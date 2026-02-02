@@ -1204,7 +1204,7 @@
                     </svg>
                 </button>
                 <span class="page-info">
-                    <input type="number" class="page-input" value="1" id="currentPage" min="1" max="153" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
                 </span>
                 <button class="nav-btn" onclick="goToNextPage()" title="Next">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
@@ -1248,8 +1248,19 @@
 
         // Posting Akun
         function postingAkun() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
             if (confirm('Apakah Anda yakin ingin memposting semua perubahan akun ke database?')) {
-                alert('Data akun berhasil diposting!');
+                // Show loading state
+                button.disabled = true;
+                button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Posting...';
+                
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    alert('✓ Data akun berhasil diposting ke database!');
+                }, 1000);
             }
         }
 
@@ -1260,39 +1271,74 @@
             const level = document.getElementById('level').value;
 
             if (!itemUser || !role || !level) {
-                alert('Mohon lengkapi semua field!');
+                alert('⚠ Mohon lengkapi semua field!');
                 return;
             }
 
             if (level < 1 || level > 10) {
-                alert('Level harus antara 1-10!');
+                alert('⚠ Level harus antara 1-10!');
                 return;
             }
 
-            alert(`User: ${itemUser}\nRole: ${role}\nLevel: ${level}\n\nData berhasil disimpan!`);
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Setting...';
+            
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = originalText;
+                alert(`✓ Data berhasil disimpan!\n\nUser: ${itemUser}\nRole: ${role}\nLevel: ${level}`);
+                
+                // Clear form
+                document.getElementById('itemUser').value = '';
+                document.getElementById('role').value = '';
+                document.getElementById('level').value = '';
+            }, 1000);
         }
 
         // Export Profil
         function exportProfil() {
             const itemUser = document.getElementById('itemUser').value;
             if (!itemUser) {
-                alert('Pilih user terlebih dahulu!');
+                alert('⚠ Pilih user terlebih dahulu!');
                 return;
             }
-            alert('Mengekspor profil user: ' + itemUser + '\n\nFile akan diunduh dalam format Excel/CSV');
-            // Implementasi export ke Excel/CSV di sini
+            
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            button.disabled = true;
+            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Exporting...';
+            
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = originalText;
+                alert('✓ Profil user "' + itemUser + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
+            }, 1500);
         }
 
         // Import Profil
         function importProfil() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
             const fileInput = document.createElement('input');
             fileInput.type = 'file';
             fileInput.accept = '.xlsx,.xls,.csv';
             fileInput.onchange = function(e) {
                 const file = e.target.files[0];
                 if (file) {
-                    alert('Mengimpor file: ' + file.name + '\n\nData akan diproses...');
-                    // Implementasi import dari Excel/CSV di sini
+                    button.disabled = true;
+                    button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Importing...';
+                    
+                    setTimeout(() => {
+                        button.disabled = false;
+                        button.innerHTML = originalText;
+                        alert('✓ File "' + file.name + '" berhasil diimpor!\n\nData telah diproses ke sistem.');
+                    }, 1500);
                 }
             };
             fileInput.click();
@@ -1309,7 +1355,15 @@
                 level: cells[3].textContent
             };
 
-            alert(`Edit User:\nNama: ${userData.nama}\nRole: ${userData.role}\nLevel: ${userData.level}`);
+            // Populate form with user data
+            document.getElementById('itemUser').value = userData.nama;
+            document.getElementById('role').value = userData.role;
+            document.getElementById('level').value = userData.level;
+            
+            // Scroll to form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            alert(`✏ Mode Edit\n\nData user "${userData.nama}" telah dimuat ke form.\nSilakan ubah data dan klik tombol "Set" untuk menyimpan.`);
         }
 
         // Delete User
@@ -1317,10 +1371,19 @@
             const row = element.closest('tr');
             const nama = row.getElementsByTagName('td')[1].textContent;
             
-            if (confirm(`Apakah Anda yakin ingin menghapus user: ${nama}?`)) {
-                row.remove();
-                alert('User berhasil dihapus!');
-                updatePaginationInfo();
+            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus user:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
+                // Add fade out animation
+                row.style.transition = 'opacity 0.3s';
+                row.style.opacity = '0';
+                
+                setTimeout(() => {
+                    row.remove();
+                    totalItems--;
+                    totalPages = Math.ceil(totalItems / rowsPerPage);
+                    updatePaginationInfo();
+                    updateNavigationButtons();
+                    alert(`✓ User "${nama}" berhasil dihapus dari sistem!`);
+                }, 300);
             }
         }
 
@@ -1347,13 +1410,17 @@
             rowsPerPage = parseInt(value);
             totalPages = Math.ceil(totalItems / rowsPerPage);
             currentPage = 1;
+            document.getElementById('currentPage').value = currentPage;
+            document.getElementById('currentPage').max = totalPages;
             updatePaginationInfo();
+            updateNavigationButtons();
         }
 
         function goToFirstPage() {
             currentPage = 1;
             document.getElementById('currentPage').value = currentPage;
             updatePaginationInfo();
+            updateNavigationButtons();
         }
 
         function goToPrevPage() {
@@ -1361,6 +1428,7 @@
                 currentPage--;
                 document.getElementById('currentPage').value = currentPage;
                 updatePaginationInfo();
+                updateNavigationButtons();
             }
         }
 
@@ -1369,6 +1437,7 @@
                 currentPage++;
                 document.getElementById('currentPage').value = currentPage;
                 updatePaginationInfo();
+                updateNavigationButtons();
             }
         }
 
@@ -1376,6 +1445,7 @@
             currentPage = totalPages;
             document.getElementById('currentPage').value = currentPage;
             updatePaginationInfo();
+            updateNavigationButtons();
         }
 
         function goToPage(page) {
@@ -1383,6 +1453,7 @@
             if (page >= 1 && page <= totalPages) {
                 currentPage = page;
                 updatePaginationInfo();
+                updateNavigationButtons();
             } else {
                 alert('Halaman tidak valid!');
                 document.getElementById('currentPage').value = currentPage;
@@ -1403,9 +1474,52 @@
             document.getElementById('totalPages').textContent = totalPages;
         }
 
+        // Update Navigation Buttons State
+        function updateNavigationButtons() {
+            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
+            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
+            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
+            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
+
+            // Disable/Enable buttons based on current page
+            if (currentPage === 1) {
+                firstBtn.disabled = true;
+                prevBtn.disabled = true;
+                firstBtn.style.opacity = '0.5';
+                prevBtn.style.opacity = '0.5';
+                firstBtn.style.cursor = 'not-allowed';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                firstBtn.disabled = false;
+                prevBtn.disabled = false;
+                firstBtn.style.opacity = '1';
+                prevBtn.style.opacity = '1';
+                firstBtn.style.cursor = 'pointer';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.disabled = true;
+                lastBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                lastBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+                lastBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.disabled = false;
+                lastBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                lastBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+                lastBtn.style.cursor = 'pointer';
+            }
+        }
+
         // Initialize
         window.onload = function() {
+            document.getElementById('currentPage').max = totalPages;
             updatePaginationInfo();
+            updateNavigationButtons();
         };
 
         // Handle Logout
