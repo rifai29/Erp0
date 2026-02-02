@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistem ERP - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal-primary: #0D9488;
+            --teal-hover: #0F766E;
+            --teal-light: #5EEAD4;
+            --bluish-grey: #E2E8F0;
+            --dark-text: #1E293B;
+            --medium-text: #475569;
+            --light-text: #64748B;
+            --white: #FFFFFF;
+            --input-border: #CBD5E1;
+            --input-focus: #0D9488;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--bluish-grey);
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Visual Area - Kiri */
+        .visual-area {
+            flex: 1;
+            background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .visual-area::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .logo-large {
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInLogo 1.2s ease-out 0.3s forwards;
+        }
+
+        .logo-large svg {
+            width: 280px;
+            height: 280px;
+            filter: drop-shadow(0 20px 40px rgba(13, 148, 136, 0.15));
+        }
+
+        .grid-box {
+            animation: boxFloat 3s ease-in-out infinite;
+        }
+
+        .grid-box:nth-child(1) { animation-delay: 0s; }
+        .grid-box:nth-child(2) { animation-delay: 0.1s; }
+        .grid-box:nth-child(3) { animation-delay: 0.2s; }
+        .grid-box:nth-child(4) { animation-delay: 0.3s; }
+        .grid-box:nth-child(5) { animation-delay: 0.4s; }
+        .grid-box:nth-child(6) { animation-delay: 0.5s; }
+        .grid-box:nth-child(7) { animation-delay: 0.6s; }
+        .grid-box:nth-child(8) { animation-delay: 0.7s; }
+        .grid-box:nth-child(9) { animation-delay: 0.8s; }
+
+        @keyframes boxFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes fadeInLogo {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Action Area - Kanan */
+        .action-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            padding: 60px 50px;
+            margin: auto;
+            opacity: 0;
+            animation: slideInCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+        }
+
+        @keyframes slideInCard {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .brand-text h1 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--dark-text);
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .brand-text p {
+            font-size: 14px;
+            color: var(--medium-text);
+            font-weight: 500;
+        }
+
+        .welcome-section {
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+
+        .welcome-section p {
+            font-size: 15px;
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark-text);
+            background: var(--white);
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--light-text);
+            opacity: 0.6;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--teal-primary) 0%, var(--teal-hover) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .forgot-password a {
+            color: var(--teal-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: var(--teal-hover);
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--light-text);
+            font-size: 13px;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .visual-area {
+                min-height: 35vh;
+            }
+
+            .logo-large svg {
+                width: 180px;
+                height: 180px;
+            }
+
+            .action-area {
+                flex: 1;
+            }
+
+            .login-card {
+                padding: 40px 30px;
+            }
+
+            .welcome-section h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .visual-area {
+                min-height: 25vh;
+            }
+
+            .logo-large svg {
+                width: 140px;
+                height: 140px;
+            }
+
+            .login-card {
+                padding: 30px 24px;
+            }
+
+            .brand-header {
+                gap: 12px;
+                margin-bottom: 32px;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-text h1 {
+                font-size: 22px;
+            }
+
+            .footer {
+                padding: 20px;
+                margin-top: 40px;
+            }
+        }
+
+        /* Loading animation untuk input */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .input-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .form-control:focus + .input-wrapper::after {
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Visual Area (Kiri) -->
+        <div class="visual-area">
+            <div class="logo-large">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="boxGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#0D9488;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#14B8A6;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="boxGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2DD4BF;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="boxGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2DD4BF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#5EEAD4;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Grid 3x3 kotak -->
+                    <!-- Baris 1 -->
+                    <rect class="grid-box" x="30" y="30" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="0.9"/>
+                    <rect class="grid-box" x="79" y="30" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
+                    <rect class="grid-box" x="128" y="30" width="42" height="42" rx="6" fill="url(#boxGradient3)" opacity="0.9"/>
+                    
+                    <!-- Baris 2 -->
+                    <rect class="grid-box" x="30" y="79" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
+                    <rect class="grid-box" x="79" y="79" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="1"/>
+                    <rect class="grid-box" x="128" y="79" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
+                    
+                    <!-- Baris 3 -->
+                    <rect class="grid-box" x="30" y="128" width="42" height="42" rx="6" fill="url(#boxGradient3)" opacity="0.9"/>
+                    <rect class="grid-box" x="79" y="128" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
+                    <rect class="grid-box" x="128" y="128" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="0.9"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Action Area (Kanan) -->
+        <div class="action-area">
+            <div class="login-card">
+                <div class="brand-header">
+                    <div class="brand-icon">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0D9488;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#14B8A6;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="iconGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#14B8A6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#2DD4BF;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#2DD4BF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#5EEAD4;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Background -->
+                            <rect x="0" y="0" width="48" height="48" rx="10" fill="#F8FAFC"/>
+                            
+                            <!-- Grid 3x3 kotak kecil -->
+                            <!-- Baris 1 -->
+                            <rect x="8" y="8" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
+                            <rect x="19.5" y="8" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
+                            <rect x="31" y="8" width="9" height="9" rx="2" fill="url(#iconGradient3)"/>
+                            
+                            <!-- Baris 2 -->
+                            <rect x="8" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
+                            <rect x="19.5" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
+                            <rect x="31" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
+                            
+                            <!-- Baris 3 -->
+                            <rect x="8" y="31" width="9" height="9" rx="2" fill="url(#iconGradient3)"/>
+                            <rect x="19.5" y="31" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
+                            <rect x="31" y="31" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <h1>Sistem ERP</h1>
+                        <p>Enterprise Resource Planning</p>
+                    </div>
+                </div>
+
+                <div class="welcome-section">
+                    <h2>Selamat Datang</h2>
+                    <p>Masukkan kredensial Anda untuk mengakses sistem internal perusahaan</p>
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                class="form-control" 
+                                placeholder="Masukkan username Anda"
+                                required
+                                autocomplete="username"
+                            />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Sign me in
+                    </button>
+                </form>
+
+                <div class="forgot-password">
+                    <a href="#" onclick="handleForgotPassword(event)">Lupa Password?</a>
+                </div>
+            </div>
+
+            <div class="footer">
+                © ADMIN All Rights Reserved 2020
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            
+            // Validasi username tidak kosong
+            if (!username.trim()) {
+                return;
+            }
+
+            // Simulasi proses login
+            const button = event.target.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = 'Memproses...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                // Redirect ke dashboard setelah login berhasil
+                window.location.href = 'dasbord.html';
+            }, 1000);
+        }
+
+        // Handle forgot password
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            alert('Silakan hubungi administrator untuk reset password.');
+        }
+
+        // Animasi subtle untuk input focus
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.01)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

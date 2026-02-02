@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Akun - User Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-weight: 700;
+            font-size: 20px;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
+        }
+
+        .control-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .control-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+            transition: left 0.3s ease;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .sidebar-menu {
+            padding: 16px 0;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            color: #374151;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-item:hover {
+            background: #f3f4f6;
+            color: #2563eb;
+            border-left-color: #2563eb;
+        }
+
+        .sidebar-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            border-left-color: #2563eb;
+            font-weight: 600;
+        }
+
+        .sidebar-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .sidebar-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-sidebar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .close-sidebar:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            color: #374151;
+            transition: color 0.2s;
+        }
+
+        .menu-icon:hover {
+            color: #2563eb;
+        }
+
+        /* Sub Header */
+        .sub-header {
+            background: #f9fafb;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 16px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-primary svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            white-space: nowrap;
+        }
+
+        .input-group select,
+        .input-group input {
+            padding: 7px 10px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            background-color: white;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-user {
+            width: 180px;
+        }
+
+        .input-role {
+            width: 150px;
+        }
+
+        .input-level {
+            width: 70px;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn-secondary svg {
+            width: 14px;
+            height: 14px;
+            stroke: #6b7280;
+        }
+
+        /* Table */
+        .table-container {
+            padding: 24px;
+            overflow-x: auto;
+            background: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 14px;
+        }
+
+        thead tr:first-child {
+            background: #f9fafb;
+        }
+
+        thead tr:first-child th {
+            color: #374151;
+            font-weight: 600;
+            padding: 12px;
+            text-align: left;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        thead tr:first-child th:first-child {
+            border-left: 1px solid #e5e7eb;
+            border-top-left-radius: 8px;
+        }
+
+        thead tr:first-child th:last-child {
+            border-right: 1px solid #e5e7eb;
+            border-top-right-radius: 8px;
+        }
+
+        .filter-row {
+            background: #ffffff;
+        }
+
+        .filter-row th {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filter-row th:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        .filter-row th:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .filter-row input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-row input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        tbody tr {
+            transition: background-color 0.15s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        tbody tr.inactive {
+            background-color: #fef2f2;
+        }
+
+        tbody tr.inactive:hover {
+            background-color: #fee2e2;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        tbody tr:first-child td:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        tbody tr:first-child td:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        tbody tr td:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        tbody tr td:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            background: #f9fafb;
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        .icon-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .icon-btn.delete:hover svg {
+            stroke: #ef4444;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-inactive {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            min-width: fit-content;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .page-input {
+            width: 50px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .sub-header {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .toolbar {
+                padding: 16px;
+            }
+
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+            .input-group label {
+                margin-bottom: 4px;
+            }
+
+            .input-user, .input-role, .input-level {
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .table-container {
+                padding: 16px;
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 12px;
+                min-width: 800px;
+            }
+
+            thead tr:first-child th,
+            tbody td {
+                padding: 8px;
+                white-space: nowrap;
+            }
+
+            .filter-row input {
+                padding: 8px 10px;
+                font-size: 13px;
+                min-width: 100px;
+            }
+
+            .footer {
+                padding: 12px 16px;
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            .pagination-center {
+                gap: 4px;
+            }
+
+            .pagination-left {
+                gap: 4px;
+            }
+
+            .pagination-left label {
+                font-size: 11px;
+            }
+
+            .pagination-left select {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .pagination-right {
+                font-size: 11px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .page-input {
+                width: 40px;
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .page-info {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 16px;
+            }
+
+            .table-container {
+                padding: 12px;
+            }
+
+            table {
+                font-size: 11px;
+                min-width: 800px;
+            }
+
+            thead tr:first-child th,
+            tbody td {
+                padding: 6px;
+                white-space: nowrap;
+            }
+
+            .filter-row input {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 90px;
+            }
+
+            .action-icons {
+                gap: 4px;
+            }
+
+            .icon-btn {
+                width: 28px;
+                height: 28px;
+            }
+
+            .icon-btn svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .footer {
+                padding: 10px 12px;
+                gap: 6px;
+                font-size: 10px;
+            }
+
+            .pagination-center {
+                gap: 3px;
+            }
+
+            .pagination-left {
+                gap: 3px;
+            }
+
+            .pagination-left label {
+                font-size: 10px;
+            }
+
+            .pagination-left select {
+                padding: 3px 5px;
+                font-size: 10px;
+            }
+
+            .pagination-right {
+                font-size: 10px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 26px;
+                height: 26px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 11px !important;
+                height: 11px !important;
+            }
+
+            .page-input {
+                width: 35px;
+                padding: 3px 4px;
+                font-size: 10px;
+            }
+
+            .page-info {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="close-sidebar" onclick="closeSidebar()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2>User Management</h2>
+            <p>PT MIDI UTAMA INDONESIA</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                Dashboard
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                User Management
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" onclick="openSidebar()">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <div class="header-title">User Management</div>
+            </div>
+            
+            <div class="header-controls">
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="sub-header">Set Akun</div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button class="btn-primary" onclick="postingAkun()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                Posting
+            </button>
+
+            <div class="input-group">
+                <label for="itemUser">Item User:</label>
+                <input type="text" id="itemUser" class="input-user" placeholder="Pilih user...">
+            </div>
+
+            <div class="input-group">
+                <label for="role">Role:</label>
+                <select id="role" class="input-role">
+                    <option value="">- Pilih -</option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Operator">Operator</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Guest">Guest</option>
+                    <option value="Manager">Manager</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="level">Level:</label>
+                <input type="number" id="level" class="input-level" min="1" max="10" placeholder="1-10">
+            </div>
+
+            <button class="btn-secondary" onclick="setAkun()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Set
+            </button>
+
+            <button class="btn-secondary" onclick="exportProfil()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                </svg>
+                Export
+            </button>
+
+            <button class="btn-secondary" onclick="importProfil()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                Import
+            </button>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Action</th>
+                        <th>Nama User</th>
+                        <th>Role</th>
+                        <th style="width: 80px;">Level</th>
+                        <th>Insert By</th>
+                        <th>Insert Date</th>
+                        <th>Status</th>
+                        <th>Update By</th>
+                        <th>Update Date</th>
+                    </tr>
+                    <tr class="filter-row">
+                        <th></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(0, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(1, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(2, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(3, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(4, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(5, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(6, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(7, this.value)"></th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Ahmad Fauzi</td>
+                        <td>Administrator</td>
+                        <td>10</td>
+                        <td>System Admin</td>
+                        <td>01/01/2024 09:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>System Admin</td>
+                        <td>15/01/2024 14:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Budi Santoso</td>
+                        <td>Manager</td>
+                        <td>8</td>
+                        <td>Ahmad Fauzi</td>
+                        <td>05/01/2024 10:30:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Ahmad Fauzi</td>
+                        <td>20/01/2024 11:00:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Citra Dewi</td>
+                        <td>Administrator</td>
+                        <td>9</td>
+                        <td>Budi Santoso</td>
+                        <td>03/02/2024 08:15:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Budi Santoso</td>
+                        <td>03/02/2024 16:45:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Dedi Kurniawan</td>
+                        <td>Staff</td>
+                        <td>5</td>
+                        <td>Citra Dewi</td>
+                        <td>07/02/2024 13:20:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Manager HR</td>
+                        <td>07/02/2024 15:10:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Eka Putri</td>
+                        <td>Operator</td>
+                        <td>3</td>
+                        <td>Dedi Kurniawan</td>
+                        <td>06/02/2024 09:45:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Team Leader</td>
+                        <td>06/02/2024 13:20:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Fajar Rahman</td>
+                        <td>Staff</td>
+                        <td>4</td>
+                        <td>Eka Putri</td>
+                        <td>04/02/2024 11:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Supervisor</td>
+                        <td>04/02/2024 17:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Gita Sari</td>
+                        <td>Operator</td>
+                        <td>3</td>
+                        <td>Fajar Rahman</td>
+                        <td>09/02/2024 07:30:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Lead Operator</td>
+                        <td>09/02/2024 10:15:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Hendra Wijaya</td>
+                        <td>Operator</td>
+                        <td>2</td>
+                        <td>Gita Sari</td>
+                        <td>08/02/2024 10:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Supervisor Ops</td>
+                        <td>08/02/2024 14:15:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Indah Permata</td>
+                        <td>Staff</td>
+                        <td>6</td>
+                        <td>Ahmad Fauzi</td>
+                        <td>10/02/2024 08:45:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Manager Finance</td>
+                        <td>10/02/2024 12:30:00</td>
+                    </tr>
+                    <tr class="inactive">
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Joko Susilo</td>
+                        <td>Guest</td>
+                        <td>1</td>
+                        <td>Indah Permata</td>
+                        <td>12/02/2024 11:30:00</td>
+                        <td><span class="status-inactive">Inactive</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer / Pagination -->
+        <div class="footer">
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" max="153" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
+                </span>
+                <button class="nav-btn" onclick="goToNextPage()" title="Next">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">1</span>-<span id="displayEnd">10</span> of <span id="totalItems">1524</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentPage = 1;
+        let rowsPerPage = 10;
+        let totalItems = 1524;
+        let totalPages = Math.ceil(totalItems / rowsPerPage);
+
+        // Posting Akun
+        function postingAkun() {
+            if (confirm('Apakah Anda yakin ingin memposting semua perubahan akun ke database?')) {
+                alert('Data akun berhasil diposting!');
+            }
+        }
+
+        // Set Akun
+        function setAkun() {
+            const itemUser = document.getElementById('itemUser').value;
+            const role = document.getElementById('role').value;
+            const level = document.getElementById('level').value;
+
+            if (!itemUser || !role || !level) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+
+            if (level < 1 || level > 10) {
+                alert('Level harus antara 1-10!');
+                return;
+            }
+
+            alert(`User: ${itemUser}\nRole: ${role}\nLevel: ${level}\n\nData berhasil disimpan!`);
+        }
+
+        // Export Profil
+        function exportProfil() {
+            const itemUser = document.getElementById('itemUser').value;
+            if (!itemUser) {
+                alert('Pilih user terlebih dahulu!');
+                return;
+            }
+            alert('Mengekspor profil user: ' + itemUser + '\n\nFile akan diunduh dalam format Excel/CSV');
+            // Implementasi export ke Excel/CSV di sini
+        }
+
+        // Import Profil
+        function importProfil() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.xlsx,.xls,.csv';
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    alert('Mengimpor file: ' + file.name + '\n\nData akan diproses...');
+                    // Implementasi import dari Excel/CSV di sini
+                }
+            };
+            fileInput.click();
+        }
+
+        // Edit User
+        function editUser(element) {
+            const row = element.closest('tr');
+            const cells = row.getElementsByTagName('td');
+            
+            const userData = {
+                nama: cells[1].textContent,
+                role: cells[2].textContent,
+                level: cells[3].textContent
+            };
+
+            alert(`Edit User:\nNama: ${userData.nama}\nRole: ${userData.role}\nLevel: ${userData.level}`);
+        }
+
+        // Delete User
+        function deleteUser(element) {
+            const row = element.closest('tr');
+            const nama = row.getElementsByTagName('td')[1].textContent;
+            
+            if (confirm(`Apakah Anda yakin ingin menghapus user: ${nama}?`)) {
+                row.remove();
+                alert('User berhasil dihapus!');
+                updatePaginationInfo();
+            }
+        }
+
+        // Filter Table
+        function filterTable(columnIndex, searchValue) {
+            const table = document.getElementById('tableBody');
+            const rows = table.getElementsByTagName('tr');
+            searchValue = searchValue.toLowerCase();
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const cellValue = cells[columnIndex + 1].textContent.toLowerCase();
+                
+                if (cellValue.includes(searchValue)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Pagination Functions
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            totalPages = Math.ceil(totalItems / rowsPerPage);
+            currentPage = 1;
+            updatePaginationInfo();
+        }
+
+        function goToFirstPage() {
+            currentPage = 1;
+            document.getElementById('currentPage').value = currentPage;
+            updatePaginationInfo();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                document.getElementById('currentPage').value = currentPage;
+                updatePaginationInfo();
+            }
+        }
+
+        function goToNextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                document.getElementById('currentPage').value = currentPage;
+                updatePaginationInfo();
+            }
+        }
+
+        function goToLastPage() {
+            currentPage = totalPages;
+            document.getElementById('currentPage').value = currentPage;
+            updatePaginationInfo();
+        }
+
+        function goToPage(page) {
+            page = parseInt(page);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                updatePaginationInfo();
+            } else {
+                alert('Halaman tidak valid!');
+                document.getElementById('currentPage').value = currentPage;
+            }
+        }
+
+        function refreshData() {
+            alert('Menyinkronkan data terbaru...');
+            location.reload();
+        }
+
+        function updatePaginationInfo() {
+            const displayStart = (currentPage - 1) * rowsPerPage + 1;
+            const displayEnd = Math.min(currentPage * rowsPerPage, totalItems);
+            
+            document.getElementById('displayStart').textContent = displayStart;
+            document.getElementById('displayEnd').textContent = displayEnd;
+            document.getElementById('totalPages').textContent = totalPages;
+        }
+
+        // Initialize
+        window.onload = function() {
+            updatePaginationInfo();
+        };
+
+        // Handle Logout
+        function handleLogout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                // Redirect kembali ke halaman login
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Sidebar Functions
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
