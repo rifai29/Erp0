@@ -1,0 +1,51 @@
+================================================================================
+SKEMA LAYOUT: HALAMAN LOGIN ERP (SPLIT SCREEN)
+================================================================================
+
+[ CONTAINER (Layar Penuh / 100vh) ]
+--------------------------------------------------------------------------------
+|                                      |                                       |
+|        AREA VISUAL (KIRI)            |         AREA AKSI (KANAN)             |
+|        [Flex: 1]                     |         [Flex: 1, Background: Putih]  |
+|        (Sembunyi di Mobile)          |                                       |
+|                                      |                                       |
+|  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  |  [ LOGIN CARD (Tengah / Centered) ]   |
+|  ~          GRADIENT              ~  |  +---------------------------------+  |
+|  ~          BG AREA               ~  |  |  [BRAND HEADER]                 |  |
+|  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  |  |  (Ikon 3x3)  SISTEM ERP         |  |
+|                                      |  |              Enterprise Planning|  |
+|             [ LOGO ]                 |  |                                 |  |
+|          (SVG ANIMASI)               |  |  [WELCOME SECTION]              |  |
+|           Grid 3x3                   |  |  Selamat Datang                 |  |
+|         Kotak Melayang               |  |  "Masukkan kredensial anda..."  |  |
+|                                      |  |                                 |  |
+|          (Efek Pulse)                |  |  [FORM LOGIN]                   |  |
+|                                      |  |  Username:                      |  |
+|                                      |  |  [___________________________]  |  |
+|                                      |  |                                 |  |
+|                                      |  |  [   TOMBOL SIGN ME IN (Teal)  ]|  |
+|                                      |  |                                 |  |
+|                                      |  |  [Lupa Password? (Link)]        |  |
+|                                      |  +---------------------------------+  |
+|                                      |                                       |
+|                                      |  [FOOTER]                             |
+|                                      |  © ADMIN All Rights Reserved 2020     |
+--------------------------------------------------------------------------------
+
+================================================================================
+LOGIKA KODE & INTERAKSI
+================================================================================
+
+1. LOGIKA CSS (Styling):
+   - Warna Utama : Teal (#0D9488) sebagai identitas brand.
+   - Font Utama  : DM Sans & Archivo (Modern & Bersih).
+   - Animasi     : 'boxFloat' (Kotak logo kiri naik-turun)
+                   'slideInCard' (Kartu login muncul dari kanan).
+
+2. LOGIKA JS (Behavior):
+   - Input Focus : Saat kolom diklik, ada efek 'scale' (perbesaran tipis 1.01).
+   - Submit Form : Klik tombol -> Ubah teks jadi "Memproses..." -> Redirect 
+                   otomatis ke 'dasbord.html' setelah 1 detik.
+   - Responsive  : Jika lebar layar < 968px, Area Kiri (Visual) otomatis hilang.
+
+================================================================================
