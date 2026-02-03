@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Akun - User Management</title>
+    <title>Set Akun - Email Manajemen</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -298,16 +298,93 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .input-user {
-            width: 180px;
+        .input-email {
+            width: 100%;
+        }
+        
+        .email-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 250px;
+        }
+        
+        .clear-email-btn {
+            position: absolute;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #9ca3af;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+        
+        .clear-email-btn:hover {
+            background: #6b7280;
+            transform: scale(1.1);
+        }
+        
+        .clear-email-btn svg {
+            width: 12px;
+            height: 12px;
+            stroke: white;
+            stroke-width: 2.5;
+        }
+        
+        .email-input-wrapper input {
+            padding-right: 35px;
+        }
+        
+        .email-input-wrapper.has-value .clear-email-btn {
+            display: flex;
         }
 
-        .input-role {
-            width: 150px;
+        .input-password {
+            width: 100%;
         }
-
-        .input-level {
-            width: 70px;
+        
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 250px;
+        }
+        
+        .toggle-password-btn {
+            position: absolute;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+        
+        .toggle-password-btn:hover {
+            background: #f3f4f6;
+        }
+        
+        .toggle-password-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #6b7280;
+            stroke-width: 2;
+        }
+        
+        .password-input-wrapper input {
+            padding-right: 40px;
         }
 
         .btn-secondary {
@@ -502,6 +579,44 @@
             font-weight: 600;
             display: inline-block;
         }
+        
+        .password-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+        }
+        
+        .password-text {
+            flex: 1;
+            font-family: monospace;
+        }
+        
+        .password-toggle-table {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        
+        .password-toggle-table:hover {
+            background: #f3f4f6;
+        }
+        
+        .password-toggle-table svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+            stroke-width: 2;
+        }
 
         .status-inactive {
             background: #fee2e2;
@@ -619,20 +734,31 @@
 
             .toolbar {
                 padding: 16px;
+                flex-direction: column;
+                align-items: stretch;
             }
 
             .input-group {
-                flex-direction: column;
-                align-items: stretch;
+                flex-direction: column !important;
+                align-items: stretch !important;
                 width: 100%;
+                gap: 8px !important;
+            }
+            
+            .input-group > div {
+                width: 100% !important;
             }
 
             .input-group label {
                 margin-bottom: 4px;
             }
+            
+            .email-input-wrapper, .password-input-wrapper {
+                width: 100% !important;
+            }
 
-            .input-user, .input-role, .input-level {
-                width: 100%;
+            .input-email, .input-password {
+                width: 100% !important;
             }
 
             .btn-primary, .btn-secondary {
@@ -813,7 +939,7 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <h2>User Management</h2>
+            <h2>Email Management</h2>
             <p>PT MIDI UTAMA INDONESIA</p>
         </div>
 
@@ -827,14 +953,14 @@
                 </svg>
                 Dashboard
             </a>
-            <a href="usermanagemen.html" class="sidebar-item active">
+            <a href="usermanagemen.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
                 User Management
             </a>
-            <a href="emailmanagement.html" class="sidebar-item">
+            <a href="emailmanagement.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -853,7 +979,7 @@
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
-                <div class="header-title">User Management</div>
+                <div class="header-title">Email Management</div>
             </div>
             
             <div class="header-controls">
@@ -867,7 +993,7 @@
         </div>
 
         <!-- Sub Header -->
-        <div class="sub-header">Set Akun</div>
+        <div class="sub-header">Email Manajemen</div>
 
         <!-- Toolbar -->
         <div class="toolbar">
@@ -881,26 +1007,32 @@
                 Posting
             </button>
 
-            <div class="input-group">
-                <label for="itemUser">Item User:</label>
-                <input type="text" id="itemUser" class="input-user" placeholder="Pilih user...">
-            </div>
-
-            <div class="input-group">
-                <label for="role">Role:</label>
-                <select id="role" class="input-role">
-                    <option value="">- Pilih -</option>
-                    <option value="Administrator">Administrator</option>
-                    <option value="Operator">Operator</option>
-                    <option value="Staff">Staff</option>
-                    <option value="Guest">Guest</option>
-                    <option value="Manager">Manager</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="level">Level:</label>
-                <input type="number" id="level" class="input-level" min="1" max="10" placeholder="1-10">
+            <div class="input-group" style="display: flex; align-items: center; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="itemEmail">Item Email:</label>
+                    <div class="email-input-wrapper" id="emailWrapper">
+                        <input type="text" id="itemEmail" class="input-email" placeholder="Masukkan nama (otomatis @gmail.com)" onblur="autoCompleteEmail()">
+                        <button class="clear-email-btn" onclick="clearEmail()" title="Clear email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="password">Password:</label>
+                    <div class="password-input-wrapper" id="passwordWrapper">
+                        <input type="password" id="password" class="input-password" placeholder="Masukkan password">
+                        <button class="toggle-password-btn" onclick="togglePassword()" title="Show/Hide password">
+                            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <button class="btn-secondary" onclick="setAkun()">
@@ -940,9 +1072,8 @@
                 <thead>
                     <tr>
                         <th style="width: 100px;">Action</th>
-                        <th>Nama User</th>
-                        <th>Role</th>
-                        <th style="width: 80px;">Level</th>
+                        <th>Nama Email</th>
+                        <th style="width: 120px;">Password</th>
                         <th>Insert By</th>
                         <th>Insert Date</th>
                         <th>Status</th>
@@ -958,19 +1089,18 @@
                         <th><input type="text" placeholder="Filter..." onkeyup="filterTable(4, this.value)"></th>
                         <th><input type="text" placeholder="Filter..." onkeyup="filterTable(5, this.value)"></th>
                         <th><input type="text" placeholder="Filter..." onkeyup="filterTable(6, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(7, this.value)"></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -978,8 +1108,17 @@
                             </div>
                         </td>
                         <td>Ahmad Fauzi</td>
-                        <td>Administrator</td>
-                        <td>10</td>
+                        <td>
+                            <div class="password-cell">
+                                <span class="password-text" data-password="Password123">••••••••</span>
+                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
                         <td>System Admin</td>
                         <td>01/01/2024 09:00:00</td>
                         <td><span class="status-active">Active</span></td>
@@ -989,12 +1128,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1002,8 +1141,17 @@
                             </div>
                         </td>
                         <td>Budi Santoso</td>
-                        <td>Manager</td>
-                        <td>8</td>
+                        <td>
+                            <div class="password-cell">
+                                <span class="password-text" data-password="SecurePass456">••••••••</span>
+                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
                         <td>Ahmad Fauzi</td>
                         <td>05/01/2024 10:30:00</td>
                         <td><span class="status-active">Active</span></td>
@@ -1013,12 +1161,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1026,8 +1174,7 @@
                             </div>
                         </td>
                         <td>Citra Dewi</td>
-                        <td>Administrator</td>
-                        <td>9</td>
+                        <td>••••••••</td>
                         <td>Budi Santoso</td>
                         <td>03/02/2024 08:15:00</td>
                         <td><span class="status-active">Active</span></td>
@@ -1037,12 +1184,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1050,8 +1197,7 @@
                             </div>
                         </td>
                         <td>Dedi Kurniawan</td>
-                        <td>Staff</td>
-                        <td>5</td>
+                        <td>••••••••</td>
                         <td>Citra Dewi</td>
                         <td>07/02/2024 13:20:00</td>
                         <td><span class="status-active">Active</span></td>
@@ -1061,12 +1207,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1074,7 +1220,6 @@
                             </div>
                         </td>
                         <td>Eka Putri</td>
-                        <td>Operator</td>
                         <td>3</td>
                         <td>Dedi Kurniawan</td>
                         <td>06/02/2024 09:45:00</td>
@@ -1085,12 +1230,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1098,7 +1243,6 @@
                             </div>
                         </td>
                         <td>Fajar Rahman</td>
-                        <td>Staff</td>
                         <td>4</td>
                         <td>Eka Putri</td>
                         <td>04/02/2024 11:00:00</td>
@@ -1109,12 +1253,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1122,7 +1266,6 @@
                             </div>
                         </td>
                         <td>Gita Sari</td>
-                        <td>Operator</td>
                         <td>3</td>
                         <td>Fajar Rahman</td>
                         <td>09/02/2024 07:30:00</td>
@@ -1133,12 +1276,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1146,7 +1289,6 @@
                             </div>
                         </td>
                         <td>Hendra Wijaya</td>
-                        <td>Operator</td>
                         <td>2</td>
                         <td>Gita Sari</td>
                         <td>08/02/2024 10:00:00</td>
@@ -1157,12 +1299,12 @@
                     <tr>
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1170,8 +1312,7 @@
                             </div>
                         </td>
                         <td>Indah Permata</td>
-                        <td>Staff</td>
-                        <td>6</td>
+                        <td>••••••••</td>
                         <td>Ahmad Fauzi</td>
                         <td>10/02/2024 08:45:00</td>
                         <td><span class="status-active">Active</span></td>
@@ -1181,12 +1322,12 @@
                     <tr class="inactive">
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1194,7 +1335,6 @@
                             </div>
                         </td>
                         <td>Joko Susilo</td>
-                        <td>Guest</td>
                         <td>1</td>
                         <td>Indah Permata</td>
                         <td>12/02/2024 11:30:00</td>
@@ -1299,12 +1439,12 @@
                     row.innerHTML = `
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -1325,6 +1465,100 @@
                 });
                 
                 totalItems = users.length;
+            }
+        }
+
+        // Auto Complete Email dengan @gmail.com
+        function autoCompleteEmail() {
+            const emailInput = document.getElementById('itemEmail');
+            let emailValue = emailInput.value.trim();
+            
+            // Jika kosong, tidak perlu diproses
+            if (!emailValue) {
+                return;
+            }
+            
+            // Jika sudah ada @, tidak perlu ditambahkan lagi
+            if (!emailValue.includes('@')) {
+                emailInput.value = emailValue + '@gmail.com';
+            }
+            
+            // Validasi format email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailInput.value)) {
+                emailInput.style.borderColor = '#ef4444';
+            } else {
+                emailInput.style.borderColor = '#10b981';
+            }
+            
+            // Update clear button visibility
+            updateClearButton();
+        }
+        
+        // Clear Email Function
+        function clearEmail() {
+            const emailInput = document.getElementById('itemEmail');
+            emailInput.value = '';
+            emailInput.style.borderColor = '#d1d5db';
+            emailInput.focus();
+            updateClearButton();
+        }
+        
+        // Update Clear Button Visibility
+        function updateClearButton() {
+            const emailInput = document.getElementById('itemEmail');
+            const wrapper = document.getElementById('emailWrapper');
+            
+            if (emailInput.value.trim() !== '') {
+                wrapper.classList.add('has-value');
+            } else {
+                wrapper.classList.remove('has-value');
+            }
+        }
+        
+        // Toggle Password Visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                // Show password
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                `;
+            } else {
+                // Hide password
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                `;
+            }
+        }
+        
+        // Toggle Password in Table
+        function toggleTablePassword(button) {
+            const passwordSpan = button.previousElementSibling;
+            const realPassword = passwordSpan.getAttribute('data-password');
+            const currentText = passwordSpan.textContent;
+            const svg = button.querySelector('svg');
+            
+            if (currentText.includes('•')) {
+                // Show password
+                passwordSpan.textContent = realPassword;
+                svg.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                `;
+            } else {
+                // Hide password
+                passwordSpan.textContent = '•'.repeat(realPassword.length);
+                svg.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                `;
             }
         }
 
@@ -1356,17 +1590,16 @@
 
         // Set Akun
         function setAkun() {
-            const itemUser = document.getElementById('itemUser').value;
-            const role = document.getElementById('role').value;
-            const level = document.getElementById('level').value;
+            const itemEmail = document.getElementById('itemEmail').value;
+            const password = document.getElementById('password').value;
 
-            if (!itemUser || !role || !level) {
+            if (!itemEmail || !password) {
                 alert('⚠ Mohon lengkapi semua field!');
                 return;
             }
 
-            if (level < 1 || level > 10) {
-                alert('⚠ Level harus antara 1-10!');
+            if (password.length < 6) {
+                alert('⚠ Password harus minimal 6 karakter!');
                 return;
             }
 
@@ -1391,17 +1624,26 @@
                         second: '2-digit'
                     });
                     
-                    cells[1].textContent = itemUser;
-                    cells[2].textContent = role;
-                    cells[3].textContent = level;
-                    cells[7].textContent = 'System Admin';
-                    cells[8].textContent = dateStr;
+                    cells[1].textContent = itemEmail;
+                    cells[2].innerHTML = `
+                        <div class="password-cell">
+                            <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
+                            <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    cells[6].textContent = 'System Admin';
+                    cells[7].textContent = dateStr;
                     
                     editingRow = null;
                     
                     button.disabled = false;
                     button.innerHTML = originalText;
-                    alert(`✓ Data berhasil diupdate!\n\nUser: ${itemUser}\nRole: ${role}\nLevel: ${level}`);
+                    alert(`✓ Data berhasil diupdate!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
                 } else {
                     // ADD new row to table
                     const tableBody = document.getElementById('tableBody');
@@ -1420,21 +1662,30 @@
                     newRow.innerHTML = `
                         <td>
                             <div class="action-icons">
-                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </button>
-                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
                                 </button>
                             </div>
                         </td>
-                        <td>${itemUser}</td>
-                        <td>${role}</td>
-                        <td>${level}</td>
+                        <td>${itemEmail}</td>
+                        <td>
+                            <div class="password-cell">
+                                <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
+                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
                         <td>System Admin</td>
                         <td>${dateStr}</td>
                         <td><span class="status-active">Active</span></td>
@@ -1455,13 +1706,15 @@
                     
                     button.disabled = false;
                     button.innerHTML = originalText;
-                    alert(`✓ Data berhasil disimpan!\n\nUser: ${itemUser}\nRole: ${role}\nLevel: ${level}`);
+                    alert(`✓ Data berhasil disimpan!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
                 }
                 
                 // Clear form
-                document.getElementById('itemUser').value = '';
-                document.getElementById('role').value = '';
-                document.getElementById('level').value = '';
+                document.getElementById('itemEmail').value = '';
+                document.getElementById('password').value = '';
+                
+                // Update clear button
+                updateClearButton();
                 
                 // Save to localStorage
                 saveToLocalStorage();
@@ -1470,9 +1723,9 @@
 
         // Export Profil
         function exportProfil() {
-            const itemUser = document.getElementById('itemUser').value;
-            if (!itemUser) {
-                alert('⚠ Pilih user terlebih dahulu!');
+            const itemEmail = document.getElementById('itemEmail').value;
+            if (!itemEmail) {
+                alert('⚠ Pilih email terlebih dahulu!');
                 return;
             }
             
@@ -1485,7 +1738,7 @@
             setTimeout(() => {
                 button.disabled = false;
                 button.innerHTML = originalText;
-                alert('✓ Profil user "' + itemUser + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
+                alert('✓ Profil email "' + itemEmail + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
             }, 1500);
         }
 
@@ -1514,36 +1767,38 @@
         }
 
         // Edit User
-        function editUser(element) {
+        function editEmail(element) {
             const row = element.closest('tr');
             const cells = row.getElementsByTagName('td');
             
-            const userData = {
+            const emailData = {
                 nama: cells[1].textContent,
-                role: cells[2].textContent,
-                level: cells[3].textContent
+                password: cells[2].textContent
             };
 
             // Set editing mode
             editingRow = row;
             
-            // Populate form with user data
-            document.getElementById('itemUser').value = userData.nama;
-            document.getElementById('role').value = userData.role;
-            document.getElementById('level').value = userData.level;
+            // Populate form with email data
+            document.getElementById('itemEmail').value = emailData.nama;
+            // Password tidak di-populate karena sudah ter-mask, user harus input ulang
+            document.getElementById('password').value = '';
+            
+            // Update clear button
+            updateClearButton();
             
             // Scroll to form
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            alert(`✏ Mode Edit\n\nData user "${userData.nama}" telah dimuat ke form.\nSilakan ubah data dan klik tombol "Set" untuk menyimpan perubahan.`);
+            alert(`✏ Mode Edit\n\nData email "${emailData.nama}" telah dimuat ke form.\n\nCatatan: Untuk keamanan, silakan masukkan password baru.`);
         }
 
         // Delete User
-        function deleteUser(element) {
+        function deleteEmail(element) {
             const row = element.closest('tr');
             const nama = row.getElementsByTagName('td')[1].textContent;
             
-            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus user:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
+            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus email:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
                 // Add fade out animation
                 row.style.transition = 'opacity 0.3s';
                 row.style.opacity = '0';
@@ -1566,7 +1821,7 @@
                     // Save to localStorage
                     saveToLocalStorage();
                     
-                    alert(`✓ User "${nama}" berhasil dihapus dari sistem!`);
+                    alert(`✓ Email "${nama}" berhasil dihapus dari sistem!`);
                 }, 300);
             }
         }
@@ -1739,6 +1994,30 @@
             showCurrentPageRows();
             updatePaginationInfo();
             updateNavigationButtons();
+            
+            // Add event listener for email input untuk menampilkan preview saat mengetik
+            const emailInput = document.getElementById('itemEmail');
+            emailInput.addEventListener('input', function() {
+                let value = this.value;
+                // Update clear button visibility
+                updateClearButton();
+                
+                // Hapus @gmail.com jika ada untuk memungkinkan editing
+                if (value.endsWith('@gmail.com')) {
+                    // Tidak perlu diubah
+                } else if (!value.includes('@')) {
+                    // Tampilkan hint
+                    this.style.fontStyle = 'normal';
+                }
+            });
+            
+            // Reset border color saat focus
+            emailInput.addEventListener('focus', function() {
+                this.style.borderColor = '#3b82f6';
+            });
+            
+            // Initial check untuk clear button
+            updateClearButton();
         };
 
         // Handle Logout
