@@ -13,26 +13,38 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            background: #f5f7fa;
             min-height: 100vh;
+            padding: 20px;
+        }
+
+        .page-container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
         }
 
         /* HEADER */
         .header {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            padding: 16px 24px;
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .header-left {
@@ -54,19 +66,20 @@
         }
 
         .header-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            color: #1f2937;
+            color: #111827;
+            letter-spacing: -0.3px;
         }
 
         .store-name {
             color: #2563eb;
         }
 
-        .header-right {
+        .header-controls {
             display: flex;
+            gap: 8px;
             align-items: center;
-            gap: 16px;
         }
 
         .company-badge {
@@ -82,28 +95,30 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border: none;
-            background: white;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
 
         .logout-btn:hover {
             background: #fee2e2;
+            border-color: #fecaca;
         }
         
         .logout-btn svg {
-            color: #ef4444;
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
         }
 
         /* MAIN CONTAINER */
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
             padding: 32px 24px;
+            background: transparent;
         }
 
         .grid {
@@ -549,10 +564,10 @@
         </div>
     </nav>
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-left">
+    <div class="page-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
                 <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" onclick="openSidebar()">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -560,23 +575,22 @@
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 <h1 class="header-title">
-                    Selamat Datang DI <span class="store-name">Store A YANI PURWODADI</span>
+                    <span class="store-name">STORE A YANI PURWODADI</span>
                 </h1>
             </div>
-            <div class="header-right">
-                <span class="company-badge">PT MIDI UTAMA INDONESIA</span>
+            
+            <div class="header-controls">
                 <button class="logout-btn" onclick="handleLogout()" title="Logout">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                         <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                         <line x1="12" y1="2" x2="12" y2="12"></line>
                     </svg>
                 </button>
             </div>
         </div>
-    </header>
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
+        <!-- MAIN CONTENT -->
+        <div class="container">
         <div class="grid">
             <!-- PROFILE CARD -->
             <div class="profile-card">
@@ -818,6 +832,7 @@
             </div>
         </div>
     </div>
+    <!-- End of page-container -->
 
     <script>
         function handleLogout() {
