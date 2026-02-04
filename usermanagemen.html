@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Bensin</title>
+    <title>Set Akun - User Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -104,18 +104,6 @@
             stroke: #6b7280;
         }
 
-        .menu-icon {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            color: #374151;
-            transition: color 0.2s;
-        }
-
-        .menu-icon:hover {
-            color: #2563eb;
-        }
-
         /* SIDEBAR */
         .sidebar {
             position: fixed;
@@ -127,7 +115,6 @@
             transition: left 0.3s ease;
             z-index: 100;
             overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
 
         .sidebar.open {
@@ -212,7 +199,7 @@
             color: white;
             width: 32px;
             height: 32px;
-            border-radius: 6px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -224,6 +211,18 @@
             background: rgba(255,255,255,0.3);
         }
 
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            color: #374151;
+            transition: color 0.2s;
+        }
+
+        .menu-icon:hover {
+            color: #2563eb;
+        }
+
         /* Sub Header */
         .sub-header {
             background: #f9fafb;
@@ -232,114 +231,6 @@
             font-size: 14px;
             color: #374151;
             border-bottom: 1px solid #e5e7eb;
-        }
-
-        /* Summary Cards */
-        .summary-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            padding: 24px;
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .summary-card {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border-radius: 12px;
-            padding: 20px;
-            color: white;
-        }
-
-        .summary-card.success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-
-        .summary-card.warning {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-
-        .summary-card.danger {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        }
-
-        .summary-card h3 {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            opacity: 0.95;
-        }
-
-        .summary-value {
-            font-size: 26px;
-            font-weight: 700;
-        }
-
-        /* Form Section */
-        .form-section {
-            padding: 24px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #374151;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .btn-submit {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-submit:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         /* Toolbar */
@@ -360,7 +251,7 @@
             padding: 8px 16px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             border-radius: 6px;
             transition: all 0.2s ease;
             display: flex;
@@ -370,18 +261,65 @@
 
         .btn-primary:hover {
             background: #2563eb;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-            border: none;
+        .btn-primary svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            white-space: nowrap;
+        }
+
+        .input-group select,
+        .input-group input {
+            padding: 7px 10px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            background-color: white;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            color: #111827;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-user {
+            width: 180px;
+        }
+
+        .input-role {
+            width: 150px;
+        }
+
+        .input-level {
+            width: 70px;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
             padding: 8px 16px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             border-radius: 6px;
             transition: all 0.2s ease;
             display: flex;
@@ -389,213 +327,272 @@
             gap: 6px;
         }
 
-        .btn-danger:hover {
-            background: #dc2626;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
         }
 
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 8px 12px 8px 36px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            stroke: #9ca3af;
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 8px;
-        }
-
-        .filter-select {
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            background: white;
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .btn-secondary svg {
+            width: 14px;
+            height: 14px;
+            stroke: #6b7280;
         }
 
         /* Table */
-        .table-wrapper {
-            overflow-x: auto;
+        .table-container {
             padding: 24px;
+            overflow-x: auto;
+            background: #ffffff;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             font-size: 14px;
         }
 
-        thead {
+        thead tr:first-child {
             background: #f9fafb;
         }
 
-        th {
-            padding: 12px 16px;
-            text-align: left;
+        thead tr:first-child th {
+            color: #374151;
             font-weight: 600;
-            color: #6b7280;
+            padding: 12px;
+            text-align: left;
+            border-top: 1px solid #e5e7eb;
             border-bottom: 1px solid #e5e7eb;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        td {
-            padding: 14px 16px;
-            border-bottom: 1px solid #f3f4f6;
-            color: #374151;
+        thead tr:first-child th:first-child {
+            border-left: 1px solid #e5e7eb;
+            border-top-left-radius: 8px;
+        }
+
+        thead tr:first-child th:last-child {
+            border-right: 1px solid #e5e7eb;
+            border-top-right-radius: 8px;
+        }
+
+        .filter-row {
+            background: #ffffff;
+        }
+
+        .filter-row th {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filter-row th:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        .filter-row th:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .filter-row input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-row input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        tbody tr {
+            transition: background-color 0.15s ease;
         }
 
         tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        tbody tr.inactive {
+            background-color: #fef2f2;
+        }
+
+        tbody tr.inactive:hover {
+            background-color: #fee2e2;
+        }
+
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        tbody tr:first-child td:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        tbody tr:first-child td:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        tbody tr td:first-child {
+            border-left: 1px solid #e5e7eb;
+        }
+
+        tbody tr td:last-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
             background: #f9fafb;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 4px 10px;
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        .icon-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .icon-btn.delete:hover svg {
+            stroke: #ef4444;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 12px;
             border-radius: 12px;
             font-size: 12px;
             font-weight: 600;
+            display: inline-block;
         }
 
-        .status-selesai {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .status-pending {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .status-dibatalkan {
+        .status-inactive {
             background: #fee2e2;
-            color: #dc2626;
+            color: #991b1b;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
         }
 
-        .btn-action {
-            width: 32px;
-            height: 32px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action.edit {
-            background: #dbeafe;
-            color: #2563eb;
-            margin-right: 6px;
-        }
-
-        .btn-action.edit:hover {
-            background: #bfdbfe;
-        }
-
-        .btn-action.delete {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .btn-action.delete:hover {
-            background: #fecaca;
-        }
-
-        .btn-action svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Footer */
+        .footer {
             padding: 16px 24px;
-            background: #ffffff;
+            background: #f9fafb;
             border-top: 1px solid #e5e7eb;
-        }
-
-        .pagination-info {
-            font-size: 14px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
             color: #6b7280;
         }
 
-        .pagination-controls {
+        .pagination-center {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
+            min-width: fit-content;
         }
 
-        .nav-btn {
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
             width: 32px;
             height: 32px;
             border: 1px solid #d1d5db;
-            background: white;
-            border-radius: 6px;
+            background: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 6px;
             transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
         }
 
-        .nav-btn:hover:not(:disabled) {
-            background: #f3f4f6;
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
             border-color: #9ca3af;
         }
 
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .nav-btn svg {
-            width: 14px;
-            height: 14px;
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
         }
 
         .page-input {
-            width: 60px;
+            width: 50px;
             padding: 6px 8px;
             border: 1px solid #d1d5db;
-            border-radius: 6px;
+            border-radius: 4px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .page-input:focus {
@@ -603,17 +600,10 @@
             border-color: #3b82f6;
         }
 
-        .rows-select {
-            padding: 6px 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        /* Responsive */
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 12px;
             }
 
             .header {
@@ -624,70 +614,92 @@
                 font-size: 16px;
             }
 
-            .summary-cards {
-                grid-template-columns: 1fr;
-                padding: 16px;
-            }
-
-            .form-section {
-                padding: 16px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
+            .sub-header {
+                padding: 10px 16px;
+                font-size: 13px;
             }
 
             .toolbar {
-                padding: 12px 16px;
+                padding: 16px;
+            }
+
+            .input-group {
                 flex-direction: column;
                 align-items: stretch;
+                width: 100%;
             }
 
-            .search-box {
-                min-width: 100%;
+            .input-group label {
+                margin-bottom: 4px;
             }
 
-            .filter-group {
-                flex-direction: column;
+            .input-user, .input-role, .input-level {
+                width: 100%;
             }
 
-            .table-wrapper {
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .table-container {
                 padding: 16px;
+                overflow-x: auto;
             }
 
             table {
                 font-size: 12px;
+                min-width: 800px;
             }
 
-            th, td {
+            thead tr:first-child th,
+            tbody td {
                 padding: 8px;
                 white-space: nowrap;
             }
 
-            .pagination {
+            .filter-row input {
+                padding: 8px 10px;
+                font-size: 13px;
+                min-width: 100px;
+            }
+
+            .footer {
                 padding: 12px 16px;
-                flex-direction: column;
-                align-items: flex-start;
                 gap: 8px;
-            }
-
-            .pagination-controls {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .pagination-info {
                 font-size: 11px;
             }
 
-            .nav-btn {
-                width: 28px;
-                height: 28px;
+            .pagination-center {
+                gap: 4px;
             }
 
-            .nav-btn svg {
-                width: 12px;
-                height: 12px;
+            .pagination-left {
+                gap: 4px;
+            }
+
+            .pagination-left label {
+                font-size: 11px;
+            }
+
+            .pagination-left select {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .pagination-right {
+                font-size: 11px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 12px !important;
+                height: 12px !important;
             }
 
             .page-input {
@@ -696,102 +708,86 @@
                 font-size: 11px;
             }
 
-            .rows-select {
-                padding: 4px 6px;
+            .page-info {
                 font-size: 11px;
             }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 8px;
-            }
-
-            .header {
-                padding: 12px;
-            }
-
             .header-title {
                 font-size: 14px;
             }
 
-            .sub-header {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .form-section {
-                padding: 12px;
-            }
-
-            .summary-cards {
-                padding: 12px;
-            }
-
-            .summary-card {
-                padding: 12px;
-            }
-
-            .summary-card h3 {
-                font-size: 11px;
-            }
-
-            .summary-value {
-                font-size: 18px;
-            }
-
-            .toolbar {
-                padding: 12px;
-            }
-
-            .table-wrapper {
+            .table-container {
                 padding: 12px;
             }
 
             table {
                 font-size: 11px;
+                min-width: 800px;
             }
 
-            th, td {
+            thead tr:first-child th,
+            tbody td {
                 padding: 6px;
+                white-space: nowrap;
             }
 
-            .status-badge {
-                font-size: 10px;
-                padding: 3px 8px;
+            .filter-row input {
+                padding: 8px 10px;
+                font-size: 12px;
+                min-width: 90px;
             }
 
-            .btn-action {
+            .action-icons {
+                gap: 4px;
+            }
+
+            .icon-btn {
                 width: 28px;
                 height: 28px;
             }
 
-            .btn-action svg {
+            .icon-btn svg {
                 width: 14px;
                 height: 14px;
             }
 
-            .pagination {
+            .footer {
                 padding: 10px 12px;
+                gap: 6px;
                 font-size: 10px;
             }
 
-            .pagination-info {
+            .pagination-center {
+                gap: 3px;
+            }
+
+            .pagination-left {
+                gap: 3px;
+            }
+
+            .pagination-left label {
                 font-size: 10px;
             }
 
-            .pagination-controls {
-                gap: 4px;
+            .pagination-left select {
+                padding: 3px 5px;
+                font-size: 10px;
             }
 
-            .nav-btn {
+            .pagination-right {
+                font-size: 10px;
+            }
+
+            .nav-btn, .refresh-btn {
                 width: 26px;
                 height: 26px;
             }
 
-            .nav-btn svg {
-                width: 11px;
-                height: 11px;
+            .nav-btn svg, .refresh-btn svg {
+                width: 11px !important;
+                height: 11px !important;
             }
 
             .page-input {
@@ -800,18 +796,17 @@
                 font-size: 10px;
             }
 
-            .rows-select {
-                padding: 3px 5px;
+            .page-info {
                 font-size: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar Overlay -->
+    <!-- SIDEBAR OVERLAY -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <button class="close-sidebar" onclick="closeSidebar()">
@@ -834,7 +829,7 @@
                 </svg>
                 Dashboard
             </a>
-            <a href="usermanagemen.html" class="sidebar-item">
+            <a href="usermanagemen.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -870,12 +865,13 @@
                 </svg>
                 Laporan Karyawan
             </a>
-            <a href="laporanbensin.html" class="sidebar-item active">
+            <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
                 </svg>
                 Laporan Bensin
             </a>
@@ -892,7 +888,7 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
                 <h1 class="header-title">
-                    <span class="store-name">LAPORAN BENSIN</span>
+                    <span class="store-name">STORE A YANI PURWODADI</span>
                 </h1>
             </div>
             
@@ -907,495 +903,889 @@
         </div>
 
         <!-- Sub Header -->
-        <div class="sub-header">
-            ⛽ Data Pengisian Bensin Kendaraan
-        </div>
-
-        <!-- Summary Cards -->
-        <div class="summary-cards">
-            <div class="summary-card">
-                <h3>Total Pengisian Bulan Ini</h3>
-                <div class="summary-value" id="totalPengisian">15</div>
-            </div>
-            <div class="summary-card success">
-                <h3>Total Pengeluaran</h3>
-                <div class="summary-value" id="totalPengeluaran">Rp 1,875,000</div>
-            </div>
-            <div class="summary-card warning">
-                <h3>Total Liter</h3>
-                <div class="summary-value" id="totalLiter">187.5 L</div>
-            </div>
-            <div class="summary-card danger">
-                <h3>Rata-rata per Pengisian</h3>
-                <div class="summary-value" id="rataRata">Rp 125,000</div>
-            </div>
-        </div>
-
-        <!-- Form Section -->
-        <div class="form-section">
-            <h3 style="margin-bottom: 16px; font-size: 16px; color: #111827;">Tambah/Edit Data Bensin</h3>
-            <form onsubmit="addBensin(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Tanggal *</label>
-                        <input type="date" id="tanggal" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nomor Plat *</label>
-                        <input type="text" id="nomorPlat" placeholder="Contoh: AB 1234 CD" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Jenis Kendaraan *</label>
-                        <select id="jenisKendaraan" required>
-                            <option value="">-- Pilih Jenis Kendaraan --</option>
-                            <option value="Motor">Motor</option>
-                            <option value="Mobil">Mobil</option>
-                            <option value="Truk">Truk</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Jenis Bensin *</label>
-                        <select id="jenisBensin" required>
-                            <option value="">-- Pilih Jenis Bensin --</option>
-                            <option value="Pertalite">Pertalite</option>
-                            <option value="Pertamax">Pertamax</option>
-                            <option value="Pertamax Turbo">Pertamax Turbo</option>
-                            <option value="Solar">Solar</option>
-                            <option value="Dexlite">Dexlite</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Liter *</label>
-                        <input type="number" id="liter" placeholder="0" step="0.1" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Harga per Liter (Rp) *</label>
-                        <input type="number" id="hargaPerLiter" placeholder="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Odometer (km) *</label>
-                        <input type="number" id="odometer" placeholder="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Petugas *</label>
-                        <input type="text" id="petugas" placeholder="Nama Petugas" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Status *</label>
-                        <select id="status" required>
-                            <option value="Selesai">Selesai</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Dibatalkan">Dibatalkan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Keterangan</label>
-                        <textarea id="keterangan" placeholder="Keterangan (opsional)"></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">
-                    <span id="btnText">Simpan Data</span>
-                </button>
-            </form>
-        </div>
+        <div class="sub-header">Set Akun</div>
 
         <!-- Toolbar -->
         <div class="toolbar">
-            <div class="search-box">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
+            <button class="btn-primary" onclick="postingAkun()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
                 </svg>
-                <input type="text" id="searchInput" placeholder="Cari nomor plat, petugas, keterangan..." onkeyup="searchTable()">
-            </div>
-            <div class="filter-group">
-                <select class="filter-select" id="monthFilter" onchange="filterTable()">
-                    <option value="">Semua Bulan</option>
-                    <option value="01">Januari</option>
-                    <option value="02">Februari</option>
-                    <option value="03">Maret</option>
-                    <option value="04">April</option>
-                    <option value="05">Mei</option>
-                    <option value="06">Juni</option>
-                    <option value="07">Juli</option>
-                    <option value="08">Agustus</option>
-                    <option value="09">September</option>
-                    <option value="10">Oktober</option>
-                    <option value="11">November</option>
-                    <option value="12">Desember</option>
-                </select>
-                <select class="filter-select" id="vehicleFilter" onchange="filterTable()">
-                    <option value="">Semua Kendaraan</option>
-                </select>
-            </div>
-            <button class="btn-primary" onclick="exportData()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Export Excel
+                Posting
             </button>
-            <button class="btn-danger" onclick="clearAllData()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+
+            <div class="input-group">
+                <label for="itemUser">Item User:</label>
+                <input type="text" id="itemUser" class="input-user" placeholder="Pilih user...">
+            </div>
+
+            <div class="input-group">
+                <label for="role">Nama Jabatan:</label>
+                <select id="role" class="input-role">
+                    <option value="">- Pilih -</option>
+                    <option value="ACOS (Asisten Chief Of Store)">ACOS (Asisten Chief Of Store)</option>
+                    <option value="COS (Chief Of Store)">COS (Chief Of Store)</option>
+                    <option value="MD (Merchandiser)">MD (Merchandiser)</option>
+                    <option value="Kasir">Kasir</option>
+                    <option value="Crew">Crew</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="level">Level:</label>
+                <input type="number" id="level" class="input-level" min="1" max="10" placeholder="1-10">
+            </div>
+
+            <button class="btn-secondary" onclick="setAkun()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
                 </svg>
-                Hapus Semua
+                Set
+            </button>
+
+            <button class="btn-secondary" onclick="exportProfil()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                </svg>
+                Export
+            </button>
+
+            <button class="btn-secondary" onclick="importProfil()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                </svg>
+                Import
             </button>
         </div>
 
         <!-- Table -->
-        <div class="table-wrapper">
-            <table id="bensinTable">
+        <div class="table-container">
+            <table>
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Nomor Plat</th>
-                        <th>Jenis Kendaraan</th>
-                        <th>Jenis Bensin</th>
-                        <th>Liter</th>
-                        <th>Harga/Liter</th>
-                        <th>Total</th>
-                        <th>Odometer</th>
-                        <th>Petugas</th>
-                        <th>Keterangan</th>
+                        <th style="width: 100px;">Action</th>
+                        <th>Nama User</th>
+                        <th>Nama Jabatan</th>
+                        <th style="width: 80px;">Level</th>
+                        <th>Insert By</th>
+                        <th>Insert Date</th>
                         <th>Status</th>
-                        <th>Aksi</th>
+                        <th>Update By</th>
+                        <th>Update Date</th>
+                    </tr>
+                    <tr class="filter-row">
+                        <th></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(0, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(1, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(2, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(3, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(4, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(5, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(6, this.value)"></th>
+                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(7, this.value)"></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- Data akan diisi via JavaScript -->
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Ahmad Fauzi</td>
+                        <td>Administrator</td>
+                        <td>10</td>
+                        <td>System Admin</td>
+                        <td>01/01/2024 09:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>System Admin</td>
+                        <td>15/01/2024 14:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Budi Santoso</td>
+                        <td>Manager</td>
+                        <td>8</td>
+                        <td>Ahmad Fauzi</td>
+                        <td>05/01/2024 10:30:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Ahmad Fauzi</td>
+                        <td>20/01/2024 11:00:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Citra Dewi</td>
+                        <td>Administrator</td>
+                        <td>9</td>
+                        <td>Budi Santoso</td>
+                        <td>03/02/2024 08:15:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Budi Santoso</td>
+                        <td>03/02/2024 16:45:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Dedi Kurniawan</td>
+                        <td>Staff</td>
+                        <td>5</td>
+                        <td>Citra Dewi</td>
+                        <td>07/02/2024 13:20:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Manager HR</td>
+                        <td>07/02/2024 15:10:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Eka Putri</td>
+                        <td>Operator</td>
+                        <td>3</td>
+                        <td>Dedi Kurniawan</td>
+                        <td>06/02/2024 09:45:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Team Leader</td>
+                        <td>06/02/2024 13:20:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Fajar Rahman</td>
+                        <td>Staff</td>
+                        <td>4</td>
+                        <td>Eka Putri</td>
+                        <td>04/02/2024 11:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Supervisor</td>
+                        <td>04/02/2024 17:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Gita Sari</td>
+                        <td>Operator</td>
+                        <td>3</td>
+                        <td>Fajar Rahman</td>
+                        <td>09/02/2024 07:30:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Lead Operator</td>
+                        <td>09/02/2024 10:15:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Hendra Wijaya</td>
+                        <td>Operator</td>
+                        <td>2</td>
+                        <td>Gita Sari</td>
+                        <td>08/02/2024 10:00:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Supervisor Ops</td>
+                        <td>08/02/2024 14:15:00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Indah Permata</td>
+                        <td>Staff</td>
+                        <td>6</td>
+                        <td>Ahmad Fauzi</td>
+                        <td>10/02/2024 08:45:00</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>Manager Finance</td>
+                        <td>10/02/2024 12:30:00</td>
+                    </tr>
+                    <tr class="inactive">
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>Joko Susilo</td>
+                        <td>Guest</td>
+                        <td>1</td>
+                        <td>Indah Permata</td>
+                        <td>12/02/2024 11:30:00</td>
+                        <td><span class="status-inactive">Inactive</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="pagination">
-            <div class="pagination-info">
-                Menampilkan <span id="showingStart">0</span>-<span id="showingEnd">0</span> dari <span id="totalData">0</span> data
+        <!-- Footer / Pagination -->
+        <div class="footer">
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
+                </span>
+                <button class="nav-btn" onclick="goToNextPage()" title="Next">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
             </div>
-            <div class="pagination-controls">
-                <button class="nav-btn" id="prevBtn" onclick="changePage(-1)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <span style="font-size: 14px; color: #6b7280;">Hal</span>
-                <input type="number" class="page-input" id="currentPageInput" value="1" min="1" onchange="goToPage()">
-                <span style="font-size: 14px; color: #6b7280;">dari <span id="totalPages">1</span></span>
-                <button class="nav-btn" id="nextBtn" onclick="changePage(1)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-                <select class="rows-select" id="rowsPerPage" onchange="changeRowsPerPage()">
-                    <option value="10">10 baris</option>
-                    <option value="25">25 baris</option>
-                    <option value="50">50 baris</option>
-                    <option value="100">100 baris</option>
+
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
                 </select>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">1</span>-<span id="displayEnd">10</span> of <span id="totalItems">1524</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Data storage
-        let bensinData = [];
-        let editIndex = -1;
+        // Global Variables
         let currentPage = 1;
         let rowsPerPage = 10;
+        let totalItems = 0; // Will be calculated on page load
+        let totalPages = 0; // Will be calculated on page load
+        let editingRow = null; // Store row being edited
 
-        // Load data from localStorage
-        function loadData() {
-            const saved = localStorage.getItem('bensinData');
-            if (saved) {
-                bensinData = JSON.parse(saved);
-            }
-            updateVehicleFilter();
-            renderTable();
-            updateSummary();
-        }
-
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('bensinData', JSON.stringify(bensinData));
-        }
-
-        // Add or update bensin data
-        function addBensin(event) {
-            event.preventDefault();
-
-            const data = {
-                tanggal: document.getElementById('tanggal').value,
-                nomorPlat: document.getElementById('nomorPlat').value,
-                jenisKendaraan: document.getElementById('jenisKendaraan').value,
-                jenisBensin: document.getElementById('jenisBensin').value,
-                liter: parseFloat(document.getElementById('liter').value),
-                hargaPerLiter: parseFloat(document.getElementById('hargaPerLiter').value),
-                odometer: parseFloat(document.getElementById('odometer').value),
-                petugas: document.getElementById('petugas').value,
-                status: document.getElementById('status').value,
-                keterangan: document.getElementById('keterangan').value
-            };
-
-            data.total = data.liter * data.hargaPerLiter;
-
-            if (editIndex >= 0) {
-                bensinData[editIndex] = data;
-                editIndex = -1;
-                document.getElementById('btnText').textContent = 'Simpan Data';
-            } else {
-                bensinData.unshift(data);
-            }
-
-            saveData();
-            renderTable();
-            updateSummary();
-            updateVehicleFilter();
-            event.target.reset();
-        }
-
-        // Edit data
-        function editData(index) {
-            const data = bensinData[index];
-            editIndex = index;
-
-            document.getElementById('tanggal').value = data.tanggal;
-            document.getElementById('nomorPlat').value = data.nomorPlat;
-            document.getElementById('jenisKendaraan').value = data.jenisKendaraan;
-            document.getElementById('jenisBensin').value = data.jenisBensin;
-            document.getElementById('liter').value = data.liter;
-            document.getElementById('hargaPerLiter').value = data.hargaPerLiter;
-            document.getElementById('odometer').value = data.odometer;
-            document.getElementById('petugas').value = data.petugas;
-            document.getElementById('status').value = data.status;
-            document.getElementById('keterangan').value = data.keterangan;
-
-            document.getElementById('btnText').textContent = 'Update Data';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Delete data
-        function deleteData(index) {
-            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                bensinData.splice(index, 1);
-                saveData();
-                renderTable();
-                updateSummary();
-                updateVehicleFilter();
-            }
-        }
-
-        // Clear all data
-        function clearAllData() {
-            if (confirm('Apakah Anda yakin ingin menghapus SEMUA data? Tindakan ini tidak dapat dibatalkan!')) {
-                bensinData = [];
-                saveData();
-                renderTable();
-                updateSummary();
-                updateVehicleFilter();
-            }
-        }
-
-        // Render table
-        function renderTable() {
-            const tbody = document.getElementById('tableBody');
-            const start = (currentPage - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedData = bensinData.slice(start, end);
-
-            tbody.innerHTML = '';
-
-            if (paginatedData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="13" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada data. Silakan tambahkan data bensin.</td></tr>';
-            } else {
-                paginatedData.forEach((item, i) => {
-                    const actualIndex = start + i;
-                    const row = `
-                        <tr>
-                            <td>${actualIndex + 1}</td>
-                            <td>${formatDate(item.tanggal)}</td>
-                            <td><strong>${item.nomorPlat}</strong></td>
-                            <td>${item.jenisKendaraan}</td>
-                            <td>${item.jenisBensin}</td>
-                            <td>${item.liter.toFixed(1)} L</td>
-                            <td>${formatRupiah(item.hargaPerLiter)}</td>
-                            <td><strong>${formatRupiah(item.total)}</strong></td>
-                            <td>${item.odometer.toLocaleString('id-ID')} km</td>
-                            <td>${item.petugas}</td>
-                            <td>${item.keterangan || '-'}</td>
-                            <td><span class="status-badge status-${item.status.toLowerCase().replace(' ', '-')}">${item.status}</span></td>
-                            <td>
-                                <button class="btn-action edit" onclick="editData(${actualIndex})" title="Edit">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </button>
-                                <button class="btn-action delete" onclick="deleteData(${actualIndex})" title="Hapus">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
+        // LocalStorage functions
+        function saveToLocalStorage() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const data = [];
+            
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                data.push({
+                    nama: cells[1].textContent,
+                    role: cells[2].textContent,
+                    level: cells[3].textContent,
+                    createdBy: cells[4].textContent,
+                    createdDate: cells[5].textContent,
+                    status: cells[6].textContent,
+                    updatedBy: cells[7].textContent,
+                    updatedDate: cells[8].textContent
                 });
             }
-
-            updatePagination();
+            
+            localStorage.setItem('userManagementData', JSON.stringify(data));
         }
 
-        // Update pagination
-        function updatePagination() {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
-            const start = (currentPage - 1) * rowsPerPage + 1;
-            const end = Math.min(currentPage * rowsPerPage, bensinData.length);
-
-            document.getElementById('showingStart').textContent = bensinData.length > 0 ? start : 0;
-            document.getElementById('showingEnd').textContent = end;
-            document.getElementById('totalData').textContent = bensinData.length;
-            document.getElementById('totalPages').textContent = totalPages || 1;
-            document.getElementById('currentPageInput').value = currentPage;
-            document.getElementById('currentPageInput').max = totalPages || 1;
-
-            document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage >= totalPages || bensinData.length === 0;
-        }
-
-        // Change page
-        function changePage(direction) {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
-            currentPage += direction;
-            if (currentPage < 1) currentPage = 1;
-            if (currentPage > totalPages) currentPage = totalPages;
-            renderTable();
-        }
-
-        // Go to specific page
-        function goToPage() {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
-            const page = parseInt(document.getElementById('currentPageInput').value);
-            if (page >= 1 && page <= totalPages) {
-                currentPage = page;
-                renderTable();
+        function loadFromLocalStorage() {
+            const data = localStorage.getItem('userManagementData');
+            if (data) {
+                const users = JSON.parse(data);
+                const tableBody = document.getElementById('tableBody');
+                tableBody.innerHTML = ''; // Clear existing data
+                
+                users.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>${user.nama}</td>
+                        <td>${user.role}</td>
+                        <td>${user.level}</td>
+                        <td>${user.createdBy}</td>
+                        <td>${user.createdDate}</td>
+                        <td>${user.status}</td>
+                        <td>${user.updatedBy}</td>
+                        <td>${user.updatedDate}</td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+                totalItems = users.length;
             }
         }
 
-        // Change rows per page
-        function changeRowsPerPage() {
-            rowsPerPage = parseInt(document.getElementById('rowsPerPage').value);
-            currentPage = 1;
-            renderTable();
-        }
-
-        // Update summary
-        function updateSummary() {
-            const currentMonth = new Date().getMonth();
-            const currentYear = new Date().getFullYear();
+        // Posting Akun
+        function postingAkun() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
             
-            const thisMonthData = bensinData.filter(item => {
-                const itemDate = new Date(item.tanggal);
-                return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
-            });
-
-            const totalPengisian = thisMonthData.length;
-            const totalPengeluaran = thisMonthData.reduce((sum, item) => sum + item.total, 0);
-            const totalLiter = thisMonthData.reduce((sum, item) => sum + item.liter, 0);
-            const rataRata = totalPengisian > 0 ? totalPengeluaran / totalPengisian : 0;
-
-            document.getElementById('totalPengisian').textContent = totalPengisian;
-            document.getElementById('totalPengeluaran').textContent = formatRupiah(totalPengeluaran);
-            document.getElementById('totalLiter').textContent = totalLiter.toFixed(1) + ' L';
-            document.getElementById('rataRata').textContent = formatRupiah(rataRata);
-        }
-
-        // Update vehicle filter
-        function updateVehicleFilter() {
-            const vehicles = [...new Set(bensinData.map(item => item.nomorPlat))];
-            const select = document.getElementById('vehicleFilter');
-            const currentValue = select.value;
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
             
-            select.innerHTML = '<option value="">Semua Kendaraan</option>';
-            vehicles.forEach(vehicle => {
-                select.innerHTML += `<option value="${vehicle}">${vehicle}</option>`;
-            });
-            
-            select.value = currentValue;
-        }
-
-        // Search table
-        function searchTable() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const rows = document.querySelectorAll('#tableBody tr');
-
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(input) ? '' : 'none';
-            });
-        }
-
-        // Filter table
-        function filterTable() {
-            const monthFilter = document.getElementById('monthFilter').value;
-            const vehicleFilter = document.getElementById('vehicleFilter').value;
-
-            let filtered = bensinData;
-
-            if (monthFilter) {
-                filtered = filtered.filter(item => item.tanggal.substring(5, 7) === monthFilter);
+            if (rows.length === 0) {
+                alert('⚠ Tidak ada data untuk diposting!');
+                return;
             }
-
-            if (vehicleFilter) {
-                filtered = filtered.filter(item => item.nomorPlat === vehicleFilter);
+            
+            if (confirm(`Apakah Anda yakin ingin memposting ${rows.length} data akun ke database?\n\nData yang sudah diposting akan tersimpan permanen.`)) {
+                // Show loading state
+                button.disabled = true;
+                button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Posting...';
+                
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    alert(`✓ Berhasil memposting ${rows.length} data akun ke database!\n\nSemua perubahan telah disimpan.`);
+                }, 1500);
             }
-
-            // Temporarily replace bensinData for rendering
-            const originalData = bensinData;
-            bensinData = filtered;
-            currentPage = 1;
-            renderTable();
-            bensinData = originalData;
         }
 
-        // Export to Excel
-        function exportData() {
-            if (bensinData.length === 0) {
-                alert('Tidak ada data untuk diekspor');
+        // Set Akun
+        function setAkun() {
+            const itemUser = document.getElementById('itemUser').value;
+            const role = document.getElementById('role').value;
+            const level = document.getElementById('level').value;
+
+            if (!itemUser || !role || !level) {
+                alert('⚠ Mohon lengkapi semua field!');
                 return;
             }
 
-            let csv = 'No,Tanggal,Nomor Plat,Jenis Kendaraan,Jenis Bensin,Liter,Harga/Liter,Total,Odometer,Petugas,Keterangan,Status\n';
+            if (level < 1 || level > 10) {
+                alert('⚠ Level harus antara 1-10!');
+                return;
+            }
+
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
             
-            bensinData.forEach((item, i) => {
-                csv += `${i + 1},${formatDate(item.tanggal)},${item.nomorPlat},${item.jenisKendaraan},${item.jenisBensin},${item.liter},${item.hargaPerLiter},${item.total},${item.odometer},${item.petugas},"${item.keterangan || '-'}",${item.status}\n`;
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Setting...';
+            
+            setTimeout(() => {
+                if (editingRow) {
+                    // UPDATE existing row
+                    const cells = editingRow.getElementsByTagName('td');
+                    const currentDate = new Date();
+                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
+                        day: '2-digit', 
+                        month: '2-digit', 
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    });
+                    
+                    cells[1].textContent = itemUser;
+                    cells[2].textContent = role;
+                    cells[3].textContent = level;
+                    cells[7].textContent = 'System Admin';
+                    cells[8].textContent = dateStr;
+                    
+                    editingRow = null;
+                    
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    alert(`✓ Data berhasil diupdate!\n\nUser: ${itemUser}\nRole: ${role}\nLevel: ${level}`);
+                } else {
+                    // ADD new row to table
+                    const tableBody = document.getElementById('tableBody');
+                    const newRow = document.createElement('tr');
+                    
+                    const currentDate = new Date();
+                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
+                        day: '2-digit', 
+                        month: '2-digit', 
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    });
+                    
+                    newRow.innerHTML = `
+                        <td>
+                            <div class="action-icons">
+                                <button class="icon-btn" onclick="editUser(this)" title="Edit">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)" title="Hapus">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>${itemUser}</td>
+                        <td>${role}</td>
+                        <td>${level}</td>
+                        <td>System Admin</td>
+                        <td>${dateStr}</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    `;
+                    
+                    tableBody.appendChild(newRow);
+                    
+                    // Update total items
+                    totalItems++;
+                    totalPages = Math.ceil(totalItems / rowsPerPage);
+                    
+                    // Show rows based on current page
+                    showCurrentPageRows();
+                    updatePaginationInfo();
+                    updateNavigationButtons();
+                    
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    alert(`✓ Data berhasil disimpan!\n\nUser: ${itemUser}\nRole: ${role}\nLevel: ${level}`);
+                }
+                
+                // Clear form
+                document.getElementById('itemUser').value = '';
+                document.getElementById('role').value = '';
+                document.getElementById('level').value = '';
+                
+                // Save to localStorage
+                saveToLocalStorage();
+            }, 1000);
+        }
+
+        // Export Profil
+        function exportProfil() {
+            const itemUser = document.getElementById('itemUser').value;
+            if (!itemUser) {
+                alert('⚠ Pilih user terlebih dahulu!');
+                return;
+            }
+            
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            button.disabled = true;
+            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Exporting...';
+            
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = originalText;
+                alert('✓ Profil user "' + itemUser + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
+            }, 1500);
+        }
+
+        // Import Profil
+        function importProfil() {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.xlsx,.xls,.csv';
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    button.disabled = true;
+                    button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Importing...';
+                    
+                    setTimeout(() => {
+                        button.disabled = false;
+                        button.innerHTML = originalText;
+                        alert('✓ File "' + file.name + '" berhasil diimpor!\n\nData telah diproses ke sistem.');
+                    }, 1500);
+                }
+            };
+            fileInput.click();
+        }
+
+        // Edit User
+        function editUser(element) {
+            const row = element.closest('tr');
+            const cells = row.getElementsByTagName('td');
+            
+            const userData = {
+                nama: cells[1].textContent,
+                role: cells[2].textContent,
+                level: cells[3].textContent
+            };
+
+            // Set editing mode
+            editingRow = row;
+            
+            // Populate form with user data
+            document.getElementById('itemUser').value = userData.nama;
+            document.getElementById('role').value = userData.role;
+            document.getElementById('level').value = userData.level;
+            
+            // Scroll to form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            alert(`✏ Mode Edit\n\nData user "${userData.nama}" telah dimuat ke form.\nSilakan ubah data dan klik tombol "Set" untuk menyimpan perubahan.`);
+        }
+
+        // Delete User
+        function deleteUser(element) {
+            const row = element.closest('tr');
+            const nama = row.getElementsByTagName('td')[1].textContent;
+            
+            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus user:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
+                // Add fade out animation
+                row.style.transition = 'opacity 0.3s';
+                row.style.opacity = '0';
+                
+                setTimeout(() => {
+                    row.remove();
+                    totalItems--;
+                    totalPages = Math.ceil(totalItems / rowsPerPage);
+                    
+                    // If current page is now empty and not page 1, go to previous page
+                    if (currentPage > totalPages && totalPages > 0) {
+                        currentPage = totalPages;
+                        document.getElementById('currentPage').value = currentPage;
+                    }
+                    
+                    showCurrentPageRows();
+                    updatePaginationInfo();
+                    updateNavigationButtons();
+                    
+                    // Save to localStorage
+                    saveToLocalStorage();
+                    
+                    alert(`✓ User "${nama}" berhasil dihapus dari sistem!`);
+                }, 300);
+            }
+        }
+
+        // Filter Table
+        function filterTable(columnIndex, searchValue) {
+            const table = document.getElementById('tableBody');
+            const rows = table.getElementsByTagName('tr');
+            searchValue = searchValue.toLowerCase();
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const cellValue = cells[columnIndex + 1].textContent.toLowerCase();
+                
+                if (cellValue.includes(searchValue)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Pagination Functions
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            totalPages = Math.ceil(totalItems / rowsPerPage);
+            currentPage = 1;
+            document.getElementById('currentPage').value = currentPage;
+            document.getElementById('currentPage').max = totalPages;
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToFirstPage() {
+            currentPage = 1;
+            document.getElementById('currentPage').value = currentPage;
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                document.getElementById('currentPage').value = currentPage;
+                showCurrentPageRows();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToNextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                document.getElementById('currentPage').value = currentPage;
+                showCurrentPageRows();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToLastPage() {
+            currentPage = totalPages;
+            document.getElementById('currentPage').value = currentPage;
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPage(page) {
+            page = parseInt(page);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                showCurrentPageRows();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            } else {
+                alert('Halaman tidak valid!');
+                document.getElementById('currentPage').value = currentPage;
+            }
+        }
+
+        function refreshData() {
+            alert('Menyinkronkan data terbaru...');
+            location.reload();
+        }
+
+        function updatePaginationInfo() {
+            const displayStart = (currentPage - 1) * rowsPerPage + 1;
+            const displayEnd = Math.min(currentPage * rowsPerPage, totalItems);
+            
+            document.getElementById('displayStart').textContent = displayStart;
+            document.getElementById('displayEnd').textContent = displayEnd;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('totalItems').textContent = totalItems;
+        }
+
+        // Show only rows for current page
+        function showCurrentPageRows() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+            
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            
+            rows.forEach((row, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
             });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `laporan_bensin_${new Date().getTime()}.csv`;
-            a.click();
         }
 
-        // Format date
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        // Update Navigation Buttons State
+        function updateNavigationButtons() {
+            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
+            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
+            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
+            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
+
+            // Disable/Enable buttons based on current page
+            if (currentPage === 1) {
+                firstBtn.disabled = true;
+                prevBtn.disabled = true;
+                firstBtn.style.opacity = '0.5';
+                prevBtn.style.opacity = '0.5';
+                firstBtn.style.cursor = 'not-allowed';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                firstBtn.disabled = false;
+                prevBtn.disabled = false;
+                firstBtn.style.opacity = '1';
+                prevBtn.style.opacity = '1';
+                firstBtn.style.cursor = 'pointer';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.disabled = true;
+                lastBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                lastBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+                lastBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.disabled = false;
+                lastBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                lastBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+                lastBtn.style.cursor = 'pointer';
+            }
         }
 
-        // Format rupiah
-        function formatRupiah(number) {
-            return 'Rp ' + number.toLocaleString('id-ID');
+        // Initialize
+        window.onload = function() {
+            // Load data from localStorage first
+            loadFromLocalStorage();
+            
+            document.getElementById('currentPage').max = totalPages;
+            
+            // Count actual rows in table
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            totalItems = rows.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage);
+            
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        };
+
+        // Handle Logout
+        function handleLogout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                // Redirect kembali ke halaman login
+                window.location.href = 'index.html';
+            }
         }
 
-        // Sidebar functions
+        // Sidebar Functions
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
             document.getElementById('sidebarOverlay').classList.add('show');
@@ -1407,25 +1797,6 @@
             document.getElementById('sidebarOverlay').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
-
-        function handleLogout() {
-            window.location.href = 'index.html';
-        }
-
-        // Set today's date as default
-        document.getElementById('tanggal').valueAsDate = new Date();
-
-        // Load data on page load
-        window.addEventListener('DOMContentLoaded', loadData);
-
-        // Close sidebar when clicking menu items
-        document.querySelectorAll('.sidebar-item').forEach(item => {
-            item.addEventListener('click', () => {
-                if (window.innerWidth <= 1024) {
-                    closeSidebar();
-                }
-            });
-        });
     </script>
 </body>
 </html>
