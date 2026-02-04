@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Akun - Email Manajemen</title>
+    <title>Pencatatan Hutang</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -40,8 +40,8 @@
         }
 
         .header-title {
-            font-weight: 700;
             font-size: 20px;
+            font-weight: 700;
             color: #111827;
             letter-spacing: -0.3px;
         }
@@ -112,10 +112,10 @@
             width: 300px;
             height: 100vh;
             background: white;
-            box-shadow: 4px 0 12px rgba(0,0,0,0.15);
             transition: left 0.3s ease;
             z-index: 100;
             overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
 
         .sidebar.open {
@@ -234,6 +234,73 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
+        /* Form Section */
+        .form-section {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-submit {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
         /* Toolbar */
         .toolbar {
             padding: 16px 24px;
@@ -255,143 +322,14 @@
             font-size: 13px;
             border-radius: 6px;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .btn-primary:hover {
             background: #2563eb;
         }
 
-        .btn-primary svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 12px;
-            font-weight: 500;
-            color: #374151;
-            white-space: nowrap;
-        }
-
-        .input-group select,
-        .input-group input {
-            padding: 7px 10px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
-            background-color: white;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            color: #111827;
-        }
-
-        .input-group select:focus,
-        .input-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .input-email {
-            width: 100%;
-        }
-        
-        .email-input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 250px;
-        }
-        
-        .clear-email-btn {
-            position: absolute;
-            right: 8px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #9ca3af;
-            border: none;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            padding: 0;
-        }
-        
-        .clear-email-btn:hover {
-            background: #6b7280;
-            transform: scale(1.1);
-        }
-        
-        .clear-email-btn svg {
-            width: 12px;
-            height: 12px;
-            stroke: white;
-            stroke-width: 2.5;
-        }
-        
-        .email-input-wrapper input {
-            padding-right: 35px;
-        }
-        
-        .email-input-wrapper.has-value .clear-email-btn {
-            display: flex;
-        }
-
-        .input-password {
-            width: 100%;
-        }
-        
-        .password-input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 250px;
-        }
-        
-        .toggle-password-btn {
-            position: absolute;
-            right: 8px;
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            padding: 0;
-        }
-        
-        .toggle-password-btn:hover {
-            background: #f3f4f6;
-        }
-        
-        .toggle-password-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: #6b7280;
-            stroke-width: 2;
-        }
-        
-        .password-input-wrapper input {
-            padding-right: 40px;
-        }
-
         .btn-secondary {
-            background: #ffffff;
+            background: #f3f4f6;
             color: #374151;
             border: 1px solid #d1d5db;
             padding: 8px 16px;
@@ -400,90 +338,75 @@
             font-size: 13px;
             border-radius: 6px;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .btn-secondary:hover {
-            background: #f9fafb;
-            border-color: #9ca3af;
+            background: #e5e7eb;
         }
 
-        .btn-secondary svg {
-            width: 14px;
-            height: 14px;
-            stroke: #6b7280;
+        /* Search Box */
+        .search-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 6px 12px;
+            gap: 8px;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 13px;
+            flex: 1;
+        }
+
+        .search-box svg {
+            width: 16px;
+            height: 16px;
+            stroke: #9ca3af;
         }
 
         /* Table */
         .table-container {
-            padding: 24px;
             overflow-x: auto;
-            background: #ffffff;
         }
 
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            font-size: 14px;
+            border-collapse: collapse;
         }
 
-        thead tr:first-child {
+        thead {
             background: #f9fafb;
-        }
-
-        thead tr:first-child th {
-            color: #374151;
-            font-weight: 600;
-            padding: 12px;
-            text-align: left;
             border-top: 1px solid #e5e7eb;
             border-bottom: 1px solid #e5e7eb;
-            font-size: 13px;
         }
 
-        thead tr:first-child th:first-child {
-            border-left: 1px solid #e5e7eb;
-            border-top-left-radius: 8px;
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        thead tr:first-child th:last-child {
-            border-right: 1px solid #e5e7eb;
-            border-top-right-radius: 8px;
-        }
-
-        .filter-row {
-            background: #ffffff;
-        }
-
-        .filter-row th {
-            padding: 8px 12px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .filter-row th:first-child {
-            border-left: 1px solid #e5e7eb;
-        }
-
-        .filter-row th:last-child {
-            border-right: 1px solid #e5e7eb;
-        }
-
-        .filter-row input {
-            width: 100%;
-            padding: 6px 10px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .filter-row input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        td {
+            padding: 16px;
+            font-size: 14px;
+            color: #1f2937;
+            border-bottom: 1px solid #f3f4f6;
         }
 
         tbody tr {
@@ -494,229 +417,179 @@
             background-color: #f9fafb;
         }
 
-        tbody tr.inactive {
-            background-color: #fef2f2;
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-        tbody tr.inactive:hover {
-            background-color: #fee2e2;
+        .status-belum-lunas {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
-        tbody td {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
-            color: #374151;
+        .status-lunas {
+            background: #d1fae5;
+            color: #065f46;
         }
 
-        tbody tr:first-child td:first-child {
-            border-left: 1px solid #e5e7eb;
+        .status-cicilan {
+            background: #fef3c7;
+            color: #92400e;
         }
 
-        tbody tr:first-child td:last-child {
-            border-right: 1px solid #e5e7eb;
-        }
-
-        tbody tr td:first-child {
-            border-left: 1px solid #e5e7eb;
-        }
-
-        tbody tr td:last-child {
-            border-right: 1px solid #e5e7eb;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        tbody tr:last-child td:first-child {
-            border-bottom-left-radius: 8px;
-        }
-
-        tbody tr:last-child td:last-child {
-            border-bottom-right-radius: 8px;
-        }
-
-        .action-icons {
+        /* Action Buttons */
+        .action-btns {
             display: flex;
             gap: 6px;
         }
 
-        .icon-btn {
+        .btn-action {
             width: 32px;
             height: 32px;
-            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
             background: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
             transition: all 0.2s ease;
         }
 
-        .icon-btn:hover {
-            background: #f9fafb;
+        .btn-action:hover {
+            transform: scale(1.1);
         }
 
-        .icon-btn svg {
-            width: 16px;
-            height: 16px;
-            stroke: #6b7280;
+        .btn-edit:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
         }
 
-        .icon-btn.delete:hover {
-            background: #fef2f2;
-            border-color: #f87171;
-        }
-
-        .icon-btn.delete:hover svg {
-            stroke: #ef4444;
-        }
-
-        .status-active {
-            background: #dcfce7;
-            color: #166534;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .password-cell {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: space-between;
-        }
-        
-        .password-text {
-            flex: 1;
-            font-family: monospace;
-        }
-        
-        .password-toggle-table {
-            width: 24px;
-            height: 24px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            transition: all 0.2s;
-            padding: 0;
-            flex-shrink: 0;
-        }
-        
-        .password-toggle-table:hover {
-            background: #f3f4f6;
-        }
-        
-        .password-toggle-table svg {
-            width: 16px;
-            height: 16px;
-            stroke: #6b7280;
-            stroke-width: 2;
-        }
-
-        .status-inactive {
+        .btn-delete:hover {
             background: #fee2e2;
-            color: #991b1b;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
+            border-color: #ef4444;
         }
 
-        /* Footer */
-        .footer {
+        .btn-action svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Pagination */
+        .pagination {
             padding: 16px 24px;
-            background: #f9fafb;
-            border-top: 1px solid #e5e7eb;
             display: flex;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            gap: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .pagination-info {
             font-size: 13px;
             color: #6b7280;
         }
 
-        .pagination-center {
+        .pagination-controls {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
-            min-width: fit-content;
         }
 
-        .pagination-left {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            white-space: nowrap;
-            min-width: fit-content;
-        }
-
-        .pagination-left select {
-            padding: 6px 10px;
+        .page-input {
+            width: 60px;
+            padding: 6px 8px;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 13px;
-            background: white;
+            text-align: center;
         }
 
-        .pagination-right {
-            white-space: nowrap;
-            min-width: fit-content;
-            margin-left: auto;
+        .rows-select {
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
         }
 
-        .nav-btn, .refresh-btn {
+        .nav-btn {
             width: 32px;
             height: 32px;
             border: 1px solid #d1d5db;
-            background: #ffffff;
+            background: white;
+            border-radius: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
             transition: all 0.2s ease;
-            font-size: 14px;
-            color: #374151;
         }
 
-        .nav-btn:hover, .refresh-btn:hover {
+        .nav-btn:hover:not(:disabled) {
             background: #f9fafb;
-            border-color: #9ca3af;
-        }
-
-        .page-info {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: #374151;
-        }
-
-        .page-input {
-            width: 50px;
-            padding: 6px 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 13px;
-        }
-
-        .page-input:focus {
-            outline: none;
             border-color: #3b82f6;
         }
 
-        /* Mobile Responsiveness */
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            padding: 24px;
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .summary-card h3 {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .summary-card.danger .summary-value {
+            color: #dc2626;
+        }
+
+        .summary-card.success .summary-value {
+            color: #059669;
+        }
+
+        .summary-card.warning .summary-value {
+            color: #d97706;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             body {
                 padding: 12px;
@@ -727,7 +600,7 @@
             }
 
             .header-title {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .sub-header {
@@ -735,98 +608,77 @@
                 font-size: 13px;
             }
 
+            .form-section {
+                padding: 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-cards {
+                padding: 16px;
+                grid-template-columns: 1fr;
+            }
+
             .toolbar {
                 padding: 16px;
                 flex-direction: column;
-                align-items: stretch;
-            }
-
-            .input-group {
-                flex-direction: column !important;
-                align-items: stretch !important;
-                width: 100%;
-                gap: 8px !important;
-            }
-            
-            .input-group > div {
-                width: 100% !important;
-            }
-
-            .input-group label {
-                margin-bottom: 4px;
-            }
-            
-            .email-input-wrapper, .password-input-wrapper {
-                width: 100% !important;
-            }
-
-            .input-email, .input-password {
-                width: 100% !important;
+                align-items: flex-start;
             }
 
             .btn-primary, .btn-secondary {
-                width: 100%;
+                width: auto;
                 justify-content: center;
             }
 
+            .search-container {
+                width: 100%;
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: auto;
+            }
+
             .table-container {
-                padding: 16px;
                 overflow-x: auto;
             }
 
             table {
                 font-size: 12px;
-                min-width: 800px;
+                min-width: 1000px;
             }
 
-            thead tr:first-child th,
-            tbody td {
+            th, td {
                 padding: 8px;
                 white-space: nowrap;
             }
 
-            .filter-row input {
-                padding: 8px 10px;
-                font-size: 13px;
-                min-width: 100px;
-            }
-
-            .footer {
+            .pagination {
                 padding: 12px 16px;
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 8px;
+            }
+
+            .pagination-controls {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .pagination-info {
                 font-size: 11px;
             }
 
-            .pagination-center {
-                gap: 4px;
-            }
-
-            .pagination-left {
-                gap: 4px;
-            }
-
-            .pagination-left label {
-                font-size: 11px;
-            }
-
-            .pagination-left select {
-                padding: 4px 6px;
-                font-size: 11px;
-            }
-
-            .pagination-right {
-                font-size: 11px;
-            }
-
-            .nav-btn, .refresh-btn {
+            .nav-btn {
                 width: 28px;
                 height: 28px;
-                font-size: 12px;
             }
 
-            .nav-btn svg, .refresh-btn svg {
-                width: 12px !important;
-                height: 12px !important;
+            .nav-btn svg {
+                width: 12px;
+                height: 12px;
             }
 
             .page-input {
@@ -835,86 +687,104 @@
                 font-size: 11px;
             }
 
-            .page-info {
+            .rows-select {
+                padding: 4px 6px;
                 font-size: 11px;
             }
         }
 
         @media (max-width: 480px) {
-            .header-title {
-                font-size: 16px;
+            body {
+                padding: 8px;
             }
 
-            .table-container {
+            .header {
                 padding: 12px;
+            }
+
+            .header-title {
+                font-size: 14px;
+            }
+
+            .sub-header {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .form-section {
+                padding: 12px;
+            }
+
+            .summary-cards {
+                padding: 12px;
+            }
+
+            .summary-card {
+                padding: 12px;
+            }
+
+            .summary-card h3 {
+                font-size: 11px;
+            }
+
+            .summary-value {
+                font-size: 18px;
+            }
+
+            .toolbar {
+                padding: 12px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 6px 12px;
+                font-size: 12px;
             }
 
             table {
                 font-size: 11px;
-                min-width: 800px;
+                min-width: 1000px;
             }
 
-            thead tr:first-child th,
-            tbody td {
+            th, td {
                 padding: 6px;
-                white-space: nowrap;
             }
 
-            .filter-row input {
-                padding: 8px 10px;
-                font-size: 12px;
-                min-width: 90px;
+            .status-badge {
+                font-size: 10px;
+                padding: 3px 8px;
             }
 
-            .action-icons {
-                gap: 4px;
-            }
-
-            .icon-btn {
+            .btn-action {
                 width: 28px;
                 height: 28px;
             }
 
-            .icon-btn svg {
+            .btn-action svg {
                 width: 14px;
                 height: 14px;
             }
 
-            .footer {
+            .pagination {
                 padding: 10px 12px;
-                gap: 6px;
                 font-size: 10px;
             }
 
-            .pagination-center {
-                gap: 3px;
-            }
-
-            .pagination-left {
-                gap: 3px;
-            }
-
-            .pagination-left label {
+            .pagination-info {
                 font-size: 10px;
             }
 
-            .pagination-left select {
-                padding: 3px 5px;
-                font-size: 10px;
+            .pagination-controls {
+                gap: 4px;
             }
 
-            .pagination-right {
-                font-size: 10px;
-            }
-
-            .nav-btn, .refresh-btn {
+            .nav-btn {
                 width: 26px;
                 height: 26px;
             }
 
-            .nav-btn svg, .refresh-btn svg {
-                width: 11px !important;
-                height: 11px !important;
+            .nav-btn svg {
+                width: 11px;
+                height: 11px;
             }
 
             .page-input {
@@ -923,17 +793,18 @@
                 font-size: 10px;
             }
 
-            .page-info {
+            .rows-select {
+                padding: 3px 5px;
                 font-size: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- SIDEBAR OVERLAY -->
+    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- SIDEBAR -->
+    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <button class="close-sidebar" onclick="closeSidebar()">
@@ -965,7 +836,7 @@
                 </svg>
                 User Management
             </a>
-            <a href="emailmanagement.html" class="sidebar-item active">
+            <a href="emailmanagement.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -974,7 +845,7 @@
                 </svg>
                 Email Management
             </a>
-            <a href="catatanhutang.html" class="sidebar-item">
+            <a href="catatanhutang.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -1015,7 +886,7 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
                 <h1 class="header-title">
-                    <span class="store-name">STORE A YANI PURWODADI</span>
+                    <span class="store-name">PENCATATAN HUTANG</span>
                 </h1>
             </div>
             
@@ -1030,77 +901,100 @@
         </div>
 
         <!-- Sub Header -->
-        <div class="sub-header">Email Manajemen</div>
+        <div class="sub-header">
+            📋 Daftar Hutang & Piutang
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card danger">
+                <h3>Total Hutang Belum Lunas</h3>
+                <div class="summary-value" id="totalHutang">Rp 0</div>
+            </div>
+            <div class="summary-card success">
+                <h3>Total Sudah Lunas</h3>
+                <div class="summary-value" id="totalLunas">Rp 0</div>
+            </div>
+            <div class="summary-card warning">
+                <h3>Total Dalam Cicilan</h3>
+                <div class="summary-value" id="totalCicilan">Rp 0</div>
+            </div>
+            <div class="summary-card">
+                <h3>Jumlah Transaksi</h3>
+                <div class="summary-value" id="totalTransaksi">0</div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <h3 style="margin-bottom: 16px; font-size: 16px; color: #111827;">Tambah/Edit Hutang</h3>
+            <form onsubmit="addHutang(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Peminjam/Pemberi Pinjaman *</label>
+                        <input type="text" id="namaPihak" placeholder="Contoh: PT. ABC / Budi Santoso" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis *</label>
+                        <select id="jenisHutang" required>
+                            <option value="">-- Pilih Jenis --</option>
+                            <option value="Hutang">Hutang (Saya Berutang)</option>
+                            <option value="Piutang">Piutang (Saya Memberi Pinjaman)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah (Rp) *</label>
+                        <input type="number" id="jumlah" placeholder="0" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Transaksi *</label>
+                        <input type="date" id="tanggalTransaksi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jatuh Tempo</label>
+                        <input type="date" id="jatuhTempo">
+                    </div>
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="status" required>
+                            <option value="Belum Lunas">Belum Lunas</option>
+                            <option value="Lunas">Lunas</option>
+                            <option value="Cicilan">Cicilan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sudah Dibayar (Rp)</label>
+                        <input type="number" id="sudahDibayar" placeholder="0" min="0" value="0">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Keterangan</label>
+                    <textarea id="keterangan" placeholder="Catatan tambahan..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">💾 Simpan Data Hutang</button>
+            </form>
+        </div>
 
         <!-- Toolbar -->
         <div class="toolbar">
-            <button class="btn-primary" onclick="postingAkun()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Posting
+            <button class="btn-primary" onclick="exportToExcel()">
+                📊 Export Excel
             </button>
-
-            <div class="input-group" style="display: flex; align-items: center; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                    <label for="itemEmail">Item Email:</label>
-                    <div class="email-input-wrapper" id="emailWrapper">
-                        <input type="text" id="itemEmail" class="input-email" placeholder="Masukkan nama (otomatis @gmail.com)" onblur="autoCompleteEmail()">
-                        <button class="clear-email-btn" onclick="clearEmail()" title="Clear email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 6px;">
-                    <label for="password">Password:</label>
-                    <div class="password-input-wrapper" id="passwordWrapper">
-                        <input type="password" id="password" class="input-password" placeholder="Masukkan password">
-                        <button class="toggle-password-btn" onclick="togglePassword()" title="Show/Hide password">
-                            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </button>
-                    </div>
+            <button class="btn-secondary" onclick="printTable()">
+                🖨️ Print
+            </button>
+            <button class="btn-secondary" onclick="refreshData()">
+                🔄 Refresh
+            </button>
+            <div style="flex: 1;"></div>
+            <div class="search-container">
+                <div class="search-box">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" placeholder="Cari nama, jenis..." onkeyup="searchTable(this.value)">
                 </div>
             </div>
-
-            <button class="btn-secondary" onclick="setAkun()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Set
-            </button>
-
-            <button class="btn-secondary" onclick="exportProfil()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Export
-            </button>
-
-            <button class="btn-secondary" onclick="importProfil()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Import
-            </button>
         </div>
 
         <!-- Table -->
@@ -1108,754 +1002,326 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 100px;">Action</th>
-                        <th>Nama Email</th>
-                        <th style="width: 120px;">Password</th>
-                        <th>Insert By</th>
-                        <th>Insert Date</th>
+                        <th>No</th>
+                        <th>Nama Pihak</th>
+                        <th>Jenis</th>
+                        <th>Jumlah</th>
+                        <th>Tgl Transaksi</th>
+                        <th>Jatuh Tempo</th>
                         <th>Status</th>
-                        <th>Update By</th>
-                        <th>Update Date</th>
-                    </tr>
-                    <tr class="filter-row">
-                        <th></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(0, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(1, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(2, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(3, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(4, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(5, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(6, this.value)"></th>
+                        <th>Sudah Dibayar</th>
+                        <th>Sisa</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
+                    <!-- Sample Data -->
                     <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Ahmad Fauzi</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="Password123">••••••••</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>System Admin</td>
-                        <td>01/01/2024 09:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>System Admin</td>
-                        <td>15/01/2024 14:30:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Budi Santoso</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="SecurePass456">••••••••</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Ahmad Fauzi</td>
-                        <td>05/01/2024 10:30:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Ahmad Fauzi</td>
-                        <td>20/01/2024 11:00:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Citra Dewi</td>
-                        <td>••••••••</td>
-                        <td>Budi Santoso</td>
-                        <td>03/02/2024 08:15:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Budi Santoso</td>
-                        <td>03/02/2024 16:45:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Dedi Kurniawan</td>
-                        <td>••••••••</td>
-                        <td>Citra Dewi</td>
-                        <td>07/02/2024 13:20:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Manager HR</td>
-                        <td>07/02/2024 15:10:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Eka Putri</td>
-                        <td>3</td>
-                        <td>Dedi Kurniawan</td>
-                        <td>06/02/2024 09:45:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Team Leader</td>
-                        <td>06/02/2024 13:20:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Fajar Rahman</td>
-                        <td>4</td>
-                        <td>Eka Putri</td>
-                        <td>04/02/2024 11:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Supervisor</td>
-                        <td>04/02/2024 17:30:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Gita Sari</td>
-                        <td>3</td>
-                        <td>Fajar Rahman</td>
-                        <td>09/02/2024 07:30:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Lead Operator</td>
-                        <td>09/02/2024 10:15:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Hendra Wijaya</td>
-                        <td>2</td>
-                        <td>Gita Sari</td>
-                        <td>08/02/2024 10:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Supervisor Ops</td>
-                        <td>08/02/2024 14:15:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Indah Permata</td>
-                        <td>••••••••</td>
-                        <td>Ahmad Fauzi</td>
-                        <td>10/02/2024 08:45:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Manager Finance</td>
-                        <td>10/02/2024 12:30:00</td>
-                    </tr>
-                    <tr class="inactive">
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Joko Susilo</td>
                         <td>1</td>
-                        <td>Indah Permata</td>
-                        <td>12/02/2024 11:30:00</td>
-                        <td><span class="status-inactive">Inactive</span></td>
-                        <td>-</td>
-                        <td>-</td>
+                        <td>PT. Sumber Rejeki</td>
+                        <td>Hutang</td>
+                        <td>Rp 15.000.000</td>
+                        <td>2024-01-15</td>
+                        <td>2024-03-15</td>
+                        <td><span class="status-badge status-cicilan">Cicilan</span></td>
+                        <td>Rp 5.000.000</td>
+                        <td>Rp 10.000.000</td>
+                        <td>Pembelian barang dagangan</td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-edit" onclick="editHutang(this)" title="Edit">
+                                    <svg fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteHutang(this)" title="Hapus">
+                                    <svg fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Budi Santoso</td>
+                        <td>Piutang</td>
+                        <td>Rp 5.000.000</td>
+                        <td>2024-01-20</td>
+                        <td>2024-02-20</td>
+                        <td><span class="status-badge status-belum-lunas">Belum Lunas</span></td>
+                        <td>Rp 0</td>
+                        <td>Rp 5.000.000</td>
+                        <td>Pinjaman modal usaha</td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-edit" onclick="editHutang(this)" title="Edit">
+                                    <svg fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteHutang(this)" title="Hapus">
+                                    <svg fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bank BCA</td>
+                        <td>Hutang</td>
+                        <td>Rp 50.000.000</td>
+                        <td>2023-12-01</td>
+                        <td>2024-12-01</td>
+                        <td><span class="status-badge status-lunas">Lunas</span></td>
+                        <td>Rp 50.000.000</td>
+                        <td>Rp 0</td>
+                        <td>KTA untuk renovasi toko</td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-edit" onclick="editHutang(this)" title="Edit">
+                                    <svg fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteHutang(this)" title="Hapus">
+                                    <svg fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Footer / Pagination -->
-        <div class="footer">
-            <div class="pagination-center">
-                <button class="nav-btn" onclick="goToFirstPage()" title="First">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+        <!-- Pagination -->
+        <div class="pagination">
+            <div class="pagination-info">
+                Menampilkan <span id="displayStart">1</span> - <span id="displayEnd">3</span> dari <span id="totalItems">3</span> data
+            </div>
+            <div class="pagination-controls">
+                <select class="rows-select" onchange="changeRowsPerPage(this.value)">
+                    <option value="10">10 rows</option>
+                    <option value="25">25 rows</option>
+                    <option value="50">50 rows</option>
+                    <option value="100">100 rows</option>
+                </select>
+                <button class="nav-btn" onclick="goToFirstPage()" title="First Page">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
                     </svg>
                 </button>
                 <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
-                <span class="page-info">
-                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
-                </span>
+                <input type="number" class="page-input" id="currentPage" value="1" min="1" onchange="goToPage(this.value)">
+                <span style="font-size: 13px; color: #6b7280;">/ <span id="totalPages">1</span></span>
                 <button class="nav-btn" onclick="goToNextPage()" title="Next">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
                 </button>
-                <button class="nav-btn" onclick="goToLastPage()" title="Last">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                <button class="nav-btn" onclick="goToLastPage()" title="Last Page">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
                 </button>
-                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="pagination-left">
-                <label style="font-size: 13px;">Rows:</label>
-                <select onchange="changeRowsPerPage(this.value)">
-                    <option value="10" selected>10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>
-
-            <div class="pagination-right">
-                <span id="displayStart">1</span>-<span id="displayEnd">10</span> of <span id="totalItems">1524</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Global Variables
         let currentPage = 1;
         let rowsPerPage = 10;
-        let totalItems = 0; // Will be calculated on page load
-        let totalPages = 0; // Will be calculated on page load
-        let editingRow = null; // Store row being edited
+        let totalItems = 0;
+        let totalPages = 1;
+        let editingRow = null;
 
-        // LocalStorage functions
-        function saveToLocalStorage() {
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            const data = [];
-            
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                const passwordSpan = cells[2].querySelector('.password-text');
-                
-                data.push({
-                    nama: cells[1].textContent,
-                    password: passwordSpan ? passwordSpan.getAttribute('data-password') : '',
-                    createdBy: cells[3].textContent,
-                    createdDate: cells[4].textContent,
-                    status: cells[5].textContent,
-                    updatedBy: cells[6].textContent,
-                    updatedDate: cells[7].textContent
-                });
-            }
-            
-            localStorage.setItem('emailManagementData', JSON.stringify(data));
+        // Format currency
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
-        function loadFromLocalStorage() {
-            const data = localStorage.getItem('emailManagementData');
-            if (data) {
-                const emails = JSON.parse(data);
-                const tableBody = document.getElementById('tableBody');
-                tableBody.innerHTML = ''; // Clear existing data
-                
-                emails.forEach((email, index) => {
-                    const row = document.createElement('tr');
+        // Parse currency
+        function parseRupiah(rupiah) {
+            return parseInt(rupiah.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        // Calculate summary
+        function calculateSummary() {
+            const tbody = document.getElementById('tableBody');
+            const rows = tbody.getElementsByTagName('tr');
+            
+            let totalHutang = 0;
+            let totalLunas = 0;
+            let totalCicilan = 0;
+            let totalTransaksi = 0;
+
+            for (let row of rows) {
+                if (row.style.display !== 'none') {
+                    const cells = row.getElementsByTagName('td');
+                    const jumlah = parseRupiah(cells[3].textContent);
+                    const status = cells[6].textContent.trim();
+                    const sisa = parseRupiah(cells[8].textContent);
                     
-                    row.innerHTML = `
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${email.nama}</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="${email.password}">${'•'.repeat(email.password.length)}</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${email.createdBy}</td>
-                        <td>${email.createdDate}</td>
-                        <td>${email.status}</td>
-                        <td>${email.updatedBy}</td>
-                        <td>${email.updatedDate}</td>
-                    `;
+                    totalTransaksi++;
                     
-                    tableBody.appendChild(row);
-                });
+                    if (status === 'Belum Lunas') {
+                        totalHutang += sisa;
+                    } else if (status === 'Lunas') {
+                        totalLunas += jumlah;
+                    } else if (status === 'Cicilan') {
+                        totalCicilan += sisa;
+                    }
+                }
+            }
+
+            document.getElementById('totalHutang').textContent = formatRupiah(totalHutang);
+            document.getElementById('totalLunas').textContent = formatRupiah(totalLunas);
+            document.getElementById('totalCicilan').textContent = formatRupiah(totalCicilan);
+            document.getElementById('totalTransaksi').textContent = totalTransaksi;
+        }
+
+        // Add Hutang
+        function addHutang(event) {
+            event.preventDefault();
+            
+            const namaPihak = document.getElementById('namaPihak').value;
+            const jenisHutang = document.getElementById('jenisHutang').value;
+            const jumlah = parseInt(document.getElementById('jumlah').value);
+            const tanggalTransaksi = document.getElementById('tanggalTransaksi').value;
+            const jatuhTempo = document.getElementById('jatuhTempo').value || '-';
+            const status = document.getElementById('status').value;
+            const sudahDibayar = parseInt(document.getElementById('sudahDibayar').value) || 0;
+            const keterangan = document.getElementById('keterangan').value || '-';
+            
+            const sisa = jumlah - sudahDibayar;
+            
+            let statusClass = 'status-belum-lunas';
+            if (status === 'Lunas') statusClass = 'status-lunas';
+            else if (status === 'Cicilan') statusClass = 'status-cicilan';
+
+            const tbody = document.getElementById('tableBody');
+            
+            if (editingRow) {
+                // Update existing row
+                const cells = editingRow.getElementsByTagName('td');
+                cells[1].textContent = namaPihak;
+                cells[2].textContent = jenisHutang;
+                cells[3].textContent = formatRupiah(jumlah);
+                cells[4].textContent = tanggalTransaksi;
+                cells[5].textContent = jatuhTempo;
+                cells[6].innerHTML = `<span class="status-badge ${statusClass}">${status}</span>`;
+                cells[7].textContent = formatRupiah(sudahDibayar);
+                cells[8].textContent = formatRupiah(sisa);
+                cells[9].textContent = keterangan;
                 
-                totalItems = emails.length;
-            }
-        }
-
-        // Auto Complete Email dengan @gmail.com
-        function autoCompleteEmail() {
-            const emailInput = document.getElementById('itemEmail');
-            let emailValue = emailInput.value.trim();
-            
-            // Jika kosong, tidak perlu diproses
-            if (!emailValue) {
-                return;
-            }
-            
-            // Jika sudah ada @, tidak perlu ditambahkan lagi
-            if (!emailValue.includes('@')) {
-                emailInput.value = emailValue + '@gmail.com';
-            }
-            
-            // Validasi format email
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(emailInput.value)) {
-                emailInput.style.borderColor = '#ef4444';
+                editingRow = null;
+                alert('✓ Data hutang berhasil diupdate!');
             } else {
-                emailInput.style.borderColor = '#10b981';
-            }
-            
-            // Update clear button visibility
-            updateClearButton();
-        }
-        
-        // Clear Email Function
-        function clearEmail() {
-            const emailInput = document.getElementById('itemEmail');
-            emailInput.value = '';
-            emailInput.style.borderColor = '#d1d5db';
-            emailInput.focus();
-            updateClearButton();
-        }
-        
-        // Update Clear Button Visibility
-        function updateClearButton() {
-            const emailInput = document.getElementById('itemEmail');
-            const wrapper = document.getElementById('emailWrapper');
-            
-            if (emailInput.value.trim() !== '') {
-                wrapper.classList.add('has-value');
-            } else {
-                wrapper.classList.remove('has-value');
-            }
-        }
-        
-        // Toggle Password Visibility
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIcon');
-            
-            if (passwordInput.type === 'password') {
-                // Show password
-                passwordInput.type = 'text';
-                eyeIcon.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                // Hide password
-                passwordInput.type = 'password';
-                eyeIcon.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
-            }
-        }
-        
-        // Toggle Password in Table
-        function toggleTablePassword(button) {
-            const passwordSpan = button.previousElementSibling;
-            const realPassword = passwordSpan.getAttribute('data-password');
-            const currentText = passwordSpan.textContent;
-            const svg = button.querySelector('svg');
-            
-            if (currentText.includes('•')) {
-                // Show password
-                passwordSpan.textContent = realPassword;
-                svg.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                // Hide password
-                passwordSpan.textContent = '•'.repeat(realPassword.length);
-                svg.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
-            }
-        }
-
-        // Posting Akun
-        function postingAkun() {
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            
-            if (rows.length === 0) {
-                alert('⚠ Tidak ada data untuk diposting!');
-                return;
-            }
-            
-            if (confirm(`Apakah Anda yakin ingin memposting ${rows.length} data akun ke database?\n\nData yang sudah diposting akan tersimpan permanen.`)) {
-                // Show loading state
-                button.disabled = true;
-                button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Posting...';
+                // Add new row
+                const rowCount = tbody.getElementsByTagName('tr').length;
+                const newRow = tbody.insertRow();
                 
-                setTimeout(() => {
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Berhasil memposting ${rows.length} data akun ke database!\n\nSemua perubahan telah disimpan.`);
-                }, 1500);
-            }
-        }
-
-        // Set Akun
-        function setAkun() {
-            const itemEmail = document.getElementById('itemEmail').value;
-            const password = document.getElementById('password').value;
-
-            if (!itemEmail || !password) {
-                alert('⚠ Mohon lengkapi semua field!');
-                return;
-            }
-
-            if (password.length < 6) {
-                alert('⚠ Password harus minimal 6 karakter!');
-                return;
-            }
-
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            // Show loading state
-            button.disabled = true;
-            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Setting...';
-            
-            setTimeout(() => {
-                if (editingRow) {
-                    // UPDATE existing row
-                    const cells = editingRow.getElementsByTagName('td');
-                    const currentDate = new Date();
-                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
-                        day: '2-digit', 
-                        month: '2-digit', 
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    });
-                    
-                    cells[1].textContent = itemEmail;
-                    cells[2].innerHTML = `
-                        <div class="password-cell">
-                            <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
-                            <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                newRow.innerHTML = `
+                    <td>${rowCount + 1}</td>
+                    <td>${namaPihak}</td>
+                    <td>${jenisHutang}</td>
+                    <td>${formatRupiah(jumlah)}</td>
+                    <td>${tanggalTransaksi}</td>
+                    <td>${jatuhTempo}</td>
+                    <td><span class="status-badge ${statusClass}">${status}</span></td>
+                    <td>${formatRupiah(sudahDibayar)}</td>
+                    <td>${formatRupiah(sisa)}</td>
+                    <td>${keterangan}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-edit" onclick="editHutang(this)" title="Edit">
+                                <svg fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-action btn-delete" onclick="deleteHutang(this)" title="Hapus">
+                                <svg fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </button>
                         </div>
-                    `;
-                    cells[6].textContent = 'System Admin';
-                    cells[7].textContent = dateStr;
-                    
-                    editingRow = null;
-                    
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Data berhasil diupdate!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
-                } else {
-                    // ADD new row to table
-                    const tableBody = document.getElementById('tableBody');
-                    const newRow = document.createElement('tr');
-                    
-                    const currentDate = new Date();
-                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
-                        day: '2-digit', 
-                        month: '2-digit', 
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    });
-                    
-                    newRow.innerHTML = `
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${itemEmail}</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>System Admin</td>
-                        <td>${dateStr}</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>-</td>
-                        <td>-</td>
-                    `;
-                    
-                    tableBody.appendChild(newRow);
-                    
-                    // Update total items
-                    totalItems++;
-                    totalPages = Math.ceil(totalItems / rowsPerPage);
-                    
-                    // Show rows based on current page
-                    showCurrentPageRows();
-                    updatePaginationInfo();
-                    updateNavigationButtons();
-                    
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Data berhasil disimpan!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
-                }
+                    </td>
+                `;
                 
-                // Clear form
-                document.getElementById('itemEmail').value = '';
-                document.getElementById('password').value = '';
+                totalItems++;
+                totalPages = Math.ceil(totalItems / rowsPerPage);
+                updatePaginationInfo();
+                updateNavigationButtons();
                 
-                // Update clear button
-                updateClearButton();
-                
-                // Save to localStorage
-                saveToLocalStorage();
-            }, 1000);
-        }
-
-        // Export Profil
-        function exportProfil() {
-            const itemEmail = document.getElementById('itemEmail').value;
-            if (!itemEmail) {
-                alert('⚠ Pilih email terlebih dahulu!');
-                return;
+                alert('✓ Data hutang berhasil ditambahkan!');
             }
             
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
+            // Reset form
+            document.getElementById('namaPihak').value = '';
+            document.getElementById('jenisHutang').value = '';
+            document.getElementById('jumlah').value = '';
+            document.getElementById('tanggalTransaksi').value = '';
+            document.getElementById('jatuhTempo').value = '';
+            document.getElementById('status').value = 'Belum Lunas';
+            document.getElementById('sudahDibayar').value = '0';
+            document.getElementById('keterangan').value = '';
             
-            button.disabled = true;
-            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Exporting...';
-            
-            setTimeout(() => {
-                button.disabled = false;
-                button.innerHTML = originalText;
-                alert('✓ Profil email "' + itemEmail + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
-            }, 1500);
+            calculateSummary();
+            saveToLocalStorage();
         }
 
-        // Import Profil
-        function importProfil() {
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = '.xlsx,.xls,.csv';
-            fileInput.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    button.disabled = true;
-                    button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Importing...';
-                    
-                    setTimeout(() => {
-                        button.disabled = false;
-                        button.innerHTML = originalText;
-                        alert('✓ File "' + file.name + '" berhasil diimpor!\n\nData telah diproses ke sistem.');
-                    }, 1500);
-                }
-            };
-            fileInput.click();
-        }
-
-        // Edit User
-        function editEmail(element) {
+        // Edit Hutang
+        function editHutang(element) {
             const row = element.closest('tr');
             const cells = row.getElementsByTagName('td');
             
-            const emailData = {
-                nama: cells[1].textContent,
-                password: cells[2].textContent
-            };
-
-            // Set editing mode
             editingRow = row;
             
-            // Populate form with email data
-            document.getElementById('itemEmail').value = emailData.nama;
-            // Password tidak di-populate karena sudah ter-mask, user harus input ulang
-            document.getElementById('password').value = '';
+            document.getElementById('namaPihak').value = cells[1].textContent;
+            document.getElementById('jenisHutang').value = cells[2].textContent;
+            document.getElementById('jumlah').value = parseRupiah(cells[3].textContent);
+            document.getElementById('tanggalTransaksi').value = cells[4].textContent;
+            document.getElementById('jatuhTempo').value = cells[5].textContent === '-' ? '' : cells[5].textContent;
+            document.getElementById('status').value = cells[6].textContent.trim();
+            document.getElementById('sudahDibayar').value = parseRupiah(cells[7].textContent);
+            document.getElementById('keterangan').value = cells[9].textContent === '-' ? '' : cells[9].textContent;
             
-            // Update clear button
-            updateClearButton();
-            
-            // Scroll to form
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            alert(`✏ Mode Edit\n\nData email "${emailData.nama}" telah dimuat ke form.\n\nCatatan: Untuk keamanan, silakan masukkan password baru.`);
+            alert('✏ Mode Edit\n\nData telah dimuat ke form.\nSilakan ubah data dan klik "Simpan" untuk menyimpan perubahan.');
         }
 
-        // Delete User
-        function deleteEmail(element) {
+        // Delete Hutang
+        function deleteHutang(element) {
             const row = element.closest('tr');
             const nama = row.getElementsByTagName('td')[1].textContent;
             
-            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus email:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
-                // Add fade out animation
+            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus data:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
                 row.style.transition = 'opacity 0.3s';
                 row.style.opacity = '0';
                 
                 setTimeout(() => {
                     row.remove();
+                    
+                    // Reorder numbering
+                    const tbody = document.getElementById('tableBody');
+                    const rows = tbody.getElementsByTagName('tr');
+                    for (let i = 0; i < rows.length; i++) {
+                        rows[i].getElementsByTagName('td')[0].textContent = i + 1;
+                    }
+                    
                     totalItems--;
                     totalPages = Math.ceil(totalItems / rowsPerPage);
                     
-                    // If current page is now empty and not page 1, go to previous page
                     if (currentPage > totalPages && totalPages > 0) {
                         currentPage = totalPages;
                         document.getElementById('currentPage').value = currentPage;
@@ -1864,31 +1330,37 @@
                     showCurrentPageRows();
                     updatePaginationInfo();
                     updateNavigationButtons();
-                    
-                    // Save to localStorage
+                    calculateSummary();
                     saveToLocalStorage();
                     
-                    alert(`✓ Email "${nama}" berhasil dihapus dari sistem!`);
+                    alert(`✓ Data "${nama}" berhasil dihapus!`);
                 }, 300);
             }
         }
 
-        // Filter Table
-        function filterTable(columnIndex, searchValue) {
-            const table = document.getElementById('tableBody');
-            const rows = table.getElementsByTagName('tr');
+        // Search Table
+        function searchTable(searchValue) {
+            const tbody = document.getElementById('tableBody');
+            const rows = tbody.getElementsByTagName('tr');
             searchValue = searchValue.toLowerCase();
 
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                const cellValue = cells[columnIndex + 1].textContent.toLowerCase();
+            for (let row of rows) {
+                const cells = row.getElementsByTagName('td');
+                let found = false;
                 
-                if (cellValue.includes(searchValue)) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
+                // Search in nama pihak, jenis, and keterangan
+                const nama = cells[1].textContent.toLowerCase();
+                const jenis = cells[2].textContent.toLowerCase();
+                const keterangan = cells[9].textContent.toLowerCase();
+                
+                if (nama.includes(searchValue) || jenis.includes(searchValue) || keterangan.includes(searchValue)) {
+                    found = true;
                 }
+                
+                row.style.display = found ? '' : 'none';
             }
+            
+            calculateSummary();
         }
 
         // Pagination Functions
@@ -1952,22 +1424,6 @@
             }
         }
 
-        function refreshData() {
-            alert('Menyinkronkan data terbaru...');
-            location.reload();
-        }
-
-        function updatePaginationInfo() {
-            const displayStart = (currentPage - 1) * rowsPerPage + 1;
-            const displayEnd = Math.min(currentPage * rowsPerPage, totalItems);
-            
-            document.getElementById('displayStart').textContent = displayStart;
-            document.getElementById('displayEnd').textContent = displayEnd;
-            document.getElementById('totalPages').textContent = totalPages;
-            document.getElementById('totalItems').textContent = totalItems;
-        }
-
-        // Show only rows for current page
         function showCurrentPageRows() {
             const tableBody = document.getElementById('tableBody');
             const rows = Array.from(tableBody.getElementsByTagName('tr'));
@@ -1984,14 +1440,22 @@
             });
         }
 
-        // Update Navigation Buttons State
+        function updatePaginationInfo() {
+            const displayStart = (currentPage - 1) * rowsPerPage + 1;
+            const displayEnd = Math.min(currentPage * rowsPerPage, totalItems);
+            
+            document.getElementById('displayStart').textContent = displayStart;
+            document.getElementById('displayEnd').textContent = displayEnd;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('totalItems').textContent = totalItems;
+        }
+
         function updateNavigationButtons() {
             const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
             const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
             const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
             const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
 
-            // Disable/Enable buttons based on current page
             if (currentPage === 1) {
                 firstBtn.disabled = true;
                 prevBtn.disabled = true;
@@ -2025,52 +1489,26 @@
             }
         }
 
-        // Initialize
-        window.onload = function() {
-            // Load data from localStorage first
-            loadFromLocalStorage();
-            
-            document.getElementById('currentPage').max = totalPages;
-            
-            // Count actual rows in table
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            totalItems = rows.length;
-            totalPages = Math.ceil(totalItems / rowsPerPage);
-            
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
-            
-            // Add event listener for email input untuk menampilkan preview saat mengetik
-            const emailInput = document.getElementById('itemEmail');
-            emailInput.addEventListener('input', function() {
-                let value = this.value;
-                // Update clear button visibility
-                updateClearButton();
-                
-                // Hapus @gmail.com jika ada untuk memungkinkan editing
-                if (value.endsWith('@gmail.com')) {
-                    // Tidak perlu diubah
-                } else if (!value.includes('@')) {
-                    // Tampilkan hint
-                    this.style.fontStyle = 'normal';
-                }
-            });
-            
-            // Reset border color saat focus
-            emailInput.addEventListener('focus', function() {
-                this.style.borderColor = '#3b82f6';
-            });
-            
-            // Initial check untuk clear button
-            updateClearButton();
-        };
+        // Export to Excel
+        function exportToExcel() {
+            alert('📊 Fitur Export Excel sedang dalam pengembangan!\n\nData akan diekspor ke format Excel.');
+        }
+
+        // Print Table
+        function printTable() {
+            window.print();
+        }
+
+        // Refresh Data
+        function refreshData() {
+            if (confirm('🔄 Refresh data?\n\nData yang belum disimpan akan hilang.')) {
+                location.reload();
+            }
+        }
 
         // Handle Logout
         function handleLogout() {
             if (confirm('Apakah Anda yakin ingin keluar?')) {
-                // Redirect kembali ke halaman login
                 window.location.href = 'index.html';
             }
         }
@@ -2087,6 +1525,94 @@
             document.getElementById('sidebarOverlay').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
+
+        // LocalStorage Functions
+        function saveToLocalStorage() {
+            const tbody = document.getElementById('tableBody');
+            const rows = tbody.getElementsByTagName('tr');
+            const data = [];
+            
+            for (let row of rows) {
+                const cells = row.getElementsByTagName('td');
+                data.push({
+                    namaPihak: cells[1].textContent,
+                    jenisHutang: cells[2].textContent,
+                    jumlah: cells[3].textContent,
+                    tanggalTransaksi: cells[4].textContent,
+                    jatuhTempo: cells[5].textContent,
+                    status: cells[6].textContent.trim(),
+                    sudahDibayar: cells[7].textContent,
+                    sisa: cells[8].textContent,
+                    keterangan: cells[9].textContent
+                });
+            }
+            
+            localStorage.setItem('hutangData', JSON.stringify(data));
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('hutangData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                const tbody = document.getElementById('tableBody');
+                tbody.innerHTML = '';
+                
+                data.forEach((item, index) => {
+                    let statusClass = 'status-belum-lunas';
+                    if (item.status === 'Lunas') statusClass = 'status-lunas';
+                    else if (item.status === 'Cicilan') statusClass = 'status-cicilan';
+                    
+                    const newRow = tbody.insertRow();
+                    newRow.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${item.namaPihak}</td>
+                        <td>${item.jenisHutang}</td>
+                        <td>${item.jumlah}</td>
+                        <td>${item.tanggalTransaksi}</td>
+                        <td>${item.jatuhTempo}</td>
+                        <td><span class="status-badge ${statusClass}">${item.status}</span></td>
+                        <td>${item.sudahDibayar}</td>
+                        <td>${item.sisa}</td>
+                        <td>${item.keterangan}</td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="btn-action btn-edit" onclick="editHutang(this)" title="Edit">
+                                    <svg fill="none" stroke="#3b82f6" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                                <button class="btn-action btn-delete" onclick="deleteHutang(this)" title="Hapus">
+                                    <svg fill="none" stroke="#ef4444" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                });
+            }
+        }
+
+        // Initialize
+        window.onload = function() {
+            loadFromLocalStorage();
+            
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            totalItems = rows.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage);
+            
+            document.getElementById('currentPage').max = totalPages;
+            
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+            calculateSummary();
+            
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tanggalTransaksi').value = today;
+        };
     </script>
 </body>
 </html>
