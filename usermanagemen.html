@@ -30,9 +30,8 @@
 
         /* Header */
         .header {
-            background: #ffffff;
+            background: transparent;
             padding: 20px 24px;
-            border-bottom: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,10 +40,14 @@
         }
 
         .header-title {
-            font-weight: 700;
             font-size: 20px;
+            font-weight: 700;
             color: #111827;
             letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #2563eb;
         }
 
         .header-controls {
@@ -109,7 +112,6 @@
             width: 300px;
             height: 100vh;
             background: white;
-            box-shadow: 4px 0 12px rgba(0,0,0,0.15);
             transition: left 0.3s ease;
             z-index: 100;
             overflow-y: auto;
@@ -609,7 +611,7 @@
             }
 
             .header-title {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .sub-header {
@@ -713,7 +715,7 @@
 
         @media (max-width: 480px) {
             .header-title {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .table-container {
@@ -813,7 +815,7 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <h2>User Management</h2>
+            <h2>Store A YANI</h2>
             <p>PT MIDI UTAMA INDONESIA</p>
         </div>
 
@@ -829,15 +831,19 @@
             </a>
             <a href="usermanagemen.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 User Management
             </a>
             <a href="emailmanagement.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 Email Management
             </a>
@@ -853,7 +859,9 @@
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
-                <div class="header-title">User Management</div>
+                <h1 class="header-title">
+                    <span class="store-name">STORE A YANI PURWODADI</span>
+                </h1>
             </div>
             
             <div class="header-controls">
@@ -887,14 +895,14 @@
             </div>
 
             <div class="input-group">
-                <label for="role">Role:</label>
+                <label for="role">Nama Jabatan:</label>
                 <select id="role" class="input-role">
                     <option value="">- Pilih -</option>
-                    <option value="Administrator">Administrator</option>
-                    <option value="Operator">Operator</option>
-                    <option value="Staff">Staff</option>
-                    <option value="Guest">Guest</option>
-                    <option value="Manager">Manager</option>
+                    <option value="ACOS (Asisten Chief Of Store)">ACOS (Asisten Chief Of Store)</option>
+                    <option value="COS (Chief Of Store)">COS (Chief Of Store)</option>
+                    <option value="MD (Merchandiser)">MD (Merchandiser)</option>
+                    <option value="Kasir">Kasir</option>
+                    <option value="Crew">Crew</option>
                 </select>
             </div>
 
@@ -941,7 +949,7 @@
                     <tr>
                         <th style="width: 100px;">Action</th>
                         <th>Nama User</th>
-                        <th>Role</th>
+                        <th>Nama Jabatan</th>
                         <th style="width: 80px;">Level</th>
                         <th>Insert By</th>
                         <th>Insert Date</th>
