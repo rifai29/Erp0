@@ -30,9 +30,8 @@
 
         /* Header */
         .header {
-            background: #ffffff;
+            background: transparent;
             padding: 20px 24px;
-            border-bottom: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,6 +44,10 @@
             font-size: 20px;
             color: #111827;
             letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #2563eb;
         }
 
         .header-controls {
@@ -939,7 +942,7 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <h2>Email Management</h2>
+            <h2>Store A YANI</h2>
             <p>PT MIDI UTAMA INDONESIA</p>
         </div>
 
@@ -955,15 +958,19 @@
             </a>
             <a href="usermanagemen.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 User Management
             </a>
             <a href="emailmanagement.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 Email Management
             </a>
@@ -979,7 +986,9 @@
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
-                <div class="header-title">Email Management</div>
+                <h1 class="header-title">
+                    <span class="store-name">STORE A YANI PURWODADI</span>
+                </h1>
             </div>
             
             <div class="header-controls">
@@ -1411,29 +1420,30 @@
             
             for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName('td');
+                const passwordSpan = cells[2].querySelector('.password-text');
+                
                 data.push({
                     nama: cells[1].textContent,
-                    role: cells[2].textContent,
-                    level: cells[3].textContent,
-                    createdBy: cells[4].textContent,
-                    createdDate: cells[5].textContent,
-                    status: cells[6].textContent,
-                    updatedBy: cells[7].textContent,
-                    updatedDate: cells[8].textContent
+                    password: passwordSpan ? passwordSpan.getAttribute('data-password') : '',
+                    createdBy: cells[3].textContent,
+                    createdDate: cells[4].textContent,
+                    status: cells[5].textContent,
+                    updatedBy: cells[6].textContent,
+                    updatedDate: cells[7].textContent
                 });
             }
             
-            localStorage.setItem('userManagementData', JSON.stringify(data));
+            localStorage.setItem('emailManagementData', JSON.stringify(data));
         }
 
         function loadFromLocalStorage() {
-            const data = localStorage.getItem('userManagementData');
+            const data = localStorage.getItem('emailManagementData');
             if (data) {
-                const users = JSON.parse(data);
+                const emails = JSON.parse(data);
                 const tableBody = document.getElementById('tableBody');
                 tableBody.innerHTML = ''; // Clear existing data
                 
-                users.forEach((user, index) => {
+                emails.forEach((email, index) => {
                     const row = document.createElement('tr');
                     
                     row.innerHTML = `
@@ -1451,20 +1461,29 @@
                                 </button>
                             </div>
                         </td>
-                        <td>${user.nama}</td>
-                        <td>${user.role}</td>
-                        <td>${user.level}</td>
-                        <td>${user.createdBy}</td>
-                        <td>${user.createdDate}</td>
-                        <td>${user.status}</td>
-                        <td>${user.updatedBy}</td>
-                        <td>${user.updatedDate}</td>
+                        <td>${email.nama}</td>
+                        <td>
+                            <div class="password-cell">
+                                <span class="password-text" data-password="${email.password}">${'•'.repeat(email.password.length)}</span>
+                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>${email.createdBy}</td>
+                        <td>${email.createdDate}</td>
+                        <td>${email.status}</td>
+                        <td>${email.updatedBy}</td>
+                        <td>${email.updatedDate}</td>
                     `;
                     
                     tableBody.appendChild(row);
                 });
                 
-                totalItems = users.length;
+                totalItems = emails.length;
             }
         }
 
