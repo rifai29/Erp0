@@ -479,45 +479,83 @@
         }
 
         /* Pagination */
-        .pagination {
-            padding: 16px 24px;
+        .footer {
+            padding: 14px 24px;
+            border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
-            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
         }
 
-        .pagination-info {
-            font-size: 13px;
-            color: #6b7280;
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
         }
 
-        .pagination-controls {
+        .pagination-left {
             display: flex;
             gap: 8px;
             align-items: center;
         }
 
+        .pagination-left label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .pagination-left select:hover {
+            border-color: #9ca3af;
+        }
+
+        .pagination-right {
+            font-size: 13px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+            font-weight: 500;
+        }
+
         .page-input {
-            width: 60px;
+            width: 50px;
             padding: 6px 8px;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 13px;
             text-align: center;
+            transition: all 0.2s ease;
         }
 
-        .rows-select {
-            padding: 6px 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 13px;
-            cursor: pointer;
+        .page-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .nav-btn {
+        .nav-btn, .refresh-btn {
             width: 32px;
             height: 32px;
             border: 1px solid #d1d5db;
@@ -530,20 +568,14 @@
             transition: all 0.2s ease;
         }
 
-        .nav-btn:hover:not(:disabled) {
-            background: #f9fafb;
-            border-color: #3b82f6;
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
         }
 
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .nav-btn svg {
+        .nav-btn svg, .refresh-btn svg {
             width: 16px;
             height: 16px;
-            stroke: #6b7280;
         }
 
         /* Summary Cards */
@@ -655,36 +687,51 @@
                 white-space: nowrap;
             }
 
-            .pagination {
-                padding: 12px 16px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+            .footer {
+                padding: 10px 12px;
+                gap: 6px;
+                font-size: 10px;
             }
 
-            .pagination-controls {
-                width: 100%;
-                justify-content: flex-start;
+            .pagination-center {
+                gap: 3px;
             }
 
-            .pagination-info {
-                font-size: 11px;
+            .pagination-left {
+                gap: 3px;
             }
 
-            .nav-btn {
-                width: 28px;
-                height: 28px;
+            .pagination-left label {
+                font-size: 10px;
             }
 
-            .nav-btn svg {
-                width: 12px;
-                height: 12px;
+            .pagination-left select {
+                padding: 3px 5px;
+                font-size: 10px;
+            }
+
+            .pagination-right {
+                font-size: 10px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 26px;
+                height: 26px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 11px !important;
+                height: 11px !important;
             }
 
             .page-input {
-                width: 40px;
-                padding: 4px 6px;
-                font-size: 11px;
+                width: 35px;
+                padding: 3px 4px;
+                font-size: 10px;
+            }
+
+            .page-info {
+                font-size: 10px;
             }
 
             .rows-select {
@@ -764,27 +811,41 @@
                 height: 14px;
             }
 
-            .pagination {
+            .footer {
                 padding: 10px 12px;
+                gap: 6px;
                 font-size: 10px;
             }
 
-            .pagination-info {
+            .pagination-center {
+                gap: 3px;
+            }
+
+            .pagination-left {
+                gap: 3px;
+            }
+
+            .pagination-left label {
                 font-size: 10px;
             }
 
-            .pagination-controls {
-                gap: 4px;
+            .pagination-left select {
+                padding: 3px 5px;
+                font-size: 10px;
             }
 
-            .nav-btn {
+            .pagination-right {
+                font-size: 10px;
+            }
+
+            .nav-btn, .refresh-btn {
                 width: 26px;
                 height: 26px;
             }
 
-            .nav-btn svg {
-                width: 11px;
-                height: 11px;
+            .nav-btn svg, .refresh-btn svg {
+                width: 11px !important;
+                height: 11px !important;
             }
 
             .page-input {
@@ -793,8 +854,7 @@
                 font-size: 10px;
             }
 
-            .rows-select {
-                padding: 3px 5px;
+            .page-info {
                 font-size: 10px;
             }
         }
@@ -865,11 +925,10 @@
             </a>
             <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 Laporan Bensin
             </a>
@@ -1100,39 +1159,50 @@
         </div>
 
         <!-- Pagination -->
-        <div class="pagination">
-            <div class="pagination-info">
-                Menampilkan <span id="displayStart">1</span> - <span id="displayEnd">3</span> dari <span id="totalItems">3</span> data
-            </div>
-            <div class="pagination-controls">
-                <select class="rows-select" onchange="changeRowsPerPage(this.value)">
-                    <option value="10">10 rows</option>
-                    <option value="25">25 rows</option>
-                    <option value="50">50 rows</option>
-                    <option value="100">100 rows</option>
-                </select>
-                <button class="nav-btn" onclick="goToFirstPage()" title="First Page">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="footer">
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
                     </svg>
                 </button>
                 <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
-                <input type="number" class="page-input" id="currentPage" value="1" min="1" onchange="goToPage(this.value)">
-                <span style="font-size: 13px; color: #6b7280;">/ <span id="totalPages">1</span></span>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">1</span>
+                </span>
                 <button class="nav-btn" onclick="goToNextPage()" title="Next">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
                 </button>
-                <button class="nav-btn" onclick="goToLastPage()" title="Last Page">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
                 </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">1</span>-<span id="displayEnd">10</span> of <span id="totalItems">3</span>
             </div>
         </div>
     </div>
@@ -1422,6 +1492,11 @@
                 alert('Halaman tidak valid!');
                 document.getElementById('currentPage').value = currentPage;
             }
+        }
+
+        function refreshData() {
+            alert('Menyinkronkan data terbaru...');
+            location.reload();
         }
 
         function showCurrentPageRows() {
