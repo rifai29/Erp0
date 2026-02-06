@@ -17,6 +17,9 @@
             --white: #FFFFFF;
             --input-border: #CBD5E1;
             --input-focus: #0D9488;
+            --red-error: #EF4444;
+            --green-success: #10B981;
+            --yellow-warning: #F59E0B;
         }
 
         * {
@@ -102,6 +105,7 @@
             background: var(--white);
             position: relative;
             min-height: 100vh;
+            overflow-y: auto;
         }
 
         .login-card {
@@ -198,6 +202,23 @@
             opacity: 0.6;
         }
 
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--light-text);
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .password-toggle:hover {
+            color: var(--teal-primary);
+        }
+
         .btn-primary {
             width: 100%;
             padding: 14px 24px;
@@ -213,19 +234,14 @@
             margin-top: 8px;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
         .btn-primary:disabled {
-            opacity: 0.7;
+            opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
         }
 
         .forgot-password {
@@ -246,6 +262,215 @@
             text-decoration: underline;
         }
 
+        /* Login History Button */
+        .history-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 12px 20px;
+            background: var(--bluish-grey);
+            border: none;
+            border-radius: 8px;
+            color: var(--medium-text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .history-trigger:hover {
+            background: #CBD5E1;
+            color: var(--dark-text);
+        }
+
+        .history-trigger svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Login History Modal */
+        .history-modal {
+            background: var(--white);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .history-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--bluish-grey);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .history-header h3 {
+            font-family: 'Archivo', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--light-text);
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: var(--bluish-grey);
+            color: var(--dark-text);
+        }
+
+        .history-content {
+            padding: 20px 28px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: #F8FAFC;
+            border: 1px solid var(--bluish-grey);
+            transition: all 0.2s;
+        }
+
+        .history-item:hover {
+            background: var(--white);
+            border-color: var(--teal-light);
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
+        }
+
+        .history-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .history-icon.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green-success);
+        }
+
+        .history-icon.failed {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red-error);
+        }
+
+        .history-icon.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--yellow-warning);
+        }
+
+        .history-details {
+            flex: 1;
+        }
+
+        .history-title {
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .history-info {
+            font-size: 13px;
+            color: var(--light-text);
+            margin-bottom: 2px;
+        }
+
+        .history-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--white);
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--medium-text);
+        }
+
+        .meta-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--light-text);
+        }
+
+        .empty-history svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
         .footer {
             text-align: center;
             padding: 24px;
@@ -254,13 +479,24 @@
             margin-top: auto;
         }
 
-        @media (max-width: 968px) {
+        /* Responsive */
+        @media (max-width: 1024px) {
             .visual-area {
                 display: none;
             }
 
             .action-area {
                 flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .visual-area {
+                display: none;
             }
 
             .logo-large svg {
@@ -290,27 +526,68 @@
                 padding: 20px;
                 margin-top: 40px;
             }
+
+            .history-modal {
+                width: 95%;
+            }
         }
 
-        /* Loading animation untuk input */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            animation: slideInRight 0.3s ease;
+            max-width: 400px;
         }
 
-        .input-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.05), transparent);
-            pointer-events: none;
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
-        .form-control:focus + .input-wrapper::after {
-            animation: shimmer 2s infinite;
+        .toast.success {
+            border-left: 4px solid var(--green-success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--red-error);
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .toast-message {
+            font-size: 13px;
+            color: var(--light-text);
         }
     </style>
 </head>
@@ -336,17 +613,12 @@
                     </defs>
                     
                     <!-- Grid 3x3 kotak -->
-                    <!-- Baris 1 -->
                     <rect class="grid-box" x="30" y="30" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="0.9"/>
                     <rect class="grid-box" x="79" y="30" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
                     <rect class="grid-box" x="128" y="30" width="42" height="42" rx="6" fill="url(#boxGradient3)" opacity="0.9"/>
-                    
-                    <!-- Baris 2 -->
                     <rect class="grid-box" x="30" y="79" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
                     <rect class="grid-box" x="79" y="79" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="1"/>
                     <rect class="grid-box" x="128" y="79" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
-                    
-                    <!-- Baris 3 -->
                     <rect class="grid-box" x="30" y="128" width="42" height="42" rx="6" fill="url(#boxGradient3)" opacity="0.9"/>
                     <rect class="grid-box" x="79" y="128" width="42" height="42" rx="6" fill="url(#boxGradient2)" opacity="0.95"/>
                     <rect class="grid-box" x="128" y="128" width="42" height="42" rx="6" fill="url(#boxGradient1)" opacity="0.9"/>
@@ -374,22 +646,13 @@
                                     <stop offset="100%" style="stop-color:#5EEAD4;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
-                            
-                            <!-- Background -->
                             <rect x="0" y="0" width="48" height="48" rx="10" fill="#F8FAFC"/>
-                            
-                            <!-- Grid 3x3 kotak kecil -->
-                            <!-- Baris 1 -->
                             <rect x="8" y="8" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
                             <rect x="19.5" y="8" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
                             <rect x="31" y="8" width="9" height="9" rx="2" fill="url(#iconGradient3)"/>
-                            
-                            <!-- Baris 2 -->
                             <rect x="8" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
                             <rect x="19.5" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
                             <rect x="31" y="19.5" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
-                            
-                            <!-- Baris 3 -->
                             <rect x="8" y="31" width="9" height="9" rx="2" fill="url(#iconGradient3)"/>
                             <rect x="19.5" y="31" width="9" height="9" rx="2" fill="url(#iconGradient2)"/>
                             <rect x="31" y="31" width="9" height="9" rx="2" fill="url(#iconGradient1)"/>
@@ -422,7 +685,28 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-primary">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-control" 
+                                placeholder="Masukkan password Anda"
+                                required
+                                autocomplete="current-password"
+                            />
+                            <button type="button" class="password-toggle" onclick="togglePassword()">
+                                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="loginBtn">
                         Sign me in
                     </button>
                 </form>
@@ -430,6 +714,14 @@
                 <div class="forgot-password">
                     <a href="#" onclick="handleForgotPassword(event)">Lupa Password?</a>
                 </div>
+
+                <button class="history-trigger" onclick="openHistoryModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Riwayat Login
+                </button>
             </div>
 
             <div class="footer">
@@ -438,40 +730,381 @@
         </div>
     </div>
 
+    <!-- Login History Modal -->
+    <div class="modal-overlay" id="historyModal" onclick="closeModalOnOverlay(event)">
+        <div class="history-modal" onclick="event.stopPropagation()">
+            <div class="history-header">
+                <h3>Riwayat Login</h3>
+                <button class="close-modal" onclick="closeHistoryModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="history-content" id="historyContent">
+                <!-- History items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Simulated login history data (dalam aplikasi nyata, ini dari database)
+        let loginHistory = [
+            {
+                status: 'success',
+                username: 'admin',
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 jam lalu
+                ip: '192.168.1.100',
+                device: 'Chrome - Windows 10',
+                location: 'Jakarta, Indonesia'
+            },
+            {
+                status: 'success',
+                username: 'admin',
+                timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 hari lalu
+                ip: '192.168.1.100',
+                device: 'Chrome - Windows 10',
+                location: 'Jakarta, Indonesia'
+            },
+            {
+                status: 'failed',
+                username: 'admin',
+                timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 hari lalu
+                ip: '203.45.67.89',
+                device: 'Firefox - Linux',
+                location: 'Bandung, Indonesia',
+                reason: 'Password salah'
+            },
+            {
+                status: 'warning',
+                username: 'admin',
+                timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 hari lalu
+                ip: '120.34.56.78',
+                device: 'Safari - MacOS',
+                location: 'Surabaya, Indonesia',
+                reason: 'Login dari perangkat baru'
+            },
+            {
+                status: 'success',
+                username: 'admin',
+                timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 1 minggu lalu
+                ip: '192.168.1.100',
+                device: 'Chrome - Windows 10',
+                location: 'Jakarta, Indonesia'
+            }
+        ];
+
+        // Load history dari localStorage jika ada
+        function loadHistory() {
+            const saved = localStorage.getItem('loginHistory');
+            if (saved) {
+                loginHistory = JSON.parse(saved).map(item => ({
+                    ...item,
+                    timestamp: new Date(item.timestamp)
+                }));
+            }
+        }
+
+        // Save history ke localStorage
+        function saveHistory() {
+            localStorage.setItem('loginHistory', JSON.stringify(loginHistory));
+        }
+
+        // Format waktu relatif
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diff = now - date;
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (seconds < 60) return 'Baru saja';
+            if (minutes < 60) return `${minutes} menit yang lalu`;
+            if (hours < 24) return `${hours} jam yang lalu`;
+            if (days < 7) return `${days} hari yang lalu`;
+            
+            return date.toLocaleDateString('id-ID', { 
+                day: 'numeric', 
+                month: 'short', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Render login history
+        function renderHistory() {
+            const content = document.getElementById('historyContent');
+            
+            if (loginHistory.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-history">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <p>Belum ada riwayat login</p>
+                    </div>
+                `;
+                return;
+            }
+
+            content.innerHTML = loginHistory.map(item => {
+                const iconClass = item.status === 'success' ? 'success' : 
+                                 item.status === 'failed' ? 'failed' : 'warning';
+                
+                const icon = item.status === 'success' ? 
+                    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>` :
+                    item.status === 'failed' ?
+                    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>` :
+                    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>`;
+
+                const statusText = item.status === 'success' ? 'Login Berhasil' : 
+                                  item.status === 'failed' ? 'Login Gagal' : 'Peringatan Keamanan';
+
+                return `
+                    <div class="history-item">
+                        <div class="history-icon ${iconClass}">
+                            ${icon}
+                        </div>
+                        <div class="history-details">
+                            <div class="history-title">${statusText}</div>
+                            <div class="history-info">${getRelativeTime(item.timestamp)}</div>
+                            ${item.reason ? `<div class="history-info" style="color: var(--red-error);">${item.reason}</div>` : ''}
+                            <div class="history-meta">
+                                <span class="meta-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                    ${item.device}
+                                </span>
+                                <span class="meta-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                        <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"></path>
+                                    </svg>
+                                    ${item.location}
+                                </span>
+                                <span class="meta-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                    ${item.ip}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open history modal
+        function openHistoryModal() {
+            loadHistory();
+            renderHistory();
+            document.getElementById('historyModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close history modal
+        function closeHistoryModal() {
+            document.getElementById('historyModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking overlay
+        function closeModalOnOverlay(event) {
+            if (event.target.id === 'historyModal') {
+                closeHistoryModal();
+            }
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                `;
+            }
+        }
+
+        // Show toast notification
+        function showToast(type, title, message) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconColor = type === 'success' ? '#10B981' : '#EF4444';
+            const icon = type === 'success' ? 
+                `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>` :
+                `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="${iconColor}" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>`;
+            
+            toast.innerHTML = `
+                ${icon}
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Get device info
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            let os = 'Unknown';
+            
+            if (ua.indexOf('Chrome') > -1) browser = 'Chrome';
+            else if (ua.indexOf('Firefox') > -1) browser = 'Firefox';
+            else if (ua.indexOf('Safari') > -1) browser = 'Safari';
+            else if (ua.indexOf('Edge') > -1) browser = 'Edge';
+            
+            if (ua.indexOf('Windows') > -1) os = 'Windows';
+            else if (ua.indexOf('Mac') > -1) os = 'MacOS';
+            else if (ua.indexOf('Linux') > -1) os = 'Linux';
+            else if (ua.indexOf('Android') > -1) os = 'Android';
+            else if (ua.indexOf('iOS') > -1) os = 'iOS';
+            
+            return `${browser} - ${os}`;
+        }
+
+        // Get IP address (simulasi - dalam aplikasi nyata gunakan API)
+        function getIPAddress() {
+            return '192.168.1.' + Math.floor(Math.random() * 255);
+        }
+
+        // Add login record
+        function addLoginRecord(status, username, reason = null) {
+            const record = {
+                status: status,
+                username: username,
+                timestamp: new Date(),
+                ip: getIPAddress(),
+                device: getDeviceInfo(),
+                location: 'Jakarta, Indonesia', // Dalam aplikasi nyata, gunakan geolocation API
+                reason: reason
+            };
+            
+            loginHistory.unshift(record); // Add to beginning
+            if (loginHistory.length > 20) { // Keep only last 20 records
+                loginHistory = loginHistory.slice(0, 20);
+            }
+            saveHistory();
+        }
+
         // Handle form submission
         function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             
-            // Validasi username tidak kosong
-            if (!username.trim()) {
+            if (!username.trim() || !password.trim()) {
+                showToast('error', 'Login Gagal', 'Username dan password harus diisi');
                 return;
             }
 
-            // Simulasi proses login
-            const button = event.target.querySelector('button');
+            const button = document.getElementById('loginBtn');
             const originalText = button.textContent;
             button.textContent = 'Memproses...';
             button.disabled = true;
 
+            // Simulasi validasi login
             setTimeout(() => {
-                // Redirect ke dashboard setelah login berhasil
-                window.location.href = 'dasbord.html';
+                // Untuk demo, anggap login berhasil jika password = "admin123"
+                if (password === 'admin123') {
+                    addLoginRecord('success', username);
+                    showToast('success', 'Login Berhasil', 'Mengalihkan ke dashboard...');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dasbord.html';
+                    }, 1500);
+                } else {
+                    addLoginRecord('failed', username, 'Password salah');
+                    showToast('error', 'Login Gagal', 'Username atau password salah');
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
             }, 1000);
         }
 
         // Handle forgot password
         function handleForgotPassword(event) {
             event.preventDefault();
-            alert('Silakan hubungi administrator untuk reset password.');
+            showToast('error', 'Perhatian', 'Silakan hubungi administrator untuk reset password.');
         }
 
-        // Animasi subtle untuk input focus
+        // Auto focus to username on page load
+        window.addEventListener('load', function() {
+            document.getElementById('username').focus();
+            loadHistory();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Esc to close modal
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('historyModal');
+                if (modal.classList.contains('active')) {
+                    closeHistoryModal();
+                }
+            }
+            
+            // Ctrl + H to open history
+            if (e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                openHistoryModal();
+            }
+        });
+
+        // Input animations
         const inputs = document.querySelectorAll('.form-control');
         inputs.forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentElement.style.transform = 'scale(1.01)';
+                this.parentElement.style.transition = 'transform 0.2s';
             });
             
             input.addEventListener('blur', function() {
