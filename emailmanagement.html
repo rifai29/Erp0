@@ -244,6 +244,12 @@
             gap: 8px;
             flex-wrap: wrap;
         }
+        
+        .action-buttons-wrapper,
+        .utility-buttons-wrapper {
+            display: flex;
+            gap: 8px;
+        }
 
         .btn-primary {
             background: #3b82f6;
@@ -768,6 +774,29 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            /* Container untuk tombol Set dan Posting agar sejajar di mobile */
+            .toolbar .btn-secondary:nth-of-type(1),
+            .toolbar .btn-primary {
+                width: calc(50% - 4px);
+            }
+            
+            /* Wrapper untuk Set dan Posting */
+            .action-buttons-wrapper {
+                display: flex;
+                gap: 8px;
+                width: 100%;
+            }
+            
+            .utility-buttons-wrapper {
+                display: flex;
+                gap: 8px;
+                width: 100%;
+            }
+            
+            .utility-buttons-wrapper .btn-secondary {
+                width: calc(50% - 4px);
+            }
 
             .table-container {
                 padding: 16px;
@@ -994,11 +1023,10 @@
             </a>
             <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
                 Laporan Bensin
             </a>
@@ -1034,16 +1062,6 @@
 
         <!-- Toolbar -->
         <div class="toolbar">
-            <button class="btn-primary" onclick="postingAkun()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Posting
-            </button>
-
             <div class="input-group" style="display: flex; align-items: center; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 6px;">
                     <label for="itemEmail">Item Email:</label>
@@ -1072,35 +1090,49 @@
                 </div>
             </div>
 
-            <button class="btn-secondary" onclick="setAkun()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Set
-            </button>
+            <div class="action-buttons-wrapper">
+                <button class="btn-secondary" onclick="setAkun()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Set
+                </button>
 
-            <button class="btn-secondary" onclick="exportProfil()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Export
-            </button>
+                <button class="btn-primary" onclick="postingAkun()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Posting
+                </button>
+            </div>
 
-            <button class="btn-secondary" onclick="importProfil()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                    <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                </svg>
-                Import
-            </button>
+            <div class="utility-buttons-wrapper">
+                <button class="btn-secondary" onclick="exportProfil()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Export
+                </button>
+
+                <button class="btn-secondary" onclick="importProfil()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Import
+                </button>
+            </div>
         </div>
 
         <!-- Table -->
