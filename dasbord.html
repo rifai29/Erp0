@@ -2,504 +2,128 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store A YANI PURWODADI - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Dashboard - Clean Design</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #FAFAFA;
             min-height: 100vh;
-            padding: 10px;
+            color: #1A1A1A;
         }
 
-        .page-container {
-            background: #ffffff;
-            border-radius: 12px;
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
-            overflow: hidden;
+            padding: 32px 24px;
         }
 
-        /* HEADER */
+        /* Header - Minimal & Clean */
         .header {
-            background: transparent;
-            padding: 20px 24px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            flex-wrap: wrap;
-            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #F0F0F0;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .menu-icon {
-            width: 24px;
-            height: 24px;
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            color: #374151;
-            transition: color 0.2s;
+            transition: all 0.2s;
         }
 
-        .menu-icon:hover {
-            color: #2563eb;
+        .hamburger-btn:hover {
+            background: #EFEFEF;
+        }
+
+        .hamburger-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #1A1A1A;
         }
 
         .header-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #111827;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1A1A1A;
             letter-spacing: -0.3px;
         }
 
-        .store-name {
-            color: #2563eb;
-        }
-
-        .header-controls {
+        .header-actions {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             align-items: center;
         }
 
         .company-badge {
-            background: #dcfce7;
-            color: #16a34a;
-            font-weight: 700;
+            background: #F0F9FF;
+            color: #0369A1;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-weight: 500;
             font-size: 13px;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border: 1px solid #E0F2FE;
         }
 
         .logout-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            cursor: pointer;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #FEF2F2;
+            border: 1px solid #FEE2E2;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .logout-btn:hover {
-            background: #fee2e2;
-            border-color: #fecaca;
+            background: #FEE2E2;
         }
-        
+
         .logout-btn svg {
             width: 18px;
             height: 18px;
-            stroke: #ef4444;
+            stroke: #DC2626;
         }
 
-        /* MAIN CONTAINER */
-        .container {
-            padding: 32px 24px;
-            background: transparent;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 24px;
-        }
-
-        /* PROFILE CARD */
-        .profile-card {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-            overflow: hidden;
-        }
-
-        .profile-header {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            padding: 40px 24px;
-            text-align: center;
-        }
-
-        .profile-photo {
-            width: 112px;
-            height: 112px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .profile-photo:hover {
-            transform: scale(1.05);
-        }
-
-        .profile-photo:hover .photo-overlay {
-            opacity: 1;
-        }
-
-        .profile-photo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .profile-photo-img.active {
-            display: block;
-        }
-
-        .profile-photo-text {
-            color: #2563eb;
-            font-size: 36px;
-            font-weight: 700;
-        }
-
-        .photo-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .photo-overlay svg {
-            width: 32px;
-            height: 32px;
-            stroke: white;
-            margin-bottom: 4px;
-        }
-
-        .photo-overlay-text {
-            color: white;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .photo-input {
-            display: none;
-        }
-
-        .profile-id {
-            background: rgba(30, 64, 175, 0.4);
-            color: white;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 18px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
-
-        .profile-id:hover {
-            background: rgba(30, 64, 175, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile-id .edit-icon-inline {
-            width: 14px;
-            height: 14px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .profile-id:hover .edit-icon-inline {
-            opacity: 1;
-        }
-
-        /* Input edit mode */
-        .id-edit-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .id-input-field {
-            background: white;
-            color: #2563eb;
-            border: 3px solid #3b82f6;
-            border-radius: 20px;
-            padding: 8px 18px;
-            font-size: 14px;
-            font-weight: 600;
-            outline: none;
-            width: 180px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .id-edit-buttons {
-            display: inline-flex;
-            gap: 8px;
-        }
-
-        .id-btn-save {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .id-btn-save:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.9);
-            transform: scale(1.1);
-        }
-
-        .id-btn-save svg {
-            width: 20px;
-            height: 20px;
-            stroke: white;
-            stroke-width: 3;
-        }
-
-        .profile-details {
-            padding: 24px;
-        }
-
-        .detail-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: background 0.2s;
-        }
-
-        .detail-row:hover {
-            background: #eff6ff;
-        }
-
-        .detail-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .detail-icon {
-            width: 16px;
-            height: 16px;
-            color: #3b82f6;
-        }
-
-        .detail-label {
-            color: #374151;
-            font-weight: 500;
-            font-size: 15px;
-        }
-
-        .detail-value {
-            color: #2563eb;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        /* EMPLOYEE CARD */
-        .employee-card {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-            overflow: hidden;
-        }
-
-        .tabs {
-            display: flex;
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 16px 24px;
-            border: none;
-            background: white;
-            color: #6b7280;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tab:hover {
-            background: #f3f4f6;
-        }
-
-        .tab.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .tab-content {
-            padding: 24px;
-        }
-
-        .employee-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .employee-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;
-            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
-            border-radius: 12px;
-            border: 1px solid #dbeafe;
-            transition: all 0.2s;
-        }
-
-        .employee-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .employee-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .employee-avatar {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .employee-info h3 {
-            color: #1e40af;
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .employee-info .position {
-            color: #2563eb;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .employee-info .phone {
-            color: #6b7280;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .employee-shift {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            color: #6b7280;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .map-placeholder {
-            padding: 64px 24px;
-            text-align: center;
-        }
-
-        .map-box {
-            height: 320px;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-            border-radius: 12px;
-            border: 2px dashed #d1d5db;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .map-icon {
-            width: 64px;
-            height: 64px;
-            color: #9ca3af;
-            margin-bottom: 16px;
-        }
-
-        .map-text {
-            color: #6b7280;
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-        .map-subtext {
-            color: #9ca3af;
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* SIDEBAR */
+        /* Sidebar - Cleaner Design */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -300px;
-            width: 300px;
+            left: -320px;
+            width: 320px;
             height: 100vh;
             background: white;
-            transition: left 0.3s ease;
-            z-index: 100;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
             overflow-y: auto;
         }
 
@@ -507,74 +131,49 @@
             left: 0;
         }
 
-        .sidebar-header {
-            padding: 24px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-        }
-
-        .sidebar-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-header p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
         .sidebar-menu {
-            padding: 16px 0;
+            padding: 24px 12px;
         }
 
         .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 24px;
-            color: #374151;
-            text-decoration: none;
-            transition: all 0.2s;
+            gap: 14px;
+            padding: 14px 16px;
             cursor: pointer;
-            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
         }
 
         .sidebar-item:hover {
-            background: #f3f4f6;
-            color: #2563eb;
-            border-left-color: #2563eb;
+            background: #F8F8F8;
+            color: #1A1A1A;
         }
 
         .sidebar-item.active {
-            background: #eff6ff;
-            color: #2563eb;
-            border-left-color: #2563eb;
-            font-weight: 600;
+            background: #F0F9FF;
+            color: #0369A1;
         }
 
         .sidebar-item svg {
             width: 20px;
             height: 20px;
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: #e5e7eb;
-            margin: 12px 24px;
+            stroke: currentColor;
         }
 
         .sidebar-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
         }
 
         .sidebar-overlay.show {
@@ -582,120 +181,1063 @@
             visibility: visible;
         }
 
-        .close-sidebar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
+        /* Main Grid - Better Spacing */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 24px;
+        }
+
+        /* Card - Minimal Shadow */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #F0F0F0;
+        }
+
+        /* Profile Section - Kotak di Kiri */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            flex-shrink: 0;
+        }
+
+        .profile-avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .profile-avatar-img.active {
+            display: block;
+        }
+
+        .profile-avatar-text {
+            font-size: 32px;
+            font-weight: 600;
             color: white;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .edit-profile-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+
+        .edit-profile-btn:hover {
+            background: #EFEFEF;
+            border-color: #E5E5E5;
+        }
+
+        .edit-profile-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #525252;
+        }
+
+        .avatar-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .profile-avatar:hover .avatar-overlay {
+            opacity: 1;
+        }
+
+        .avatar-overlay svg {
             width: 32px;
             height: 32px;
-            border-radius: 50%;
+            stroke: white;
+        }
+
+        .profile-name {
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .profile-role {
+            text-align: left;
+            font-size: 13px;
+            color: #737373;
+            margin-bottom: 0;
+        }
+
+        .profile-id {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #F8F8F8;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #F0F0F0;
+            margin-top: 12px;
+        }
+
+        .profile-id:hover {
+            background: #EFEFEF;
+        }
+
+        .profile-id svg {
+            width: 16px;
+            height: 16px;
+            stroke: #737373;
+        }
+
+        .profile-id-label {
+            font-size: 13px;
+            color: #737373;
+            font-weight: 500;
+        }
+
+        .profile-id-value {
+            font-size: 13px;
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .id-edit-container {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .id-input-field {
+            flex: 1;
+            padding: 10px 16px;
+            border: 2px solid #3B82F6;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .id-save-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: #3B82F6;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .id-save-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2.5;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 480px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #EFEFEF;
+        }
+
+        .modal-close svg {
+            width: 18px;
+            height: 18px;
+            stroke: #525252;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #525252;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: #F8F8F8;
+            color: #525252;
+        }
+
+        .btn-cancel:hover {
+            background: #EFEFEF;
+        }
+
+        .btn-save {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #2563EB;
+        }
+
+        /* Tabs - Minimal */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            background: #F8F8F8;
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #737373;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #1A1A1A;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #A3A3A3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Content Header */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .content-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1A1A1A;
+            letter-spacing: -0.3px;
+        }
+
+        /* Employee List - Clean Cards */
+        .employee-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .employee-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #F5F5F5;
+        }
+
+        .employee-item:hover {
+            background: #F5F5F5;
+            transform: translateX(4px);
+        }
+
+        .employee-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .employee-info {
+            flex: 1;
+        }
+
+        .employee-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 2px;
+        }
+
+        .employee-role {
+            font-size: 13px;
+            color: #737373;
+        }
+
+        .employee-id {
+            font-size: 12px;
+            color: #A3A3A3;
+            margin-top: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Member Photo Preview in Modal */
+        .member-photo-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px dashed #D1D5DB;
+            transition: all 0.2s;
+        }
+
+        .member-photo-preview:hover {
+            border-color: #3B82F6;
+            background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+        }
+
+        .member-photo-preview:hover .member-photo-initial {
+            color: #3B82F6;
+        }
+
+        .member-photo-initial {
+            font-size: 32px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .member-photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .member-photo-img.active {
+            display: block;
+        }
+
+        .member-photo-preview .avatar-overlay {
+            opacity: 0;
+        }
+
+        .member-photo-preview:hover .avatar-overlay {
+            opacity: 1;
+        }
+
+        .chevron {
+            width: 18px;
+            height: 18px;
+            stroke: #D4D4D4;
+            flex-shrink: 0;
+        }
+
+        /* Map Card */
+        .map-card {
+            text-align: center;
+            padding: 48px 24px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .map-icon {
+            width: 56px;
+            height: 56px;
+            stroke: #3B82F6;
+            margin: 0 auto 20px;
+        }
+
+        .map-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .map-subtitle {
+            font-size: 14px;
+            color: #737373;
+        }
+
+        /* Pagination Footer */
+        .pagination-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #737373;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination-left select:hover {
+            border-color: #3B82F6;
+        }
+
+        .pagination-left select:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .pagination-right {
+            font-size: 13px;
+            color: #737373;
+            text-align: right;
+            font-weight: 400;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #F5F5F5;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: #525252;
         }
 
-        .close-sidebar:hover {
-            background: rgba(255,255,255,0.3);
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #3B82F6;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
 
-        /* RESPONSIVE */
+        .nav-btn:active, .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: #F5F5F5;
+            color: #A3A3A3;
+        }
+
+        .nav-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .nav-btn svg, .refresh-btn svg {
+            stroke: currentColor;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #1A1A1A;
+            font-weight: 500;
+            margin: 0 4px;
+        }
+
+        .page-input {
+            width: 45px;
+            padding: 6px 8px;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .grid {
+            .main-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            .header-content {
-                padding: 0 16px;
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .header {
+                padding: 16px 20px;
+                margin-bottom: 24px;
             }
 
             .header-title {
-                font-size: 14px;
+                font-size: 19px;
             }
 
             .company-badge {
                 display: none;
             }
 
-            .container {
-                padding: 16px;
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .employee-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .card {
+                padding: 24px;
             }
 
-            .employee-shift {
-                width: 100%;
+            .pagination-footer {
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            .pagination-center {
+                gap: 4px;
+            }
+
+            .pagination-left {
+                gap: 4px;
+            }
+
+            .pagination-left span {
+                display: none;
+            }
+
+            .pagination-left select {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .pagination-right {
+                font-size: 11px;
+            }
+
+            .nav-btn {
+                width: 28px;
+                height: 28px;
+            }
+
+            .page-input {
+                width: 35px;
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            /* Modal positioning for mobile - turun dikit dari atas */
+            .modal-overlay {
+                align-items: flex-start !important;
                 justify-content: center;
+                padding: 0;
+                padding-top: 40px;
+                padding-left: 12px;
+                padding-right: 12px;
             }
 
-            /* Mobile responsive untuk edit ID */
-            .profile-id {
+            .modal-content {
+                margin: 0;
+                margin-top: 0 !important;
+                width: calc(100% - 24px);
+                max-width: 100%;
+                border-radius: 20px;
+                max-height: calc(95vh - 40px);
+                overflow-y: auto;
+                animation: modalSlideUp 0.3s ease;
+            }
+
+            @keyframes modalSlideUp {
+                from {
+                    transform: translateY(100%);
+                }
+                to {
+                    transform: translateY(0);
+                }
+            }
+
+            /* Photo crop modal for mobile */
+            .photo-crop-modal {
+                align-items: flex-start !important;
+                justify-content: center;
+                padding: 0;
+                padding-top: 40px;
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .photo-crop-container {
+                margin: 0;
+                margin-top: 0 !important;
+                width: calc(100% - 24px);
+                max-width: 100%;
+                border-radius: 20px;
+                max-height: calc(95vh - 40px);
+                overflow-y: auto;
+                padding: 24px 20px;
+            }
+
+            .crop-preview-area {
+                height: 280px;
+            }
+
+            .photo-crop-header h3 {
+                font-size: 18px;
+            }
+
+            .crop-instructions {
                 font-size: 13px;
-                padding: 8px 16px;
             }
 
-            .profile-id .edit-icon-inline {
-                width: 13px;
-                height: 13px;
+            /* Add member button on mobile - same clean style */
+            .add-member-btn {
+                width: 34px;
+                height: 34px;
             }
 
-            .id-edit-container {
-                gap: 12px;
-                padding: 0 12px;
+            .add-member-btn svg {
+                width: 17px;
+                height: 17px;
             }
 
-            .id-input-field {
-                width: 160px;
-                font-size: 16px;
-                padding: 10px 18px;
-            }
-
-            .id-btn-save {
-                width: 42px;
-                height: 42px;
-            }
-
-            .id-btn-save svg {
-                width: 22px;
-                height: 22px;
+            .section-title {
+                font-size: 11px;
             }
         }
 
-        /* SVG ICONS */
-        .icon {
+        /* Photo Crop Modal */
+        .photo-crop-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+        }
+
+        .photo-crop-modal.show {
+            display: flex;
+        }
+
+        .photo-crop-container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-crop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .photo-crop-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .crop-close-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .crop-close-btn:hover {
+            background: #EFEFEF;
+        }
+
+        .crop-preview-area {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #F8F8F8;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            cursor: move;
+            user-select: none;
+        }
+
+        .crop-preview-img {
+            position: absolute;
+            max-width: none;
+            cursor: grab;
+        }
+
+        .crop-preview-img:active {
+            cursor: grabbing;
+        }
+
+        .crop-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+            border: 3px solid #3B82F6;
+            border-radius: 12px;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .crop-frame::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #3B82F6, #8B5CF6);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .crop-instructions {
+            text-align: center;
+            color: #737373;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .crop-zoom-control {
+            margin-bottom: 20px;
+        }
+
+        .crop-zoom-label {
+            font-size: 13px;
+            color: #525252;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .crop-zoom-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #E5E5E5;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .crop-zoom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
             width: 20px;
             height: 20px;
+            border-radius: 50%;
+            background: #3B82F6;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .crop-zoom-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3B82F6;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Add Member Button */
+        .add-member-btn {
+            position: static;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .add-member-btn:hover {
+            background: #EFEFEF;
+            border-color: #E5E5E5;
+        }
+
+        .add-member-btn:active {
+            transform: scale(0.95);
+        }
+
+        .add-member-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #525252;
             stroke-width: 2;
-            stroke: currentColor;
-            fill: none;
+        }
+
+        .employee-list-container {
+            position: relative;
+        }
+
+        /* Delete button on employee items */
+        .employee-item {
+            position: relative;
+        }
+
+        .employee-delete-btn {
+            display: none;
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #FEE2E2;
+            border: 1px solid #FEE2E2;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 5;
+        }
+
+        .employee-item:hover .employee-delete-btn {
+            display: flex;
+        }
+
+        .employee-delete-btn:hover {
+            background: #FEE2E2;
+            border-color: #FCA5A5;
+        }
+
+        .employee-delete-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #DC2626;
         }
     </style>
 </head>
 <body>
-    <!-- SIDEBAR OVERLAY -->
+    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- SIDEBAR -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <button class="close-sidebar" onclick="closeSidebar()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <h2>Store A YANI</h2>
-            <p>PT MIDI UTAMA INDONESIA</p>
-        </div>
-
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-menu">
             <a href="dasbord.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -704,7 +1246,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Dashboard
+                <span>Dashboard</span>
             </a>
             <a href="usermanagemen.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -713,7 +1255,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                User Management
+                <span>User Management</span>
             </a>
             <a href="emailmanagement.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -722,7 +1264,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Email Management
+                <span>Email Management</span>
             </a>
             <a href="catatanhutang.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -731,7 +1273,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Catatan Hutang
+                <span>Catatan Hutang</span>
             </a>
             <a href="laporankaryawan.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -740,38 +1282,37 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Laporan Karyawan
+                <span>Laporan Karyawan</span>
             </a>
             <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Laporan Bensin
+                <span>Laporan Bensin</span>
             </a>
         </div>
-    </nav>
+    </div>
 
-    <div class="page-container">
-        <!-- HEADER -->
+    <div class="container">
+        <!-- Header -->
         <div class="header">
-            <div style="display: flex; align-items: center; gap: 16px;">
-                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="openSidebar()">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-                <h1 class="header-title">
-                    <span class="store-name">STORE A YANI PURWODADI</span>
-                </h1>
+            <div class="header-left">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="header-title">Dashboard</div>
             </div>
-            
-            <div class="header-controls">
-                <button class="logout-btn" onclick="handleLogout()" title="Logout">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <div class="header-actions">
+                <div class="company-badge">A YANI PURWODADI</div>
+                <button class="logout-btn" onclick="handleLogout()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                         <line x1="12" y1="2" x2="12" y2="12"></line>
                     </svg>
@@ -779,270 +1320,240 @@
             </div>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="container">
-        <div class="grid">
-            <!-- PROFILE CARD -->
-            <div class="profile-card">
-                <div class="profile-header">
-                    <div class="profile-photo" onclick="document.getElementById('photoInput').click()">
-                        <img id="profileImage" class="profile-photo-img" src="" alt="Profile Photo">
-                        <span id="profileInitial" class="profile-photo-text">RIFA</span>
-                        <div class="photo-overlay">
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Profile Card -->
+            <div class="card">
+                <div class="profile-section">
+                    <div class="profile-avatar" onclick="document.getElementById('photoInput').click()">
+                        <img id="profileImage" class="profile-avatar-img" alt="Profile">
+                        <div class="profile-avatar-text" id="profileInitial">US</div>
+                        <div class="avatar-overlay">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                                 <circle cx="12" cy="13" r="4"></circle>
                             </svg>
-                            <span class="photo-overlay-text">Ubah Foto</span>
                         </div>
                     </div>
-                    <input type="file" id="photoInput" class="photo-input" accept="image/*" onchange="handlePhotoChange(event)">
-                    <span class="profile-id" onclick="startEditId()" title="Klik untuk edit ID">
-                        ID: <span id="userIdDisplay">0225106927</span>
-                        <svg class="edit-icon-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                        </svg>
-                    </span>
-                </div>
-
-                <div class="profile-details">
-                    <div class="detail-row">
-                        <div class="detail-left">
-                            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                            </svg>
-                            <span class="detail-label">Jabatan:</span>
-                        </div>
-                        <span class="detail-value">KEPALA TOKO</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-left">
-                            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                            </svg>
-                            <span class="detail-label">Department:</span>
-                        </div>
-                        <span class="detail-value">PENJUALAN</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-left">
-                            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="12" y1="20" x2="12" y2="10"></line>
-                                <line x1="18" y1="20" x2="18" y2="4"></line>
-                                <line x1="6" y1="20" x2="6" y2="16"></line>
-                            </svg>
-                            <span class="detail-label">Divisi:</span>
-                        </div>
-                        <span class="detail-value">PENJUALAN</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-left">
-                            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
-                            </svg>
-                            <span class="detail-label">Tlp:</span>
-                        </div>
-                        <span class="detail-value">0877-7918-442</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-left">
-                            <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoChange(event)" style="display: none;">
+                    
+                    <div class="profile-info">
+                        <div class="profile-name">User Name</div>
+                        <div class="profile-role">Store Manager</div>
+                        <div class="profile-id" onclick="startEditId()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
-                            <span class="detail-label">Gender:</span>
+                            <span class="profile-id-label">ID:</span>
+                            <span class="profile-id-value" id="userIdDisplay">USER001</span>
                         </div>
-                        <span class="detail-value">Laki-laki</span>
+                    </div>
+
+                    <button class="edit-profile-btn" onclick="editProfile()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('employees', this)">Team Members</button>
+                    <button class="tab-btn" onclick="switchTab('location', this)">Location</button>
+                </div>
+
+                <!-- Employees Tab -->
+                <div id="employees-tab" class="tab-content active">
+                    <div class="section-title">
+                        <span>A YANI Team</span>
+                        <button class="add-member-btn" onclick="openAddMember()" title="Tambah Anggota Tim">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="employee-list-container">
+                        <div class="employee-list" id="employeeList">
+                            <!-- Employees will be loaded dynamically -->
+                        </div>
+                        
+                        <!-- Pagination Footer -->
+                        <div class="pagination-footer">
+                            <div class="pagination-left">
+                                <span style="font-size: 13px; color: #737373;">Show</span>
+                                <select onchange="changeRowsPerPage(this.value)" id="rowsPerPageSelect" style="padding: 6px 10px; border: 1px solid #E5E5E5; border-radius: 8px; font-size: 13px; background: white; cursor: pointer; outline: none;">
+                                    <option value="5" selected>5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                                <span style="font-size: 13px; color: #737373;">entries</span>
+                            </div>
+
+                            <div class="pagination-center">
+                                <button class="nav-btn" onclick="goToPrevPage()" title="Previous" id="prevPageBtn">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <span class="page-info">
+                                    Page <input type="number" class="page-input" value="1" id="currentPageInput" min="1" onchange="goToPage(this.value)"> of <span id="totalPages">1</span>
+                                </span>
+                                <button class="nav-btn" onclick="goToNextPage()" title="Next" id="nextPageBtn">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="pagination-right">
+                                <span id="displayStart">1</span>-<span id="displayEnd">5</span> of <span id="totalItems">0</span> items
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Location Tab -->
+                <div id="location-tab" class="tab-content">
+                    <div class="map-card">
+                        <svg class="map-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <div class="map-title">Lokasi Store</div>
+                        <div class="map-subtitle">A YANI PURWODADI</div>
                     </div>
                 </div>
             </div>
 
-            <!-- EMPLOYEE CARD -->
-            <div class="employee-card">
-                <div class="tabs">
-                    <button class="tab active" onclick="switchTab('employees', this)">
-                        Employe In Store A YANI
-                    </button>
-                    <button class="tab" onclick="switchTab('map', this)">
-                        Map Lokasi A YANI
-                    </button>
-                </div>
+        </div>
 
-                <!-- EMPLOYEE TAB -->
-                <div id="employees-tab" class="tab-content">
-                    <div class="employee-list">
-                        <div class="employee-item">
-                            <div class="employee-left">
-                                <div class="employee-avatar">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="employee-info">
-                                    <h3>RIFA</h3>
-                                    <div class="position">Kepala Toko</div>
-                                    <div class="phone">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg>
-                                        0877-7918-4422
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="employee-shift">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                Shift 6 (06:00 - 15:00)
-                            </div>
-                        </div>
-
-                        <div class="employee-item">
-                            <div class="employee-left">
-                                <div class="employee-avatar">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="employee-info">
-                                    <h3>RIFA0</h3>
-                                    <div class="position">Kasir</div>
-                                    <div class="phone">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg>
-                                        0897-9217-350
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="employee-shift">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                Shift 6 (06:00 - 15:00)
-                            </div>
-                        </div>
-
-                        <div class="employee-item">
-                            <div class="employee-left">
-                                <div class="employee-avatar">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="employee-info">
-                                    <h3>RIFA1</h3>
-                                    <div class="position">Pramuniaga</div>
-                                    <div class="phone">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg>
-                                        0821-3251-8982
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="employee-shift">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                Shift 12 (09:00 - 18:00)
-                            </div>
-                        </div>
-
-                        <div class="employee-item">
-                            <div class="employee-left">
-                                <div class="employee-avatar">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="employee-info">
-                                    <h3>RIFA2</h3>
-                                    <div class="position">Pramuniaga</div>
-                                    <div class="phone">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg>
-                                        0857-3081-9798
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="employee-shift">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                Shift 30 (13:00 - 22:00)
-                            </div>
-                        </div>
-
-                        <div class="employee-item">
-                            <div class="employee-left">
-                                <div class="employee-avatar">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <div class="employee-info">
-                                    <h3>RIFA3</h3>
-                                    <div class="position">Kasir</div>
-                                    <div class="phone">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg>
-                                        0857-8410-0175
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="employee-shift">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                Shift 30 (13:00 - 22:00)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MAP TAB -->
-                <div id="map-tab" class="tab-content hidden">
-                    <div class="map-placeholder">
-                        <div class="map-box">
-                            <svg class="map-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <p class="map-text">Peta Lokasi Store</p>
-                            <p class="map-subtext">A YANI PURWODADI</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Photo Crop Modal -->
+    <div class="photo-crop-modal" id="photoCropModal">
+        <div class="photo-crop-container">
+            <div class="photo-crop-header">
+                <h3>Atur Posisi Foto</h3>
+                <button class="crop-close-btn" onclick="closeCropModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="crop-instructions">
+                Drag foto untuk mengatur posisi dan gunakan slider untuk zoom
+            </div>
+            
+            <div class="crop-preview-area" id="cropPreviewArea">
+                <img id="cropPreviewImg" class="crop-preview-img" src="" alt="Preview">
+                <div class="crop-frame"></div>
+            </div>
+            
+            <div class="crop-zoom-control">
+                <label class="crop-zoom-label">Zoom</label>
+                <input type="range" class="crop-zoom-slider" id="cropZoomSlider" min="100" max="300" value="100">
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeCropModal()">Batal</button>
+                <button class="btn btn-save" onclick="saveCroppedPhoto()">Gunakan Foto</button>
             </div>
         </div>
     </div>
-    <!-- End of page-container -->
+
+    <!-- Add Member Modal -->
+    <div class="modal-overlay" id="addMemberModal" onclick="if(event.target === this) closeAddMember()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Tambah Anggota Tim</div>
+                <button class="modal-close" onclick="closeAddMember()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Foto Profil (Opsional)</label>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="member-photo-preview" id="memberPhotoPreview" onclick="document.getElementById('memberPhotoInput').click()">
+                        <div class="member-photo-initial" id="memberPhotoInitial">?</div>
+                        <img id="memberPhotoImg" class="member-photo-img" alt="Preview">
+                        <div class="avatar-overlay">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <input type="file" id="memberPhotoInput" accept="image/*" style="display: none;">
+                    <div style="flex: 1;">
+                        <div style="font-size: 13px; color: #737373; margin-bottom: 4px;">Klik kotak untuk upload foto</div>
+                        <div style="font-size: 12px; color: #A3A3A3;">Max 5MB (jpg, png)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">ID Karyawan</label>
+                <input type="text" class="form-input" id="memberId" placeholder="Contoh: EMP001">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-input" id="memberName" placeholder="Masukkan nama lengkap">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Jabatan</label>
+                <input type="text" class="form-input" id="memberRole" placeholder="Masukkan jabatan">
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeAddMember()">Batal</button>
+                <button class="btn btn-save" onclick="saveMember()">Tambah</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Profile -->
+    <div class="modal-overlay" id="editProfileModal" onclick="if(event.target === this) closeEditProfile()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Edit Profile</div>
+                <button class="modal-close" onclick="closeEditProfile()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-input" id="editName" placeholder="Masukkan nama lengkap">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Jabatan</label>
+                <input type="text" class="form-input" id="editRole" placeholder="Masukkan jabatan">
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-cancel" onclick="closeEditProfile()">Batal</button>
+                <button class="btn btn-save" onclick="saveProfile()">Simpan</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Load saved profile photo on page load
+        // Load saved data on page load
         window.addEventListener('DOMContentLoaded', function() {
-            // Load saved photo
             const savedPhoto = localStorage.getItem('profilePhoto');
             if (savedPhoto) {
                 const img = document.getElementById('profileImage');
@@ -1052,81 +1563,563 @@
                 initial.style.display = 'none';
             }
 
-            // Load saved ID
             const savedId = localStorage.getItem('userId');
             if (savedId) {
                 document.getElementById('userIdDisplay').textContent = savedId;
             }
+
+            const savedName = localStorage.getItem('profileName');
+            if (savedName) {
+                document.querySelector('.profile-name').textContent = savedName;
+                // Update initial if no photo
+                const img = document.getElementById('profileImage');
+                if (!img.classList.contains('active')) {
+                    const initial = savedName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                    document.getElementById('profileInitial').textContent = initial;
+                }
+            }
+
+            const savedRole = localStorage.getItem('profileRole');
+            if (savedRole) {
+                document.querySelector('.profile-role').textContent = savedRole;
+            }
+
+            // Load employees
+            loadEmployees();
+
+            // Setup member photo input
+            document.getElementById('memberPhotoInput').addEventListener('change', handleMemberPhotoChange);
         });
 
+        // Employee Management
+        let currentPage = 1;
+        let rowsPerPage = 5;
+        let allEmployees = [];
+
+        const avatarColors = [
+            'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+            'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+            'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+            'linear-gradient(135deg, #EC4899 0%, #DB2777 100%)',
+            'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+            'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+            'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
+            'linear-gradient(135deg, #84CC16 0%, #65A30D 100%)'
+        ];
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function getRandomColor() {
+            return avatarColors[Math.floor(Math.random() * avatarColors.length)];
+        }
+
+        function getDefaultEmployees() {
+            return [
+                { id: 1, employeeId: 'EMP001', name: 'John Doe', role: 'Store Manager', color: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)' },
+                { id: 2, employeeId: 'EMP002', name: 'Anna Smith', role: 'Senior Cashier', color: 'linear-gradient(135deg, #10B981 0%, #059669 100%)' },
+                { id: 3, employeeId: 'EMP003', name: 'Michael Johnson', role: 'Stock Supervisor', color: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)' },
+                { id: 4, employeeId: 'EMP004', name: 'Sarah Davis', role: 'Sales Associate', color: 'linear-gradient(135deg, #EC4899 0%, #DB2777 100%)' },
+                { id: 5, employeeId: 'EMP005', name: 'Robert Wilson', role: 'Inventory Specialist', color: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)' }
+            ];
+        }
+
+        function loadEmployees() {
+            let employees = localStorage.getItem('teamMembers');
+            if (!employees) {
+                employees = getDefaultEmployees();
+                localStorage.setItem('teamMembers', JSON.stringify(employees));
+            } else {
+                employees = JSON.parse(employees);
+            }
+            allEmployees = employees;
+            renderEmployees();
+        }
+
+        function renderEmployees() {
+            const list = document.getElementById('employeeList');
+            list.innerHTML = '';
+            
+            // Calculate pagination
+            const totalItems = allEmployees.length;
+            const totalPages = Math.ceil(totalItems / rowsPerPage);
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+            const employeesToShow = allEmployees.slice(startIndex, endIndex);
+            
+            // Render employees
+            employeesToShow.forEach(emp => {
+                const item = document.createElement('div');
+                item.className = 'employee-item';
+                
+                // Generate avatar HTML
+                let avatarHtml;
+                if (emp.photo) {
+                    avatarHtml = `
+                        <div class="employee-avatar" style="background: ${emp.color}; padding: 0; overflow: hidden;">
+                            <img src="${emp.photo}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    `;
+                } else {
+                    avatarHtml = `<div class="employee-avatar" style="background: ${emp.color}">${getInitials(emp.name)}</div>`;
+                }
+                
+                item.innerHTML = `
+                    ${avatarHtml}
+                    <div class="employee-info">
+                        <div class="employee-name">${emp.name}</div>
+                        <div class="employee-role">${emp.role}</div>
+                        <div class="employee-id">ID: ${emp.employeeId}</div>
+                    </div>
+                    <button class="employee-delete-btn" onclick="deleteMember(${emp.id})" title="Hapus">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                `;
+                list.appendChild(item);
+            });
+            
+            // Update pagination info
+            updatePaginationInfo(totalItems, totalPages, startIndex, endIndex);
+        }
+
+        function updatePaginationInfo(totalItems, totalPages, startIndex, endIndex) {
+            document.getElementById('totalPages').textContent = totalPages || 1;
+            document.getElementById('currentPageInput').value = currentPage;
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('displayStart').textContent = totalItems > 0 ? startIndex + 1 : 0;
+            document.getElementById('displayEnd').textContent = endIndex;
+            
+            // Update button states (hanya prev dan next)
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = currentPage === 1;
+            }
+            if (nextBtn) {
+                nextBtn.disabled = currentPage >= totalPages || totalPages === 0;
+            }
+        }
+
+        // Pagination functions
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderEmployees();
+            }
+        }
+
+        function goToNextPage() {
+            const totalPages = Math.ceil(allEmployees.length / rowsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderEmployees();
+            }
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(allEmployees.length / rowsPerPage);
+            const pageNum = parseInt(page);
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                currentPage = pageNum;
+                renderEmployees();
+            } else {
+                document.getElementById('currentPageInput').value = currentPage;
+            }
+        }
+
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            currentPage = 1;
+            renderEmployees();
+        }
+
+        function refreshTeamList() {
+            loadEmployees();
+        }
+
+        function openAddMember() {
+            document.getElementById('memberId').value = '';
+            document.getElementById('memberName').value = '';
+            document.getElementById('memberRole').value = '';
+            
+            // Reset photo preview
+            currentMemberPhoto = null;
+            const memberImg = document.getElementById('memberPhotoImg');
+            const memberInitial = document.getElementById('memberPhotoInitial');
+            memberImg.classList.remove('active');
+            memberImg.src = '';
+            memberInitial.style.display = 'flex';
+            memberInitial.textContent = '?';
+            
+            document.getElementById('addMemberModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddMember() {
+            document.getElementById('addMemberModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function saveMember() {
+            const employeeId = document.getElementById('memberId').value.trim();
+            const name = document.getElementById('memberName').value.trim();
+            const role = document.getElementById('memberRole').value.trim();
+            
+            if (employeeId === '') {
+                alert('ID Karyawan tidak boleh kosong');
+                return;
+            }
+            
+            if (name === '') {
+                alert('Nama tidak boleh kosong');
+                return;
+            }
+            
+            if (role === '') {
+                alert('Jabatan tidak boleh kosong');
+                return;
+            }
+            
+            let employees = JSON.parse(localStorage.getItem('teamMembers') || '[]');
+            
+            // Check if employeeId already exists
+            if (employees.some(e => e.employeeId === employeeId)) {
+                alert('ID Karyawan sudah digunakan');
+                return;
+            }
+            
+            const newId = employees.length > 0 ? Math.max(...employees.map(e => e.id)) + 1 : 1;
+            
+            const newMember = {
+                id: newId,
+                employeeId: employeeId,
+                name: name,
+                role: role,
+                color: getRandomColor(),
+                photo: currentMemberPhoto || null
+            };
+            
+            employees.push(newMember);
+            localStorage.setItem('teamMembers', JSON.stringify(employees));
+            
+            loadEmployees();
+            closeAddMember();
+        }
+
+        function deleteMember(id) {
+            if (!confirm('Hapus anggota tim ini?')) {
+                return;
+            }
+            
+            let employees = JSON.parse(localStorage.getItem('teamMembers') || '[]');
+            employees = employees.filter(e => e.id !== id);
+            localStorage.setItem('teamMembers', JSON.stringify(employees));
+            
+            loadEmployees();
+        }
+
         // Handle photo upload
+        let currentImageFile = null;
+        let currentMemberPhoto = null; // For member photo in add modal
+        let cropState = {
+            x: 0,
+            y: 0,
+            scale: 1,
+            isDragging: false,
+            startX: 0,
+            startY: 0
+        };
+
         function handlePhotoChange(event) {
             const file = event.target.files[0];
             if (file) {
-                // Check if file is an image
                 if (!file.type.startsWith('image/')) {
-                    alert('Mohon pilih file gambar yang valid');
+                    alert('Pilih file gambar yang valid');
                     return;
                 }
 
-                // Check file size (max 5MB)
                 if (file.size > 5 * 1024 * 1024) {
-                    alert('Ukuran file terlalu besar. Maksimal 5MB');
+                    alert('File terlalu besar (Max 5MB)');
+                    return;
+                }
+
+                currentImageFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    openCropModal(e.target.result, 'profile');
+                };
+                reader.readAsDataURL(file);
+            }
+            // Reset input
+            event.target.value = '';
+        }
+
+        function handleMemberPhotoChange(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('image/')) {
+                    alert('Pilih file gambar yang valid');
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File terlalu besar (Max 5MB)');
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = document.getElementById('profileImage');
-                    const initial = document.getElementById('profileInitial');
-                    
-                    // Set image source
-                    img.src = e.target.result;
-                    img.classList.add('active');
-                    initial.style.display = 'none';
-                    
-                    // Save to localStorage
-                    localStorage.setItem('profilePhoto', e.target.result);
+                    openCropModal(e.target.result, 'member');
                 };
                 reader.readAsDataURL(file);
             }
+            // Reset input
+            event.target.value = '';
         }
 
-        // Fungsi Edit ID - Inline Editable
+        function openCropModal(imageSrc, mode) {
+            // Store mode for saveCroppedPhoto
+            window.currentCropMode = mode;
+            const modal = document.getElementById('photoCropModal');
+            const img = document.getElementById('cropPreviewImg');
+            const previewArea = document.getElementById('cropPreviewArea');
+            
+            img.src = imageSrc;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset crop state
+            cropState = { x: 0, y: 0, scale: 1, isDragging: false, startX: 0, startY: 0 };
+            document.getElementById('cropZoomSlider').value = 100;
+            
+            // Wait for image to load to center it
+            img.onload = function() {
+                const areaWidth = previewArea.offsetWidth;
+                const areaHeight = previewArea.offsetHeight;
+                const imgWidth = img.naturalWidth;
+                const imgHeight = img.naturalHeight;
+                
+                // Calculate initial scale to fit
+                const scaleX = areaWidth / imgWidth;
+                const scaleY = areaHeight / imgHeight;
+                const initialScale = Math.max(scaleX, scaleY, 0.5);
+                
+                cropState.scale = initialScale;
+                
+                // Center the image
+                const scaledWidth = imgWidth * initialScale;
+                const scaledHeight = imgHeight * initialScale;
+                cropState.x = (areaWidth - scaledWidth) / 2;
+                cropState.y = (areaHeight - scaledHeight) / 2;
+                
+                updateCropPreview();
+                setupCropDrag();
+            };
+        }
+
+        function setupCropDrag() {
+            const img = document.getElementById('cropPreviewImg');
+            const previewArea = document.getElementById('cropPreviewArea');
+            const zoomSlider = document.getElementById('cropZoomSlider');
+            
+            // Mouse/Touch drag
+            function handleDragStart(e) {
+                cropState.isDragging = true;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                cropState.startX = clientX - cropState.x;
+                cropState.startY = clientY - cropState.y;
+            }
+            
+            function handleDragMove(e) {
+                if (!cropState.isDragging) return;
+                e.preventDefault();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                cropState.x = clientX - cropState.startX;
+                cropState.y = clientY - cropState.startY;
+                updateCropPreview();
+            }
+            
+            function handleDragEnd() {
+                cropState.isDragging = false;
+            }
+            
+            // Mouse events
+            img.addEventListener('mousedown', handleDragStart);
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+            
+            // Touch events
+            img.addEventListener('touchstart', handleDragStart);
+            document.addEventListener('touchmove', handleDragMove, { passive: false });
+            document.addEventListener('touchend', handleDragEnd);
+            
+            // Zoom slider
+            zoomSlider.addEventListener('input', function(e) {
+                const percent = parseInt(e.target.value);
+                const baseScale = cropState.scale / (cropState.scale / Math.max(0.5, cropState.scale));
+                cropState.scale = baseScale * (percent / 100);
+                updateCropPreview();
+            });
+        }
+
+        function updateCropPreview() {
+            const img = document.getElementById('cropPreviewImg');
+            img.style.transform = `translate(${cropState.x}px, ${cropState.y}px) scale(${cropState.scale})`;
+            img.style.transformOrigin = '0 0';
+        }
+
+        function closeCropModal() {
+            const modal = document.getElementById('photoCropModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            currentImageFile = null;
+        }
+
+        function saveCroppedPhoto() {
+            const img = document.getElementById('cropPreviewImg');
+            const previewArea = document.getElementById('cropPreviewArea');
+            const frameSize = 240;
+            
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = frameSize;
+            canvas.height = frameSize;
+            const ctx = canvas.getContext('2d');
+            
+            // Calculate crop area
+            const areaWidth = previewArea.offsetWidth;
+            const areaHeight = previewArea.offsetHeight;
+            const frameCenterX = areaWidth / 2;
+            const frameCenterY = areaHeight / 2;
+            
+            // Calculate source coordinates
+            const sourceX = (frameCenterX - frameSize / 2 - cropState.x) / cropState.scale;
+            const sourceY = (frameCenterY - frameSize / 2 - cropState.y) / cropState.scale;
+            const sourceWidth = frameSize / cropState.scale;
+            const sourceHeight = frameSize / cropState.scale;
+            
+            // Draw cropped image
+            ctx.drawImage(
+                img,
+                sourceX, sourceY, sourceWidth, sourceHeight,
+                0, 0, frameSize, frameSize
+            );
+            
+            // Convert to data URL and save
+            const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+            
+            // Check mode and update accordingly
+            if (window.currentCropMode === 'profile') {
+                // Update profile image
+                const profileImg = document.getElementById('profileImage');
+                const profileInitial = document.getElementById('profileInitial');
+                profileImg.src = croppedDataUrl;
+                profileImg.classList.add('active');
+                profileInitial.style.display = 'none';
+                
+                // Save to localStorage
+                localStorage.setItem('profilePhoto', croppedDataUrl);
+            } else if (window.currentCropMode === 'member') {
+                // Update member preview in modal
+                currentMemberPhoto = croppedDataUrl;
+                const memberImg = document.getElementById('memberPhotoImg');
+                const memberInitial = document.getElementById('memberPhotoInitial');
+                memberImg.src = croppedDataUrl;
+                memberImg.classList.add('active');
+                memberInitial.style.display = 'none';
+            }
+            
+            closeCropModal();
+        }
+
+        // Edit Profile Modal
+        function editProfile() {
+            const currentName = document.querySelector('.profile-name').textContent;
+            const currentRole = document.querySelector('.profile-role').textContent;
+            
+            document.getElementById('editName').value = currentName;
+            document.getElementById('editRole').value = currentRole;
+            
+            document.getElementById('editProfileModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditProfile() {
+            document.getElementById('editProfileModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function saveProfile() {
+            const newName = document.getElementById('editName').value.trim();
+            const newRole = document.getElementById('editRole').value.trim();
+            
+            if (newName === '') {
+                alert('Nama tidak boleh kosong');
+                return;
+            }
+            
+            if (newRole === '') {
+                alert('Jabatan tidak boleh kosong');
+                return;
+            }
+            
+            // Update profile
+            document.querySelector('.profile-name').textContent = newName;
+            document.querySelector('.profile-role').textContent = newRole;
+            
+            // Save to localStorage
+            localStorage.setItem('profileName', newName);
+            localStorage.setItem('profileRole', newRole);
+            
+            // Update initial if no photo
+            const img = document.getElementById('profileImage');
+            if (!img.classList.contains('active')) {
+                const initial = newName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                document.getElementById('profileInitial').textContent = initial;
+            }
+            
+            closeEditProfile();
+        }
+
+        // Edit ID functions
         function startEditId() {
-            const profileIdElement = document.querySelector('.profile-id');
+            const badge = document.querySelector('.profile-id');
             const currentId = document.getElementById('userIdDisplay').textContent;
             
-            // Buat container untuk mode edit
             const editContainer = document.createElement('div');
             editContainer.className = 'id-edit-container';
             editContainer.innerHTML = `
-                <input type="tel" 
+                <input type="text" 
                        class="id-input-field" 
                        id="idInputEdit" 
                        value="${currentId}" 
                        maxlength="20" 
                        placeholder="Masukkan ID...">
-                <div class="id-edit-buttons">
-                    <button class="id-btn-save" onclick="saveIdEdit()" title="Simpan">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </button>
-                </div>
+                <button class="id-save-btn" onclick="saveIdEdit()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </button>
             `;
             
-            // Replace profile-id with edit container
-            profileIdElement.style.display = 'none';
-            profileIdElement.parentNode.insertBefore(editContainer, profileIdElement.nextSibling);
+            badge.style.display = 'none';
+            badge.parentNode.insertBefore(editContainer, badge.nextSibling);
             
-            // Focus input
             setTimeout(() => {
                 const input = document.getElementById('idInputEdit');
                 input.focus();
                 input.select();
                 
-                // Handle Enter key
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
                         e.preventDefault();
@@ -1134,7 +2127,6 @@
                     }
                 });
                 
-                // Handle Escape key untuk batal
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
                         e.preventDefault();
@@ -1142,20 +2134,17 @@
                     }
                 });
                 
-                // Handle blur (klik di luar) - auto save
                 input.addEventListener('blur', (e) => {
-                    // Cek apakah yang diklik bukan tombol save
                     setTimeout(() => {
                         if (document.getElementById('idInputEdit')) {
-                            // Jika input masih ada dan tidak fokus, auto cancel
                             const relatedTarget = e.relatedTarget;
-                            if (!relatedTarget || !relatedTarget.classList.contains('id-btn-save')) {
+                            if (!relatedTarget || !relatedTarget.classList.contains('id-save-btn')) {
                                 cancelIdEdit();
                             }
                         }
                     }, 100);
                 });
-            }, 100);
+            }, 50);
         }
 
         function saveIdEdit() {
@@ -1163,22 +2152,14 @@
             const newId = input.value.trim();
             
             if (newId === '') {
-                alert('ID tidak boleh kosong!');
+                alert('ID tidak boleh kosong');
                 input.focus();
                 return;
             }
             
-            // Simpan ke localStorage
             localStorage.setItem('userId', newId);
-            
-            // Update tampilan
             document.getElementById('userIdDisplay').textContent = newId;
-            
-            // Kembali ke mode normal
             exitEditMode();
-            
-            // Tampilkan notifikasi
-            showNotif('✓ ID berhasil disimpan!');
         }
 
         function cancelIdEdit() {
@@ -1187,47 +2168,19 @@
 
         function exitEditMode() {
             const editContainer = document.querySelector('.id-edit-container');
-            const profileIdElement = document.querySelector('.profile-id');
+            const badge = document.querySelector('.profile-id');
             
             if (editContainer) {
                 editContainer.remove();
             }
             
-            if (profileIdElement) {
-                profileIdElement.style.display = 'inline-flex';
+            if (badge) {
+                badge.style.display = 'inline-flex';
             }
         }
 
-        function showNotif(message) {
-            const notif = document.createElement('div');
-            notif.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #10b981;
-                color: white;
-                padding: 14px 28px;
-                border-radius: 10px;
-                font-size: 14px;
-                font-weight: 600;
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-                z-index: 9999;
-                animation: slideUp 0.3s ease;
-            `;
-            notif.textContent = message;
-            document.body.appendChild(notif);
-            
-            setTimeout(() => {
-                notif.style.transition = 'all 0.3s ease';
-                notif.style.opacity = '0';
-                notif.style.transform = 'translateX(-50%) translateY(20px)';
-                setTimeout(() => notif.remove(), 300);
-            }, 2000);
-        }
-
+        // Navigation functions
         function handleLogout() {
-            // Redirect kembali ke halaman login
             window.location.href = 'index.html';
         }
 
@@ -1243,40 +2196,17 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Tab switching
         function switchTab(tabName, button) {
-            // Hide all tabs
-            document.getElementById('employees-tab').classList.add('hidden');
-            document.getElementById('map-tab').classList.add('hidden');
-
-            // Remove active class from all buttons
-            const tabs = document.querySelectorAll('.tab');
+            document.getElementById('employees-tab').classList.remove('active');
+            document.getElementById('location-tab').classList.remove('active');
+            
+            const tabs = document.querySelectorAll('.tab-btn');
             tabs.forEach(tab => tab.classList.remove('active'));
-
-            // Show selected tab and activate button
-            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
             button.classList.add('active');
         }
-
-        // Close sidebar when clicking menu items
-        document.querySelectorAll('.sidebar-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                // Jangan prevent default agar link bisa navigate
-                // e.preventDefault(); // DIHAPUS
-                
-                // Remove active class from all items
-                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-                
-                // Add active class to clicked item
-                item.classList.add('active');
-                
-                // Close sidebar on mobile
-                if (window.innerWidth <= 1024) {
-                    closeSidebar();
-                }
-                
-                // Allow navigation to href
-            });
-        });
     </script>
 </body>
 </html>
