@@ -2654,9 +2654,35 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const img = document.getElementById('cropPreviewImg');
+                const previewArea = document.getElementById('cropPreviewArea');
+                
                 img.src = e.target.result;
                 img.onload = function() {
-                    initCropControls();
+                    // Reset crop state
+                    cropState = { x: 0, y: 0, scale: 1, isDragging: false, startX: 0, startY: 0 };
+                    document.getElementById('cropZoomSlider').value = 100;
+                    
+                    // Calculate initial scale to fit
+                    const areaWidth = previewArea.offsetWidth;
+                    const areaHeight = previewArea.offsetHeight;
+                    const imgWidth = img.naturalWidth;
+                    const imgHeight = img.naturalHeight;
+                    
+                    const scaleX = areaWidth / imgWidth;
+                    const scaleY = areaHeight / imgHeight;
+                    const initialScale = Math.max(scaleX, scaleY, 0.5);
+                    
+                    cropState.scale = initialScale;
+                    
+                    // Center the image
+                    const scaledWidth = imgWidth * initialScale;
+                    const scaledHeight = imgHeight * initialScale;
+                    cropState.x = (areaWidth - scaledWidth) / 2;
+                    cropState.y = (areaHeight - scaledHeight) / 2;
+                    
+                    updateCropPreview();
+                    setupCropDrag();
+                    
                     document.getElementById('photoCropModal').classList.add('show');
                     document.body.style.overflow = 'hidden';
                 };
