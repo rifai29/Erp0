@@ -416,6 +416,16 @@
             background: #FEE2E2;
         }
 
+        .photo-preview-btn-upload {
+            background: #EFF6FF;
+            color: #2563EB;
+            border: 1px solid #DBEAFE;
+        }
+
+        .photo-preview-btn-upload:hover {
+            background: #DBEAFE;
+        }
+
         .photo-preview-btn svg {
             width: 18px;
             height: 18px;
@@ -1860,6 +1870,14 @@
                 </div>
                 
                 <div class="photo-preview-actions">
+                    <button class="photo-preview-btn photo-preview-btn-upload" onclick="triggerPhotoUpload()" style="width: 100%;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        Upload Foto
+                    </button>
                     <button class="photo-preview-btn photo-preview-btn-remove" onclick="removePhoto()" id="removePhotoBtn" style="display: none; width: 100%;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="3 6 5 6 21 6"></polyline>
@@ -2341,6 +2359,11 @@
             localStorage.removeItem('profilePhoto');
             
             closePhotoPreview();
+        }
+
+        function triggerPhotoUpload() {
+            closePhotoPreview();
+            document.getElementById('photoInput').click();
         }
 
         function handlePhotoChange(event) {
