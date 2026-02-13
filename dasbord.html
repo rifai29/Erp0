@@ -215,9 +215,9 @@
         }
 
         .profile-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
+            width: 180px;
+            height: 180px;
+            border-radius: 20px;
             background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
             display: flex;
             align-items: center;
@@ -241,7 +241,7 @@
         }
 
         .profile-avatar-text {
-            font-size: 32px;
+            font-size: 72px;
             font-weight: 600;
             color: white;
         }
@@ -432,7 +432,11 @@
         }
 
         .profile-info {
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+            height: 100%;
         }
 
         .edit-profile-btn {
@@ -485,16 +489,16 @@
 
         .profile-name {
             text-align: left;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #1A1A1A;
-            margin-bottom: 4px;
+            margin-bottom: 0;
             letter-spacing: -0.3px;
         }
 
         .profile-role {
             text-align: left;
-            font-size: 13px;
+            font-size: 14px;
             color: #737373;
             margin-bottom: 0;
         }
@@ -552,6 +556,15 @@
             padding: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: modalSlideIn 0.3s ease;
+        }
+        
+        /* Mobile spacing untuk popup - kasih space kecil */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: calc(100% - 32px);
+                max-height: calc(100vh - 40px);
+                margin: 20px 16px;
+            }
         }
 
         @keyframes modalSlideIn {
@@ -644,7 +657,7 @@
         .modal-actions {
             display: flex;
             gap: 12px;
-            margin-top: 16px;
+            margin-top: 8px;
         }
 
         .btn {
@@ -768,14 +781,14 @@
         }
 
         .employee-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
             background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 28px;
             font-weight: 600;
             color: white;
             flex-shrink: 0;
@@ -806,9 +819,9 @@
 
         /* Member Photo Preview in Modal */
         .member-photo-preview {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
             background: linear-gradient(135deg, #D1D5DB 0%, #9CA3AF 100%);
             display: flex;
             align-items: center;
@@ -831,7 +844,7 @@
         }
 
         .member-photo-initial {
-            font-size: 32px;
+            font-size: 56px;
             font-weight: 600;
             color: white;
             transition: all 0.2s;
@@ -1221,27 +1234,33 @@
 
             /* Photo crop modal for mobile */
             .photo-crop-modal {
-                align-items: flex-start !important;
+                align-items: center !important;
                 justify-content: center;
                 padding: 0;
-                padding-top: 40px;
-                padding-left: 12px;
-                padding-right: 12px;
             }
 
             .photo-crop-container {
                 margin: 0;
-                margin-top: 0 !important;
-                width: calc(100% - 24px);
+                width: 100%;
                 max-width: 100%;
-                border-radius: 20px;
-                max-height: calc(95vh - 40px);
-                overflow-y: auto;
-                padding: 24px 20px;
+                border-radius: 0;
+                height: 100vh;
+                max-height: 100vh;
+                overflow: hidden;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
             }
 
             .crop-preview-area {
-                height: 280px;
+                height: 60vh;
+                flex-shrink: 0;
+                margin-bottom: 16px;
+            }
+
+            .photo-crop-header {
+                flex-shrink: 0;
+                margin-bottom: 12px;
             }
 
             .photo-crop-header h3 {
@@ -1249,7 +1268,57 @@
             }
 
             .crop-instructions {
+                font-size: 12px;
+                padding: 10px 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                margin-bottom: 12px;
+                flex-shrink: 0;
+            }
+
+            .instruction-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .zoom-indicator {
                 font-size: 13px;
+                padding: 6px 12px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .crop-controls {
+                gap: 8px;
+                margin-bottom: 12px;
+                flex-shrink: 0;
+            }
+
+            .crop-control-btn {
+                padding: 12px;
+                font-size: 13px;
+                min-height: 48px;
+            }
+
+            .crop-control-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .crop-control-btn span {
+                display: none;
+            }
+
+            .modal-actions {
+                flex-shrink: 0;
+                gap: 10px;
+            }
+
+            .modal-actions .btn {
+                padding: 14px;
+                min-height: 50px;
+                font-size: 15px;
             }
 
             /* Add member button on mobile - same clean style */
@@ -1421,9 +1490,21 @@
             background: white;
             border-radius: 16px;
             padding: 20px;
-            max-width: 1400px;
+            max-width: 500px;
             width: 90%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Mobile spacing untuk photo crop popup - sama dengan container padding */
+        @media (max-width: 768px) {
+            .photo-crop-container {
+                width: calc(100% - 32px);
+                max-height: calc(100vh - 40px);
+                margin: 20px 16px;
+                padding: 14px;
+                border-radius: 12px;
+                overflow-y: auto;
+            }
         }
 
         .photo-crop-header {
@@ -1459,13 +1540,20 @@
         .crop-preview-area {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 300px;
             background: #F8F8F8;
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 14px;
             cursor: move;
             user-select: none;
+        }
+        
+        /* Sesuaikan tinggi crop area di mobile */
+        @media (max-width: 768px) {
+            .crop-preview-area {
+                height: 250px;
+            }
         }
 
         .crop-preview-img {
@@ -1483,73 +1571,282 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 240px;
-            height: 240px;
-            border: 3px solid #3B82F6;
-            border-radius: 12px;
+            width: 200px;
+            height: 200px;
+            border: 4px solid #3B82F6;
+            border-radius: 20px;
             box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
             pointer-events: none;
             z-index: 1;
+            transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+        }
+
+        /* Aspect Ratio Variations */
+        .crop-frame.square {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        .crop-frame.portrait {
+            width: 160px;
+            height: 220px;
+            border-radius: 16px;
+        }
+
+        .crop-frame.landscape {
+            width: 240px;
+            height: 160px;
+            border-radius: 16px;
+        }
+
+        .crop-frame.wide {
+            width: 260px;
+            height: 140px;
+            border-radius: 14px;
         }
 
         .crop-frame::before {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border-radius: 12px;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 20px;
             background: linear-gradient(45deg, #3B82F6, #8B5CF6);
             opacity: 0.3;
             pointer-events: none;
         }
 
         .crop-instructions {
-            text-align: center;
-            color: #737373;
-            font-size: 14px;
-            margin-bottom: 14px;
-        }
-
-        .crop-zoom-control {
-            margin-bottom: 14px;
-        }
-
-        .crop-zoom-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #F0F9FF;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid #DBEAFE;
+            color: #0369A1;
             font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Aspect Ratio Selector */
+        .aspect-ratio-selector {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .aspect-ratio-label {
+            font-size: 13px;
+            font-weight: 600;
             color: #525252;
-            margin-bottom: 8px;
-            display: block;
+            margin-right: 8px;
         }
 
-        .crop-zoom-slider {
+        .aspect-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #E5E7EB;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #525252;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .aspect-btn:hover {
+            border-color: #3B82F6;
+            background: #F0F9FF;
+            color: #3B82F6;
+        }
+
+        .aspect-btn.active {
+            border-color: #3B82F6;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .aspect-icon {
+            width: 28px;
+            height: 28px;
+            border: 2px solid currentColor;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .aspect-icon.square {
+            width: 24px;
+            height: 24px;
+        }
+
+        .aspect-icon.portrait {
+            width: 18px;
+            height: 26px;
+        }
+
+        .aspect-icon.landscape {
+            width: 30px;
+            height: 20px;
+        }
+
+        .aspect-icon.wide {
+            width: 32px;
+            height: 18px;
+        }
+
+        .aspect-text {
+            font-size: 11px;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+
+        .auto-detect-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .auto-detect-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .instruction-icon {
+            flex-shrink: 0;
+        }
+
+        .instruction-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #0369A1;
+        }
+
+        .crop-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .grid-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .grid-line-v {
+            width: 1px;
+            height: 100%;
+            top: 0;
+        }
+
+        .grid-line-v:nth-child(1) {
+            left: 33.33%;
+        }
+
+        .grid-line-v:nth-child(2) {
+            left: 66.66%;
+        }
+
+        .grid-line-h {
             width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: #E5E5E5;
-            outline: none;
-            -webkit-appearance: none;
+            height: 1px;
+            left: 0;
         }
 
-        .crop-zoom-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #3B82F6;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .grid-line-h:nth-child(3) {
+            top: 33.33%;
         }
 
-        .crop-zoom-slider::-moz-range-thumb {
+        .grid-line-h:nth-child(4) {
+            top: 66.66%;
+        }
+
+        .zoom-indicator {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .crop-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .crop-control-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: #F8F8F8;
+            border: 1px solid #E5E5E5;
+            color: #525252;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .crop-control-btn:hover {
+            background: #EFEFEF;
+            border-color: #D4D4D4;
+            transform: translateY(-1px);
+        }
+
+        .crop-control-btn:active {
+            transform: translateY(0);
+        }
+
+        .crop-control-btn svg {
             width: 20px;
             height: 20px;
-            border-radius: 50%;
-            background: #3B82F6;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            stroke: currentColor;
+        }
+
+        .crop-control-primary {
+            background: #EFF6FF;
+            border-color: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .crop-control-primary:hover {
+            background: #DBEAFE;
+            border-color: #BFDBFE;
         }
 
         /* Add Member Button */
@@ -1624,6 +1921,517 @@
             width: 16px;
             height: 16px;
             stroke: #DC2626;
+        }
+
+        /* ===== MOBILE OPTIMIZATION ===== */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            /* Header Mobile */
+            .header {
+                padding: 14px 16px;
+                margin-bottom: 16px;
+                border-radius: 12px;
+            }
+
+            .header-left {
+                gap: 12px;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .header-title {
+                font-size: 18px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .hamburger-btn {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+            }
+
+            .hamburger-btn svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .company-badge {
+                display: none;
+            }
+
+            .logout-btn {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+            }
+
+            .logout-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            /* Sidebar Mobile */
+            .sidebar {
+                width: 85%;
+                max-width: 320px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .sidebar-item {
+                padding: 16px;
+                margin-bottom: 6px;
+                min-height: 52px;
+            }
+
+            .sidebar-item svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* Main Grid - Stack di Mobile */
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            /* Card Mobile */
+            .card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            /* Profile Section - Tetap Horizontal di Mobile */
+            .profile-section {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 24px;
+                padding-bottom: 24px;
+                position: relative;
+            }
+
+            .profile-avatar {
+                width: 200px;
+                height: 200px;
+                border-radius: 20px;
+            }
+
+            .profile-avatar-text {
+                font-size: 80px;
+            }
+
+            .profile-info {
+                text-align: left;
+                flex: 1;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+
+            /* Edit Button di Pojok Kanan Atas */
+            .edit-profile-btn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 44px;
+                height: 44px;
+            }
+
+            .edit-profile-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .profile-name {
+                font-size: 16px;
+            }
+
+            .profile-role {
+                font-size: 12px;
+            }
+
+            .profile-id {
+                padding: 6px 10px;
+                margin-top: 8px;
+                font-size: 11px;
+            }
+
+            .profile-id svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .profile-id-label,
+            .profile-id-value {
+                font-size: 11px;
+            }
+
+            /* Info Groups Mobile */
+            .info-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .info-group {
+                margin-bottom: 16px;
+            }
+
+            .info-value {
+                font-size: 15px;
+                padding: 12px 14px;
+                word-break: break-word;
+            }
+
+            /* Action Buttons Stack */
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .action-btn {
+                width: 100%;
+                padding: 14px 18px;
+                font-size: 15px;
+                min-height: 50px;
+            }
+
+            /* Tabs Mobile - Horizontal Scroll */
+            .tabs {
+                gap: 8px;
+                margin-bottom: 16px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+                white-space: nowrap;
+                min-height: 44px;
+            }
+
+            /* Employee List Mobile */
+            .employee-list {
+                gap: 12px;
+            }
+
+            .employee-item {
+                padding: 14px;
+                gap: 12px;
+            }
+
+            .employee-avatar {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .employee-name {
+                font-size: 15px;
+            }
+
+            .employee-role {
+                font-size: 13px;
+            }
+
+            .employee-status {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .employee-delete-btn {
+                display: flex !important;
+                right: 12px;
+            }
+
+            /* Location Mobile */
+            .location-info {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .location-display {
+                padding: 14px;
+            }
+
+            .location-text {
+                font-size: 15px;
+                word-break: break-word;
+            }
+
+            .location-btn {
+                padding: 14px 18px;
+                font-size: 15px;
+                min-height: 50px;
+            }
+
+            /* Modal Mobile - Bottom Sheet */
+            .modal {
+                align-items: flex-end;
+                padding: 0;
+            }
+
+            .modal-content {
+                border-radius: 20px 20px 0 0;
+                max-height: 90vh;
+                animation: slideUp 0.3s ease-out;
+            }
+
+            @keyframes slideUp {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+
+            .modal-header {
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                background: white;
+                z-index: 10;
+            }
+
+            .modal-header::before {
+                content: '';
+                position: absolute;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 40px;
+                height: 4px;
+                background: #E5E5E5;
+                border-radius: 2px;
+            }
+
+            .modal-title {
+                font-size: 18px;
+                margin-top: 8px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            /* Form Mobile */
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-input {
+                padding: 14px 16px;
+                font-size: 15px;
+                min-height: 50px;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-buttons .action-btn {
+                width: 100%;
+            }
+
+            /* Photo Crop Mobile */
+            .crop-preview-area {
+                height: 50vh;
+                max-height: 400px;
+                margin-bottom: 20px;
+            }
+
+            .crop-zoom-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .crop-info {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            /* Member Modal Mobile */
+            .member-photo-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* Touch Improvements */
+            .hamburger-btn:active,
+            .logout-btn:active,
+            .action-btn:active,
+            .tab-btn:active,
+            .employee-item:active,
+            .sidebar-item:active,
+            .location-btn:active,
+            .crop-zoom-btn:active,
+            .modal-close:active {
+                transform: scale(0.95);
+            }
+
+            /* Safe Area untuk iOS */
+            @supports (padding: max(0px)) {
+                .container {
+                    padding-left: max(16px, env(safe-area-inset-left));
+                    padding-right: max(16px, env(safe-area-inset-right));
+                }
+                
+                .sidebar {
+                    padding-left: env(safe-area-inset-left);
+                }
+            }
+        }
+
+        /* Mobile Adjustments - Hanya Sesuaikan Ukuran */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 12px;
+            }
+
+            .header {
+                padding: 16px 18px;
+                margin-bottom: 20px;
+            }
+
+            .header-title {
+                font-size: 18px;
+            }
+
+            .hamburger-btn, .logout-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .company-badge {
+                font-size: 11px;
+                padding: 6px 14px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .profile-avatar {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-initials {
+                font-size: 50px;
+            }
+
+            .profile-name {
+                font-size: 20px;
+            }
+
+            .profile-role {
+                font-size: 13px;
+            }
+
+            .info-item {
+                padding: 14px;
+            }
+
+            .info-item-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .info-item-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .info-item-label {
+                font-size: 11px;
+            }
+
+            .info-item-value {
+                font-size: 13px;
+            }
+
+            .action-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .tab-btn {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+
+            .employees-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .employee-card {
+                padding: 12px;
+            }
+
+            .employee-avatar {
+                width: 65px;
+                height: 65px;
+                font-size: 22px;
+            }
+
+            .employee-name {
+                font-size: 13px;
+            }
+
+            .employee-role {
+                font-size: 11px;
+            }
+
+            .modal-content {
+                padding: 20px 18px;
+                max-height: 85vh;
+            }
+
+            .modal-title {
+                font-size: 18px;
+            }
+
+            .crop-preview-area {
+                height: 320px;
+            }
+
+            .form-input, .form-select, .form-textarea {
+                padding: 11px;
+                font-size: 14px;
+            }
+        }
+
+        /* Tablet Adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 320px 1fr;
+                gap: 20px;
+            }
+
+            .profile-avatar {
+                width: 140px;
+                height: 140px;
+            }
         }
     </style>
 </head>
@@ -1732,15 +2540,23 @@
                     <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoChange(event)" style="display: none;">
                     
                     <div class="profile-info">
-                        <div class="profile-name">Nama Pengguna</div>
-                        <div class="profile-role">Jabatan</div>
-                        <div class="profile-id">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            <span class="profile-id-label">ID:</span>
-                            <span class="profile-id-value" id="userIdDisplay">-</span>
+                        <div>
+                            <div class="profile-name">Nama Pengguna</div>
+                            <div class="profile-role">Jabatan</div>
+                            <div class="profile-id">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span class="profile-id-label">ID:</span>
+                                <span class="profile-id-value" id="userIdDisplay">-</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Tabs di bawah ID -->
+                        <div class="tabs" style="flex-direction: column; gap: 6px; margin-bottom: 0;">
+                            <button class="tab-btn active" onclick="switchTab('employees', this)">Team Members</button>
+                            <button class="tab-btn" onclick="switchTab('location', this)">Location</button>
                         </div>
                     </div>
 
@@ -1750,12 +2566,6 @@
                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                         </svg>
                     </button>
-                </div>
-
-                <!-- Tabs -->
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('employees', this)">Team Members</button>
-                    <button class="tab-btn" onclick="switchTab('location', this)">Location</button>
                 </div>
 
                 <!-- Employees Tab -->
@@ -1903,23 +2713,77 @@
                 </button>
             </div>
             
-            <div class="crop-instructions">
-                Drag foto untuk mengatur posisi dan gunakan slider untuk zoom
+            
+            <!-- Aspect Ratio Selector -->
+            <div class="aspect-ratio-selector">
+                <button class="aspect-btn" onclick="setAspectRatio('square')" id="aspectBtnSquare">
+                    <div class="aspect-icon square"></div>
+                    <span class="aspect-text">1:1</span>
+                </button>
+                <button class="aspect-btn" onclick="setAspectRatio('portrait')" id="aspectBtnPortrait">
+                    <div class="aspect-icon portrait"></div>
+                    <span class="aspect-text">4:5</span>
+                </button>
+                <button class="aspect-btn" onclick="setAspectRatio('landscape')" id="aspectBtnLandscape">
+                    <div class="aspect-icon landscape"></div>
+                    <span class="aspect-text">3:2</span>
+                </button>
+                <button class="aspect-btn" onclick="setAspectRatio('wide')" id="aspectBtnWide">
+                    <div class="aspect-icon wide"></div>
+                    <span class="aspect-text">16:9</span>
+                </button>
             </div>
             
             <div class="crop-preview-area" id="cropPreviewArea">
                 <img id="cropPreviewImg" class="crop-preview-img" src="" alt="Preview">
-                <div class="crop-frame"></div>
+                <div class="crop-frame">
+                    <div class="crop-grid">
+                        <div class="grid-line grid-line-v"></div>
+                        <div class="grid-line grid-line-v"></div>
+                        <div class="grid-line grid-line-h"></div>
+                        <div class="grid-line grid-line-h"></div>
+                    </div>
+                </div>
+                <div class="zoom-indicator" id="zoomIndicator" style="display: none;">100%</div>
             </div>
             
-            <div class="crop-zoom-control">
-                <label class="crop-zoom-label">Zoom</label>
-                <input type="range" class="crop-zoom-slider" id="cropZoomSlider" min="100" max="300" value="100">
+            <div class="crop-controls" style="display: none;">
+                <button class="crop-control-btn" onclick="zoomOut()" title="Zoom Out">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </button>
+                
+                <button class="crop-control-btn crop-control-primary" onclick="resetCrop()" title="Reset Posisi">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                        <path d="M21 3v5h-5"></path>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                        <path d="M3 21v-5h5"></path>
+                    </svg>
+                    <span>Reset</span>
+                </button>
+                
+                <button class="crop-control-btn" onclick="zoomIn()" title="Zoom In">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </button>
             </div>
             
             <div class="modal-actions">
                 <button class="btn btn-cancel" onclick="closeCropModal()">Batal</button>
-                <button class="btn btn-save" onclick="saveCroppedPhoto()">Gunakan Foto</button>
+                <button class="btn btn-save" onclick="saveCroppedPhoto()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; margin-right: 6px;">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Gunakan Foto
+                </button>
             </div>
         </div>
     </div>
@@ -1937,41 +2801,34 @@
                 </button>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Foto Profil (Opsional)</label>
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div class="member-photo-preview" id="memberPhotoPreview" onclick="document.getElementById('memberPhotoInput').click()">
-                        <div class="member-photo-initial" id="memberPhotoInitial">?</div>
-                        <img id="memberPhotoImg" class="member-photo-img" alt="Preview">
-                        <div class="avatar-overlay">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                                <circle cx="12" cy="13" r="4"></circle>
-                            </svg>
-                        </div>
-                    </div>
-                    <input type="file" id="memberPhotoInput" accept="image/*" style="display: none;">
-                    <div style="flex: 1;">
-                        <div style="font-size: 13px; color: #737373; margin-bottom: 4px;">Klik kotak untuk upload foto</div>
-                        <div style="font-size: 12px; color: #A3A3A3;">Max 5MB (jpg, png)</div>
+            <!-- Photo Section in Add Member Modal -->
+            <div style="display: flex; align-items: stretch; gap: 20px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #F5F5F5;">
+                <div class="member-photo-preview" id="memberPhotoPreview" onclick="document.getElementById('memberPhotoInput').click()" style="flex-shrink: 0; width: 180px; height: 180px;">
+                    <div class="member-photo-initial" id="memberPhotoInitial">?</div>
+                    <img id="memberPhotoImg" class="member-photo-img" alt="Preview">
+                    <div class="avatar-overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">ID Karyawan</label>
-                    <input type="text" class="form-input" id="memberId" placeholder="Contoh: EMP001">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-input" id="memberName" placeholder="Masukkan nama lengkap">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Jabatan</label>
-                    <input type="text" class="form-input" id="memberRole" placeholder="Masukkan jabatan">
+                <input type="file" id="memberPhotoInput" accept="image/*" style="display: none;">
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 8px; margin-bottom: 1px;">Nama Lengkap</label>
+                        <input type="text" class="form-input" id="memberName" placeholder="Masukkan nama lengkap" style="padding: 1px 6px; font-size: 9px; height: 20px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 8px; margin-bottom: 1px;">Jabatan</label>
+                        <input type="text" class="form-input" id="memberRole" placeholder="Masukkan jabatan" style="padding: 1px 6px; font-size: 9px; height: 20px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 8px; margin-bottom: 1px;">ID Karyawan</label>
+                        <input type="text" class="form-input" id="memberId" placeholder="Contoh: EMP001" style="padding: 1px 6px; font-size: 9px; height: 20px;">
+                    </div>
                 </div>
             </div>
 
@@ -1996,29 +2853,29 @@
             </div>
 
             <!-- Photo Section in Edit Modal -->
-            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #F5F5F5;">
-                <div class="profile-avatar" id="editProfileAvatar" onclick="triggerEditPhotoUpload()" style="cursor: pointer;">
+            <div style="display: flex; align-items: stretch; gap: 20px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #F5F5F5;">
+                <div class="profile-avatar" id="editProfileAvatar" onclick="triggerEditPhotoUpload()" style="cursor: pointer; flex-shrink: 0;">
                     <img id="editProfileImage" class="profile-avatar-img" src="" alt="Profile">
                     <div class="profile-avatar-text" id="editProfileInitial">NP</div>
                 </div>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600; color: #1A1A1A; margin-bottom: 4px;">Foto Profil</div>
-                    <div style="font-size: 13px; color: #737373;">Klik foto untuk mengubah</div>
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 10px; margin-bottom: 2px;">Nama Lengkap</label>
+                        <input type="text" class="form-input" id="editName" placeholder="Masukkan nama lengkap" style="padding: 5px 9px; font-size: 12px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 10px; margin-bottom: 2px;">Jabatan</label>
+                        <input type="text" class="form-input" id="editRole" placeholder="Masukkan jabatan" style="padding: 5px 9px; font-size: 12px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="font-size: 10px; margin-bottom: 2px;">ID Karyawan</label>
+                        <input type="text" class="form-input" id="editId" placeholder="Masukkan ID Karyawan" style="padding: 5px 9px; font-size: 12px;">
+                    </div>
                 </div>
             </div>
             <input type="file" id="editPhotoInput" accept="image/*" style="display: none;" onchange="handleEditPhotoSelect(event)">
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-input" id="editName" placeholder="Masukkan nama lengkap">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Jabatan</label>
-                    <input type="text" class="form-input" id="editRole" placeholder="Masukkan jabatan">
-                </div>
-            </div>
 
             <div class="modal-actions">
                 <button class="btn btn-cancel" onclick="closeEditProfile()">Batal</button>
@@ -2374,8 +3231,8 @@
                     return;
                 }
 
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('File terlalu besar (Max 5MB)');
+                if (file.size > 20 * 1024 * 1024) {
+                    alert('File terlalu besar (Max 20MB)');
                     return;
                 }
 
@@ -2398,8 +3255,8 @@
                     return;
                 }
 
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('File terlalu besar (Max 5MB)');
+                if (file.size > 20 * 1024 * 1024) {
+                    alert('File terlalu besar (Max 20MB)');
                     return;
                 }
 
@@ -2426,7 +3283,6 @@
             
             // Reset crop state
             cropState = { x: 0, y: 0, scale: 1, isDragging: false, startX: 0, startY: 0 };
-            document.getElementById('cropZoomSlider').value = 100;
             
             // Wait for image to load to center it
             img.onload = function() {
@@ -2435,10 +3291,13 @@
                 const imgWidth = img.naturalWidth;
                 const imgHeight = img.naturalHeight;
                 
-                // Calculate initial scale to fit
+                // Smart Auto-Detect Orientation
+                detectAndSetAspectRatio(imgWidth, imgHeight);
+                
+                // Calculate initial scale to fit - mulai dari ukuran yang pas tanpa terlalu zoom
                 const scaleX = areaWidth / imgWidth;
                 const scaleY = areaHeight / imgHeight;
-                const initialScale = Math.max(scaleX, scaleY, 0.5);
+                const initialScale = Math.min(scaleX, scaleY, 1.0); // Gunakan MIN supaya foto fit tanpa terlalu besar
                 
                 cropState.scale = initialScale;
                 
@@ -2453,14 +3312,88 @@
             };
         }
 
+        // Global variable to track current aspect ratio
+        let currentAspectRatio = 'square';
+
+        // Smart Orientation Detection
+        function detectAndSetAspectRatio(imgWidth, imgHeight) {
+            const ratio = imgWidth / imgHeight;
+            let detectedRatio = 'square';
+            
+            console.log('📐 Image dimensions:', imgWidth, 'x', imgHeight, '| Ratio:', ratio.toFixed(2));
+            
+            if (ratio > 1.4) {
+                // Very wide (16:9 atau lebih)
+                detectedRatio = 'wide';
+                console.log('🖼️ Auto-detected: WIDE (16:9)');
+            } else if (ratio > 1.1) {
+                // Landscape (3:2)
+                detectedRatio = 'landscape';
+                console.log('🖼️ Auto-detected: LANDSCAPE (3:2)');
+            } else if (ratio > 0.9) {
+                // Almost square (1:1)
+                detectedRatio = 'square';
+                console.log('🖼️ Auto-detected: SQUARE (1:1)');
+            } else {
+                // Portrait (4:5 atau lebih tinggi)
+                detectedRatio = 'portrait';
+                console.log('🖼️ Auto-detected: PORTRAIT (4:5)');
+            }
+            
+            // Set aspect ratio and show badge
+            setAspectRatio(detectedRatio, true);
+        }
+
+        // Set Aspect Ratio
+        function setAspectRatio(ratio, isAuto = false) {
+            currentAspectRatio = ratio;
+            
+            // Update crop frame class
+            const cropFrame = document.querySelector('.crop-frame');
+            cropFrame.className = 'crop-frame ' + ratio;
+            
+            // Update button states
+            ['square', 'portrait', 'landscape', 'wide'].forEach(r => {
+                const btn = document.getElementById('aspectBtn' + r.charAt(0).toUpperCase() + r.slice(1));
+                if (btn) {
+                    if (r === ratio) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Show/hide auto-detect badge
+            const badge = document.getElementById('autoDetectBadge');
+            if (badge) {
+                if (isAuto) {
+                    badge.style.display = 'inline-flex';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+            
+            console.log('✅ Aspect ratio set to:', ratio, isAuto ? '(Auto)' : '(Manual)');
+        }
+
         function setupCropDrag() {
             const img = document.getElementById('cropPreviewImg');
             const previewArea = document.getElementById('cropPreviewArea');
-            const zoomSlider = document.getElementById('cropZoomSlider');
+            
+            let lastTouchDistance = 0;
             
             // Mouse/Touch drag
             function handleDragStart(e) {
+                // Ignore if it's a multi-touch (for pinch zoom)
+                if (e.touches && e.touches.length > 1) return;
+                
                 cropState.isDragging = true;
+                
+                // Disable transition saat drag untuk smooth movement
+                const img = document.getElementById('cropPreviewImg');
+                img.style.transition = 'none';
+                
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 cropState.startX = clientX - cropState.x;
@@ -2468,18 +3401,63 @@
             }
             
             function handleDragMove(e) {
+                // ZOOM DISABLED - Pinch zoom functionality removed
+                /*
+                // Handle pinch zoom for touch
+                if (e.touches && e.touches.length === 2) {
+                    e.preventDefault();
+                    cropState.isDragging = false;
+                    
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const distance = Math.hypot(
+                        touch2.clientX - touch1.clientX,
+                        touch2.clientY - touch1.clientY
+                    );
+                    
+                    if (lastTouchDistance > 0) {
+                        const delta = distance - lastTouchDistance;
+                        const zoomSpeed = 0.008; // Lebih halus dan mudah dikontrol
+                        cropState.scale = Math.max(0.3, Math.min(10, cropState.scale + delta * zoomSpeed));
+                        updateCropPreview();
+                    }
+                    
+                    lastTouchDistance = distance;
+                    return;
+                }
+                */
+                
+                // Normal drag
                 if (!cropState.isDragging) return;
                 e.preventDefault();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 cropState.x = clientX - cropState.startX;
                 cropState.y = clientY - cropState.startY;
+                
+                // Update tanpa transition untuk smooth drag
+                const img = document.getElementById('cropPreviewImg');
+                img.style.transition = 'none';
                 updateCropPreview();
             }
             
-            function handleDragEnd() {
+            function handleDragEnd(e) {
                 cropState.isDragging = false;
+                if (e.touches && e.touches.length === 0) {
+                    lastTouchDistance = 0;
+                }
             }
+            
+            // ZOOM DISABLED - Mouse wheel zoom disabled
+            // Mouse wheel zoom
+            /*
+            function handleWheel(e) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.15 : 0.15; // Lebih cepat
+                cropState.scale = Math.max(0.3, Math.min(10, cropState.scale + delta)); // Range lebih lebar
+                updateCropPreview();
+            }
+            */
             
             // Mouse events
             img.addEventListener('mousedown', handleDragStart);
@@ -2487,23 +3465,62 @@
             document.addEventListener('mouseup', handleDragEnd);
             
             // Touch events
-            img.addEventListener('touchstart', handleDragStart);
+            img.addEventListener('touchstart', handleDragStart, { passive: false });
             document.addEventListener('touchmove', handleDragMove, { passive: false });
             document.addEventListener('touchend', handleDragEnd);
             
-            // Zoom slider
-            zoomSlider.addEventListener('input', function(e) {
-                const percent = parseInt(e.target.value);
-                const baseScale = cropState.scale / (cropState.scale / Math.max(0.5, cropState.scale));
-                cropState.scale = baseScale * (percent / 100);
-                updateCropPreview();
-            });
+            // ZOOM DISABLED - Mouse wheel zoom event listener removed
+            // Mouse wheel zoom
+            // previewArea.addEventListener('wheel', handleWheel, { passive: false });
         }
 
         function updateCropPreview() {
             const img = document.getElementById('cropPreviewImg');
             img.style.transform = `translate(${cropState.x}px, ${cropState.y}px) scale(${cropState.scale})`;
             img.style.transformOrigin = '0 0';
+            img.style.transition = 'transform 0.1s ease-out';
+            
+            // Update zoom indicator
+            const zoomIndicator = document.getElementById('zoomIndicator');
+            if (zoomIndicator) {
+                const percentage = Math.round(cropState.scale * 100);
+                zoomIndicator.textContent = percentage + '%';
+            }
+        }
+
+        function zoomIn() {
+            cropState.scale = Math.min(10, cropState.scale + 0.5); // Step lebih besar untuk mobile
+            updateCropPreview();
+        }
+
+        function zoomOut() {
+            cropState.scale = Math.max(0.3, cropState.scale - 0.5); // Step lebih besar untuk mobile
+            updateCropPreview();
+        }
+
+        function resetCrop() {
+            const img = document.getElementById('cropPreviewImg');
+            const previewArea = document.getElementById('cropPreviewArea');
+            
+            const areaWidth = previewArea.offsetWidth;
+            const areaHeight = previewArea.offsetHeight;
+            const imgWidth = img.naturalWidth;
+            const imgHeight = img.naturalHeight;
+            
+            // Reset ke scale awal - fit tanpa terlalu zoom
+            const scaleX = areaWidth / imgWidth;
+            const scaleY = areaHeight / imgHeight;
+            const initialScale = Math.min(scaleX, scaleY, 1.0); // Gunakan MIN supaya foto fit
+            
+            cropState.scale = initialScale;
+            
+            // Center the image
+            const scaledWidth = imgWidth * initialScale;
+            const scaledHeight = imgHeight * initialScale;
+            cropState.x = (areaWidth - scaledWidth) / 2;
+            cropState.y = (areaHeight - scaledHeight) / 2;
+            
+            updateCropPreview();
         }
 
         function closeCropModal() {
@@ -2513,15 +3530,83 @@
             currentImageFile = null;
         }
 
+        // Advanced Image Compression Function
+        function compressImage(canvas, maxWidth = 800, maxHeight = 800, quality = 0.85) {
+            // Get original dimensions
+            const originalWidth = canvas.width;
+            const originalHeight = canvas.height;
+            
+            // Calculate new dimensions while maintaining aspect ratio
+            let newWidth = originalWidth;
+            let newHeight = originalHeight;
+            
+            if (originalWidth > maxWidth || originalHeight > maxHeight) {
+                const ratio = Math.min(maxWidth / originalWidth, maxHeight / originalHeight);
+                newWidth = Math.round(originalWidth * ratio);
+                newHeight = Math.round(originalHeight * ratio);
+                
+                // Create new canvas with optimized size
+                const resizeCanvas = document.createElement('canvas');
+                resizeCanvas.width = newWidth;
+                resizeCanvas.height = newHeight;
+                const resizeCtx = resizeCanvas.getContext('2d');
+                
+                // Use better image smoothing
+                resizeCtx.imageSmoothingEnabled = true;
+                resizeCtx.imageSmoothingQuality = 'high';
+                
+                // Draw resized image
+                resizeCtx.drawImage(canvas, 0, 0, newWidth, newHeight);
+                
+                canvas = resizeCanvas;
+            }
+            
+            // Try different qualities until we get acceptable size
+            let dataUrl = canvas.toDataURL('image/jpeg', quality);
+            let currentQuality = quality;
+            
+            // If image is still too large (> 500KB), reduce quality further
+            while (dataUrl.length > 500000 && currentQuality > 0.5) {
+                currentQuality -= 0.1;
+                dataUrl = canvas.toDataURL('image/jpeg', currentQuality);
+            }
+            
+            // Calculate compression stats
+            const originalSize = (originalWidth * originalHeight * 4 / 1024).toFixed(1);
+            const compressedSize = (dataUrl.length / 1024).toFixed(1);
+            const finalQuality = Math.round(currentQuality * 100);
+            const reduction = Math.round((1 - dataUrl.length / (originalWidth * originalHeight * 4)) * 100);
+            
+            console.log(`📸 Image compressed: ${originalSize}KB → ${compressedSize}KB (${reduction}% reduction)`);
+            console.log(`   Quality: ${finalQuality}% | Size: ${newWidth}x${newHeight}`);
+            
+            return dataUrl;
+        }
+
         function saveCroppedPhoto() {
             const img = document.getElementById('cropPreviewImg');
             const previewArea = document.getElementById('cropPreviewArea');
-            const frameSize = 240;
             
-            // Create canvas
+            // Get frame dimensions based on current aspect ratio
+            const frameDimensions = {
+                'square': { width: 500, height: 500, outputWidth: 1000, outputHeight: 1000 },
+                'portrait': { width: 400, height: 550, outputWidth: 800, outputHeight: 1100 },
+                'landscape': { width: 600, height: 400, outputWidth: 1200, outputHeight: 800 },
+                'wide': { width: 650, height: 350, outputWidth: 1300, outputHeight: 700 }
+            };
+            
+            const dims = frameDimensions[currentAspectRatio];
+            const displayFrameWidth = dims.width;
+            const displayFrameHeight = dims.height;
+            const outputWidth = dims.outputWidth;
+            const outputHeight = dims.outputHeight;
+            
+            console.log(`🎨 Cropping as ${currentAspectRatio}: ${outputWidth}x${outputHeight}`);
+            
+            // Create canvas with appropriate dimensions
             const canvas = document.createElement('canvas');
-            canvas.width = frameSize;
-            canvas.height = frameSize;
+            canvas.width = outputWidth;
+            canvas.height = outputHeight;
             const ctx = canvas.getContext('2d');
             
             // Calculate crop area
@@ -2530,21 +3615,32 @@
             const frameCenterX = areaWidth / 2;
             const frameCenterY = areaHeight / 2;
             
-            // Calculate source coordinates
-            const sourceX = (frameCenterX - frameSize / 2 - cropState.x) / cropState.scale;
-            const sourceY = (frameCenterY - frameSize / 2 - cropState.y) / cropState.scale;
-            const sourceWidth = frameSize / cropState.scale;
-            const sourceHeight = frameSize / cropState.scale;
+            // Hitung posisi frame relatif terhadap gambar
+            const frameLeft = frameCenterX - displayFrameWidth / 2;
+            const frameTop = frameCenterY - displayFrameHeight / 2;
             
-            // Draw cropped image
+            // Hitung koordinat source dari gambar asli
+            const sourceX = (frameLeft - cropState.x) / cropState.scale;
+            const sourceY = (frameTop - cropState.y) / cropState.scale;
+            const sourceWidth = displayFrameWidth / cropState.scale;
+            const sourceHeight = displayFrameHeight / cropState.scale;
+            
+            // Pastikan koordinat source tidak negatif dan tidak melebihi ukuran gambar
+            const clampedSourceX = Math.max(0, Math.min(sourceX, img.naturalWidth - sourceWidth));
+            const clampedSourceY = Math.max(0, Math.min(sourceY, img.naturalHeight - sourceHeight));
+            const clampedSourceWidth = Math.min(sourceWidth, img.naturalWidth - clampedSourceX);
+            const clampedSourceHeight = Math.min(sourceHeight, img.naturalHeight - clampedSourceY);
+            
+            // Draw hanya bagian foto yang ada saja
             ctx.drawImage(
                 img,
-                sourceX, sourceY, sourceWidth, sourceHeight,
-                0, 0, frameSize, frameSize
+                clampedSourceX, clampedSourceY, clampedSourceWidth, clampedSourceHeight,
+                0, 0, outputWidth, outputHeight
             );
             
-            // Convert to data URL and save
-            const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+            // Compress with aspect-ratio-appropriate settings
+            const maxDimension = Math.max(outputWidth, outputHeight);
+            const croppedDataUrl = compressImage(canvas, maxDimension, maxDimension, 0.85);
             
             // Check mode and update accordingly
             if (window.currentCropMode === 'profile') {
@@ -2581,9 +3677,11 @@
         function editProfile() {
             const currentName = document.querySelector('.profile-name').textContent;
             const currentRole = document.querySelector('.profile-role').textContent;
+            const currentId = localStorage.getItem('userId') || '-';
             
             document.getElementById('editName').value = currentName;
             document.getElementById('editRole').value = currentRole;
+            document.getElementById('editId').value = currentId;
             
             // Load current photo into edit modal
             const mainProfileImg = document.getElementById('profileImage');
@@ -2613,8 +3711,14 @@
         }
 
         function saveProfile() {
+            const newId = document.getElementById('editId').value.trim();
             const newName = document.getElementById('editName').value.trim();
             const newRole = document.getElementById('editRole').value.trim();
+            
+            if (newId === '') {
+                alert('ID Karyawan tidak boleh kosong');
+                return;
+            }
             
             if (newName === '') {
                 alert('Nama tidak boleh kosong');
@@ -2630,7 +3734,14 @@
             document.querySelector('.profile-name').textContent = newName;
             document.querySelector('.profile-role').textContent = newRole;
             
+            // Update ID display if it exists
+            const profileIdValue = document.querySelector('.profile-id-value');
+            if (profileIdValue) {
+                profileIdValue.textContent = newId;
+            }
+            
             // Save to localStorage
+            localStorage.setItem('userId', newId);
             localStorage.setItem('profileName', newName);
             localStorage.setItem('profileRole', newRole);
             
@@ -2670,6 +3781,12 @@
                 return;
             }
             
+            // Validate file size
+            if (file.size > 20 * 1024 * 1024) {
+                alert('File terlalu besar (Max 20MB)');
+                return;
+            }
+            
             // Store file and open crop modal
             currentImageFile = file;
             window.currentCropMode = 'edit-profile';
@@ -2683,17 +3800,19 @@
                 img.onload = function() {
                     // Reset crop state
                     cropState = { x: 0, y: 0, scale: 1, isDragging: false, startX: 0, startY: 0 };
-                    document.getElementById('cropZoomSlider').value = 100;
                     
-                    // Calculate initial scale to fit
+                    // Calculate initial scale to fit - mulai dari ukuran yang pas
                     const areaWidth = previewArea.offsetWidth;
                     const areaHeight = previewArea.offsetHeight;
                     const imgWidth = img.naturalWidth;
                     const imgHeight = img.naturalHeight;
                     
+                    // Smart Auto-Detect Orientation
+                    detectAndSetAspectRatio(imgWidth, imgHeight);
+                    
                     const scaleX = areaWidth / imgWidth;
                     const scaleY = areaHeight / imgHeight;
-                    const initialScale = Math.max(scaleX, scaleY, 0.5);
+                    const initialScale = Math.min(scaleX, scaleY, 1.0); // Gunakan MIN supaya foto fit tanpa terlalu zoom
                     
                     cropState.scale = initialScale;
                     
