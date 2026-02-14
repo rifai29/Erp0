@@ -616,7 +616,8 @@
         }
 
         .modal-body {
-            overflow: hidden;
+            overflow-y: auto;
+            max-height: calc(90vh - 160px);
             padding: 0;
         }
 
@@ -2439,46 +2440,221 @@
             stroke: #DC2626;
         }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            top: 16px;
-            right: 24px;
+        /* iOS-Style Table */
+        .ios-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+            min-width: 900px; /* Minimum width to trigger horizontal scroll */
+            table-layout: auto; /* Allow columns to resize based on content */
+        }
+
+        /* Table Scroll Wrapper */
+        .table-scroll-wrapper {
+            overflow-x: auto;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -32px;
+            padding: 0 32px;
+        }
+
+        .table-scroll-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-scroll-wrapper::-webkit-scrollbar-track {
+            background: #F5F5F5;
+            border-radius: 4px;
+        }
+
+        .table-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 4px;
+        }
+
+        .table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #9CA3AF;
+        }
+
+        .ios-table thead tr {
+            background: transparent;
+        }
+
+        .ios-table thead th {
+            padding: 8px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8E8E93;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        .ios-tbody {
+            /* Wrapper styles if needed */
+        }
+
+        .ios-row {
             background: white;
-            padding: 14px 20px 14px 24px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), inset 4px 0 0 #10B981;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 3000;
-            transform: translateX(400px);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            max-width: 400px;
+            border-radius: 14px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
         }
 
-        .toast.show {
-            transform: translateX(0);
+        .ios-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
         }
 
-        .toast-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            color: #10B981;
+        .ios-row td:first-child {
+            border-top-left-radius: 14px;
+            border-bottom-left-radius: 14px;
         }
 
-        .toast-message {
-            font-size: 14px;
-            font-weight: 500;
+        .ios-row td:last-child {
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
+        }
+
+        .ios-cell {
+            padding: 18px 16px;
+            font-size: 15px;
             color: #1A1A1A;
-            flex: 1;
+            font-weight: 500;
+            border: none;
+            background: white;
+        }
+
+        /* Column specific widths */
+        .ios-table th:nth-child(1),
+        .ios-table td:nth-child(1) {
+            width: 70px; /* No - fixed small */
+            text-align: center;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .ios-table th:nth-child(2),
+        .ios-table td:nth-child(2) {
+            min-width: 150px; /* Nama - flexible */
+        }
+
+        .ios-table th:nth-child(3),
+        .ios-table td:nth-child(3) {
+            min-width: 120px; /* NIK - flexible */
+        }
+
+        .ios-table th:nth-child(4),
+        .ios-table td:nth-child(4) {
+            width: auto; /* Role - auto based on badge */
+        }
+
+        .ios-table th:nth-child(5),
+        .ios-table td:nth-child(5) {
+            width: auto; /* e-trans - flexible */
+        }
+
+        .ios-table th:nth-child(6),
+        .ios-table td:nth-child(6) {
+            width: auto; /* Portal - flexible */
+        }
+
+        .ios-table th:nth-child(7),
+        .ios-table td:nth-child(7) {
+            width: auto; /* Kasir - flexible */
+        }
+
+        .ios-table th:nth-child(8),
+        .ios-table td:nth-child(8) {
+            width: 120px; /* Aksi - fixed for buttons */
         }
 
         /* Mobile Adjustments - Hanya Sesuaikan Ukuran */
         @media (max-width: 768px) {
+            .table-scroll-wrapper {
+                margin: 0 -16px;
+                padding: 0 16px;
+            }
+
             .container {
                 padding: 16px 12px;
+            }
+
+            /* Mobile table adjustments */
+            .ios-table {
+                min-width: 950px; /* Increased for more columns */
+            }
+
+            .ios-table th:nth-child(1),
+            .ios-table td:nth-child(1) {
+                width: 60px; /* Smaller No column */
+                text-align: center;
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+
+            .ios-table th:nth-child(2),
+            .ios-table td:nth-child(2) {
+                min-width: 120px; /* Nama */
+            }
+
+            .ios-table th:nth-child(3),
+            .ios-table td:nth-child(3) {
+                min-width: 100px; /* NIK */
+            }
+
+            .ios-table th:nth-child(4),
+            .ios-table td:nth-child(4) {
+                min-width: 80px; /* Role badge */
+            }
+
+            .ios-table th:nth-child(5),
+            .ios-table td:nth-child(5) {
+                min-width: 100px; /* e-trans */
+            }
+
+            .ios-table th:nth-child(6),
+            .ios-table td:nth-child(6) {
+                min-width: 80px; /* Portal */
+            }
+
+            .ios-table th:nth-child(7),
+            .ios-table td:nth-child(7) {
+                min-width: 80px; /* Kasir */
+            }
+
+            .ios-table th:nth-child(8),
+            .ios-table td:nth-child(8) {
+                width: 100px; /* Aksi buttons */
+            }
+
+            .ios-cell {
+                padding: 12px 10px; /* Smaller padding on mobile */
+                font-size: 14px; /* Smaller font */
+            }
+
+            .ios-table thead th {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+
+            /* Smaller badge on mobile */
+            .ios-table td:nth-child(3) span {
+                padding: 4px 8px !important;
+                font-size: 12px !important;
+            }
+
+            /* Smaller action buttons on mobile */
+            .icon-btn {
+                width: 32px;
+                height: 32px;
+            }
+
+            .icon-btn svg {
+                width: 14px !important;
+                height: 14px !important;
             }
 
             .header {
@@ -2487,6 +2663,21 @@
             }
 
             .header-title {
+                font-size: 18px;
+            }
+
+            .card {
+                padding: 20px 16px;
+            }
+
+            .content-header {
+                margin-bottom: 16px;
+            }
+
+            .content-title {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2563,27 +2754,36 @@
             <div class="modal-body">
                 <form id="userForm" onsubmit="handleSubmit(event)">
                     <div class="form-group">
-                        <label class="form-label">Nama User</label>
-                        <input type="text" class="form-input" id="itemUser" placeholder="Masukkan nama user" required>
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-input" id="itemUser" placeholder="Masukkan nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">NIK</label>
+                        <input type="text" class="form-input" id="nik" placeholder="Masukkan NIK" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Role</label>
                         <select class="form-input" id="role" required>
                             <option value="">Pilih Role</option>
-                            <option value="Admin">Admin</option>
+                            <option value="Crew">Crew</option>
                             <option value="Kasir">Kasir</option>
-                            <option value="Gudang">Gudang</option>
-                            <option value="Sales">Sales</option>
+                            <option value="HC">HC</option>
+                            <option value="ACOS">ACOS</option>
+                            <option value="COS">COS</option>
+                            <option value="MD">MD</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Level</label>
-                        <select class="form-input" id="level" required>
-                            <option value="">Pilih Level</option>
-                            <option value="Super Admin">Super Admin</option>
-                            <option value="Admin">Admin</option>
-                            <option value="User">User</option>
-                        </select>
+                        <label class="form-label">e-trans</label>
+                        <input type="text" class="form-input" id="level" placeholder="Masukkan e-trans" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Portal</label>
+                        <input type="text" class="form-input" id="portal" placeholder="Masukkan Portal" pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kasir</label>
+                        <input type="text" class="form-input" id="kasir" placeholder="Masukkan Kasir">
                     </div>
                     <div class="modal-actions">
                         <button type="button" class="btn btn-cancel" onclick="closeFormModal()">Batal</button>
@@ -2632,84 +2832,21 @@
                     </button>
                 </div>
 
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse;">
+                <div class="table-scroll-wrapper">
+                    <table class="ios-table" style="width: 100%; border-collapse: separate; border-spacing: 0 10px;">
                         <thead>
-                            <tr style="background: #FAFAFA; border-bottom: 1px solid #F0F0F0;">
-                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #525252;">No</th>
-                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #525252;">Nama User</th>
-                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #525252;">Role</th>
-                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #525252;">Level</th>
-                                <th style="padding: 14px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #525252;">Aksi</th>
+                            <tr style="background: transparent;">
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">No</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Nama</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">NIK</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Role</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">e-trans</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Portal</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Kasir</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody">
-                            <tr style="border-bottom: 1px solid #F5F5F5;">
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">1</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">Ahmad Muslih</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <span style="background: #D1FAE5; color: #065F46; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Kasir</span>
-                                </td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">User</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <div style="display: flex; gap: 8px;">
-                                        <button onclick="editUser(this)" class="icon-btn" title="Edit">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                            </svg>
-                                        </button>
-                                        <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #F5F5F5;">
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">2</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">Siti Rahmawati</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <span style="background: #DBEAFE; color: #1E40AF; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Admin</span>
-                                </td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">Admin</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <div style="display: flex; gap: 8px;">
-                                        <button onclick="editUser(this)" class="icon-btn" title="Edit">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                            </svg>
-                                        </button>
-                                        <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #F5F5F5;">
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">3</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">Dedi Prasetyo</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <span style="background: #FED7AA; color: #C2410C; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">Gudang</span>
-                                </td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">User</td>
-                                <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                                    <div style="display: flex; gap: 8px;">
-                                        <button onclick="editUser(this)" class="icon-btn" title="Edit">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                            </svg>
-                                        </button>
-                                        <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
-                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tbody id="tableBody" class="ios-tbody">
                         </tbody>
                     </table>
                 </div>
@@ -2750,14 +2887,6 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <svg class="toast-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <span class="toast-message" id="toastMessage">User berhasil ditambahkan!</span>
-    </div>
-
     <script>
         let editingRow = null;
         let currentPage = 1;
@@ -2765,53 +2894,64 @@
         let totalItems = 0;
         let totalPages = 1;
 
+        // Helper function to get badge color
+        function getBadgeColor(role) {
+            const badgeColors = {
+                'Crew': 'background: #D1FAE5; color: #065F46;',
+                'Kasir': 'background: #DBEAFE; color: #1E40AF;',
+                'HC': 'background: #FEF3C7; color: #92400E;',
+                'ACOS': 'background: #E0E7FF; color: #3730A3;',
+                'COS': 'background: #FCE7F3; color: #9F1239;',
+                'MD': 'background: #FED7AA; color: #C2410C;'
+            };
+            // Return color if exists, otherwise return default gray
+            return badgeColors[role] || 'background: #E5E7EB; color: #374151;';
+        }
+
         function handleSubmit(e) {
             e.preventDefault();
             
             const nama = document.getElementById('itemUser').value;
+            const nik = document.getElementById('nik').value;
             const role = document.getElementById('role').value;
             const level = document.getElementById('level').value;
+            const portal = document.getElementById('portal').value;
+            const kasir = document.getElementById('kasir').value;
 
             if (editingRow) {
                 // Update existing row
                 const cells = editingRow.getElementsByTagName('td');
                 cells[1].textContent = nama;
+                cells[2].textContent = nik;
                 
-                const badgeColors = {
-                    'Admin': 'background: #DBEAFE; color: #1E40AF;',
-                    'Kasir': 'background: #D1FAE5; color: #065F46;',
-                    'Gudang': 'background: #FED7AA; color: #C2410C;',
-                    'Sales': 'background: #FCE7F3; color: #9F1239;'
-                };
-                
-                cells[2].innerHTML = `<span style="${badgeColors[role]} padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">${role}</span>`;
-                cells[3].textContent = level;
+                const badgeStyle = getBadgeColor(role);
+                cells[3].innerHTML = `<span style="${badgeStyle} padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">${role}</span>`;
+                cells[4].textContent = level;
+                cells[5].textContent = portal;
+                cells[6].textContent = kasir;
                 
                 editingRow = null;
-                showToast('User berhasil diperbarui!');
             } else {
                 // Add new row
                 const tableBody = document.getElementById('tableBody');
-                const newRow = tableBody.insertRow(0);
+                const newRow = tableBody.insertRow(); // Insert at end instead of position 0
                 
                 totalItems++;
                 
-                const badgeColors = {
-                    'Admin': 'background: #DBEAFE; color: #1E40AF;',
-                    'Kasir': 'background: #D1FAE5; color: #065F46;',
-                    'Gudang': 'background: #FED7AA; color: #C2410C;',
-                    'Sales': 'background: #FCE7F3; color: #9F1239;'
-                };
+                const badgeStyle = getBadgeColor(role);
                 
-                newRow.style.borderBottom = '1px solid #F5F5F5';
+                newRow.className = 'ios-row';
                 newRow.innerHTML = `
-                    <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">${totalItems}</td>
-                    <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">${nama}</td>
-                    <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
-                        <span style="${badgeColors[role]} padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;">${role}</span>
+                    <td class="ios-cell">${totalItems}</td>
+                    <td class="ios-cell">${nama}</td>
+                    <td class="ios-cell">${nik}</td>
+                    <td class="ios-cell">
+                        <span style="${badgeStyle} padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">${role}</span>
                     </td>
-                    <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">${level}</td>
-                    <td style="padding: 16px; font-size: 14px; color: #1A1A1A;">
+                    <td class="ios-cell">${level}</td>
+                    <td class="ios-cell">${portal}</td>
+                    <td class="ios-cell">${kasir}</td>
+                    <td class="ios-cell">
                         <div style="display: flex; gap: 8px;">
                             <button onclick="editUser(this)" class="icon-btn" title="Edit">
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
@@ -2828,12 +2968,24 @@
                 `;
                 
                 totalPages = Math.ceil(totalItems / rowsPerPage);
+                reindexTableNumbers(); // Reindex semua nomor
                 updatePaginationInfo();
-                showToast('User berhasil ditambahkan!');
             }
             
             resetForm();
             closeFormModal();
+        }
+
+        function reindexTableNumbers() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const firstCell = rows[i].getElementsByTagName('td')[0];
+                if (firstCell) {
+                    firstCell.textContent = i + 1;
+                }
+            }
         }
 
         function resetForm() {
@@ -2848,8 +3000,13 @@
             editingRow = row;
             
             document.getElementById('itemUser').value = cells[1].textContent;
-            document.getElementById('role').value = cells[2].textContent.trim();
-            document.getElementById('level').value = cells[3].textContent;
+            document.getElementById('nik').value = cells[2].textContent;
+            // Extract role from badge span
+            const roleSpan = cells[3].querySelector('span');
+            document.getElementById('role').value = roleSpan ? roleSpan.textContent.trim() : '';
+            document.getElementById('level').value = cells[4].textContent;
+            document.getElementById('portal').value = cells[5].textContent;
+            document.getElementById('kasir').value = cells[6].textContent;
             
             openFormModal();
         }
@@ -2868,6 +3025,7 @@
                     document.getElementById('currentPageInput').value = currentPage;
                 }
                 
+                reindexTableNumbers(); // Reindex semua nomor
                 showCurrentPageRows();
                 updatePaginationInfo();
                 updateNavigationButtons();
@@ -2973,37 +3131,20 @@
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
             document.getElementById('sidebarOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
         }
 
         function closeSidebar() {
             document.getElementById('sidebar').classList.remove('open');
             document.getElementById('sidebarOverlay').classList.remove('show');
-            document.body.style.overflow = 'auto';
         }
 
         function openFormModal() {
             document.getElementById('formModal').classList.add('show');
-            document.body.style.overflow = 'hidden';
         }
 
         function closeFormModal() {
             document.getElementById('formModal').classList.remove('show');
-            document.body.style.overflow = 'auto';
             resetForm();
-        }
-
-        // Toast Notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         }
 
         // Initialize
