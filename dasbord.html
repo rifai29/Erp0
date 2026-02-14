@@ -285,7 +285,7 @@
 
         .photo-preview-container {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             max-width: 1400px;
             width: 90%;
             max-height: none;
@@ -299,7 +299,7 @@
         @media (max-width: 768px) {
             .photo-preview-container {
                 width: 95%;
-                border-radius: 16px;
+                border-radius: 20px;
             }
         }
 
@@ -566,12 +566,13 @@
 
         .modal-content {
             background: white;
-            border-radius: 16px;
+            border-radius: 24px !important;
             width: 90%;
             max-width: 1400px;
-            padding: 20px;
+            padding: 28px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: modalSlideIn 0.3s ease;
+            overflow: hidden !important;
         }
         
         /* Mobile spacing untuk popup - kasih space kecil */
@@ -580,6 +581,9 @@
                 width: calc(100% - 32px);
                 max-height: calc(100vh - 40px);
                 margin: 20px 16px;
+                border-radius: 24px !important;
+                overflow: hidden !important;
+                padding: 24px;
             }
         }
 
@@ -656,30 +660,33 @@
 
         .form-input {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 14px;
             border: 1px solid #E5E5E5;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 15px;
             font-family: inherit;
             transition: all 0.2s;
+            background: #FAFAFA;
         }
 
         .form-input:focus {
             outline: none;
             border-color: #3B82F6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: white;
         }
 
         .modal-actions {
             display: flex;
             gap: 12px;
-            margin-top: 8px;
+            margin-top: 20px;
+            margin-bottom: 0;
         }
 
         .btn {
             flex: 1;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
@@ -1234,10 +1241,11 @@
                 margin-top: 0 !important;
                 width: calc(100% - 24px);
                 max-width: 100%;
-                border-radius: 20px;
+                border-radius: 24px !important;
                 max-height: calc(95vh - 40px);
-                overflow-y: auto;
+                overflow: hidden !important;
                 animation: modalSlideUp 0.3s ease;
+                padding: 24px;
             }
 
             @keyframes modalSlideUp {
@@ -1330,6 +1338,7 @@
             .modal-actions {
                 flex-shrink: 0;
                 gap: 10px;
+                margin-bottom: 0;
             }
 
             .modal-actions .btn {
@@ -2234,11 +2243,13 @@
             }
 
             .modal-header {
-                padding: 20px;
                 position: sticky;
                 top: 0;
                 background: white;
                 z-index: 10;
+                margin: -24px -24px 20px -24px;
+                padding: 20px 24px;
+                border-radius: 24px 24px 0 0;
             }
 
             .modal-header::before {
@@ -2256,10 +2267,6 @@
             .modal-title {
                 font-size: 18px;
                 margin-top: 8px;
-            }
-
-            .modal-body {
-                padding: 20px;
             }
 
             /* Form Mobile */
