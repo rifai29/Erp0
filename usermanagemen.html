@@ -2703,7 +2703,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                <span>User</span>
+                <span>User Management</span>
             </a>
             <a href="emailmanagement.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2972,6 +2972,7 @@
                 updatePaginationInfo();
             }
             
+            saveToLocalStorage(); // Save to localStorage after any change
             resetForm();
             closeFormModal();
         }
@@ -3029,6 +3030,7 @@
                 showCurrentPageRows();
                 updatePaginationInfo();
                 updateNavigationButtons();
+                saveToLocalStorage(); // Save to localStorage after delete
             }
         }
 
@@ -3147,8 +3149,77 @@
             resetForm();
         }
 
+        // Save data to localStorage
+        function saveToLocalStorage() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const data = [];
+            
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const roleSpan = cells[3].querySelector('span');
+                
+                data.push({
+                    nama: cells[1].textContent,
+                    nik: cells[2].textContent,
+                    role: roleSpan ? roleSpan.textContent.trim() : '',
+                    level: cells[4].textContent,
+                    portal: cells[5].textContent,
+                    kasir: cells[6].textContent
+                });
+            }
+            
+            localStorage.setItem('userManagementData', JSON.stringify(data));
+        }
+
+        // Load data from localStorage
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('userManagementData');
+            if (!savedData) return;
+            
+            const data = JSON.parse(savedData);
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // Clear existing data
+            
+            data.forEach((user, index) => {
+                const newRow = tableBody.insertRow();
+                const badgeStyle = getBadgeColor(user.role);
+                
+                newRow.className = 'ios-row';
+                newRow.innerHTML = `
+                    <td class="ios-cell">${index + 1}</td>
+                    <td class="ios-cell">${user.nama}</td>
+                    <td class="ios-cell">${user.nik}</td>
+                    <td class="ios-cell">
+                        <span style="${badgeStyle} padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">${user.role}</span>
+                    </td>
+                    <td class="ios-cell">${user.level}</td>
+                    <td class="ios-cell">${user.portal}</td>
+                    <td class="ios-cell">${user.kasir}</td>
+                    <td class="ios-cell">
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="editUser(this)" class="icon-btn" title="Edit">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+            });
+            
+            totalItems = data.length;
+        }
+
         // Initialize
         window.onload = function() {
+            loadFromLocalStorage(); // Load saved data first
+            
             const tableBody = document.getElementById('tableBody');
             const rows = tableBody.getElementsByTagName('tr');
             totalItems = rows.length;
