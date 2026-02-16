@@ -2,119 +2,135 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Akun - Email Manajemen</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Email Management - Clean Design</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #FAFAFA;
             min-height: 100vh;
-            padding: 20px;
+            color: #1A1A1A;
         }
 
         .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             max-width: 1400px;
             margin: 0 auto;
-            overflow: hidden;
+            padding: 32px 24px;
         }
 
-        /* Header */
+        /* Header - Minimal & Clean */
         .header {
-            background: transparent;
-            padding: 20px 24px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 28px;
+            margin-bottom: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #F0F0F0;
         }
 
-        .header-title {
-            font-weight: 700;
-            font-size: 20px;
-            color: #111827;
-            letter-spacing: -0.3px;
-        }
-
-        .store-name {
-            color: #2563eb;
-        }
-
-        .header-controls {
+        .header-left {
             display: flex;
-            gap: 8px;
             align-items: center;
+            gap: 20px;
         }
 
-        .logout-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            cursor: pointer;
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .hamburger-btn:hover {
+            background: #EFEFEF;
+        }
+
+        .hamburger-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #1A1A1A;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1A1A1A;
+            letter-spacing: -0.3px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .company-badge {
+            background: #F0F9FF;
+            color: #0369A1;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            border: 1px solid #E0F2FE;
+            transition: all 0.2s;
+        }
+
+        .company-badge:hover {
+            background: #E0F2FE;
+            border-color: #BAE6FD;
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #FEF2F2;
+            border: 1px solid #FEE2E2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .logout-btn:hover {
-            background: #fee2e2;
-            border-color: #fecaca;
+            background: #FEE2E2;
         }
 
         .logout-btn svg {
             width: 18px;
             height: 18px;
-            stroke: #ef4444;
+            stroke: #DC2626;
         }
 
-        .control-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .control-btn:hover {
-            background: #f9fafb;
-            border-color: #d1d5db;
-        }
-
-        .control-btn svg {
-            width: 16px;
-            height: 16px;
-            stroke: #6b7280;
-        }
-
-        /* SIDEBAR */
+        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
-            left: -300px;
-            width: 300px;
+            left: -320px;
+            width: 320px;
             height: 100vh;
             background: white;
-            box-shadow: 4px 0 12px rgba(0,0,0,0.15);
-            transition: left 0.3s ease;
-            z-index: 100;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
             overflow-y: auto;
         }
 
@@ -122,68 +138,49 @@
             left: 0;
         }
 
-        .sidebar-header {
-            padding: 24px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
-        }
-
-        .sidebar-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-header p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
         .sidebar-menu {
-            padding: 16px 0;
+            padding: 24px 12px;
         }
 
         .sidebar-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 24px;
-            color: #374151;
-            text-decoration: none;
-            transition: all 0.2s;
+            gap: 14px;
+            padding: 14px 16px;
             cursor: pointer;
-            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
         }
 
         .sidebar-item:hover {
-            background: #f3f4f6;
-            color: #2563eb;
-            border-left-color: #2563eb;
+            background: #F8F8F8;
+            color: #1A1A1A;
         }
 
         .sidebar-item.active {
-            background: #eff6ff;
-            color: #2563eb;
-            border-left-color: #2563eb;
-            font-weight: 600;
+            background: #F0F9FF;
+            color: #0369A1;
         }
 
         .sidebar-item svg {
             width: 20px;
             height: 20px;
+            stroke: currentColor;
         }
 
         .sidebar-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
         }
 
         .sidebar-overlay.show {
@@ -191,358 +188,404 @@
             visibility: visible;
         }
 
-        .close-sidebar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
+        /* Tabs - Minimal */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #F8F8F8;
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 20px;
+            background: transparent;
             border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #737373;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #1A1A1A;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Card - Minimal Shadow */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #F0F0F0;
+            margin-bottom: 24px;
+        }
+
+        /* Toolbar Section */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-left {
+            flex: 9;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .toolbar-right {
+            flex: 1;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* Add Button Icon - Like User Management */
+        .btn-icon-add {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 12px;
+            background: #F8F8F8;
+            border: 1px solid #E5E5E5;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            padding: 0;
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
 
-        .close-sidebar:hover {
-            background: rgba(255,255,255,0.3);
+        .btn-icon-add:hover {
+            background: #EFEFEF;
+            border-color: #D4D4D4;
         }
 
-        .menu-icon {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            color: #374151;
-            transition: color 0.2s;
+        .btn-icon-add svg {
+            stroke: #525252;
         }
 
-        .menu-icon:hover {
-            color: #2563eb;
+        /* Dropdown Menu */
+        .add-menu-wrapper {
+            position: relative;
         }
 
-        /* Sub Header */
-        .sub-header {
-            background: #f9fafb;
-            padding: 12px 24px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #374151;
-            border-bottom: 1px solid #e5e7eb;
+        .add-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid #E5E5E5;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s;
+            z-index: 100;
+            overflow: hidden;
         }
 
-        /* Toolbar */
-        .toolbar {
-            padding: 16px 24px;
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
+        .add-dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            width: 100%;
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 12px;
+            padding: 12px 16px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            color: #1A1A1A;
+            transition: all 0.2s;
+            text-align: left;
+            font-family: inherit;
         }
-        
-        .action-buttons-wrapper,
-        .utility-buttons-wrapper {
+
+        .dropdown-item:hover {
+            background: #F8F8F8;
+        }
+
+        .dropdown-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: #525252;
+            flex-shrink: 0;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:not(:last-child) {
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
+            align-items: center;
             gap: 8px;
         }
 
         .btn-primary {
-            background: #3b82f6;
+            background: #0369A1;
             color: white;
-            border: none;
-            padding: 8px 16px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            border: 1px solid #0369A1;
         }
 
         .btn-primary:hover {
-            background: #2563eb;
+            background: #075985;
+            transform: translateY(-1px);
         }
 
-        .btn-primary svg {
-            width: 14px;
-            height: 14px;
+        .btn-success {
+            background: #059669;
+            color: white;
+            border: 1px solid #059669;
         }
 
-        .input-group {
+        .btn-success:hover {
+            background: #047857;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #DC2626;
+            color: white;
+            border: 1px solid #DC2626;
+        }
+
+        .btn-danger:hover {
+            background: #B91C1C;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: #525252;
+            border: 1px solid #E5E5E5;
+        }
+
+        .btn-outline:hover {
+            background: #F8F8F8;
+            border-color: #D4D4D4;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+        }
+
+        .search-box {
             display: flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 12px;
-            font-weight: 500;
-            color: #374151;
-            white-space: nowrap;
-        }
-
-        .input-group select,
-        .input-group input {
-            padding: 7px 10px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
-            background-color: white;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            color: #111827;
-        }
-
-        .input-group select:focus,
-        .input-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .input-email {
+            gap: 8px;
+            background: #F8F8F8;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            padding: 10px 14px;
+            flex: 1;
             width: 100%;
-        }
-        
-        .email-input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 250px;
-        }
-        
-        .clear-email-btn {
-            position: absolute;
-            right: 8px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #9ca3af;
-            border: none;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            padding: 0;
-        }
-        
-        .clear-email-btn:hover {
-            background: #6b7280;
-            transform: scale(1.1);
-        }
-        
-        .clear-email-btn svg {
-            width: 12px;
-            height: 12px;
-            stroke: white;
-            stroke-width: 2.5;
-        }
-        
-        .email-input-wrapper input {
-            padding-right: 35px;
-        }
-        
-        .email-input-wrapper.has-value .clear-email-btn {
-            display: flex;
+            transition: all 0.2s;
         }
 
-        .input-password {
-            width: 100%;
+        .search-box:focus-within {
+            background: white;
+            border-color: #0369A1;
         }
-        
-        .password-input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 250px;
-        }
-        
-        .toggle-password-btn {
-            position: absolute;
-            right: 8px;
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            padding: 0;
-        }
-        
-        .toggle-password-btn:hover {
-            background: #f3f4f6;
-        }
-        
-        .toggle-password-btn svg {
+
+        .search-box svg {
             width: 18px;
             height: 18px;
-            stroke: #6b7280;
-            stroke-width: 2;
-        }
-        
-        .password-input-wrapper input {
-            padding-right: 40px;
+            stroke: #A3A3A3;
         }
 
-        .btn-secondary {
-            background: #ffffff;
-            color: #374151;
-            border: 1px solid #d1d5db;
-            padding: 8px 16px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: #1A1A1A;
         }
 
-        .btn-secondary:hover {
-            background: #f9fafb;
-            border-color: #9ca3af;
-        }
-
-        .btn-secondary svg {
-            width: 14px;
-            height: 14px;
-            stroke: #6b7280;
+        .search-box input::placeholder {
+            color: #A3A3A3;
         }
 
         /* Table */
-        .table-container {
-            padding: 24px;
-            overflow-x: auto;
-            background: #ffffff;
-        }
-
-        table {
+        /* iOS-Style Table - Like User Management */
+        .ios-table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0;
-            font-size: 14px;
+            border-spacing: 0 12px;
+            min-width: 900px;
+            table-layout: auto;
         }
 
-        thead tr:first-child {
-            background: #f9fafb;
+        /* Table Scroll Wrapper */
+        .table-scroll-wrapper {
+            overflow-x: auto;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -32px;
+            padding: 0 32px;
         }
 
-        thead tr:first-child th {
-            color: #374151;
-            font-weight: 600;
-            padding: 12px;
-            text-align: left;
-            border-top: 1px solid #e5e7eb;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 13px;
+        .table-scroll-wrapper::-webkit-scrollbar {
+            height: 8px;
         }
 
-        thead tr:first-child th:first-child {
-            border-left: 1px solid #e5e7eb;
-            border-top-left-radius: 8px;
-        }
-
-        thead tr:first-child th:last-child {
-            border-right: 1px solid #e5e7eb;
-            border-top-right-radius: 8px;
-        }
-
-        .filter-row {
-            background: #ffffff;
-        }
-
-        .filter-row th {
-            padding: 8px 12px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .filter-row th:first-child {
-            border-left: 1px solid #e5e7eb;
-        }
-
-        .filter-row th:last-child {
-            border-right: 1px solid #e5e7eb;
-        }
-
-        .filter-row input {
-            width: 100%;
-            padding: 6px 10px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
+        .table-scroll-wrapper::-webkit-scrollbar-track {
+            background: #F5F5F5;
             border-radius: 4px;
-            transition: all 0.2s ease;
         }
 
-        .filter-row input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .table-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 4px;
         }
 
-        tbody tr {
-            transition: background-color 0.15s ease;
+        .table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #9CA3AF;
         }
 
-        tbody tr:hover {
-            background-color: #f9fafb;
+        .ios-table thead tr {
+            background: transparent;
         }
 
-        tbody tr.inactive {
-            background-color: #fef2f2;
+        .ios-table thead th {
+            padding: 8px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8E8E93;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
         }
 
-        tbody tr.inactive:hover {
-            background-color: #fee2e2;
+        .ios-row {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
         }
 
-        tbody td {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
-            color: #374151;
+        .ios-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
         }
 
-        tbody tr:first-child td:first-child {
-            border-left: 1px solid #e5e7eb;
+        .ios-row td:first-child {
+            border-top-left-radius: 14px;
+            border-bottom-left-radius: 14px;
         }
 
-        tbody tr:first-child td:last-child {
-            border-right: 1px solid #e5e7eb;
+        .ios-row td:last-child {
+            border-top-right-radius: 14px;
+            border-bottom-right-radius: 14px;
         }
 
-        tbody tr td:first-child {
-            border-left: 1px solid #e5e7eb;
+        .ios-cell {
+            padding: 18px 16px;
+            font-size: 15px;
+            color: #1A1A1A;
+            font-weight: 500;
+            border: none;
+            background: white;
         }
 
-        tbody tr td:last-child {
-            border-right: 1px solid #e5e7eb;
+        /* Column specific widths */
+        .ios-table th:nth-child(1),
+        .ios-table td:nth-child(1) {
+            width: 70px;
+            text-align: center;
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
-        tbody tr:last-child td {
-            border-bottom: 1px solid #e5e7eb;
+        .ios-table th:nth-child(2),
+        .ios-table td:nth-child(2) {
+            min-width: 150px;
         }
 
-        tbody tr:last-child td:first-child {
-            border-bottom-left-radius: 8px;
+        .ios-table th:nth-child(3),
+        .ios-table td:nth-child(3) {
+            min-width: 180px;
         }
 
-        tbody tr:last-child td:last-child {
-            border-bottom-right-radius: 8px;
+        .ios-table th:nth-child(4),
+        .ios-table td:nth-child(4) {
+            min-width: 140px;
         }
 
-        .action-icons {
+        .ios-table th:nth-child(5),
+        .ios-table td:nth-child(5) {
+            width: auto;
+        }
+
+        .ios-table th:nth-child(6),
+        .ios-table td:nth-child(6) {
+            width: 120px;
+        }
+
+        .email-cell {
+            color: #0369A1;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            padding: 4px 10px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-inactive {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .action-btns {
             display: flex;
             gap: 6px;
         }
@@ -550,154 +593,185 @@
         .icon-btn {
             width: 32px;
             height: 32px;
-            border: 1px solid #d1d5db;
-            background: #ffffff;
-            cursor: pointer;
+            border-radius: 8px;
+            border: 1px solid;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0;
+            background: transparent;
         }
 
-        .icon-btn:hover {
-            background: #f9fafb;
+        .icon-btn-edit {
+            border-color: #BFDBFE;
+            color: #1E40AF;
+        }
+
+        .icon-btn-edit:hover {
+            background: #DBEAFE;
+        }
+
+        .icon-btn-delete {
+            border-color: #FECACA;
+            color: #991B1B;
+        }
+
+        .icon-btn-delete:hover {
+            background: #FEE2E2;
         }
 
         .icon-btn svg {
             width: 16px;
             height: 16px;
-            stroke: #6b7280;
+            stroke: currentColor;
         }
 
-        .icon-btn.delete:hover {
-            background: #fef2f2;
-            border-color: #f87171;
-        }
-
-        .icon-btn.delete:hover svg {
-            stroke: #ef4444;
-        }
-
-        .status-active {
-            background: #dcfce7;
-            color: #166534;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .password-cell {
+        /* Pagination Footer - Like Dashboard */
+        .pagination-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
             display: flex;
-            align-items: center;
-            gap: 8px;
             justify-content: space-between;
-        }
-        
-        .password-text {
-            flex: 1;
-            font-family: monospace;
-        }
-        
-        .password-toggle-table {
-            width: 24px;
-            height: 24px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            transition: all 0.2s;
-            padding: 0;
-            flex-shrink: 0;
-        }
-        
-        .password-toggle-table:hover {
-            background: #f3f4f6;
-        }
-        
-        .password-toggle-table svg {
-            width: 16px;
-            height: 16px;
-            stroke: #6b7280;
-            stroke-width: 2;
-        }
-
-        .status-inactive {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 4px 12px;
-            border-radius: 12px;
             font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 16px 24px;
-            background: #f9fafb;
-            border-top: 1px solid #e5e7eb;
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-            color: #6b7280;
+            color: #737373;
         }
 
         .pagination-center {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
-            min-width: fit-content;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .pagination-left {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
+            justify-content: flex-start;
+            font-size: 13px;
+            color: #525252;
+            font-weight: 500;
             white-space: nowrap;
-            min-width: fit-content;
+            flex-shrink: 0;
         }
 
         .pagination-left select {
             padding: 6px 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
             font-size: 13px;
             background: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: #1A1A1A;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .pagination-left select:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .pagination-left select:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .pagination-right {
+            font-size: 13px;
+            color: #525252;
+            text-align: right;
+            font-weight: 500;
             white-space: nowrap;
-            min-width: fit-content;
-            margin-left: auto;
+            flex-shrink: 0;
         }
 
-        .nav-btn, .refresh-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid #d1d5db;
-            background: #ffffff;
+        .pagination-btn, .nav-btn {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            min-height: 34px;
+            border: 2px solid #E5E5E5;
+            background: linear-gradient(to bottom, #FFFFFF, #FAFAFA);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            font-size: 14px;
-            color: #374151;
+            border-radius: 10px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #525252;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 
+                        0 1px 2px rgba(0, 0, 0, 0.04);
+            position: relative;
+            flex-shrink: 0;
         }
 
-        .nav-btn:hover, .refresh-btn:hover {
-            background: #f9fafb;
-            border-color: #9ca3af;
+        .pagination-btn::before, .nav-btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 10px;
+            padding: 2px;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .pagination-btn:hover:not(:disabled), .nav-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            border-color: #2563EB;
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3),
+                        0 4px 8px rgba(59, 130, 246, 0.15);
+        }
+
+        .pagination-btn:hover:not(:disabled)::before, .nav-btn:hover:not(:disabled)::before {
+            opacity: 1;
+        }
+
+        .pagination-btn:active:not(:disabled), .nav-btn:active:not(:disabled) {
+            transform: translateY(0) scale(1);
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+        }
+
+        .pagination-btn:disabled, .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #F5F5F5;
+            border-color: #E5E5E5;
+            color: #A3A3A3;
+            box-shadow: none;
+        }
+
+        .pagination-btn:disabled:hover, .nav-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .pagination-btn:disabled::before, .nav-btn:disabled::before {
+            opacity: 0;
+        }
+
+        .pagination-btn svg, .nav-btn svg {
+            stroke: currentColor;
+            transition: transform 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pagination-btn:hover:not(:disabled) svg, .nav-btn:hover:not(:disabled) svg {
+            transform: scale(1.15);
         }
 
         .page-info {
@@ -705,276 +779,373 @@
             align-items: center;
             gap: 6px;
             font-size: 13px;
-            color: #374151;
+            color: #525252;
+            font-weight: 500;
+            margin: 0 4px;
         }
 
         .page-input {
-            width: 50px;
+            width: 45px;
             padding: 6px 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
             text-align: center;
             font-size: 13px;
+            font-weight: 500;
+            color: #1A1A1A;
+            background: white;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
         }
 
         .page-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        /* Mobile Responsiveness */
+        .page-input::-webkit-inner-spin-button,
+        .page-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 60px 20px 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .close-modal {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: #F8F8F8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #EFEFEF;
+        }
+
+        .close-modal svg {
+            width: 18px;
+            height: 18px;
+            stroke: #525252;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #404040;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1A1A1A;
+            background: #FAFAFA;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0369A1;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-footer {
+            padding: 20px 28px;
+            border-top: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            stroke: #D4D4D4;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            color: #404040;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #737373;
+            font-size: 14px;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             body {
-                padding: 12px;
+                padding: 0;
+            }
+
+            .container {
+                padding: 20px 16px;
             }
 
             .header {
-                padding: 16px;
+                padding: 16px 20px;
+                margin-bottom: 20px;
             }
 
             .header-title {
-                font-size: 18px;
+                font-size: 17px !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .header-left {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .header-actions {
+                flex-shrink: 0;
             }
 
-            .sub-header {
-                padding: 10px 16px;
-                font-size: 13px;
+            .card {
+                padding: 24px;
             }
 
             .toolbar {
-                padding: 16px;
-                flex-direction: column;
-                align-items: stretch;
+                margin-bottom: 16px;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
             }
 
-            .input-group {
-                flex-direction: column !important;
-                align-items: stretch !important;
-                width: 100%;
-                gap: 8px !important;
-            }
-            
-            .input-group > div {
-                width: 100% !important;
+            .toolbar-left {
+                flex: 1;
+                width: auto;
             }
 
-            .input-group label {
-                margin-bottom: 4px;
-            }
-            
-            .email-input-wrapper, .password-input-wrapper {
-                width: 100% !important;
+            .toolbar-right {
+                flex: 0 0 auto;
             }
 
-            .input-email, .input-password {
-                width: 100% !important;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            /* Container untuk tombol Set dan Posting agar sejajar di mobile */
-            .toolbar .btn-secondary:nth-of-type(1),
-            .toolbar .btn-primary {
-                width: calc(50% - 4px);
-            }
-            
-            /* Wrapper untuk Set dan Posting */
-            .action-buttons-wrapper {
-                display: flex;
-                gap: 8px;
+            .search-box {
+                flex: 1;
                 width: 100%;
             }
-            
-            .utility-buttons-wrapper {
-                display: flex;
-                gap: 8px;
-                width: 100%;
-            }
-            
-            .utility-buttons-wrapper .btn-secondary {
-                width: calc(50% - 4px);
+
+            .tabs {
+                margin-bottom: 16px;
             }
 
-            .table-container {
-                padding: 16px;
-                overflow-x: auto;
+            .btn-icon-add {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
             }
 
-            table {
-                font-size: 12px;
-                min-width: 800px;
+            .btn-icon-add svg {
+                width: 20px !important;
+                height: 20px !important;
             }
 
-            thead tr:first-child th,
-            tbody td {
-                padding: 8px;
-                white-space: nowrap;
+            /* TABEL - DIPERKECIL */
+            .table-scroll-wrapper {
+                margin: 0 -24px;
+                padding: 0 24px;
             }
 
-            .filter-row input {
-                padding: 8px 10px;
-                font-size: 13px;
-                min-width: 100px;
+            .ios-table {
+                border-spacing: 0 8px;
             }
 
-            .footer {
-                padding: 12px 16px;
-                gap: 8px;
-                font-size: 11px;
+            table th {
+                padding: 8px 6px !important;
+                font-size: 10px !important;
             }
 
-            .pagination-center {
-                gap: 4px;
+            table td {
+                padding: 10px 6px !important;
+                font-size: 11px !important;
             }
 
-            .pagination-left {
-                gap: 4px;
+            .ios-cell {
+                padding: 10px 6px !important;
+                font-size: 11px !important;
             }
 
-            .pagination-left label {
-                font-size: 11px;
-            }
-
-            .pagination-left select {
-                padding: 4px 6px;
-                font-size: 11px;
-            }
-
-            .pagination-right {
-                font-size: 11px;
-            }
-
-            .nav-btn, .refresh-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-
-            .nav-btn svg, .refresh-btn svg {
-                width: 12px !important;
-                height: 12px !important;
-            }
-
-            .page-input {
-                width: 40px;
-                padding: 4px 6px;
-                font-size: 11px;
-            }
-
-            .page-info {
-                font-size: 11px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-title {
-                font-size: 16px;
-            }
-
-            .table-container {
-                padding: 12px;
-            }
-
-            table {
-                font-size: 11px;
-                min-width: 800px;
-            }
-
-            thead tr:first-child th,
-            tbody td {
-                padding: 6px;
-                white-space: nowrap;
-            }
-
-            .filter-row input {
-                padding: 8px 10px;
-                font-size: 12px;
-                min-width: 90px;
-            }
-
-            .action-icons {
-                gap: 4px;
+            .status-badge {
+                padding: 2px 6px !important;
+                font-size: 9px !important;
+                border-radius: 6px !important;
             }
 
             .icon-btn {
-                width: 28px;
-                height: 28px;
+                width: 28px !important;
+                height: 28px !important;
             }
 
             .icon-btn svg {
-                width: 14px;
-                height: 14px;
+                width: 14px !important;
+                height: 14px !important;
             }
 
-            .footer {
-                padding: 10px 12px;
-                gap: 6px;
-                font-size: 10px;
+            .action-btns {
+                gap: 6px !important;
+            }
+
+            .pagination-footer {
+                gap: 8px;
+                font-size: 11px;
             }
 
             .pagination-center {
-                gap: 3px;
+                gap: 4px;
             }
 
             .pagination-left {
-                gap: 3px;
+                gap: 4px;
             }
 
-            .pagination-left label {
-                font-size: 10px;
+            .pagination-left span {
+                display: none;
             }
 
             .pagination-left select {
-                padding: 3px 5px;
-                font-size: 10px;
+                padding: 4px 6px;
+                font-size: 11px;
             }
 
             .pagination-right {
-                font-size: 10px;
+                font-size: 11px;
             }
 
-            .nav-btn, .refresh-btn {
-                width: 26px;
-                height: 26px;
-            }
-
-            .nav-btn svg, .refresh-btn svg {
-                width: 11px !important;
-                height: 11px !important;
+            .nav-btn {
+                width: 28px;
+                height: 28px;
             }
 
             .page-input {
                 width: 35px;
-                padding: 3px 4px;
-                font-size: 10px;
+                padding: 4px 6px;
+                font-size: 11px;
             }
 
-            .page-info {
-                font-size: 10px;
+            .company-badge {
+                display: none;
+            }
+
+            /* Modal positioning for mobile */
+            .modal {
+                align-items: flex-start !important;
+                justify-content: center;
+                padding: 40px 12px 12px;
+            }
+
+            .modal-content {
+                margin: 0;
+                margin-top: 0 !important;
+                width: calc(100% - 24px);
+                max-width: 100%;
+                border-radius: 20px;
+                max-height: calc(95vh - 40px);
+                overflow-y: auto;
+                animation: modalSlideUp 0.3s ease;
+            }
+
+            @keyframes modalSlideUp {
+                from {
+                    transform: translateY(100%);
+                }
+                to {
+                    transform: translateY(0);
+                }
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- SIDEBAR OVERLAY -->
+    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- SIDEBAR -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <button class="close-sidebar" onclick="closeSidebar()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <h2>Store A YANI</h2>
-            <p>PT MIDI UTAMA INDONESIA</p>
-        </div>
-
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-menu">
             <a href="dasbord.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -983,7 +1154,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Dashboard
+                <span>Dashboard</span>
             </a>
             <a href="usermanagemen.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -992,7 +1163,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                User Management
+                <span>User Management</span>
             </a>
             <a href="emailmanagement.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1001,7 +1172,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Email Management
+                <span>Email Management</span>
             </a>
             <a href="catatanhutang.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1010,7 +1181,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Catatan Hutang
+                <span>Catatan Hutang</span>
             </a>
             <a href="laporankaryawan.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1019,7 +1190,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Laporan Karyawan
+                <span>Laporan Karyawan</span>
             </a>
             <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1028,28 +1199,28 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                Laporan Bensin
+                <span>Laporan Bensin</span>
             </a>
         </div>
-    </nav>
+    </div>
 
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div style="display: flex; align-items: center; gap: 16px;">
-                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="openSidebar()">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-                <h1 class="header-title">
-                    <span class="store-name">STORE A YANI PURWODADI</span>
-                </h1>
+            <div class="header-left">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="header-title">Email Management</div>
             </div>
-            
-            <div class="header-controls">
-                <button class="logout-btn" onclick="handleLogout()" title="Logout">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <div class="header-actions">
+                <div class="company-badge">PT. A YANI</div>
+                <button class="logout-btn" onclick="handleLogout()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                         <line x1="12" y1="2" x2="12" y2="12"></line>
                     </svg>
@@ -1057,1057 +1228,381 @@
             </div>
         </div>
 
-        <!-- Sub Header -->
-        <div class="sub-header">Email Manajemen</div>
-
-        <!-- Toolbar -->
-        <div class="toolbar">
-            <div class="input-group" style="display: flex; align-items: center; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                    <label for="itemEmail">Item Email:</label>
-                    <div class="email-input-wrapper" id="emailWrapper">
-                        <input type="text" id="itemEmail" class="input-email" placeholder="Masukkan nama (otomatis @gmail.com)" onblur="autoCompleteEmail()">
-                        <button class="clear-email-btn" onclick="clearEmail()" title="Clear email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                        </button>
+        <!-- Main Card -->
+        <div class="card">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <div class="search-box">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Cari email..." onkeyup="searchEmails()">
                     </div>
                 </div>
-                
-                <div style="display: flex; align-items: center; gap: 6px;">
-                    <label for="password">Password:</label>
-                    <div class="password-input-wrapper" id="passwordWrapper">
-                        <input type="password" id="password" class="input-password" placeholder="Masukkan password">
-                        <button class="toggle-password-btn" onclick="togglePassword()" title="Show/Hide password">
-                            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </button>
-                    </div>
+                <div class="toolbar-right">
+                    <button class="btn-icon-add" onclick="openAddModal()" title="Tambah Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <div class="action-buttons-wrapper">
-                <button class="btn-secondary" onclick="setAkun()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                    </svg>
-                    Set
-                </button>
-
-                <button class="btn-primary" onclick="postingAkun()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                    </svg>
-                    Posting
-                </button>
+            <!-- Tabs Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('all', this)">All</button>
+                <button class="tab-btn" onclick="switchTab('active', this)">Active</button>
+                <button class="tab-btn" onclick="switchTab('inactive', this)">Inactive</button>
             </div>
 
-            <div class="utility-buttons-wrapper">
-                <button class="btn-secondary" onclick="exportProfil()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                    </svg>
-                    Export
-                </button>
+            <!-- Table -->
+            <div class="table-scroll-wrapper">
+                <table class="ios-table" id="emailTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ios-tbody" id="emailTableBody">
+                        <!-- Data akan dimuat di sini -->
+                    </tbody>
+                </table>
+            </div>
 
-                <button class="btn-secondary" onclick="importProfil()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
-                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
-                    </svg>
-                    Import
-                </button>
+            <!-- Pagination -->
+            <div class="pagination-footer">
+                <div class="pagination-left">
+                    <span>Show</span>
+                    <select onchange="changeRowsPerPage(this.value)" id="rowsPerPageSelect">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    <span>entries</span>
+                </div>
+
+                <div class="pagination-center">
+                    <button class="nav-btn" onclick="prevPage()" title="Previous" id="prevBtn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <span class="page-info">
+                        Page <input type="number" class="page-input" value="1" id="currentPageInput" min="1" onchange="goToPage(this.value)"> of <span id="totalPages">1</span>
+                    </span>
+                    <button class="nav-btn" onclick="nextPage()" title="Next" id="nextBtn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="pagination-right">
+                    <span id="displayStart">0</span>-<span id="displayEnd">0</span> of <span id="totalItems">0</span> items
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Table -->
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 100px;">Action</th>
-                        <th>Nama Email</th>
-                        <th style="width: 120px;">Password</th>
-                        <th>Insert By</th>
-                        <th>Insert Date</th>
-                        <th>Status</th>
-                        <th>Update By</th>
-                        <th>Update Date</th>
-                    </tr>
-                    <tr class="filter-row">
-                        <th></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(0, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(1, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(2, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(3, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(4, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(5, this.value)"></th>
-                        <th><input type="text" placeholder="Filter..." onkeyup="filterTable(6, this.value)"></th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Ahmad Fauzi</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="Password123">••••••••</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>System Admin</td>
-                        <td>01/01/2024 09:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>System Admin</td>
-                        <td>15/01/2024 14:30:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Budi Santoso</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="SecurePass456">••••••••</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Ahmad Fauzi</td>
-                        <td>05/01/2024 10:30:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Ahmad Fauzi</td>
-                        <td>20/01/2024 11:00:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Citra Dewi</td>
-                        <td>••••••••</td>
-                        <td>Budi Santoso</td>
-                        <td>03/02/2024 08:15:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Budi Santoso</td>
-                        <td>03/02/2024 16:45:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Dedi Kurniawan</td>
-                        <td>••••••••</td>
-                        <td>Citra Dewi</td>
-                        <td>07/02/2024 13:20:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Manager HR</td>
-                        <td>07/02/2024 15:10:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Eka Putri</td>
-                        <td>3</td>
-                        <td>Dedi Kurniawan</td>
-                        <td>06/02/2024 09:45:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Team Leader</td>
-                        <td>06/02/2024 13:20:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Fajar Rahman</td>
-                        <td>4</td>
-                        <td>Eka Putri</td>
-                        <td>04/02/2024 11:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Supervisor</td>
-                        <td>04/02/2024 17:30:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Gita Sari</td>
-                        <td>3</td>
-                        <td>Fajar Rahman</td>
-                        <td>09/02/2024 07:30:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Lead Operator</td>
-                        <td>09/02/2024 10:15:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Hendra Wijaya</td>
-                        <td>2</td>
-                        <td>Gita Sari</td>
-                        <td>08/02/2024 10:00:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Supervisor Ops</td>
-                        <td>08/02/2024 14:15:00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Indah Permata</td>
-                        <td>••••••••</td>
-                        <td>Ahmad Fauzi</td>
-                        <td>10/02/2024 08:45:00</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>Manager Finance</td>
-                        <td>10/02/2024 12:30:00</td>
-                    </tr>
-                    <tr class="inactive">
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>Joko Susilo</td>
-                        <td>1</td>
-                        <td>Indah Permata</td>
-                        <td>12/02/2024 11:30:00</td>
-                        <td><span class="status-inactive">Inactive</span></td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Footer / Pagination -->
-        <div class="footer">
-            <div class="pagination-center">
-                <button class="nav-btn" onclick="goToFirstPage()" title="First">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <span class="page-info">
-                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">153</span>
-                </span>
-                <button class="nav-btn" onclick="goToNextPage()" title="Next">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
-                <button class="nav-btn" onclick="goToLastPage()" title="Last">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
-                    </svg>
-                </button>
-                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+    <!-- Add/Edit Modal -->
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Tambah Email Baru</h2>
+                <button class="close-modal" onclick="closeModal()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
+            <div class="modal-body">
+                <form id="emailForm" onsubmit="saveEmail(event)">
+                    <input type="hidden" id="emailId">
+                    
+                    <div class="form-group">
+                        <label for="emailName">Nama Lengkap</label>
+                        <input type="text" id="emailName" required placeholder="Masukkan nama lengkap">
+                    </div>
 
-            <div class="pagination-left">
-                <label style="font-size: 13px;">Rows:</label>
-                <select onchange="changeRowsPerPage(this.value)">
-                    <option value="10" selected>10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+                    <div class="form-group">
+                        <label for="emailAddress">Alamat Email</label>
+                        <input type="email" id="emailAddress" required placeholder="contoh@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailStatus">Status</label>
+                        <select id="emailStatus" required>
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Tidak Aktif</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailNotes">Catatan (Opsional)</label>
+                        <textarea id="emailNotes" placeholder="Tambahkan catatan jika diperlukan"></textarea>
+                    </div>
+                </form>
             </div>
-
-            <div class="pagination-right">
-                <span id="displayStart">1</span>-<span id="displayEnd">10</span> of <span id="totalItems">1524</span>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="document.getElementById('emailForm').requestSubmit()">Simpan</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Global Variables
+        // Data Storage - dimulai dengan data kosong, data akan tersimpan di localStorage
+        let emails = JSON.parse(localStorage.getItem('emails')) || [];
+
         let currentPage = 1;
-        let rowsPerPage = 10;
-        let totalItems = 0; // Will be calculated on page load
-        let totalPages = 0; // Will be calculated on page load
-        let editingRow = null; // Store row being edited
+        let itemsPerPage = 10;
+        let filteredEmails = [...emails];
+        let currentFilter = 'all';
 
-        // LocalStorage functions
-        function saveToLocalStorage() {
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            const data = [];
-            
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                const passwordSpan = cells[2].querySelector('.password-text');
-                
-                data.push({
-                    nama: cells[1].textContent,
-                    password: passwordSpan ? passwordSpan.getAttribute('data-password') : '',
-                    createdBy: cells[3].textContent,
-                    createdDate: cells[4].textContent,
-                    status: cells[5].textContent,
-                    updatedBy: cells[6].textContent,
-                    updatedDate: cells[7].textContent
-                });
-            }
-            
-            localStorage.setItem('emailManagementData', JSON.stringify(data));
-        }
+        // Initialize
+        renderTable();
+        updatePaginationInfo();
 
-        function loadFromLocalStorage() {
-            const data = localStorage.getItem('emailManagementData');
-            if (data) {
-                const emails = JSON.parse(data);
-                const tableBody = document.getElementById('tableBody');
-                tableBody.innerHTML = ''; // Clear existing data
-                
-                emails.forEach((email, index) => {
-                    const row = document.createElement('tr');
-                    
-                    row.innerHTML = `
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${email.nama}</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="${email.password}">${'•'.repeat(email.password.length)}</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${email.createdBy}</td>
-                        <td>${email.createdDate}</td>
-                        <td>${email.status}</td>
-                        <td>${email.updatedBy}</td>
-                        <td>${email.updatedDate}</td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-                
-                totalItems = emails.length;
-            }
-        }
+        // Tab switching
+        function switchTab(filter, button) {
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            button.classList.add('active');
 
-        // Auto Complete Email dengan @gmail.com
-        function autoCompleteEmail() {
-            const emailInput = document.getElementById('itemEmail');
-            let emailValue = emailInput.value.trim();
-            
-            // Jika kosong, tidak perlu diproses
-            if (!emailValue) {
-                return;
-            }
-            
-            // Jika sudah ada @, tidak perlu ditambahkan lagi
-            if (!emailValue.includes('@')) {
-                emailInput.value = emailValue + '@gmail.com';
-            }
-            
-            // Validasi format email
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(emailInput.value)) {
-                emailInput.style.borderColor = '#ef4444';
+            // Filter emails
+            currentFilter = filter;
+            if (filter === 'all') {
+                filteredEmails = [...emails];
             } else {
-                emailInput.style.borderColor = '#10b981';
+                filteredEmails = emails.filter(e => e.status === filter);
             }
             
-            // Update clear button visibility
-            updateClearButton();
-        }
-        
-        // Clear Email Function
-        function clearEmail() {
-            const emailInput = document.getElementById('itemEmail');
-            emailInput.value = '';
-            emailInput.style.borderColor = '#d1d5db';
-            emailInput.focus();
-            updateClearButton();
-        }
-        
-        // Update Clear Button Visibility
-        function updateClearButton() {
-            const emailInput = document.getElementById('itemEmail');
-            const wrapper = document.getElementById('emailWrapper');
-            
-            if (emailInput.value.trim() !== '') {
-                wrapper.classList.add('has-value');
-            } else {
-                wrapper.classList.remove('has-value');
-            }
-        }
-        
-        // Toggle Password Visibility
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIcon');
-            
-            if (passwordInput.type === 'password') {
-                // Show password
-                passwordInput.type = 'text';
-                eyeIcon.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                // Hide password
-                passwordInput.type = 'password';
-                eyeIcon.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
-            }
-        }
-        
-        // Toggle Password in Table
-        function toggleTablePassword(button) {
-            const passwordSpan = button.previousElementSibling;
-            const realPassword = passwordSpan.getAttribute('data-password');
-            const currentText = passwordSpan.textContent;
-            const svg = button.querySelector('svg');
-            
-            if (currentText.includes('•')) {
-                // Show password
-                passwordSpan.textContent = realPassword;
-                svg.innerHTML = `
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                `;
-            } else {
-                // Hide password
-                passwordSpan.textContent = '•'.repeat(realPassword.length);
-                svg.innerHTML = `
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                `;
-            }
+            // Reset to first page and render
+            currentPage = 1;
+            renderTable();
         }
 
-        // Posting Akun
-        function postingAkun() {
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            
-            if (rows.length === 0) {
-                alert('⚠ Tidak ada data untuk diposting!');
-                return;
-            }
-            
-            if (confirm(`Apakah Anda yakin ingin memposting ${rows.length} data akun ke database?\n\nData yang sudah diposting akan tersimpan permanen.`)) {
-                // Show loading state
-                button.disabled = true;
-                button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Posting...';
-                
-                setTimeout(() => {
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Berhasil memposting ${rows.length} data akun ke database!\n\nSemua perubahan telah disimpan.`);
-                }, 1500);
-            }
+        // Change rows per page
+        function changeRowsPerPage(value) {
+            itemsPerPage = parseInt(value);
+            currentPage = 1;
+            renderTable();
         }
 
-        // Set Akun
-        function setAkun() {
-            const itemEmail = document.getElementById('itemEmail').value;
-            const password = document.getElementById('password').value;
+        // Render Table
+        function renderTable() {
+            const tbody = document.getElementById('emailTableBody');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = filteredEmails.slice(start, end);
 
-            if (!itemEmail || !password) {
-                alert('⚠ Mohon lengkapi semua field!');
+            if (pageData.length === 0) {
+                tbody.innerHTML = '';
+                updatePaginationInfo();
                 return;
             }
 
-            if (password.length < 6) {
-                alert('⚠ Password harus minimal 6 karakter!');
-                return;
-            }
-
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            // Show loading state
-            button.disabled = true;
-            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Setting...';
-            
-            setTimeout(() => {
-                if (editingRow) {
-                    // UPDATE existing row
-                    const cells = editingRow.getElementsByTagName('td');
-                    const currentDate = new Date();
-                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
-                        day: '2-digit', 
-                        month: '2-digit', 
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    });
-                    
-                    cells[1].textContent = itemEmail;
-                    cells[2].innerHTML = `
-                        <div class="password-cell">
-                            <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
-                            <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+            tbody.innerHTML = pageData.map((email, index) => `
+                <tr class="ios-row">
+                    <td class="ios-cell">${start + index + 1}</td>
+                    <td class="ios-cell">${email.name}</td>
+                    <td class="ios-cell email-cell">${email.email}</td>
+                    <td class="ios-cell">
+                        <span class="status-badge ${email.status === 'active' ? 'status-active' : 'status-inactive'}">
+                            ${email.status === 'active' ? 'Aktif' : 'Tidak Aktif'}
+                        </span>
+                    </td>
+                    <td class="ios-cell">
+                        <div class="action-btns">
+                            <button class="icon-btn icon-btn-edit" onclick="editEmail(${email.id})" title="Edit">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button class="icon-btn icon-btn-delete" onclick="deleteEmail(${email.id})" title="Hapus">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </button>
                         </div>
-                    `;
-                    cells[6].textContent = 'System Admin';
-                    cells[7].textContent = dateStr;
-                    
-                    editingRow = null;
-                    
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Data berhasil diupdate!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
-                } else {
-                    // ADD new row to table
-                    const tableBody = document.getElementById('tableBody');
-                    const newRow = document.createElement('tr');
-                    
-                    const currentDate = new Date();
-                    const dateStr = currentDate.toLocaleDateString('id-ID', { 
-                        day: '2-digit', 
-                        month: '2-digit', 
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
-                    });
-                    
-                    newRow.innerHTML = `
-                        <td>
-                            <div class="action-icons">
-                                <button class="icon-btn" onclick="editEmail(this)" title="Edit">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                    </svg>
-                                </button>
-                                <button class="icon-btn delete" onclick="deleteEmail(this)" title="Hapus">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>${itemEmail}</td>
-                        <td>
-                            <div class="password-cell">
-                                <span class="password-text" data-password="${password}">${'•'.repeat(password.length)}</span>
-                                <button class="password-toggle-table" onclick="toggleTablePassword(this)" title="Show/Hide">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                        <td>System Admin</td>
-                        <td>${dateStr}</td>
-                        <td><span class="status-active">Active</span></td>
-                        <td>-</td>
-                        <td>-</td>
-                    `;
-                    
-                    tableBody.appendChild(newRow);
-                    
-                    // Update total items
-                    totalItems++;
-                    totalPages = Math.ceil(totalItems / rowsPerPage);
-                    
-                    // Show rows based on current page
-                    showCurrentPageRows();
-                    updatePaginationInfo();
-                    updateNavigationButtons();
-                    
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                    alert(`✓ Data berhasil disimpan!\n\nEmail: ${itemEmail}\nPassword: ${'•'.repeat(password.length)}`);
-                }
-                
-                // Clear form
-                document.getElementById('itemEmail').value = '';
-                document.getElementById('password').value = '';
-                
-                // Update clear button
-                updateClearButton();
-                
-                // Save to localStorage
-                saveToLocalStorage();
-            }, 1000);
+                    </td>
+                </tr>
+            `).join('');
+
+            updatePaginationInfo();
         }
 
-        // Export Profil
-        function exportProfil() {
-            const itemEmail = document.getElementById('itemEmail').value;
-            if (!itemEmail) {
-                alert('⚠ Pilih email terlebih dahulu!');
-                return;
+        // Update Pagination Info
+        function updatePaginationInfo() {
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, filteredEmails.length);
+            const totalPagesCount = Math.ceil(filteredEmails.length / itemsPerPage);
+            
+            document.getElementById('displayStart').textContent = filteredEmails.length > 0 ? start : 0;
+            document.getElementById('displayEnd').textContent = end;
+            document.getElementById('totalItems').textContent = filteredEmails.length;
+            document.getElementById('currentPageInput').value = currentPage;
+            document.getElementById('totalPages').textContent = totalPagesCount || 1;
+
+            // Update button states
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage >= totalPagesCount;
+        }
+
+        // Go to specific page
+        function goToPage(page) {
+            const pageNum = parseInt(page);
+            const totalPagesCount = Math.ceil(filteredEmails.length / itemsPerPage);
+            
+            if (pageNum >= 1 && pageNum <= totalPagesCount) {
+                currentPage = pageNum;
+                renderTable();
+            } else {
+                // Reset to current page if invalid
+                document.getElementById('currentPageInput').value = currentPage;
             }
-            
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            
-            button.disabled = true;
-            button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Exporting...';
-            
-            setTimeout(() => {
-                button.disabled = false;
-                button.innerHTML = originalText;
-                alert('✓ Profil email "' + itemEmail + '" berhasil diekspor!\n\nFile akan diunduh dalam format Excel/CSV');
-            }, 1500);
         }
 
-        // Import Profil
-        function importProfil() {
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
+        // Search
+        function searchEmails() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = '.xlsx,.xls,.csv';
-            fileInput.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    button.disabled = true;
-                    button.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Importing...';
-                    
-                    setTimeout(() => {
-                        button.disabled = false;
-                        button.innerHTML = originalText;
-                        alert('✓ File "' + file.name + '" berhasil diimpor!\n\nData telah diproses ke sistem.');
-                    }, 1500);
-                }
-            };
-            fileInput.click();
+            // Start with all emails or filtered by current tab
+            let baseEmails = currentFilter === 'all' ? emails : emails.filter(e => e.status === currentFilter);
+            
+            // Then apply search filter
+            filteredEmails = baseEmails.filter(email => 
+                email.name.toLowerCase().includes(searchTerm) ||
+                email.email.toLowerCase().includes(searchTerm)
+            );
+            
+            currentPage = 1;
+            renderTable();
         }
 
-        // Edit User
-        function editEmail(element) {
-            const row = element.closest('tr');
-            const cells = row.getElementsByTagName('td');
+        // Open Add Modal
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = 'Tambah Email Baru';
+            document.getElementById('emailForm').reset();
+            document.getElementById('emailId').value = '';
+            document.getElementById('emailModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Edit Email
+        function editEmail(id) {
+            const email = emails.find(e => e.id === id);
+            if (!email) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Email';
+            document.getElementById('emailId').value = email.id;
+            document.getElementById('emailName').value = email.name;
+            document.getElementById('emailAddress').value = email.email;
+            document.getElementById('emailStatus').value = email.status;
+            document.getElementById('emailNotes').value = email.notes || '';
             
+            document.getElementById('emailModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Save Email
+        function saveEmail(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('emailId').value;
             const emailData = {
-                nama: cells[1].textContent,
-                password: cells[2].textContent
+                name: document.getElementById('emailName').value,
+                email: document.getElementById('emailAddress').value,
+                status: document.getElementById('emailStatus').value,
+                notes: document.getElementById('emailNotes').value
             };
 
-            // Set editing mode
-            editingRow = row;
+            if (id) {
+                // Update existing
+                const index = emails.findIndex(e => e.id === parseInt(id));
+                emails[index] = { ...emails[index], ...emailData };
+            } else {
+                // Add new
+                const newId = emails.length > 0 ? Math.max(...emails.map(e => e.id)) + 1 : 1;
+                emails.push({ id: newId, ...emailData });
+            }
+
+            localStorage.setItem('emails', JSON.stringify(emails));
+            filteredEmails = [...emails];
+            renderTable();
+            closeModal();
             
-            // Populate form with email data
-            document.getElementById('itemEmail').value = emailData.nama;
-            // Password tidak di-populate karena sudah ter-mask, user harus input ulang
-            document.getElementById('password').value = '';
-            
-            // Update clear button
-            updateClearButton();
-            
-            // Scroll to form
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            alert(`✏ Mode Edit\n\nData email "${emailData.nama}" telah dimuat ke form.\n\nCatatan: Untuk keamanan, silakan masukkan password baru.`);
+            alert(id ? 'Email berhasil diupdate!' : 'Email berhasil ditambahkan!');
         }
 
-        // Delete User
-        function deleteEmail(element) {
-            const row = element.closest('tr');
-            const nama = row.getElementsByTagName('td')[1].textContent;
+        // Delete Email
+        function deleteEmail(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus email ini?')) return;
+
+            emails = emails.filter(e => e.id !== id);
+            localStorage.setItem('emails', JSON.stringify(emails));
+            filteredEmails = [...emails];
+            renderTable();
             
-            if (confirm(`⚠ Konfirmasi Hapus\n\nApakah Anda yakin ingin menghapus email:\n"${nama}"?\n\nTindakan ini tidak dapat dibatalkan!`)) {
-                // Add fade out animation
-                row.style.transition = 'opacity 0.3s';
-                row.style.opacity = '0';
-                
-                setTimeout(() => {
-                    row.remove();
-                    totalItems--;
-                    totalPages = Math.ceil(totalItems / rowsPerPage);
-                    
-                    // If current page is now empty and not page 1, go to previous page
-                    if (currentPage > totalPages && totalPages > 0) {
-                        currentPage = totalPages;
-                        document.getElementById('currentPage').value = currentPage;
-                    }
-                    
-                    showCurrentPageRows();
-                    updatePaginationInfo();
-                    updateNavigationButtons();
-                    
-                    // Save to localStorage
-                    saveToLocalStorage();
-                    
-                    alert(`✓ Email "${nama}" berhasil dihapus dari sistem!`);
-                }, 300);
+            alert('Email berhasil dihapus!');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('emailModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Export Data
+        function exportData() {
+            const csv = [
+                ['No', 'Nama', 'Email', 'Status', 'Catatan'],
+                ...emails.map((email, index) => [
+                    index + 1,
+                    email.name,
+                    email.email,
+                    email.status === 'active' ? 'Aktif' : 'Tidak Aktif',
+                    email.notes || ''
+                ])
+            ].map(row => row.join(',')).join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'email-data.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Pagination
+        function nextPage() {
+            const totalPagesCount = Math.ceil(filteredEmails.length / itemsPerPage);
+            if (currentPage < totalPagesCount) {
+                currentPage++;
+                renderTable();
             }
         }
 
-        // Filter Table
-        function filterTable(columnIndex, searchValue) {
-            const table = document.getElementById('tableBody');
-            const rows = table.getElementsByTagName('tr');
-            searchValue = searchValue.toLowerCase();
-
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                const cellValue = cells[columnIndex + 1].textContent.toLowerCase();
-                
-                if (cellValue.includes(searchValue)) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-
-        // Pagination Functions
-        function changeRowsPerPage(value) {
-            rowsPerPage = parseInt(value);
-            totalPages = Math.ceil(totalItems / rowsPerPage);
-            currentPage = 1;
-            document.getElementById('currentPage').value = currentPage;
-            document.getElementById('currentPage').max = totalPages;
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
-        }
-
-        function goToFirstPage() {
-            currentPage = 1;
-            document.getElementById('currentPage').value = currentPage;
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
-        }
-
-        function goToPrevPage() {
+        function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                document.getElementById('currentPage').value = currentPage;
-                showCurrentPageRows();
-                updatePaginationInfo();
-                updateNavigationButtons();
+                renderTable();
             }
         }
 
-        function goToNextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                document.getElementById('currentPage').value = currentPage;
-                showCurrentPageRows();
-                updatePaginationInfo();
-                updateNavigationButtons();
-            }
-        }
-
-        function goToLastPage() {
-            currentPage = totalPages;
-            document.getElementById('currentPage').value = currentPage;
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
-        }
-
-        function goToPage(page) {
-            page = parseInt(page);
-            if (page >= 1 && page <= totalPages) {
-                currentPage = page;
-                showCurrentPageRows();
-                updatePaginationInfo();
-                updateNavigationButtons();
-            } else {
-                alert('Halaman tidak valid!');
-                document.getElementById('currentPage').value = currentPage;
-            }
-        }
-
-        function refreshData() {
-            alert('Menyinkronkan data terbaru...');
-            location.reload();
-        }
-
-        function updatePaginationInfo() {
-            const displayStart = (currentPage - 1) * rowsPerPage + 1;
-            const displayEnd = Math.min(currentPage * rowsPerPage, totalItems);
-            
-            document.getElementById('displayStart').textContent = displayStart;
-            document.getElementById('displayEnd').textContent = displayEnd;
-            document.getElementById('totalPages').textContent = totalPages;
-            document.getElementById('totalItems').textContent = totalItems;
-        }
-
-        // Show only rows for current page
-        function showCurrentPageRows() {
-            const tableBody = document.getElementById('tableBody');
-            const rows = Array.from(tableBody.getElementsByTagName('tr'));
-            
-            const startIndex = (currentPage - 1) * rowsPerPage;
-            const endIndex = startIndex + rowsPerPage;
-            
-            rows.forEach((row, index) => {
-                if (index >= startIndex && index < endIndex) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        // Update Navigation Buttons State
-        function updateNavigationButtons() {
-            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
-            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
-            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
-            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
-
-            // Disable/Enable buttons based on current page
-            if (currentPage === 1) {
-                firstBtn.disabled = true;
-                prevBtn.disabled = true;
-                firstBtn.style.opacity = '0.5';
-                prevBtn.style.opacity = '0.5';
-                firstBtn.style.cursor = 'not-allowed';
-                prevBtn.style.cursor = 'not-allowed';
-            } else {
-                firstBtn.disabled = false;
-                prevBtn.disabled = false;
-                firstBtn.style.opacity = '1';
-                prevBtn.style.opacity = '1';
-                firstBtn.style.cursor = 'pointer';
-                prevBtn.style.cursor = 'pointer';
-            }
-
-            if (currentPage === totalPages) {
-                nextBtn.disabled = true;
-                lastBtn.disabled = true;
-                nextBtn.style.opacity = '0.5';
-                lastBtn.style.opacity = '0.5';
-                nextBtn.style.cursor = 'not-allowed';
-                lastBtn.style.cursor = 'not-allowed';
-            } else {
-                nextBtn.disabled = false;
-                lastBtn.disabled = false;
-                nextBtn.style.opacity = '1';
-                lastBtn.style.opacity = '1';
-                nextBtn.style.cursor = 'pointer';
-                lastBtn.style.cursor = 'pointer';
-            }
-        }
-
-        // Initialize
-        window.onload = function() {
-            // Load data from localStorage first
-            loadFromLocalStorage();
-            
-            document.getElementById('currentPage').max = totalPages;
-            
-            // Count actual rows in table
-            const tableBody = document.getElementById('tableBody');
-            const rows = tableBody.getElementsByTagName('tr');
-            totalItems = rows.length;
-            totalPages = Math.ceil(totalItems / rowsPerPage);
-            
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
-            
-            // Add event listener for email input untuk menampilkan preview saat mengetik
-            const emailInput = document.getElementById('itemEmail');
-            emailInput.addEventListener('input', function() {
-                let value = this.value;
-                // Update clear button visibility
-                updateClearButton();
-                
-                // Hapus @gmail.com jika ada untuk memungkinkan editing
-                if (value.endsWith('@gmail.com')) {
-                    // Tidak perlu diubah
-                } else if (!value.includes('@')) {
-                    // Tampilkan hint
-                    this.style.fontStyle = 'normal';
-                }
-            });
-            
-            // Reset border color saat focus
-            emailInput.addEventListener('focus', function() {
-                this.style.borderColor = '#3b82f6';
-            });
-            
-            // Initial check untuk clear button
-            updateClearButton();
-        };
-
-        // Handle Logout
-        function handleLogout() {
-            if (confirm('Apakah Anda yakin ingin keluar?')) {
-                // Redirect kembali ke halaman login
-                window.location.href = 'index.html';
-            }
-        }
-
-        // Sidebar Functions
+        // Sidebar
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
             document.getElementById('sidebarOverlay').classList.add('show');
@@ -2119,6 +1614,20 @@
             document.getElementById('sidebarOverlay').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
+
+        // Logout
+        function handleLogout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('emailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
