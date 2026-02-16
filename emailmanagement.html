@@ -1263,7 +1263,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
                             <th>Email</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -1327,11 +1326,6 @@
                     <input type="hidden" id="emailId">
                     
                     <div class="form-group">
-                        <label for="emailName">Nama Lengkap</label>
-                        <input type="text" id="emailName" required placeholder="Masukkan nama lengkap">
-                    </div>
-
-                    <div class="form-group">
                         <label for="emailAddress">Alamat Email</label>
                         <input type="email" id="emailAddress" required placeholder="contoh@email.com">
                     </div>
@@ -1342,11 +1336,6 @@
                             <option value="active">Aktif</option>
                             <option value="inactive">Tidak Aktif</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="emailNotes">Catatan (Opsional)</label>
-                        <textarea id="emailNotes" placeholder="Tambahkan catatan jika diperlukan"></textarea>
                     </div>
                 </form>
             </div>
@@ -1413,7 +1402,6 @@
             tbody.innerHTML = pageData.map((email, index) => `
                 <tr class="ios-row">
                     <td class="ios-cell">${start + index + 1}</td>
-                    <td class="ios-cell">${email.name}</td>
                     <td class="ios-cell email-cell">${email.email}</td>
                     <td class="ios-cell">
                         <span class="status-badge ${email.status === 'active' ? 'status-active' : 'status-inactive'}">
@@ -1483,7 +1471,6 @@
             
             // Then apply search filter
             filteredEmails = baseEmails.filter(email => 
-                email.name.toLowerCase().includes(searchTerm) ||
                 email.email.toLowerCase().includes(searchTerm)
             );
             
@@ -1507,10 +1494,8 @@
 
             document.getElementById('modalTitle').textContent = 'Edit Email';
             document.getElementById('emailId').value = email.id;
-            document.getElementById('emailName').value = email.name;
             document.getElementById('emailAddress').value = email.email;
             document.getElementById('emailStatus').value = email.status;
-            document.getElementById('emailNotes').value = email.notes || '';
             
             document.getElementById('emailModal').classList.add('show');
             document.body.style.overflow = 'hidden';
@@ -1522,10 +1507,8 @@
 
             const id = document.getElementById('emailId').value;
             const emailData = {
-                name: document.getElementById('emailName').value,
                 email: document.getElementById('emailAddress').value,
-                status: document.getElementById('emailStatus').value,
-                notes: document.getElementById('emailNotes').value
+                status: document.getElementById('emailStatus').value
             };
 
             if (id) {
@@ -1567,13 +1550,11 @@
         // Export Data
         function exportData() {
             const csv = [
-                ['No', 'Nama', 'Email', 'Status', 'Catatan'],
+                ['No', 'Email', 'Status'],
                 ...emails.map((email, index) => [
                     index + 1,
-                    email.name,
                     email.email,
-                    email.status === 'active' ? 'Aktif' : 'Tidak Aktif',
-                    email.notes || ''
+                    email.status === 'active' ? 'Aktif' : 'Tidak Aktif'
                 ])
             ].map(row => row.join(',')).join('\n');
 
