@@ -737,6 +737,219 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
+        /* Search Bar */
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 11px 16px 11px 44px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #FAFAFA;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            stroke: #A3A3A3;
+            pointer-events: none;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        .status-inactive {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        /* Barcode Modal */
+        .barcode-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .barcode-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .barcode-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .barcode-modal.show .barcode-content {
+            transform: scale(1);
+        }
+
+        .barcode-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+        }
+
+        .barcode-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .barcode-close-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .barcode-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .barcode-close-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+        }
+
+        .barcode-body {
+            padding: 32px 28px;
+            text-align: center;
+        }
+
+        .barcode-user-info {
+            margin-bottom: 24px;
+        }
+
+        .barcode-user-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+
+        .barcode-user-nik {
+            font-size: 16px;
+            color: #737373;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .barcode-container {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 2px dashed #E5E5E5;
+        }
+
+        .barcode-canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .barcode-footer {
+            padding: 0 28px 28px 28px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .barcode-btn {
+            flex: 1;
+            padding: 13px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .barcode-btn-download {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .barcode-btn-download:hover {
+            background: #2563EB;
+            transform: translateY(-1px);
+        }
+
+        .barcode-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Clickable Row Effect */
+        .ios-row {
+            cursor: pointer;
+        }
+
+        .ios-row:hover {
+            background: #F8FAFC;
+        }
+
+        .ios-row:active {
+            transform: scale(0.995);
+        }
+
         .tab-content {
             display: none;
         }
@@ -766,6 +979,7 @@
             margin-bottom: 24px;
             padding-bottom: 20px;
             border-bottom: 1px solid #F0F0F0;
+            gap: 16px;
         }
 
         .content-title {
@@ -773,6 +987,30 @@
             font-weight: 600;
             color: #1A1A1A;
             letter-spacing: -0.3px;
+        }
+
+        /* Toolbar Section - untuk search dan tombol */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-left {
+            flex: 9;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .toolbar-right {
+            flex: 1;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
         }
 
         /* Employee List - Clean Cards */
@@ -2058,6 +2296,32 @@
                 border-radius: 12px;
             }
 
+            /* Toolbar Mobile */
+            .toolbar {
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .toolbar-left {
+                flex: 1;
+                width: auto;
+            }
+
+            .toolbar-right {
+                flex: 0 0 auto;
+            }
+
+            .search-wrapper {
+                width: 100%;
+            }
+
+            .btn-icon-add {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+            }
+
             /* Profile Section - Tetap Horizontal di Mobile */
             .profile-section {
                 flex-direction: row;
@@ -2332,6 +2596,41 @@
                 transform: scale(0.95);
             }
 
+            /* Barcode Modal Mobile */
+            .barcode-content {
+                max-width: 100%;
+                width: calc(100% - 32px);
+                margin: 0 16px;
+            }
+
+            .barcode-header {
+                padding: 20px;
+            }
+
+            .barcode-title {
+                font-size: 18px;
+            }
+
+            .barcode-body {
+                padding: 24px 20px;
+            }
+
+            .barcode-user-name {
+                font-size: 18px;
+            }
+
+            .barcode-user-nik {
+                font-size: 14px;
+            }
+
+            .barcode-container {
+                padding: 16px;
+            }
+
+            .barcode-footer {
+                padding: 0 20px 20px 20px;
+            }
+
             /* Safe Area untuk iOS */
             @supports (padding: max(0px)) {
                 .container {
@@ -2370,6 +2669,7 @@
         .btn-icon-add {
             width: 40px;
             height: 40px;
+            min-width: 40px;
             border-radius: 12px;
             background: #F8F8F8;
             border: 1px solid #E5E5E5;
@@ -2785,6 +3085,13 @@
                         <label class="form-label">Kasir</label>
                         <input type="text" class="form-input" id="kasir" placeholder="Masukkan Kasir">
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-input" id="userStatus" required>
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Tidak Aktif</option>
+                        </select>
+                    </div>
                     <div class="modal-actions">
                         <button type="button" class="btn btn-cancel" onclick="closeFormModal()">Batal</button>
                         <button type="submit" class="btn btn-save">Simpan User</button>
@@ -2822,14 +3129,31 @@
         <div style="max-width: 100%;">
             <!-- Table Card -->
             <div class="card">
-                <div class="content-header">
-                    <div class="content-title">Daftar User</div>
-                    <button class="btn-icon-add" onclick="openFormModal()" title="Tambah User">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </button>
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <div class="search-wrapper">
+                            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                            <input type="text" class="search-input" id="searchInput" placeholder="Cari nama, NIK, atau role..." oninput="searchUsers()">
+                        </div>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn-icon-add" onclick="openFormModal()" title="Tambah User">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabs for Status Filter -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="filterByStatus('all')">Semua User</button>
+                    <button class="tab-btn" onclick="filterByStatus('active')">Aktif</button>
+                    <button class="tab-btn" onclick="filterByStatus('inactive')">Tidak Aktif</button>
                 </div>
 
                 <div class="table-scroll-wrapper">
@@ -2843,6 +3167,7 @@
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">e-trans</th>
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Portal</th>
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Kasir</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Status</th>
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Aksi</th>
                             </tr>
                         </thead>
@@ -2887,12 +3212,46 @@
         </div>
     </div>
 
+    <!-- Barcode Modal -->
+    <div class="barcode-modal" id="barcodeModal">
+        <div class="barcode-content">
+            <div class="barcode-header">
+                <h2 class="barcode-title">Barcode NIK</h2>
+                <button class="barcode-close-btn" onclick="closeBarcodeModal()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="barcode-body">
+                <div class="barcode-user-info">
+                    <div class="barcode-user-name" id="barcodeUserName">-</div>
+                    <div class="barcode-user-nik" id="barcodeUserNik">-</div>
+                </div>
+                <div class="barcode-container">
+                    <svg id="barcodeCanvas"></svg>
+                </div>
+            </div>
+            <div class="barcode-footer">
+                <button class="barcode-btn barcode-btn-download" onclick="downloadBarcode()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Download Barcode
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script>
         let editingRow = null;
         let currentPage = 1;
         let rowsPerPage = 10;
         let totalItems = 0;
         let totalPages = 1;
+        let currentFilter = 'all';
+        let allRows = []; // Simpan semua data user
 
         // Helper function to get badge color
         function getBadgeColor(role) {
@@ -2908,6 +3267,72 @@
             return badgeColors[role] || 'background: #E5E7EB; color: #374151;';
         }
 
+        // Filter by status
+        function filterByStatus(status) {
+            currentFilter = status;
+            currentPage = 1;
+
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            applyFilters();
+        }
+
+        // Search users
+        function searchUsers() {
+            currentPage = 1;
+            applyFilters();
+        }
+
+        // Apply filters (status and search)
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const tableBody = document.getElementById('tableBody');
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+            
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const cells = row.getElementsByTagName('td');
+                if (cells.length === 0) return;
+                
+                const nama = cells[1].textContent.toLowerCase();
+                const nik = cells[2].textContent.toLowerCase();
+                const roleSpan = cells[3].querySelector('span');
+                const role = roleSpan ? roleSpan.textContent.toLowerCase() : '';
+                const statusSpan = cells[7].querySelector('span');
+                const statusValue = statusSpan ? statusSpan.getAttribute('data-status') : 'active';
+                
+                // Check status filter
+                const statusMatch = currentFilter === 'all' || statusValue === currentFilter;
+                
+                // Check search filter
+                const searchMatch = !searchTerm || 
+                    nama.includes(searchTerm) || 
+                    nik.includes(searchTerm) || 
+                    role.includes(searchTerm);
+                
+                if (statusMatch && searchMatch) {
+                    row.setAttribute('data-visible', 'true');
+                    visibleCount++;
+                } else {
+                    row.setAttribute('data-visible', 'false');
+                }
+            });
+            
+            totalItems = visibleCount;
+            totalPages = Math.ceil(totalItems / rowsPerPage);
+            
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = totalPages;
+            }
+            
+            showCurrentPageRows();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
         function handleSubmit(e) {
             e.preventDefault();
             
@@ -2917,6 +3342,7 @@
             const level = document.getElementById('level').value;
             const portal = document.getElementById('portal').value;
             const kasir = document.getElementById('kasir').value;
+            const status = document.getElementById('userStatus').value;
 
             if (editingRow) {
                 // Update existing row
@@ -2930,6 +3356,10 @@
                 cells[5].textContent = portal;
                 cells[6].textContent = kasir;
                 
+                const statusClass = status === 'active' ? 'status-active' : 'status-inactive';
+                const statusText = status === 'active' ? 'Aktif' : 'Tidak Aktif';
+                cells[7].innerHTML = `<span class="status-badge ${statusClass}" data-status="${status}">${statusText}</span>`;
+                
                 editingRow = null;
             } else {
                 // Add new row
@@ -2939,8 +3369,11 @@
                 totalItems++;
                 
                 const badgeStyle = getBadgeColor(role);
+                const statusClass = status === 'active' ? 'status-active' : 'status-inactive';
+                const statusText = status === 'active' ? 'Aktif' : 'Tidak Aktif';
                 
                 newRow.className = 'ios-row';
+                newRow.setAttribute('data-visible', 'true');
                 newRow.innerHTML = `
                     <td class="ios-cell">${totalItems}</td>
                     <td class="ios-cell">${nama}</td>
@@ -2951,6 +3384,9 @@
                     <td class="ios-cell">${level}</td>
                     <td class="ios-cell">${portal}</td>
                     <td class="ios-cell">${kasir}</td>
+                    <td class="ios-cell">
+                        <span class="status-badge ${statusClass}" data-status="${status}">${statusText}</span>
+                    </td>
                     <td class="ios-cell">
                         <div style="display: flex; gap: 8px;">
                             <button onclick="editUser(this)" class="icon-btn" title="Edit">
@@ -2967,11 +3403,15 @@
                     </td>
                 `;
                 
+                // Make new row clickable
+                makeRowClickable(newRow);
+                
                 totalPages = Math.ceil(totalItems / rowsPerPage);
                 reindexTableNumbers(); // Reindex semua nomor
                 updatePaginationInfo();
             }
             
+            applyFilters(); // Apply filters after add/edit
             saveToLocalStorage(); // Save to localStorage after any change
             resetForm();
             closeFormModal();
@@ -3008,6 +3448,9 @@
             document.getElementById('level').value = cells[4].textContent;
             document.getElementById('portal').value = cells[5].textContent;
             document.getElementById('kasir').value = cells[6].textContent;
+            // Extract status from badge span
+            const statusSpan = cells[7].querySelector('span');
+            document.getElementById('userStatus').value = statusSpan ? statusSpan.getAttribute('data-status') : 'active';
             
             openFormModal();
         }
@@ -3018,18 +3461,9 @@
             
             if (confirm(`Hapus user "${nama}"?`)) {
                 row.remove();
-                totalItems--;
-                totalPages = Math.ceil(totalItems / rowsPerPage);
-                
-                if (currentPage > totalPages && totalPages > 0) {
-                    currentPage = totalPages;
-                    document.getElementById('currentPageInput').value = currentPage;
-                }
                 
                 reindexTableNumbers(); // Reindex semua nomor
-                showCurrentPageRows();
-                updatePaginationInfo();
-                updateNavigationButtons();
+                applyFilters(); // Recalculate filtered items
                 saveToLocalStorage(); // Save to localStorage after delete
             }
         }
@@ -3095,14 +3529,21 @@
             const tableBody = document.getElementById('tableBody');
             const rows = Array.from(tableBody.getElementsByTagName('tr'));
             
+            // Get only visible rows
+            const visibleRows = rows.filter(row => row.getAttribute('data-visible') === 'true');
+            
             const startIndex = (currentPage - 1) * rowsPerPage;
             const endIndex = startIndex + rowsPerPage;
             
-            rows.forEach((row, index) => {
+            rows.forEach(row => {
+                // Hide all rows first
+                row.style.display = 'none';
+            });
+            
+            // Show only visible rows for current page
+            visibleRows.forEach((row, index) => {
                 if (index >= startIndex && index < endIndex) {
                     row.style.display = '';
-                } else {
-                    row.style.display = 'none';
                 }
             });
         }
@@ -3158,6 +3599,7 @@
             for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName('td');
                 const roleSpan = cells[3].querySelector('span');
+                const statusSpan = cells[7].querySelector('span');
                 
                 data.push({
                     nama: cells[1].textContent,
@@ -3165,7 +3607,8 @@
                     role: roleSpan ? roleSpan.textContent.trim() : '',
                     level: cells[4].textContent,
                     portal: cells[5].textContent,
-                    kasir: cells[6].textContent
+                    kasir: cells[6].textContent,
+                    status: statusSpan ? statusSpan.getAttribute('data-status') : 'active'
                 });
             }
             
@@ -3184,8 +3627,12 @@
             data.forEach((user, index) => {
                 const newRow = tableBody.insertRow();
                 const badgeStyle = getBadgeColor(user.role);
+                const status = user.status || 'active';
+                const statusClass = status === 'active' ? 'status-active' : 'status-inactive';
+                const statusText = status === 'active' ? 'Aktif' : 'Tidak Aktif';
                 
                 newRow.className = 'ios-row';
+                newRow.setAttribute('data-visible', 'true');
                 newRow.innerHTML = `
                     <td class="ios-cell">${index + 1}</td>
                     <td class="ios-cell">${user.nama}</td>
@@ -3196,6 +3643,9 @@
                     <td class="ios-cell">${user.level}</td>
                     <td class="ios-cell">${user.portal}</td>
                     <td class="ios-cell">${user.kasir}</td>
+                    <td class="ios-cell">
+                        <span class="status-badge ${statusClass}" data-status="${status}">${statusText}</span>
+                    </td>
                     <td class="ios-cell">
                         <div style="display: flex; gap: 8px;">
                             <button onclick="editUser(this)" class="icon-btn" title="Edit">
@@ -3211,10 +3661,92 @@
                         </div>
                     </td>
                 `;
+                
+                // Make loaded row clickable
+                makeRowClickable(newRow);
             });
             
             totalItems = data.length;
         }
+
+        // Barcode Modal Functions
+        function showBarcodeModal(nama, nik) {
+            document.getElementById('barcodeUserName').textContent = nama;
+            document.getElementById('barcodeUserNik').textContent = nik;
+            
+            // Generate barcode
+            try {
+                JsBarcode("#barcodeCanvas", nik, {
+                    format: "CODE128",
+                    width: 2,
+                    height: 100,
+                    displayValue: true,
+                    fontSize: 16,
+                    margin: 10,
+                    background: "#FAFAFA"
+                });
+            } catch (e) {
+                console.error('Error generating barcode:', e);
+                alert('Gagal membuat barcode. Pastikan NIK valid.');
+                return;
+            }
+            
+            document.getElementById('barcodeModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBarcodeModal() {
+            document.getElementById('barcodeModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function downloadBarcode() {
+            const svg = document.getElementById('barcodeCanvas');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.fillStyle = '#FAFAFA';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                
+                const pngFile = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.download = `barcode-${document.getElementById('barcodeUserNik').textContent}.png`;
+                downloadLink.href = pngFile;
+                downloadLink.click();
+            };
+            
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+        }
+
+        // Make row clickable to show barcode
+        function makeRowClickable(row) {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function(e) {
+                // Don't trigger if clicking on action buttons
+                if (e.target.closest('.icon-btn')) {
+                    return;
+                }
+                
+                const cells = this.getElementsByTagName('td');
+                const nama = cells[1].textContent;
+                const nik = cells[2].textContent;
+                
+                showBarcodeModal(nama, nik);
+            });
+        }
+
+        // Close barcode modal when clicking outside
+        document.getElementById('barcodeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBarcodeModal();
+            }
+        });
 
         // Initialize
         window.onload = function() {
@@ -3222,13 +3754,20 @@
             
             const tableBody = document.getElementById('tableBody');
             const rows = tableBody.getElementsByTagName('tr');
+            
+            // Set data-visible attribute for all existing rows and make them clickable
+            for (let i = 0; i < rows.length; i++) {
+                if (!rows[i].hasAttribute('data-visible')) {
+                    rows[i].setAttribute('data-visible', 'true');
+                }
+                makeRowClickable(rows[i]);
+            }
+            
             totalItems = rows.length;
             totalPages = Math.ceil(totalItems / rowsPerPage);
             
             document.getElementById('currentPageInput').max = totalPages;
-            showCurrentPageRows();
-            updatePaginationInfo();
-            updateNavigationButtons();
+            applyFilters(); // Apply initial filters
         };
     </script>
 </body>
