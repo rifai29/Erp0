@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Bensin</title>
+    <title>Laporan Pembelian Harian</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -78,30 +78,6 @@
             width: 18px;
             height: 18px;
             stroke: #ef4444;
-        }
-
-        .control-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .control-btn:hover {
-            background: #f9fafb;
-            border-color: #d1d5db;
-        }
-
-        .control-btn svg {
-            width: 16px;
-            height: 16px;
-            stroke: #6b7280;
         }
 
         /* SIDEBAR */
@@ -373,7 +349,7 @@
             background: #f9fafb;
         }
 
-        .status-badge {
+        .category-badge {
             display: inline-block;
             padding: 4px 10px;
             border-radius: 12px;
@@ -381,19 +357,34 @@
             font-weight: 600;
         }
 
-        .status-selesai {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .status-pending {
+        .category-makanan {
             background: #fef3c7;
-            color: #d97706;
+            color: #92400e;
         }
 
-        .status-dibatalkan {
-            background: #fee2e2;
-            color: #dc2626;
+        .category-transportasi {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .category-utilitas {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        .category-belanja {
+            background: #fce7f3;
+            color: #9f1239;
+        }
+
+        .category-kesehatan {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .category-lainnya {
+            background: #e5e7eb;
+            color: #374151;
         }
 
         .btn-action {
@@ -490,16 +481,12 @@
             font-size: 14px;
         }
 
-        .page-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-
         .rows-select {
-            padding: 6px 10px;
+            padding: 6px 8px;
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 14px;
+            background: white;
         }
 
         /* Responsive */
@@ -512,112 +499,9 @@
                 padding: 16px;
             }
 
-            .header-title {
-                font-size: 16px;
-            }
-
             .summary-cards {
                 grid-template-columns: 1fr;
                 padding: 16px;
-            }
-
-            .form-section {
-                padding: 16px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                padding: 12px 16px;
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .search-box {
-                min-width: 100%;
-            }
-
-            .filter-group {
-                flex-direction: column;
-            }
-
-            .table-wrapper {
-                padding: 16px;
-            }
-
-            table {
-                font-size: 12px;
-            }
-
-            th, td {
-                padding: 8px;
-                white-space: nowrap;
-            }
-
-            .pagination {
-                padding: 12px 16px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-
-            .pagination-controls {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .pagination-info {
-                font-size: 11px;
-            }
-
-            .nav-btn {
-                width: 28px;
-                height: 28px;
-            }
-
-            .nav-btn svg {
-                width: 12px;
-                height: 12px;
-            }
-
-            .page-input {
-                width: 40px;
-                padding: 4px 6px;
-                font-size: 11px;
-            }
-
-            .rows-select {
-                padding: 4px 6px;
-                font-size: 11px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 8px;
-            }
-
-            .header {
-                padding: 12px;
-            }
-
-            .header-title {
-                font-size: 14px;
-            }
-
-            .sub-header {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .form-section {
-                padding: 12px;
-            }
-
-            .summary-cards {
-                padding: 12px;
             }
 
             .summary-card {
@@ -648,7 +532,7 @@
                 padding: 6px;
             }
 
-            .status-badge {
+            .category-badge {
                 font-size: 10px;
                 padding: 3px 8px;
             }
@@ -817,7 +701,7 @@
                 </svg>
                 <span>Laporan Karyawan</span>
             </a>
-            <a href="laporanbensin.html" class="sidebar-item active">
+            <a href="laporanbensin.html" class="sidebar-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -826,7 +710,7 @@
                 </svg>
                 <span>Laporan Bensin</span>
             </a>
-            <a href="laporanpembelian.html" class="sidebar-item">
+            <a href="laporanpembelian.html" class="sidebar-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>
@@ -932,7 +816,7 @@
                     </svg>
                 </button>
                 <h1 class="header-title">
-                    <span class="store-name">LAPORAN BENSIN</span>
+                    <span class="store-name">LAPORAN PEMBELIAN HARIAN</span>
                 </h1>
             </div>
             
@@ -948,85 +832,76 @@
 
         <!-- Sub Header -->
         <div class="sub-header">
-            ⛽ Data Pengisian Bensin Kendaraan
+            🛒 Data Pembelian Harian Toko
         </div>
 
         <!-- Summary Cards -->
         <div class="summary-cards">
             <div class="summary-card">
-                <h3>Total Pengisian Bulan Ini</h3>
-                <div class="summary-value" id="totalPengisian">15</div>
+                <h3>Total Pembelian Bulan Ini</h3>
+                <div class="summary-value" id="totalPembelian">0</div>
             </div>
             <div class="summary-card success">
                 <h3>Total Pengeluaran</h3>
-                <div class="summary-value" id="totalPengeluaran">Rp 1,875,000</div>
+                <div class="summary-value" id="totalPengeluaran">Rp 0</div>
             </div>
             <div class="summary-card warning">
-                <h3>Total Liter</h3>
-                <div class="summary-value" id="totalLiter">187.5 L</div>
+                <h3>Rata-rata per Transaksi</h3>
+                <div class="summary-value" id="rataRata">Rp 0</div>
             </div>
             <div class="summary-card danger">
-                <h3>Rata-rata per Pengisian</h3>
-                <div class="summary-value" id="rataRata">Rp 125,000</div>
+                <h3>Kategori Terbanyak</h3>
+                <div class="summary-value" id="kategoriTop" style="font-size: 18px;">-</div>
             </div>
         </div>
 
         <!-- Form Section -->
         <div class="form-section">
-            <h3 style="margin-bottom: 16px; font-size: 16px; color: #111827;">Tambah/Edit Data Bensin</h3>
-            <form onsubmit="addBensin(event)">
+            <h3 style="margin-bottom: 16px; font-size: 16px; color: #111827;">Tambah/Edit Data Pembelian</h3>
+            <form onsubmit="addPembelian(event)">
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Tanggal *</label>
                         <input type="date" id="tanggal" required>
                     </div>
                     <div class="form-group">
-                        <label>Nomor Plat *</label>
-                        <input type="text" id="nomorPlat" placeholder="Contoh: AB 1234 CD" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Jenis Kendaraan *</label>
-                        <select id="jenisKendaraan" required>
-                            <option value="">-- Pilih Jenis Kendaraan --</option>
-                            <option value="Motor">Motor</option>
-                            <option value="Mobil">Mobil</option>
-                            <option value="Truk">Truk</option>
+                        <label>Kategori *</label>
+                        <select id="kategori" required>
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="Makanan">Makanan & Minuman</option>
+                            <option value="Transportasi">Transportasi</option>
+                            <option value="Utilitas">Utilitas (Listrik, Air, dll)</option>
+                            <option value="Belanja">Belanja & Kebutuhan</option>
+                            <option value="Kesehatan">Kesehatan</option>
+                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Jenis Bensin *</label>
-                        <select id="jenisBensin" required>
-                            <option value="">-- Pilih Jenis Bensin --</option>
-                            <option value="Pertalite">Pertalite</option>
-                            <option value="Pertamax">Pertamax</option>
-                            <option value="Pertamax Turbo">Pertamax Turbo</option>
-                            <option value="Solar">Solar</option>
-                            <option value="Dexlite">Dexlite</option>
+                        <label>Nama Item/Barang *</label>
+                        <input type="text" id="namaItem" placeholder="Contoh: Nasi Goreng" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah/Qty *</label>
+                        <input type="number" id="jumlah" placeholder="0" step="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Harga Satuan (Rp) *</label>
+                        <input type="number" id="hargaSatuan" placeholder="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Metode Pembayaran *</label>
+                        <select id="metodePembayaran" required>
+                            <option value="">-- Pilih Metode --</option>
+                            <option value="Tunai">Tunai</option>
+                            <option value="Transfer">Transfer Bank</option>
+                            <option value="E-Wallet">E-Wallet</option>
+                            <option value="Debit">Kartu Debit</option>
+                            <option value="Kredit">Kartu Kredit</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Liter *</label>
-                        <input type="number" id="liter" placeholder="0" step="0.1" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Harga per Liter (Rp) *</label>
-                        <input type="number" id="hargaPerLiter" placeholder="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Odometer (km) *</label>
-                        <input type="number" id="odometer" placeholder="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Petugas *</label>
-                        <input type="text" id="petugas" placeholder="Nama Petugas" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Status *</label>
-                        <select id="status" required>
-                            <option value="Selesai">Selesai</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Dibatalkan">Dibatalkan</option>
-                        </select>
+                        <label>Pembeli *</label>
+                        <input type="text" id="pembeli" placeholder="Nama Pembeli" required>
                     </div>
                     <div class="form-group">
                         <label>Keterangan</label>
@@ -1046,7 +921,7 @@
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input type="text" id="searchInput" placeholder="Cari nomor plat, petugas, keterangan..." onkeyup="searchTable()">
+                <input type="text" id="searchInput" placeholder="Cari nama item, kategori, pembeli..." onkeyup="searchTable()">
             </div>
             <div class="filter-group">
                 <select class="filter-select" id="monthFilter" onchange="filterTable()">
@@ -1064,8 +939,14 @@
                     <option value="11">November</option>
                     <option value="12">Desember</option>
                 </select>
-                <select class="filter-select" id="vehicleFilter" onchange="filterTable()">
-                    <option value="">Semua Kendaraan</option>
+                <select class="filter-select" id="categoryFilter" onchange="filterTable()">
+                    <option value="">Semua Kategori</option>
+                    <option value="Makanan">Makanan & Minuman</option>
+                    <option value="Transportasi">Transportasi</option>
+                    <option value="Utilitas">Utilitas</option>
+                    <option value="Belanja">Belanja & Kebutuhan</option>
+                    <option value="Kesehatan">Kesehatan</option>
+                    <option value="Lainnya">Lainnya</option>
                 </select>
             </div>
             <button class="btn-primary" onclick="exportData()">
@@ -1087,21 +968,19 @@
 
         <!-- Table -->
         <div class="table-wrapper">
-            <table id="bensinTable">
+            <table id="pembelianTable">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Tanggal</th>
-                        <th>Nomor Plat</th>
-                        <th>Jenis Kendaraan</th>
-                        <th>Jenis Bensin</th>
-                        <th>Liter</th>
-                        <th>Harga/Liter</th>
+                        <th>Kategori</th>
+                        <th>Nama Item</th>
+                        <th>Qty</th>
+                        <th>Harga Satuan</th>
                         <th>Total</th>
-                        <th>Odometer</th>
-                        <th>Petugas</th>
+                        <th>Metode Bayar</th>
+                        <th>Pembeli</th>
                         <th>Keterangan</th>
-                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -1142,100 +1021,108 @@
 
     <script>
         // Data storage
-        let bensinData = [];
-        let editIndex = -1;
+        let pembelianData = [];
         let currentPage = 1;
         let rowsPerPage = 10;
+        let editingIndex = -1;
 
         // Load data from localStorage
         function loadData() {
-            const saved = localStorage.getItem('bensinData');
-            if (saved) {
-                bensinData = JSON.parse(saved);
+            const savedData = localStorage.getItem('pembelianHarianData');
+            if (savedData) {
+                pembelianData = JSON.parse(savedData);
             }
-            updateVehicleFilter();
             renderTable();
             updateSummary();
         }
 
         // Save data to localStorage
         function saveData() {
-            localStorage.setItem('bensinData', JSON.stringify(bensinData));
+            localStorage.setItem('pembelianHarianData', JSON.stringify(pembelianData));
         }
 
-        // Add or update bensin data
-        function addBensin(event) {
+        // Add/Edit pembelian
+        function addPembelian(event) {
             event.preventDefault();
 
-            const data = {
+            const jumlah = parseFloat(document.getElementById('jumlah').value);
+            const hargaSatuan = parseFloat(document.getElementById('hargaSatuan').value);
+            const total = jumlah * hargaSatuan;
+
+            const newData = {
                 tanggal: document.getElementById('tanggal').value,
-                nomorPlat: document.getElementById('nomorPlat').value,
-                jenisKendaraan: document.getElementById('jenisKendaraan').value,
-                jenisBensin: document.getElementById('jenisBensin').value,
-                liter: parseFloat(document.getElementById('liter').value),
-                hargaPerLiter: parseFloat(document.getElementById('hargaPerLiter').value),
-                odometer: parseFloat(document.getElementById('odometer').value),
-                petugas: document.getElementById('petugas').value,
-                status: document.getElementById('status').value,
+                kategori: document.getElementById('kategori').value,
+                namaItem: document.getElementById('namaItem').value,
+                jumlah: jumlah,
+                hargaSatuan: hargaSatuan,
+                total: total,
+                metodePembayaran: document.getElementById('metodePembayaran').value,
+                pembeli: document.getElementById('pembeli').value,
                 keterangan: document.getElementById('keterangan').value
             };
 
-            data.total = data.liter * data.hargaPerLiter;
-
-            if (editIndex >= 0) {
-                bensinData[editIndex] = data;
-                editIndex = -1;
-                document.getElementById('btnText').textContent = 'Simpan Data';
+            if (editingIndex === -1) {
+                pembelianData.push(newData);
+                alert('Data berhasil ditambahkan!');
             } else {
-                bensinData.unshift(data);
+                pembelianData[editingIndex] = newData;
+                alert('Data berhasil diupdate!');
+                editingIndex = -1;
+                document.getElementById('btnText').textContent = 'Simpan Data';
             }
 
             saveData();
+            resetForm();
             renderTable();
             updateSummary();
-            updateVehicleFilter();
-            event.target.reset();
+        }
+
+        // Reset form
+        function resetForm() {
+            document.querySelector('form').reset();
+            document.getElementById('tanggal').valueAsDate = new Date();
+            editingIndex = -1;
+            document.getElementById('btnText').textContent = 'Simpan Data';
         }
 
         // Edit data
         function editData(index) {
-            const data = bensinData[index];
-            editIndex = index;
-
+            const data = pembelianData[index];
             document.getElementById('tanggal').value = data.tanggal;
-            document.getElementById('nomorPlat').value = data.nomorPlat;
-            document.getElementById('jenisKendaraan').value = data.jenisKendaraan;
-            document.getElementById('jenisBensin').value = data.jenisBensin;
-            document.getElementById('liter').value = data.liter;
-            document.getElementById('hargaPerLiter').value = data.hargaPerLiter;
-            document.getElementById('odometer').value = data.odometer;
-            document.getElementById('petugas').value = data.petugas;
-            document.getElementById('status').value = data.status;
+            document.getElementById('kategori').value = data.kategori;
+            document.getElementById('namaItem').value = data.namaItem;
+            document.getElementById('jumlah').value = data.jumlah;
+            document.getElementById('hargaSatuan').value = data.hargaSatuan;
+            document.getElementById('metodePembayaran').value = data.metodePembayaran;
+            document.getElementById('pembeli').value = data.pembeli;
             document.getElementById('keterangan').value = data.keterangan;
 
+            editingIndex = index;
             document.getElementById('btnText').textContent = 'Update Data';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Delete data
         function deleteData(index) {
-            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                bensinData.splice(index, 1);
+            if (confirm('Yakin ingin menghapus data ini?')) {
+                pembelianData.splice(index, 1);
                 saveData();
                 renderTable();
                 updateSummary();
-                updateVehicleFilter();
             }
         }
 
         // Clear all data
         function clearAllData() {
-            if (confirm('Apakah Anda yakin ingin menghapus SEMUA data? Tindakan ini tidak dapat dibatalkan!')) {
-                bensinData = [];
-                saveData();
-                renderTable();
-                updateSummary();
-                updateVehicleFilter();
+            if (confirm('PERINGATAN: Semua data akan dihapus permanen. Lanjutkan?')) {
+                if (confirm('Apakah Anda benar-benar yakin?')) {
+                    pembelianData = [];
+                    saveData();
+                    currentPage = 1;
+                    renderTable();
+                    updateSummary();
+                    alert('Semua data berhasil dihapus!');
+                }
             }
         }
 
@@ -1244,29 +1131,28 @@
             const tbody = document.getElementById('tableBody');
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const paginatedData = bensinData.slice(start, end);
+            const paginatedData = pembelianData.slice(start, end);
 
             tbody.innerHTML = '';
 
             if (paginatedData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="13" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada data. Silakan tambahkan data bensin.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada data. Silakan tambahkan data pembelian.</td></tr>';
             } else {
                 paginatedData.forEach((item, i) => {
                     const actualIndex = start + i;
+                    const categoryClass = item.kategori.toLowerCase().replace(/\s/g, '-').replace('&', '');
                     const row = `
                         <tr>
                             <td>${actualIndex + 1}</td>
                             <td>${formatDate(item.tanggal)}</td>
-                            <td><strong>${item.nomorPlat}</strong></td>
-                            <td>${item.jenisKendaraan}</td>
-                            <td>${item.jenisBensin}</td>
-                            <td>${item.liter.toFixed(1)} L</td>
-                            <td>${formatRupiah(item.hargaPerLiter)}</td>
+                            <td><span class="category-badge category-${categoryClass}">${item.kategori}</span></td>
+                            <td><strong>${item.namaItem}</strong></td>
+                            <td>${item.jumlah}</td>
+                            <td>${formatRupiah(item.hargaSatuan)}</td>
                             <td><strong>${formatRupiah(item.total)}</strong></td>
-                            <td>${item.odometer.toLocaleString('id-ID')} km</td>
-                            <td>${item.petugas}</td>
+                            <td>${item.metodePembayaran}</td>
+                            <td>${item.pembeli}</td>
                             <td>${item.keterangan || '-'}</td>
-                            <td><span class="status-badge status-${item.status.toLowerCase().replace(' ', '-')}">${item.status}</span></td>
                             <td>
                                 <button class="btn-action edit" onclick="editData(${actualIndex})" title="Edit">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1292,24 +1178,24 @@
 
         // Update pagination
         function updatePagination() {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
+            const totalPages = Math.ceil(pembelianData.length / rowsPerPage);
             const start = (currentPage - 1) * rowsPerPage + 1;
-            const end = Math.min(currentPage * rowsPerPage, bensinData.length);
+            const end = Math.min(currentPage * rowsPerPage, pembelianData.length);
 
-            document.getElementById('showingStart').textContent = bensinData.length > 0 ? start : 0;
+            document.getElementById('showingStart').textContent = pembelianData.length > 0 ? start : 0;
             document.getElementById('showingEnd').textContent = end;
-            document.getElementById('totalData').textContent = bensinData.length;
+            document.getElementById('totalData').textContent = pembelianData.length;
             document.getElementById('totalPages').textContent = totalPages || 1;
             document.getElementById('currentPageInput').value = currentPage;
             document.getElementById('currentPageInput').max = totalPages || 1;
 
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage >= totalPages || bensinData.length === 0;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages || pembelianData.length === 0;
         }
 
         // Change page
         function changePage(direction) {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
+            const totalPages = Math.ceil(pembelianData.length / rowsPerPage);
             currentPage += direction;
             if (currentPage < 1) currentPage = 1;
             if (currentPage > totalPages) currentPage = totalPages;
@@ -1318,7 +1204,7 @@
 
         // Go to specific page
         function goToPage() {
-            const totalPages = Math.ceil(bensinData.length / rowsPerPage);
+            const totalPages = Math.ceil(pembelianData.length / rowsPerPage);
             const page = parseInt(document.getElementById('currentPageInput').value);
             if (page >= 1 && page <= totalPages) {
                 currentPage = page;
@@ -1338,34 +1224,28 @@
             const currentMonth = new Date().getMonth();
             const currentYear = new Date().getFullYear();
             
-            const thisMonthData = bensinData.filter(item => {
+            const thisMonthData = pembelianData.filter(item => {
                 const itemDate = new Date(item.tanggal);
                 return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
             });
 
-            const totalPengisian = thisMonthData.length;
+            const totalPembelian = thisMonthData.length;
             const totalPengeluaran = thisMonthData.reduce((sum, item) => sum + item.total, 0);
-            const totalLiter = thisMonthData.reduce((sum, item) => sum + item.liter, 0);
-            const rataRata = totalPengisian > 0 ? totalPengeluaran / totalPengisian : 0;
+            const rataRata = totalPembelian > 0 ? totalPengeluaran / totalPembelian : 0;
 
-            document.getElementById('totalPengisian').textContent = totalPengisian;
-            document.getElementById('totalPengeluaran').textContent = formatRupiah(totalPengeluaran);
-            document.getElementById('totalLiter').textContent = totalLiter.toFixed(1) + ' L';
-            document.getElementById('rataRata').textContent = formatRupiah(rataRata);
-        }
-
-        // Update vehicle filter
-        function updateVehicleFilter() {
-            const vehicles = [...new Set(bensinData.map(item => item.nomorPlat))];
-            const select = document.getElementById('vehicleFilter');
-            const currentValue = select.value;
-            
-            select.innerHTML = '<option value="">Semua Kendaraan</option>';
-            vehicles.forEach(vehicle => {
-                select.innerHTML += `<option value="${vehicle}">${vehicle}</option>`;
+            // Find most frequent category
+            const categoryCount = {};
+            thisMonthData.forEach(item => {
+                categoryCount[item.kategori] = (categoryCount[item.kategori] || 0) + 1;
             });
-            
-            select.value = currentValue;
+            const kategoriTop = Object.keys(categoryCount).length > 0 
+                ? Object.keys(categoryCount).reduce((a, b) => categoryCount[a] > categoryCount[b] ? a : b)
+                : '-';
+
+            document.getElementById('totalPembelian').textContent = totalPembelian;
+            document.getElementById('totalPengeluaran').textContent = formatRupiah(totalPengeluaran);
+            document.getElementById('rataRata').textContent = formatRupiah(rataRata);
+            document.getElementById('kategoriTop').textContent = kategoriTop;
         }
 
         // Search table
@@ -1382,44 +1262,44 @@
         // Filter table
         function filterTable() {
             const monthFilter = document.getElementById('monthFilter').value;
-            const vehicleFilter = document.getElementById('vehicleFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
 
-            let filtered = bensinData;
+            let filtered = pembelianData;
 
             if (monthFilter) {
                 filtered = filtered.filter(item => item.tanggal.substring(5, 7) === monthFilter);
             }
 
-            if (vehicleFilter) {
-                filtered = filtered.filter(item => item.nomorPlat === vehicleFilter);
+            if (categoryFilter) {
+                filtered = filtered.filter(item => item.kategori === categoryFilter);
             }
 
-            // Temporarily replace bensinData for rendering
-            const originalData = bensinData;
-            bensinData = filtered;
+            // Temporarily replace pembelianData for rendering
+            const originalData = pembelianData;
+            pembelianData = filtered;
             currentPage = 1;
             renderTable();
-            bensinData = originalData;
+            pembelianData = originalData;
         }
 
-        // Export to Excel
+        // Export to CSV
         function exportData() {
-            if (bensinData.length === 0) {
+            if (pembelianData.length === 0) {
                 alert('Tidak ada data untuk diekspor');
                 return;
             }
 
-            let csv = 'No,Tanggal,Nomor Plat,Jenis Kendaraan,Jenis Bensin,Liter,Harga/Liter,Total,Odometer,Petugas,Keterangan,Status\n';
+            let csv = 'No,Tanggal,Kategori,Nama Item,Jumlah,Harga Satuan,Total,Metode Pembayaran,Pembeli,Keterangan\n';
             
-            bensinData.forEach((item, i) => {
-                csv += `${i + 1},${formatDate(item.tanggal)},${item.nomorPlat},${item.jenisKendaraan},${item.jenisBensin},${item.liter},${item.hargaPerLiter},${item.total},${item.odometer},${item.petugas},"${item.keterangan || '-'}",${item.status}\n`;
+            pembelianData.forEach((item, i) => {
+                csv += `${i + 1},${formatDate(item.tanggal)},${item.kategori},${item.namaItem},${item.jumlah},${item.hargaSatuan},${item.total},${item.metodePembayaran},${item.pembeli},"${item.keterangan || '-'}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `laporan_bensin_${new Date().getTime()}.csv`;
+            a.download = `laporan_pembelian_${new Date().getTime()}.csv`;
             a.click();
         }
 
@@ -1437,7 +1317,9 @@
 
         // Sidebar functions
         function handleLogout() {
-            window.location.href = 'index.html';
+            if (confirm('Yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
         }
 
         // Set today's date as default

@@ -44,29 +44,6 @@
             gap: 20px;
         }
 
-        .hamburger-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: #F8F8F8;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .hamburger-btn:hover {
-            background: #EFEFEF;
-        }
-
-        .hamburger-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: #1A1A1A;
-        }
-
         .header-title {
             font-size: 22px;
             font-weight: 600;
@@ -118,74 +95,6 @@
             width: 18px;
             height: 18px;
             stroke: #DC2626;
-        }
-
-        /* Sidebar - Cleaner Design */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -320px;
-            width: 320px;
-            height: 100vh;
-            background: white;
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-menu {
-            padding: 24px 12px;
-        }
-
-        .sidebar-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            color: #525252;
-            border-radius: 12px;
-            margin-bottom: 4px;
-            font-size: 15px;
-        }
-
-        .sidebar-item:hover {
-            background: #F8F8F8;
-            color: #1A1A1A;
-        }
-
-        .sidebar-item.active {
-            background: #F0F9FF;
-            color: #0369A1;
-        }
-
-        .sidebar-item svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 999;
-            backdrop-filter: blur(2px);
-        }
-
-        .sidebar-overlay.show {
-            opacity: 1;
-            visibility: visible;
         }
 
         /* Main Grid - Better Spacing */
@@ -2240,17 +2149,6 @@
                 text-overflow: ellipsis;
             }
 
-            .hamburger-btn {
-                width: 44px;
-                height: 44px;
-                min-width: 44px;
-            }
-
-            .hamburger-btn svg {
-                width: 22px;
-                height: 22px;
-            }
-
             .company-badge {
                 display: none;
             }
@@ -2264,24 +2162,6 @@
             .logout-btn svg {
                 width: 20px;
                 height: 20px;
-            }
-
-            /* Sidebar Mobile */
-            .sidebar {
-                width: 85%;
-                max-width: 320px;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .sidebar-item {
-                padding: 16px;
-                margin-bottom: 6px;
-                min-height: 52px;
-            }
-
-            .sidebar-item svg {
-                width: 22px;
-                height: 22px;
             }
 
             /* Main Grid - Stack di Mobile */
@@ -2638,10 +2518,7 @@
                     padding-right: max(16px, env(safe-area-inset-right));
                 }
                 
-                .sidebar {
-                    padding-left: env(safe-area-inset-left);
                 }
-            }
         }
 
         /* Tombol Outline Style */
@@ -2978,7 +2855,54 @@
                 font-size: 16px;
             }
         }
-    </style>
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+</style>
 </head>
 <body>
     <!-- Sidebar Overlay -->
@@ -3041,10 +2965,101 @@
                 </svg>
                 <span>Laporan Bensin</span>
             </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
         </div>
     </div>
 
-    <!-- Modal Form User -->
+
+<!-- Modal Form User -->
     <div class="modal-overlay" id="formModal" onclick="closeFormModal()">
         <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 500px;">
             <div class="modal-header">
@@ -3571,16 +3586,6 @@
             }
         }
 
-        function openSidebar() {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('sidebarOverlay').classList.add('show');
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('show');
-        }
-
         function openFormModal() {
             document.getElementById('formModal').classList.add('show');
         }
@@ -3769,6 +3774,16 @@
             document.getElementById('currentPageInput').max = totalPages;
             applyFilters(); // Apply initial filters
         };
+    </script>
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
     </script>
 </body>
 </html>

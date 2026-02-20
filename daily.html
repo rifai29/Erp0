@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Keseharian</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #2563eb;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
+        }
+
+        /* SIDEBAR */
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Sub Header */
+        .sub-header {
+            background: #f9fafb;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 20px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            grid-column: 1 / -1;
+        }
+
+        /* Table */
+        .table-container {
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .category-kerja {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .category-pribadi {
+            background: #fce7f3;
+            color: #9f1239;
+        }
+
+        .category-olahraga {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .category-belajar {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .category-hiburan {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        .category-lainnya {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .icon-btn:hover {
+            background: #bfdbfe;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .icon-btn.delete:hover {
+            background: #fecaca;
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            min-width: fit-content;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .page-input {
+            width: 50px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                padding: 12px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+
+            .category-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .icon-btn {
+                width: 28px;
+                height: 28px;
+            }
+
+            .icon-btn svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .footer {
+                padding: 12px 16px;
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            .pagination-center {
+                gap: 4px;
+            }
+
+            .pagination-left {
+                gap: 4px;
+            }
+
+            .pagination-left label {
+                font-size: 11px;
+            }
+
+            .pagination-left select {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .pagination-right {
+                font-size: 11px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .page-input {
+                width: 40px;
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .page-info {
+                font-size: 11px;
+            }
+        }
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hamburger-btn:hover { background: #EFEFEF; }
+        .hamburger-btn svg { width: 20px; height: 20px; stroke: #1A1A1A; }
+        @media (max-width: 768px) {
+            .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
+            .hamburger-btn svg { width: 22px; height: 22px; }
+        }
+</style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>User Management</span>
+            </a>
+            <a href="emailmanagement.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Email Management</span>
+            </a>
+            <a href="catatanhutang.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Catatan Hutang</span>
+            </a>
+            <a href="laporankaryawan.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Karyawan</span>
+            </a>
+            <a href="laporanbensin.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Bensin</span>
+            </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
+        </div>
+    </div>
+
+
+<div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1 class="header-title">
+                    <span class="store-name">LAPORAN KESEHARIAN</span>
+                </h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="sub-header" id="currentDate"></div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="input-group">
+                <label for="tanggal">Tanggal:</label>
+                <input type="date" id="tanggal" required>
+            </div>
+
+            <div class="input-group">
+                <label for="waktu">Waktu:</label>
+                <input type="time" id="waktu" required>
+            </div>
+
+            <div class="input-group">
+                <label for="judul">Judul Aktivitas:</label>
+                <input type="text" id="judul" placeholder="Meeting, Olahraga, dll">
+            </div>
+
+            <div class="input-group">
+                <label for="kategori">Kategori:</label>
+                <select id="kategori">
+                    <option value="">- Pilih -</option>
+                    <option value="Kerja">Kerja</option>
+                    <option value="Pribadi">Pribadi</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Belajar">Belajar</option>
+                    <option value="Hiburan">Hiburan</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="durasi">Durasi (menit):</label>
+                <input type="number" id="durasi" placeholder="60" min="1">
+            </div>
+
+            <div class="input-group">
+                <label for="mood">Mood:</label>
+                <select id="mood">
+                    <option value="😊 Senang">😊 Senang</option>
+                    <option value="😐 Biasa">😐 Biasa</option>
+                    <option value="😢 Sedih">😢 Sedih</option>
+                    <option value="😴 Lelah">😴 Lelah</option>
+                    <option value="🔥 Produktif">🔥 Produktif</option>
+                </select>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-primary" onclick="addActivity()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Tambah
+                </button>
+
+                <button class="btn-secondary" onclick="exportData()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Export
+                </button>
+
+                <button class="btn-danger" onclick="clearAllData()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <polyline points="3 6 5 6 21 6" stroke-width="2"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"></path>
+                    </svg>
+                    Hapus Semua
+                </button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Action</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Judul</th>
+                        <th>Kategori</th>
+                        <th>Durasi</th>
+                        <th>Mood</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer / Pagination -->
+        <div class="footer">
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)" id="rowsPerPage">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">1</span>
+                </span>
+                <button class="nav-btn" onclick="goToNextPage()" title="Next">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">0</span>-<span id="displayEnd">0</span> of <span id="totalItems">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let activities = [];
+        let currentPage = 1;
+        let rowsPerPage = 10;
+        let totalPages = 1;
+        let totalItems = 0;
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('dailyReportData');
+            if (savedData) {
+                activities = JSON.parse(savedData);
+            }
+            totalItems = activities.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            renderTable();
+            updateCurrentDate();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('dailyReportData', JSON.stringify(activities));
+        }
+
+        // Update current date
+        function updateCurrentDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('currentDate').textContent = today;
+        }
+
+        // Add activity
+        function addActivity() {
+            const tanggal = document.getElementById('tanggal').value;
+            const waktu = document.getElementById('waktu').value;
+            const judul = document.getElementById('judul').value;
+            const kategori = document.getElementById('kategori').value;
+            const durasi = document.getElementById('durasi').value;
+            const mood = document.getElementById('mood').value;
+
+            if (!tanggal || !waktu || !judul || !kategori || !durasi) {
+                alert('Mohon lengkapi semua field yang diperlukan!');
+                return;
+            }
+
+            const newData = {
+                tanggal,
+                waktu,
+                judul,
+                kategori,
+                durasi: parseInt(durasi),
+                mood
+            };
+
+            activities.push(newData);
+            totalItems = activities.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            saveData();
+            renderTable();
+            resetForm();
+            updatePaginationInfo();
+            updateNavigationButtons();
+            alert('Aktivitas berhasil ditambahkan!');
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('judul').value = '';
+            document.getElementById('kategori').value = '';
+            document.getElementById('durasi').value = '';
+            document.getElementById('tanggal').valueAsDate = new Date();
+            const now = new Date();
+            document.getElementById('waktu').value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
+
+        // Delete activity
+        function deleteActivity(index) {
+            if (confirm('Yakin ingin menghapus aktivitas ini?')) {
+                activities.splice(index, 1);
+                totalItems = activities.length;
+                totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+                
+                // Adjust current page if necessary
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                
+                saveData();
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('PERINGATAN: Semua data akan dihapus permanen. Lanjutkan?')) {
+                if (confirm('Apakah Anda benar-benar yakin?')) {
+                    activities = [];
+                    totalItems = 0;
+                    totalPages = 1;
+                    currentPage = 1;
+                    saveData();
+                    renderTable();
+                    updatePaginationInfo();
+                    updateNavigationButtons();
+                    alert('Semua data berhasil dihapus!');
+                }
+            }
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = activities.slice(start, end);
+
+            tbody.innerHTML = '';
+
+            if (paginatedData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada data aktivitas.</td></tr>';
+            } else {
+                paginatedData.forEach((item, i) => {
+                    const actualIndex = start + i;
+                    const categoryClass = item.kategori.toLowerCase();
+                    const row = `
+                        <tr>
+                            <td>
+                                <div class="action-icons">
+                                    <button class="icon-btn delete" onclick="deleteActivity(${actualIndex})" title="Hapus">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>${formatDate(item.tanggal)}</td>
+                            <td>${item.waktu}</td>
+                            <td><strong>${item.judul}</strong></td>
+                            <td><span class="category-badge category-${categoryClass}">${item.kategori}</span></td>
+                            <td>${item.durasi} menit</td>
+                            <td>${item.mood}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            }
+        }
+
+        // Pagination functions
+        function goToFirstPage() {
+            currentPage = 1;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToNextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToLastPage() {
+            currentPage = totalPages;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPage(page) {
+            const pageNum = parseInt(page);
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                currentPage = pageNum;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            currentPage = 1;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function refreshData() {
+            loadData();
+        }
+
+        function updatePaginationInfo() {
+            const start = totalItems > 0 ? (currentPage - 1) * rowsPerPage + 1 : 0;
+            const end = Math.min(currentPage * rowsPerPage, totalItems);
+            
+            document.getElementById('displayStart').textContent = start;
+            document.getElementById('displayEnd').textContent = end;
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('currentPage').value = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('currentPage').max = totalPages;
+        }
+
+        function updateNavigationButtons() {
+            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
+            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
+            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
+            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
+
+            // Disable/Enable buttons based on current page
+            if (currentPage === 1) {
+                firstBtn.disabled = true;
+                prevBtn.disabled = true;
+                firstBtn.style.opacity = '0.5';
+                prevBtn.style.opacity = '0.5';
+                firstBtn.style.cursor = 'not-allowed';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                firstBtn.disabled = false;
+                prevBtn.disabled = false;
+                firstBtn.style.opacity = '1';
+                prevBtn.style.opacity = '1';
+                firstBtn.style.cursor = 'pointer';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.disabled = true;
+                lastBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                lastBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+                lastBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.disabled = false;
+                lastBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                lastBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+                lastBtn.style.cursor = 'pointer';
+            }
+        }
+
+        // Export to CSV
+        function exportData() {
+            if (activities.length === 0) {
+                alert('Tidak ada data untuk diekspor');
+                return;
+            }
+
+            let csv = 'Tanggal,Waktu,Judul,Kategori,Durasi (menit),Mood\n';
+            
+            activities.forEach((item) => {
+                csv += `${formatDate(item.tanggal)},${item.waktu},"${item.judul}",${item.kategori},${item.durasi},${item.mood}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `laporan_keseharian_${new Date().getTime()}.csv`;
+            a.click();
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        }
+
+        // Sidebar functions
+        function handleLogout() {
+            if (confirm('Yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Set today's date and time as default
+        document.getElementById('tanggal').valueAsDate = new Date();
+        const now = new Date();
+        document.getElementById('waktu').value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadData);
+
+        // Close sidebar when clicking menu items
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

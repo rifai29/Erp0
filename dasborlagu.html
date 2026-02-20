@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Dashboard Lagu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #F2F2F7;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .music-badge {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .logout-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FFEBEE;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .logout-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #D32F2F;
+        }
+
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Now Playing */
+        .album-art {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .album-art-icon {
+            font-size: 80px;
+            color: white;
+        }
+
+        .now-playing-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .song-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .artist-name {
+            font-size: 15px;
+            color: #8E8E93;
+            margin-bottom: 20px;
+        }
+
+        .play-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #F2F2F7;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: #E5E5EA;
+            transform: scale(1.1);
+        }
+
+        .control-btn.play {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .control-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #000;
+        }
+
+        .control-btn.play svg {
+            stroke: white;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-box {
+            background: #F2F2F7;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #8E8E93;
+            font-weight: 500;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            background: #F2F2F7;
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #8E8E93;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Song List */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-song-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-song-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .song-item {
+            background: #F2F2F7;
+            padding: 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .song-item:hover {
+            background: #E5E5EA;
+            transform: translateX(4px);
+        }
+
+        .song-item.playing {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid #667eea;
+        }
+
+        .song-thumbnail {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .song-artist {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+
+        .song-duration {
+            font-size: 14px;
+            color: #8E8E93;
+            font-weight: 500;
+        }
+
+        .song-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .action-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #000;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .close-modal {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F2F2F7;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #E5E5EA;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E5EA;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .album-art {
+                width: 150px;
+                height: 150px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+</style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>User Management</span>
+            </a>
+            <a href="emailmanagement.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Email Management</span>
+            </a>
+            <a href="catatanhutang.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Catatan Hutang</span>
+            </a>
+            <a href="laporankaryawan.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Karyawan</span>
+            </a>
+            <a href="laporanbensin.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Bensin</span>
+            </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
+        </div>
+    </div>
+
+
+<div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <h1 class="header-title">Dashboard Lagu</h1>
+            </div>
+            <div class="header-actions">
+                <span class="music-badge" id="totalSongs">0 Lagu</span>
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="card">
+                <div class="now-playing-section">
+                    <div class="album-art">
+                        <div class="album-art-icon">🎵</div>
+                    </div>
+                    <div class="song-title" id="currentSongTitle">Belum Memutar</div>
+                    <div class="artist-name" id="currentArtist">Pilih lagu untuk diputar</div>
+                    
+                    <div class="play-controls">
+                        <button class="control-btn" onclick="previousSong()">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button class="control-btn play" onclick="togglePlay()">
+                            <svg id="playIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                        <button class="control-btn" onclick="nextSong()">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalSongsCount">0</div>
+                        <div class="stat-label">Total Lagu</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="playlistCount">0</div>
+                        <div class="stat-label">Playlist</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="favoriteCount">0</div>
+                        <div class="stat-label">Favorit</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="playCount">0</div>
+                        <div class="stat-label">Diputar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="card">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab(0)">Semua Lagu</button>
+                    <button class="tab-btn" onclick="switchTab(1)">Favorit</button>
+                    <button class="tab-btn" onclick="switchTab(2)">Riwayat</button>
+                </div>
+
+                <!-- Tab 1: All Songs -->
+                <div class="tab-content active" id="tab1">
+                    <div class="section-title">
+                        Koleksi Lagu
+                        <button class="add-song-btn" onclick="openAddSongModal()">+ Tambah Lagu</button>
+                    </div>
+                    <div class="song-list" id="allSongsList">
+                        <div style="text-align: center; padding: 40px; color: #8E8E93;">
+                            Belum ada lagu. Klik "Tambah Lagu" untuk mulai!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Favorites -->
+                <div class="tab-content" id="tab2">
+                    <div class="section-title">Lagu Favorit</div>
+                    <div class="song-list" id="favoriteSongsList">
+                        <div style="text-align: center; padding: 40px; color: #8E8E93;">
+                            Belum ada lagu favorit
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: History -->
+                <div class="tab-content" id="tab3">
+                    <div class="section-title">Riwayat Putar</div>
+                    <div class="song-list" id="historySongsList">
+                        <div style="text-align: center; padding: 40px; color: #8E8E93;">
+                            Belum ada riwayat
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Song Modal -->
+    <div class="modal" id="addSongModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Tambah Lagu Baru</h2>
+                <button class="close-modal" onclick="closeAddSongModal()">✕</button>
+            </div>
+            <form onsubmit="addSong(event)">
+                <div class="form-group">
+                    <label>Judul Lagu *</label>
+                    <input type="text" id="songTitle" placeholder="Masukkan judul lagu" required>
+                </div>
+                <div class="form-group">
+                    <label>Artis *</label>
+                    <input type="text" id="songArtist" placeholder="Nama artis" required>
+                </div>
+                <div class="form-group">
+                    <label>Album</label>
+                    <input type="text" id="songAlbum" placeholder="Nama album (opsional)">
+                </div>
+                <div class="form-group">
+                    <label>Genre *</label>
+                    <select id="songGenre" required>
+                        <option value="">Pilih Genre</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Dangdut">Dangdut</option>
+                        <option value="K-Pop">K-Pop</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="EDM">EDM</option>
+                        <option value="Klasik">Klasik</option>
+                        <option value="R&B">R&B</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Durasi (menit:detik) *</label>
+                    <input type="text" id="songDuration" placeholder="3:45" pattern="[0-9]{1,2}:[0-5][0-9]" required>
+                </div>
+                <button type="submit" class="btn-primary">Simpan Lagu</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let songs = [];
+        let currentSongIndex = -1;
+        let isPlaying = false;
+        let favoriteSongs = [];
+        let playHistory = [];
+
+        // Load data
+        function loadData() {
+            const savedSongs = localStorage.getItem('musicDashboardSongs');
+            const savedFavorites = localStorage.getItem('musicDashboardFavorites');
+            const savedHistory = localStorage.getItem('musicDashboardHistory');
+
+            if (savedSongs) songs = JSON.parse(savedSongs);
+            if (savedFavorites) favoriteSongs = JSON.parse(savedFavorites);
+            if (savedHistory) playHistory = JSON.parse(savedHistory);
+
+            renderAllSongs();
+            renderFavorites();
+            renderHistory();
+            updateStats();
+        }
+
+        // Save data
+        function saveData() {
+            localStorage.setItem('musicDashboardSongs', JSON.stringify(songs));
+            localStorage.setItem('musicDashboardFavorites', JSON.stringify(favoriteSongs));
+            localStorage.setItem('musicDashboardHistory', JSON.stringify(playHistory));
+        }
+
+        // Add song
+        function addSong(event) {
+            event.preventDefault();
+
+            const newSong = {
+                id: Date.now(),
+                title: document.getElementById('songTitle').value,
+                artist: document.getElementById('songArtist').value,
+                album: document.getElementById('songAlbum').value,
+                genre: document.getElementById('songGenre').value,
+                duration: document.getElementById('songDuration').value,
+                addedDate: new Date().toISOString()
+            };
+
+            songs.push(newSong);
+            saveData();
+            renderAllSongs();
+            updateStats();
+            closeAddSongModal();
+            document.querySelector('form').reset();
+        }
+
+        // Play song
+        function playSong(index) {
+            currentSongIndex = index;
+            const song = songs[index];
+            
+            document.getElementById('currentSongTitle').textContent = song.title;
+            document.getElementById('currentArtist').textContent = song.artist;
+            
+            // Add to history
+            const historyItem = { ...song, playedAt: new Date().toISOString() };
+            playHistory.unshift(historyItem);
+            if (playHistory.length > 20) playHistory.pop();
+            
+            saveData();
+            renderHistory();
+            updateStats();
+            
+            // Update UI
+            document.querySelectorAll('.song-item').forEach(item => item.classList.remove('playing'));
+            document.querySelectorAll('.song-item')[index]?.classList.add('playing');
+        }
+
+        // Toggle play/pause
+        function togglePlay() {
+            if (currentSongIndex === -1 && songs.length > 0) {
+                playSong(0);
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Next/Previous song
+        function nextSong() {
+            if (songs.length === 0) return;
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            playSong(currentSongIndex);
+        }
+
+        function previousSong() {
+            if (songs.length === 0) return;
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            playSong(currentSongIndex);
+        }
+
+        // Toggle favorite
+        function toggleFavorite(songId) {
+            const index = favoriteSongs.indexOf(songId);
+            if (index > -1) {
+                favoriteSongs.splice(index, 1);
+            } else {
+                favoriteSongs.push(songId);
+            }
+            saveData();
+            renderAllSongs();
+            renderFavorites();
+            updateStats();
+        }
+
+        // Delete song
+        function deleteSong(index) {
+            if (confirm('Yakin ingin menghapus lagu ini?')) {
+                const songId = songs[index].id;
+                songs.splice(index, 1);
+                favoriteSongs = favoriteSongs.filter(id => id !== songId);
+                saveData();
+                renderAllSongs();
+                renderFavorites();
+                updateStats();
+            }
+        }
+
+        // Render all songs
+        function renderAllSongs() {
+            const container = document.getElementById('allSongsList');
+            
+            if (songs.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #8E8E93;">Belum ada lagu. Klik "Tambah Lagu" untuk mulai!</div>';
+                return;
+            }
+
+            container.innerHTML = songs.map((song, index) => {
+                const isFavorite = favoriteSongs.includes(song.id);
+                return `
+                    <div class="song-item" onclick="playSong(${index})">
+                        <div class="song-thumbnail">🎵</div>
+                        <div class="song-info">
+                            <div class="song-name">${song.title}</div>
+                            <div class="song-artist">${song.artist} • ${song.genre}</div>
+                        </div>
+                        <div class="song-duration">${song.duration}</div>
+                        <div class="song-actions" onclick="event.stopPropagation()">
+                            <button class="action-btn" onclick="toggleFavorite(${song.id})" title="${isFavorite ? 'Hapus dari favorit' : 'Tambah ke favorit'}">
+                                <svg fill="${isFavorite ? 'red' : 'none'}" stroke="${isFavorite ? 'red' : 'currentColor'}" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </button>
+                            <button class="action-btn" onclick="deleteSong(${index})" title="Hapus">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render favorites
+        function renderFavorites() {
+            const container = document.getElementById('favoriteSongsList');
+            const favorites = songs.filter(song => favoriteSongs.includes(song.id));
+            
+            if (favorites.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #8E8E93;">Belum ada lagu favorit</div>';
+                return;
+            }
+
+            container.innerHTML = favorites.map(song => {
+                const index = songs.findIndex(s => s.id === song.id);
+                return `
+                    <div class="song-item" onclick="playSong(${index})">
+                        <div class="song-thumbnail">❤️</div>
+                        <div class="song-info">
+                            <div class="song-name">${song.title}</div>
+                            <div class="song-artist">${song.artist} • ${song.genre}</div>
+                        </div>
+                        <div class="song-duration">${song.duration}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render history
+        function renderHistory() {
+            const container = document.getElementById('historySongsList');
+            
+            if (playHistory.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #8E8E93;">Belum ada riwayat</div>';
+                return;
+            }
+
+            container.innerHTML = playHistory.map(song => {
+                const playedDate = new Date(song.playedAt);
+                const timeAgo = getTimeAgo(playedDate);
+                return `
+                    <div class="song-item">
+                        <div class="song-thumbnail">🕐</div>
+                        <div class="song-info">
+                            <div class="song-name">${song.title}</div>
+                            <div class="song-artist">${song.artist} • ${timeAgo}</div>
+                        </div>
+                        <div class="song-duration">${song.duration}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalSongs').textContent = `${songs.length} Lagu`;
+            document.getElementById('totalSongsCount').textContent = songs.length;
+            document.getElementById('playlistCount').textContent = 0; // Bisa dikembangkan
+            document.getElementById('favoriteCount').textContent = favoriteSongs.length;
+            document.getElementById('playCount').textContent = playHistory.length;
+        }
+
+        // Get time ago
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'Baru saja';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes} menit lalu`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours} jam lalu`;
+            const days = Math.floor(hours / 24);
+            return `${days} hari lalu`;
+        }
+
+        // Switch tab
+        function switchTab(index) {
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.tab-content').forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+        }
+
+        // Modal functions
+        function openAddSongModal() {
+            document.getElementById('addSongModal').classList.add('show');
+        }
+
+        function closeAddSongModal() {
+            document.getElementById('addSongModal').classList.remove('show');
+        }
+
+        // Sidebar functions
+        function handleLogout() {
+            if (confirm('Yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load data on startup
+        window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

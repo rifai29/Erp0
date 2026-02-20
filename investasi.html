@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Investasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #10b981;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
+        }
+
+        /* SIDEBAR */
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Sub Header */
+        .sub-header {
+            background: #f9fafb;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 20px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Info Box - FITUR BARU */
+        .info-box {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-radius: 10px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            border: 2px solid #10b981;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #065f46;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .info-sub {
+            font-size: 11px;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            grid-column: 1 / -1;
+        }
+
+        /* Table */
+        .table-container {
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .platform-seabank {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .platform-neobank {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .platform-bibit {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .amount-cell {
+            font-weight: 700;
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+        }
+
+        .icon-btn:hover {
+            background: #f9fafb;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .icon-btn.delete:hover svg {
+            stroke: #ef4444;
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            min-width: fit-content;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .page-input {
+            width: 50px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .info-box {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                padding: 12px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+        }
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hamburger-btn:hover { background: #EFEFEF; }
+        .hamburger-btn svg { width: 20px; height: 20px; stroke: #1A1A1A; }
+        @media (max-width: 768px) {
+            .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
+            .hamburger-btn svg { width: 22px; height: 22px; }
+        }
+</style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>User Management</span>
+            </a>
+            <a href="emailmanagement.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Email Management</span>
+            </a>
+            <a href="catatanhutang.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Catatan Hutang</span>
+            </a>
+            <a href="laporankaryawan.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Karyawan</span>
+            </a>
+            <a href="laporanbensin.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Bensin</span>
+            </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
+        </div>
+    </div>
+
+
+<div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1 class="header-title">
+                    <span class="store-name">LAPORAN INVESTASI & TABUNGAN</span>
+                </h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="sub-header" id="currentDate"></div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="input-group">
+                <label>Total Uang:</label>
+                <input type="number" id="totalUang" placeholder="0" onchange="hitungPembagian()">
+            </div>
+
+            <div class="input-group">
+                <label>Mode Pembagian:</label>
+                <select id="modePembagian" onchange="hitungPembagian()">
+                    <option value="equal">Rata (33.3% tiap platform)</option>
+                    <option value="priority">Prioritas SeaBank (50-30-20)</option>
+                    <option value="balanced">Balanced (40-30-30)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>SeaBank (%):</label>
+                <input type="number" id="pctSeabank" value="33.3" step="0.1" readonly style="background:#f3f4f6;">
+            </div>
+
+            <div class="input-group">
+                <label>Neo Bank (%):</label>
+                <input type="number" id="pctNeobank" value="33.3" step="0.1" readonly style="background:#f3f4f6;">
+            </div>
+
+            <div class="input-group">
+                <label>Bibit (%):</label>
+                <input type="number" id="pctBibit" value="33.3" step="0.1" readonly style="background:#f3f4f6;">
+            </div>
+
+            <div class="input-group">
+                <label>Bunga SeaBank (% p.a.):</label>
+                <input type="number" id="bungaSeabank" value="4" step="0.1" onchange="hitungPembagian()">
+            </div>
+
+            <div class="input-group">
+                <label>Bunga Neo Bank (% p.a.):</label>
+                <input type="number" id="bungaNeobank" value="5" step="0.1" onchange="hitungPembagian()">
+            </div>
+
+            <div class="input-group">
+                <label>Bunga Bibit (% p.a.):</label>
+                <input type="number" id="bungaBibit" value="8" step="0.1" onchange="hitungPembagian()">
+            </div>
+
+            <!-- INFO BOX HASIL -->
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="info-label">💙 SeaBank</div>
+                    <div class="info-value" id="jumlahSeabank">Rp 0</div>
+                    <div class="info-sub" id="bungaHarianSeabank">+Rp 0/hari</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">🟡 Neo Bank</div>
+                    <div class="info-value" id="jumlahNeobank">Rp 0</div>
+                    <div class="info-sub" id="bungaHarianNeobank">+Rp 0/hari</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">🟣 Bibit</div>
+                    <div class="info-value" id="jumlahBibit">Rp 0</div>
+                    <div class="info-sub" id="bungaHarianBibit">+Rp 0/hari</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">💰 Total Bunga/Hari</div>
+                    <div class="info-value" id="totalBungaHarian">Rp 0</div>
+                    <div class="info-sub" id="proyeksi30">Proyeksi 30 hari: Rp 0<
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

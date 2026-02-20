@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Name Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #8b5cf6;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
+        }
+
+        /* SIDEBAR */
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Sub Header */
+        .sub-header {
+            background: #f9fafb;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Generator Section */
+        .generator-section {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .option-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .option-group select,
+        .option-group input {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .option-group select:focus,
+        .option-group input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        /* Generated Names Display */
+        .names-display {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border: 2px solid #8b5cf6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .names-display.show {
+            display: block;
+        }
+
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .name-card {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .name-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .name-text {
+            font-weight: 600;
+            color: #111827;
+            flex: 1;
+        }
+
+        .name-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-btn-sm {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            transition: all 0.2s;
+        }
+
+        .icon-btn-sm:hover {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        /* Table */
+        .table-container {
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .cat-indonesia {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .cat-barat {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .cat-jepang {
+            background: #fce7f3;
+            color: #9f1239;
+        }
+
+        .cat-korea {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .cat-brand {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .cat-karakter {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .gender-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+        }
+
+        .icon-btn:hover {
+            background: #f9fafb;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.favorite {
+            color: #f59e0b;
+        }
+
+        .icon-btn.favorited {
+            background: #fef3c7;
+            color: #f59e0b;
+            border-color: #fbbf24;
+        }
+
+        .icon-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .icon-btn.delete:hover svg {
+            stroke: #ef4444;
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            min-width: fit-content;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .page-input {
+            width: 50px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .filter-tab:hover {
+            background: #e5e7eb;
+        }
+
+        .filter-tab.active {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .names-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hamburger-btn:hover { background: #EFEFEF; }
+        .hamburger-btn svg { width: 20px; height: 20px; stroke: #1A1A1A; }
+        @media (max-width: 768px) {
+            .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
+            .hamburger-btn svg { width: 22px; height: 22px; }
+        }
+</style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>User Management</span>
+            </a>
+            <a href="emailmanagement.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Email Management</span>
+            </a>
+            <a href="catatanhutang.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Catatan Hutang</span>
+            </a>
+            <a href="laporankaryawan.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Karyawan</span>
+            </a>
+            <a href="laporanbensin.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Bensin</span>
+            </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
+        </div>
+    </div>
+
+
+<div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1 class="header-title">
+                    <span class="store-name">RANDOM NAME GENERATOR</span>
+                </h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="sub-header">Generate Nama Random - Multi Kategori & Batch Generate</div>
+
+        <!-- Generator Section -->
+        <div class="generator-section">
+            <div class="options-grid">
+                <div class="option-group">
+                    <label>Kategori Nama:</label>
+                    <select id="category">
+                        <option value="indonesia">Nama Indonesia</option>
+                        <option value="barat">Nama Barat</option>
+                        <option value="jepang">Nama Jepang</option>
+                        <option value="korea">Nama Korea</option>
+                        <option value="brand">Nama Brand/Usaha</option>
+                        <option value="karakter">Nama Karakter Fantasy</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Gender:</label>
+                    <select id="gender">
+                        <option value="random">Random</option>
+                        <option value="laki-laki">Laki-laki</option>
+                        <option value="perempuan">Perempuan</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Jumlah Generate:</label>
+                    <select id="batchSize">
+                        <option value="1">1 Nama</option>
+                        <option value="5" selected>5 Nama</option>
+                        <option value="10">10 Nama</option>
+                        <option value="15">15 Nama</option>
+                        <option value="20">20 Nama</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Awalan Kata (Opsional):</label>
+                    <input type="text" id="prefix" placeholder="Contoh: Cyber, Super, dll">
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="generateNames()">
+                🎲 Generate Nama
+            </button>
+
+            <!-- Display Generated Names -->
+            <div class="names-display" id="namesDisplay">
+                <h3 style="margin-bottom: 12px; font-size: 15px; color: #6d28d9;">Hasil Generate:</h3>
+                <div class="names-grid" id="namesGrid"></div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="saveAllGenerated()">💾 Simpan Semua ke History</button>
+                <button class="btn-secondary" onclick="exportData()">📊 Export CSV</button>
+                <button class="btn-danger" onclick="clearAllData()">🗑️ Hapus Semua History</button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <h3 style="margin-bottom: 16px; font-size: 16px; color: #111827;">History Nama yang Disimpan</h3>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterByTab('all')">Semua</button>
+                <button class="filter-tab" onclick="filterByTab('favorites')">⭐ Favorit</button>
+                <button class="filter-tab" onclick="filterByTab('indonesia')">Indonesia</button>
+                <button class="filter-tab" onclick="filterByTab('barat')">Barat</button>
+                <button class="filter-tab" onclick="filterByTab('brand')">Brand</button>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari nama..." onkeyup="searchNames()">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Action</th>
+                        <th>Nama</th>
+                        <th>Kategori</th>
+                        <th>Gender</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer / Pagination -->
+        <div class="footer">
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)" id="rowsPerPage">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">1</span>
+                </span>
+                <button class="nav-btn" onclick="goToNextPage()" title="Next">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">0</span>-<span id="displayEnd">0</span> of <span id="totalItems">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let names = [];
+        let generatedNames = [];
+        let currentPage = 1;
+        let rowsPerPage = 10;
+        let totalPages = 1;
+        let totalItems = 0;
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // Name databases
+        const nameDB = {
+            indonesia: {
+                laki: ['Ahmad', 'Budi', 'Candra', 'Doni', 'Eko', 'Fajar', 'Gunawan', 'Hendra', 'Indra', 'Joko', 'Kurniawan', 'Lutfi', 'Muhamad', 'Nur', 'Oki', 'Putra', 'Rahman', 'Satria', 'Taufik', 'Usman'],
+                perempuan: ['Ayu', 'Bunga', 'Citra', 'Dewi', 'Eka', 'Fitri', 'Gita', 'Hani', 'Indah', 'Jasmine', 'Kartika', 'Lestari', 'Maya', 'Nadia', 'Olivia', 'Putri', 'Ratna', 'Sari', 'Tia', 'Uci'],
+                belakang: ['Pratama', 'Wijaya', 'Permana', 'Santoso', 'Kusuma', 'Saputra', 'Nugroho', 'Wibowo', 'Setiawan', 'Ramadhan']
+            },
+            barat: {
+                laki: ['James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Charles', 'Christopher', 'Daniel', 'Matthew', 'Anthony', 'Mark', 'Donald', 'Steven', 'Paul', 'Andrew', 'Joshua'],
+                perempuan: ['Mary', 'Patricia', 'Jennifer', 'Linda', 'Elizabeth', 'Barbara', 'Susan', 'Jessica', 'Sarah', 'Karen', 'Nancy', 'Lisa', 'Betty', 'Margaret', 'Sandra', 'Ashley', 'Kimberly', 'Emily', 'Donna', 'Michelle'],
+                belakang: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez']
+            },
+            jepang: {
+                laki: ['Haruto', 'Yuki', 'Sora', 'Riku', 'Kaito', 'Yuto', 'Takeshi', 'Daiki', 'Kenji', 'Ryo', 'Shota', 'Koji', 'Taro', 'Hiro', 'Akira'],
+                perempuan: ['Sakura', 'Yui', 'Hina', 'Aoi', 'Mio', 'Rin', 'Yuki', 'Mei', 'Nanami', 'Ayaka', 'Haruka', 'Miyu', 'Kasumi', 'Natsuki', 'Riko'],
+                belakang: ['Tanaka', 'Suzuki', 'Watanabe', 'Yamamoto', 'Sato', 'Nakamura', 'Kobayashi', 'Kato', 'Yoshida', 'Yamada']
+            },
+            korea: {
+                laki: ['Min-ho', 'Ji-hoon', 'Joon', 'Tae-yang', 'Seung', 'Hyun', 'Jin-woo', 'Sung-min', 'Dong-wook', 'Young-jae'],
+                perempuan: ['Ji-woo', 'Seo-yeon', 'Min-ji', 'Ha-eun', 'Soo-jin', 'Ye-jin', 'Hye-jin', 'Ji-yeon', 'Yu-jin', 'Eun-ji'],
+                belakang: ['Kim', 'Lee', 'Park', 'Choi', 'Jung', 'Kang', 'Cho', 'Yoon', 'Jang', 'Lim']
+            },
+            brand: {
+                prefix: ['Tech', 'Smart', 'Pro', 'Max', 'Mega', 'Super', 'Ultra', 'Prime', 'Elite', 'Plus', 'Digital', 'Cloud', 'Cyber', 'Net', 'Web'],
+                suffix: ['Lab', 'Hub', 'Zone', 'Verse', 'Space', 'Core', 'Soft', 'Wave', 'Link', 'Tech', 'Pro', 'Mart', 'Store', 'Shop', 'Media']
+            },
+            karakter: {
+                laki: ['Draven', 'Thorin', 'Aldric', 'Kaelen', 'Zephyr', 'Orion', 'Phoenix', 'Atlas', 'Magnus', 'Dante', 'Raven', 'Shadow', 'Storm', 'Blaze', 'Drake'],
+                perempuan: ['Luna', 'Aurora', 'Seraphina', 'Lyra', 'Nova', 'Celeste', 'Stella', 'Iris', 'Zara', 'Freya', 'Athena', 'Diana', 'Aria', 'Ember', 'Skye'],
+                belakang: ['Darkbane', 'Stormborn', 'Shadowend', 'Fireheart', 'Frostborn', 'Nightshade', 'Starlight', 'Moonshadow', 'Dragonborn', 'Ironwill']
+            }
+        };
+
+        // Generate names
+        function generateNames() {
+            const category = document.getElementById('category').value;
+            const gender = document.getElementById('gender').value;
+            const batchSize = parseInt(document.getElementById('batchSize').value);
+            const prefix = document.getElementById('prefix').value.trim();
+
+            generatedNames = [];
+            const namesGrid = document.getElementById('namesGrid');
+            namesGrid.innerHTML = '';
+
+            for (let i = 0; i < batchSize; i++) {
+                let name = '';
+                
+                if (category === 'brand') {
+                    const pre = nameDB.brand.prefix[Math.floor(Math.random() * nameDB.brand.prefix.length)];
+                    const suf = nameDB.brand.suffix[Math.floor(Math.random() * nameDB.brand.suffix.length)];
+                    name = prefix ? `${prefix}${pre}${suf}` : `${pre}${suf}`;
+                } else {
+                    let selectedGender = gender;
+                    if (gender === 'random') {
+                        selectedGender = Math.random() > 0.5 ? 'laki' : 'perempuan';
+                    } else {
+                        selectedGender = gender === 'laki-laki' ? 'laki' : 'perempuan';
+                    }
+
+                    const depan = nameDB[category][selectedGender][Math.floor(Math.random() * nameDB[category][selectedGender].length)];
+                    const belakang = nameDB[category].belakang[Math.floor(Math.random() * nameDB[category].belakang.length)];
+                    name = prefix ? `${prefix} ${depan} ${belakang}` : `${depan} ${belakang}`;
+                }
+
+                generatedNames.push({
+                    name,
+                    category,
+                    gender: category === 'brand' ? 'N/A' : (gender === 'random' ? 'Random' : gender)
+                });
+
+                // Add to display
+                const card = document.createElement('div');
+                card.className = 'name-card';
+                card.innerHTML = `
+                    <span class="name-text">${name}</span>
+                    <div class="name-actions">
+                        <button class="icon-btn-sm" onclick="copyName('${name}')" title="Copy">📋</button>
+                        <button class="icon-btn-sm" onclick="saveIndividual(${i})" title="Simpan">💾</button>
+                    </div>
+                `;
+                namesGrid.appendChild(card);
+            }
+
+            document.getElementById('namesDisplay').classList.add('show');
+        }
+
+        // Copy name
+        function copyName(name) {
+            navigator.clipboard.writeText(name).then(() => {
+                alert('Nama berhasil dicopy!');
+            });
+        }
+
+        // Save individual name
+        function saveIndividual(index) {
+            const item = generatedNames[index];
+            const newData = {
+                nama: item.name,
+                kategori: document.getElementById('category').value,
+                gender: item.gender,
+                tanggal: new Date().toISOString(),
+                favorite: false
+            };
+
+            names.unshift(newData);
+            saveData();
+            updateDisplay();
+            alert('Nama berhasil disimpan!');
+        }
+
+        // Save all generated names
+        function saveAllGenerated() {
+            if (generatedNames.length === 0) {
+                alert('Generate nama terlebih dahulu!');
+                return;
+            }
+
+            generatedNames.forEach(item => {
+                const newData = {
+                    nama: item.name,
+                    kategori: document.getElementById('category').value,
+                    gender: item.gender,
+                    tanggal: new Date().toISOString(),
+                    favorite: false
+                };
+                names.unshift(newData);
+            });
+
+            saveData();
+            updateDisplay();
+            alert(`${generatedNames.length} nama berhasil disimpan!`);
+        }
+
+        // Toggle favorite
+        function toggleFavorite(index) {
+            names[index].favorite = !names[index].favorite;
+            saveData();
+            renderTable();
+        }
+
+        // Filter by tab
+        function filterByTab(filter) {
+            currentFilter = filter;
+            currentPage = 1;
+            
+            // Update tab active state
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderTable();
+        }
+
+        // Search names
+        function searchNames() {
+            searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            currentPage = 1;
+            renderTable();
+        }
+
+        // Get filtered data
+        function getFilteredData() {
+            let filtered = [...names];
+
+            // Filter by tab
+            if (currentFilter === 'favorites') {
+                filtered = filtered.filter(item => item.favorite);
+            } else if (currentFilter !== 'all') {
+                filtered = filtered.filter(item => item.kategori === currentFilter);
+            }
+
+            // Filter by search
+            if (searchQuery) {
+                filtered = filtered.filter(item => 
+                    item.nama.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            return filtered;
+        }
+
+        // Update display
+        function updateDisplay() {
+            totalItems = names.length;
+            totalPages = Math.ceil(getFilteredData().length / rowsPerPage) || 1;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('nameData');
+            if (savedData) {
+                names = JSON.parse(savedData);
+            }
+            updateDisplay();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('nameData', JSON.stringify(names));
+        }
+
+        // Delete name
+        function deleteName(index) {
+            if (confirm('Yakin ingin menghapus nama ini?')) {
+                names.splice(index, 1);
+                saveData();
+                updateDisplay();
+            }
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('PERINGATAN: Semua history akan dihapus permanen. Lanjutkan?')) {
+                if (confirm('Apakah Anda benar-benar yakin?')) {
+                    names = [];
+                    currentPage = 1;
+                    saveData();
+                    updateDisplay();
+                    alert('Semua history berhasil dihapus!');
+                }
+            }
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const filteredData = getFilteredData();
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = filteredData.slice(start, end);
+
+            tbody.innerHTML = '';
+
+            if (paginatedData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada nama yang disimpan.</td></tr>';
+            } else {
+                paginatedData.forEach((item, i) => {
+                    const actualIndex = names.indexOf(item);
+                    
+                    let catClass = 'cat-' + item.kategori;
+
+                    const row = `
+                        <tr>
+                            <td>
+                                <div class="action-icons">
+                                    <button class="icon-btn favorite ${item.favorite ? 'favorited' : ''}" onclick="toggleFavorite(${actualIndex})" title="Favorite">
+                                        ⭐
+                                    </button>
+                                    <button class="icon-btn" onclick="copyName('${item.nama}')" title="Copy">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="icon-btn delete" onclick="deleteName(${actualIndex})" title="Hapus">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            <td><strong>${item.nama}</strong></td>
+                            <td><span class="category-badge ${catClass}">${capitalizeKategori(item.kategori)}</span></td>
+                            <td><span class="gender-badge">${item.gender}</span></td>
+                            <td>${formatDate(item.tanggal)}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            }
+
+            totalPages = Math.ceil(filteredData.length / rowsPerPage) || 1;
+            updatePaginationInfo();
+        }
+
+        // Capitalize kategori
+        function capitalizeKategori(kat) {
+            const map = {
+                'indonesia': 'Indonesia',
+                'barat': 'Barat',
+                'jepang': 'Jepang',
+                'korea': 'Korea',
+                'brand': 'Brand',
+                'karakter': 'Karakter'
+            };
+            return map[kat] || kat;
+        }
+
+        // Pagination functions
+        function goToFirstPage() {
+            currentPage = 1;
+            renderTable();
+            updateNavigationButtons();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToNextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToLastPage() {
+            currentPage = totalPages;
+            renderTable();
+            updateNavigationButtons();
+        }
+
+        function goToPage(page) {
+            const pageNum = parseInt(page);
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                currentPage = pageNum;
+                renderTable();
+                updateNavigationButtons();
+            }
+        }
+
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            currentPage = 1;
+            renderTable();
+        }
+
+        function refreshData() {
+            loadData();
+        }
+
+        function updatePaginationInfo() {
+            const filteredData = getFilteredData();
+            const start = filteredData.length > 0 ? (currentPage - 1) * rowsPerPage + 1 : 0;
+            const end = Math.min(currentPage * rowsPerPage, filteredData.length);
+            
+            document.getElementById('displayStart').textContent = start;
+            document.getElementById('displayEnd').textContent = end;
+            document.getElementById('totalItems').textContent = names.length;
+            document.getElementById('currentPage').value = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('currentPage').max = totalPages;
+        }
+
+        function updateNavigationButtons() {
+            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
+            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
+            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
+            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
+
+            if (currentPage === 1) {
+                firstBtn.disabled = true;
+                prevBtn.disabled = true;
+                firstBtn.style.opacity = '0.5';
+                prevBtn.style.opacity = '0.5';
+                firstBtn.style.cursor = 'not-allowed';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                firstBtn.disabled = false;
+                prevBtn.disabled = false;
+                firstBtn.style.opacity = '1';
+                prevBtn.style.opacity = '1';
+                firstBtn.style.cursor = 'pointer';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.disabled = true;
+                lastBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                lastBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+                lastBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.disabled = false;
+                lastBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                lastBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+                lastBtn.style.cursor = 'pointer';
+            }
+        }
+
+        // Export to CSV
+        function exportData() {
+            if (names.length === 0) {
+                alert('Tidak ada data untuk diekspor');
+                return;
+            }
+
+            let csv = 'Nama,Kategori,Gender,Favorite,Tanggal\n';
+            
+            names.forEach((item) => {
+                csv += `"${item.nama}",${capitalizeKategori(item.kategori)},${item.gender},${item.favorite ? 'Ya' : 'Tidak'},${formatDate(item.tanggal)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nama_random_${new Date().getTime()}.csv`;
+            a.click();
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Sidebar functions
+        function handleLogout() {
+            if (confirm('Yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadData);
+
+        // Close sidebar when clicking menu items
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

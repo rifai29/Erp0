@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Al-Quran</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+
+        .store-name {
+            color: #7c3aed;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #ef4444;
+        }
+
+        /* SIDEBAR */
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Sub Header */
+        .sub-header {
+            background: #f9fafb;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            padding: 20px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            grid-column: 1 / -1;
+        }
+
+        /* Table */
+        .table-container {
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .surat-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-baca {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-hafal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-muraja {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+        }
+
+        .icon-btn:hover {
+            background: #f9fafb;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+        }
+
+        .icon-btn.delete:hover svg {
+            stroke: #ef4444;
+        }
+
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .pagination-center {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            min-width: fit-content;
+        }
+
+        .pagination-left {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .pagination-left select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .pagination-right {
+            white-space: nowrap;
+            min-width: fit-content;
+            margin-left: auto;
+        }
+
+        .nav-btn, .refresh-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .nav-btn:hover, .refresh-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .page-input {
+            width: 50px;
+            padding: 6px 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .page-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                padding: 12px;
+            }
+
+            table {
+                font-size: 11px;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+
+            .surat-badge, .status-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .icon-btn {
+                width: 28px;
+                height: 28px;
+            }
+
+            .icon-btn svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .footer {
+                padding: 12px 16px;
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            .pagination-center {
+                gap: 4px;
+            }
+
+            .pagination-left {
+                gap: 4px;
+            }
+
+            .pagination-left label {
+                font-size: 11px;
+            }
+
+            .pagination-left select {
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .pagination-right {
+                font-size: 11px;
+            }
+
+            .nav-btn, .refresh-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            .nav-btn svg, .refresh-btn svg {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .page-input {
+                width: 40px;
+                padding: 4px 6px;
+                font-size: 11px;
+            }
+
+            .page-info {
+                font-size: 11px;
+            }
+        }
+            /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: white;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.open { left: 0; }
+        .sidebar-menu { padding: 24px 12px; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #525252;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+        .sidebar-item:hover { background: #F8F8F8; color: #1A1A1A; }
+        .sidebar-item.active { background: #F0F9FF; color: #0369A1; }
+        .sidebar-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.show { opacity: 1; visibility: visible; }
+        @media (max-width: 768px) {
+            .sidebar { width: 85%; max-width: 320px; }
+            .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
+            .sidebar-item svg { width: 22px; height: 22px; }
+        }
+
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hamburger-btn:hover { background: #EFEFEF; }
+        .hamburger-btn svg { width: 20px; height: 20px; stroke: #1A1A1A; }
+        @media (max-width: 768px) {
+            .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
+            .hamburger-btn svg { width: 22px; height: 22px; }
+        }
+</style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu">
+            <a href="dasbord.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="usermanagemen.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>User Management</span>
+            </a>
+            <a href="emailmanagement.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Email Management</span>
+            </a>
+            <a href="catatanhutang.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Catatan Hutang</span>
+            </a>
+            <a href="laporankaryawan.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Karyawan</span>
+            </a>
+            <a href="laporanbensin.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Bensin</span>
+            </a>
+            <a href="laporanpembelian.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Pembelian</span>
+            </a>
+            <a href="investasi.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Investasi</span>
+            </a>
+            <a href="jobdesk.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Jobdesk</span>
+            </a>
+            <a href="daily.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Daily Activity</span>
+            </a>
+            <a href="laporanpuasa.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Puasa</span>
+            </a>
+            <a href="laporansolat.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Laporan Solat</span>
+            </a>
+            <a href="dasborquran.html" class="sidebar-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Quran</span>
+            </a>
+            <a href="dasborlagu.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Lagu</span>
+            </a>
+            <a href="passwordgenerator.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Password Generator</span>
+            </a>
+            <a href="randomname.html" class="sidebar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Random Name</span>
+            </a>
+        </div>
+    </div>
+
+
+<div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1 class="header-title">
+                    <span class="store-name">DASHBOARD AL-QURAN</span>
+                </h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="logout-btn" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                        <line x1="12" y1="2" x2="12" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Header -->
+        <div class="sub-header" id="currentDate"></div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="input-group">
+                <label for="tanggal">Tanggal:</label>
+                <input type="date" id="tanggal" required>
+            </div>
+
+            <div class="input-group">
+                <label for="surat">Surat:</label>
+                <select id="surat" required onchange="updateAyatMax()">
+                    <option value="">- Pilih Surat -</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="ayatMulai">Ayat Mulai:</label>
+                <input type="number" id="ayatMulai" placeholder="1" min="1" onchange="calculateJumlahAyat()">
+            </div>
+
+            <div class="input-group">
+                <label for="ayatSelesai">Ayat Selesai:</label>
+                <input type="number" id="ayatSelesai" placeholder="10" min="1" onchange="calculateJumlahAyat()">
+            </div>
+
+            <div class="input-group">
+                <label for="jumlahAyat">Jumlah Ayat:</label>
+                <input type="number" id="jumlahAyat" readonly style="background: #f3f4f6;">
+            </div>
+
+            <div class="input-group">
+                <label for="durasi">Durasi (menit):</label>
+                <input type="number" id="durasi" placeholder="15" min="1">
+            </div>
+
+            <div class="input-group">
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="Baca">Baca</option>
+                    <option value="Hafal">Hafal</option>
+                    <option value="Muraja'ah">Muraja'ah</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="khatam">Khatam Ke:</label>
+                <input type="number" id="khatam" placeholder="1" min="1">
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-primary" onclick="addBacaan()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Tambah
+                </button>
+
+                <button class="btn-secondary" onclick="exportData()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <rect x="3" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="3" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="14" y="14" width="7" height="7" stroke-width="2"></rect>
+                        <rect x="3" y="14" width="7" height="7" stroke-width="2"></rect>
+                    </svg>
+                    Export
+                </button>
+
+                <button class="btn-danger" onclick="clearAllData()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <polyline points="3 6 5 6 21 6" stroke-width="2"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"></path>
+                    </svg>
+                    Hapus Semua
+                </button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Action</th>
+                        <th>Tanggal</th>
+                        <th>Surat</th>
+                        <th>Ayat</th>
+                        <th>Jumlah</th>
+                        <th>Durasi</th>
+                        <th>Status</th>
+                        <th>Khatam Ke</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer / Pagination -->
+        <div class="footer">
+            <div class="pagination-left">
+                <label style="font-size: 13px;">Rows:</label>
+                <select onchange="changeRowsPerPage(this.value)" id="rowsPerPage">
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="pagination-center">
+                <button class="nav-btn" onclick="goToFirstPage()" title="First">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToPrevPage()" title="Previous">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <span class="page-info">
+                    <input type="number" class="page-input" value="1" id="currentPage" min="1" onchange="goToPage(this.value)"> / <span id="totalPages">1</span>
+                </span>
+                <button class="nav-btn" onclick="goToNextPage()" title="Next">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" onclick="goToLastPage()" title="Last">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <button class="refresh-btn" onclick="refreshData()" title="Refresh">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="pagination-right">
+                <span id="displayStart">0</span>-<span id="displayEnd">0</span> of <span id="totalItems">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data 114 Surat Al-Quran dengan jumlah ayat
+        const suratList = [
+            {no: 1, nama: "Al-Fatihah", ayat: 7},
+            {no: 2, nama: "Al-Baqarah", ayat: 286},
+            {no: 3, nama: "Ali 'Imran", ayat: 200},
+            {no: 4, nama: "An-Nisa'", ayat: 176},
+            {no: 5, nama: "Al-Ma'idah", ayat: 120},
+            {no: 6, nama: "Al-An'am", ayat: 165},
+            {no: 7, nama: "Al-A'raf", ayat: 206},
+            {no: 8, nama: "Al-Anfal", ayat: 75},
+            {no: 9, nama: "At-Taubah", ayat: 129},
+            {no: 10, nama: "Yunus", ayat: 109},
+            {no: 11, nama: "Hud", ayat: 123},
+            {no: 12, nama: "Yusuf", ayat: 111},
+            {no: 13, nama: "Ar-Ra'd", ayat: 43},
+            {no: 14, nama: "Ibrahim", ayat: 52},
+            {no: 15, nama: "Al-Hijr", ayat: 99},
+            {no: 16, nama: "An-Nahl", ayat: 128},
+            {no: 17, nama: "Al-Isra'", ayat: 111},
+            {no: 18, nama: "Al-Kahf", ayat: 110},
+            {no: 19, nama: "Maryam", ayat: 98},
+            {no: 20, nama: "Ta Ha", ayat: 135},
+            {no: 21, nama: "Al-Anbiya'", ayat: 112},
+            {no: 22, nama: "Al-Hajj", ayat: 78},
+            {no: 23, nama: "Al-Mu'minun", ayat: 118},
+            {no: 24, nama: "An-Nur", ayat: 64},
+            {no: 25, nama: "Al-Furqan", ayat: 77},
+            {no: 26, nama: "Asy-Syu'ara'", ayat: 227},
+            {no: 27, nama: "An-Naml", ayat: 93},
+            {no: 28, nama: "Al-Qasas", ayat: 88},
+            {no: 29, nama: "Al-'Ankabut", ayat: 69},
+            {no: 30, nama: "Ar-Rum", ayat: 60},
+            {no: 31, nama: "Luqman", ayat: 34},
+            {no: 32, nama: "As-Sajdah", ayat: 30},
+            {no: 33, nama: "Al-Ahzab", ayat: 73},
+            {no: 34, nama: "Saba'", ayat: 54},
+            {no: 35, nama: "Fatir", ayat: 45},
+            {no: 36, nama: "Ya Sin", ayat: 83},
+            {no: 37, nama: "As-Saffat", ayat: 182},
+            {no: 38, nama: "Sad", ayat: 88},
+            {no: 39, nama: "Az-Zumar", ayat: 75},
+            {no: 40, nama: "Ghafir", ayat: 85},
+            {no: 41, nama: "Fussilat", ayat: 54},
+            {no: 42, nama: "Asy-Syura", ayat: 53},
+            {no: 43, nama: "Az-Zukhruf", ayat: 89},
+            {no: 44, nama: "Ad-Dukhan", ayat: 59},
+            {no: 45, nama: "Al-Jasiyah", ayat: 37},
+            {no: 46, nama: "Al-Ahqaf", ayat: 35},
+            {no: 47, nama: "Muhammad", ayat: 38},
+            {no: 48, nama: "Al-Fath", ayat: 29},
+            {no: 49, nama: "Al-Hujurat", ayat: 18},
+            {no: 50, nama: "Qaf", ayat: 45},
+            {no: 51, nama: "Az-Zariyat", ayat: 60},
+            {no: 52, nama: "At-Tur", ayat: 49},
+            {no: 53, nama: "An-Najm", ayat: 62},
+            {no: 54, nama: "Al-Qamar", ayat: 55},
+            {no: 55, nama: "Ar-Rahman", ayat: 78},
+            {no: 56, nama: "Al-Waqi'ah", ayat: 96},
+            {no: 57, nama: "Al-Hadid", ayat: 29},
+            {no: 58, nama: "Al-Mujadilah", ayat: 22},
+            {no: 59, nama: "Al-Hasyr", ayat: 24},
+            {no: 60, nama: "Al-Mumtahanah", ayat: 13},
+            {no: 61, nama: "As-Saff", ayat: 14},
+            {no: 62, nama: "Al-Jumu'ah", ayat: 11},
+            {no: 63, nama: "Al-Munafiqun", ayat: 11},
+            {no: 64, nama: "At-Tagabun", ayat: 18},
+            {no: 65, nama: "At-Talaq", ayat: 12},
+            {no: 66, nama: "At-Tahrim", ayat: 12},
+            {no: 67, nama: "Al-Mulk", ayat: 30},
+            {no: 68, nama: "Al-Qalam", ayat: 52},
+            {no: 69, nama: "Al-Haqqah", ayat: 52},
+            {no: 70, nama: "Al-Ma'arij", ayat: 44},
+            {no: 71, nama: "Nuh", ayat: 28},
+            {no: 72, nama: "Al-Jinn", ayat: 28},
+            {no: 73, nama: "Al-Muzzammil", ayat: 20},
+            {no: 74, nama: "Al-Muddassir", ayat: 56},
+            {no: 75, nama: "Al-Qiyamah", ayat: 40},
+            {no: 76, nama: "Al-Insan", ayat: 31},
+            {no: 77, nama: "Al-Mursalat", ayat: 50},
+            {no: 78, nama: "An-Naba'", ayat: 40},
+            {no: 79, nama: "An-Nazi'at", ayat: 46},
+            {no: 80, nama: "'Abasa", ayat: 42},
+            {no: 81, nama: "At-Takwir", ayat: 29},
+            {no: 82, nama: "Al-Infitar", ayat: 19},
+            {no: 83, nama: "Al-Mutaffifin", ayat: 36},
+            {no: 84, nama: "Al-Insyiqaq", ayat: 25},
+            {no: 85, nama: "Al-Buruj", ayat: 22},
+            {no: 86, nama: "At-Tariq", ayat: 17},
+            {no: 87, nama: "Al-A'la", ayat: 19},
+            {no: 88, nama: "Al-Gasyiyah", ayat: 26},
+            {no: 89, nama: "Al-Fajr", ayat: 30},
+            {no: 90, nama: "Al-Balad", ayat: 20},
+            {no: 91, nama: "Asy-Syams", ayat: 15},
+            {no: 92, nama: "Al-Lail", ayat: 21},
+            {no: 93, nama: "Ad-Duha", ayat: 11},
+            {no: 94, nama: "Asy-Syarh", ayat: 8},
+            {no: 95, nama: "At-Tin", ayat: 8},
+            {no: 96, nama: "Al-'Alaq", ayat: 19},
+            {no: 97, nama: "Al-Qadr", ayat: 5},
+            {no: 98, nama: "Al-Bayyinah", ayat: 8},
+            {no: 99, nama: "Az-Zalzalah", ayat: 8},
+            {no: 100, nama: "Al-'Adiyat", ayat: 11},
+            {no: 101, nama: "Al-Qari'ah", ayat: 11},
+            {no: 102, nama: "At-Takasur", ayat: 8},
+            {no: 103, nama: "Al-'Asr", ayat: 3},
+            {no: 104, nama: "Al-Humazah", ayat: 9},
+            {no: 105, nama: "Al-Fil", ayat: 5},
+            {no: 106, nama: "Quraisy", ayat: 4},
+            {no: 107, nama: "Al-Ma'un", ayat: 7},
+            {no: 108, nama: "Al-Kausar", ayat: 3},
+            {no: 109, nama: "Al-Kafirun", ayat: 6},
+            {no: 110, nama: "An-Nasr", ayat: 3},
+            {no: 111, nama: "Al-Lahab", ayat: 5},
+            {no: 112, nama: "Al-Ikhlas", ayat: 4},
+            {no: 113, nama: "Al-Falaq", ayat: 5},
+            {no: 114, nama: "An-Nas", ayat: 6}
+        ];
+
+        // Data storage
+        let bacaan = [];
+        let currentPage = 1;
+        let rowsPerPage = 10;
+        let totalPages = 1;
+        let totalItems = 0;
+
+        // Populate surat dropdown
+        function populateSurat() {
+            const suratSelect = document.getElementById('surat');
+            suratList.forEach(surat => {
+                const option = document.createElement('option');
+                option.value = surat.no;
+                option.textContent = `${surat.no}. ${surat.nama} (${surat.ayat} ayat)`;
+                option.dataset.maxAyat = surat.ayat;
+                option.dataset.namaSurat = surat.nama;
+                suratSelect.appendChild(option);
+            });
+        }
+
+        // Update max ayat based on selected surat
+        function updateAyatMax() {
+            const suratSelect = document.getElementById('surat');
+            const selectedOption = suratSelect.options[suratSelect.selectedIndex];
+            const maxAyat = selectedOption.dataset.maxAyat || 286;
+            
+            document.getElementById('ayatMulai').max = maxAyat;
+            document.getElementById('ayatSelesai').max = maxAyat;
+        }
+
+        // Calculate jumlah ayat
+        function calculateJumlahAyat() {
+            const mulai = parseInt(document.getElementById('ayatMulai').value) || 0;
+            const selesai = parseInt(document.getElementById('ayatSelesai').value) || 0;
+            
+            if (mulai > 0 && selesai >= mulai) {
+                const jumlah = selesai - mulai + 1;
+                document.getElementById('jumlahAyat').value = jumlah;
+            } else {
+                document.getElementById('jumlahAyat').value = '';
+            }
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('quranData');
+            if (savedData) {
+                bacaan = JSON.parse(savedData);
+            }
+            totalItems = bacaan.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            renderTable();
+            updateCurrentDate();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('quranData', JSON.stringify(bacaan));
+        }
+
+        // Update current date
+        function updateCurrentDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('currentDate').textContent = today;
+        }
+
+        // Add bacaan
+        function addBacaan() {
+            const tanggal = document.getElementById('tanggal').value;
+            const suratNo = document.getElementById('surat').value;
+            const suratSelect = document.getElementById('surat');
+            const selectedOption = suratSelect.options[suratSelect.selectedIndex];
+            const namaSurat = selectedOption.dataset.namaSurat;
+            const ayatMulai = parseInt(document.getElementById('ayatMulai').value);
+            const ayatSelesai = parseInt(document.getElementById('ayatSelesai').value);
+            const jumlahAyat = parseInt(document.getElementById('jumlahAyat').value);
+            const durasi = parseInt(document.getElementById('durasi').value);
+            const status = document.getElementById('status').value;
+            const khatam = parseInt(document.getElementById('khatam').value) || 0;
+
+            if (!tanggal || !suratNo || !ayatMulai || !ayatSelesai || !durasi) {
+                alert('Mohon lengkapi field Tanggal, Surat, Ayat, dan Durasi!');
+                return;
+            }
+
+            if (ayatSelesai < ayatMulai) {
+                alert('Ayat selesai harus lebih besar atau sama dengan ayat mulai!');
+                return;
+            }
+
+            const newData = {
+                tanggal,
+                suratNo,
+                namaSurat,
+                ayatMulai,
+                ayatSelesai,
+                jumlahAyat,
+                durasi,
+                status,
+                khatam
+            };
+
+            bacaan.push(newData);
+            totalItems = bacaan.length;
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            saveData();
+            renderTable();
+            resetForm();
+            updatePaginationInfo();
+            updateNavigationButtons();
+            alert('Bacaan Al-Quran berhasil ditambahkan!');
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('surat').value = '';
+            document.getElementById('ayatMulai').value = '';
+            document.getElementById('ayatSelesai').value = '';
+            document.getElementById('jumlahAyat').value = '';
+            document.getElementById('durasi').value = '';
+            document.getElementById('status').value = 'Baca';
+            document.getElementById('khatam').value = '';
+            document.getElementById('tanggal').valueAsDate = new Date();
+        }
+
+        // Delete bacaan
+        function deleteBacaan(index) {
+            if (confirm('Yakin ingin menghapus data ini?')) {
+                bacaan.splice(index, 1);
+                totalItems = bacaan.length;
+                totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+                
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                
+                saveData();
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        // Clear all data
+        function clearAllData() {
+            if (confirm('PERINGATAN: Semua data akan dihapus permanen. Lanjutkan?')) {
+                if (confirm('Apakah Anda benar-benar yakin?')) {
+                    bacaan = [];
+                    totalItems = 0;
+                    totalPages = 1;
+                    currentPage = 1;
+                    saveData();
+                    renderTable();
+                    updatePaginationInfo();
+                    updateNavigationButtons();
+                    alert('Semua data berhasil dihapus!');
+                }
+            }
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = bacaan.slice(start, end);
+
+            tbody.innerHTML = '';
+
+            if (paginatedData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px; color: #9ca3af;">Belum ada data bacaan Al-Quran.</td></tr>';
+            } else {
+                paginatedData.forEach((item, i) => {
+                    const actualIndex = start + i;
+                    
+                    let statusClass = '';
+                    if (item.status === 'Baca') statusClass = 'status-baca';
+                    else if (item.status === 'Hafal') statusClass = 'status-hafal';
+                    else statusClass = 'status-muraja';
+
+                    const row = `
+                        <tr>
+                            <td>
+                                <div class="action-icons">
+                                    <button class="icon-btn delete" onclick="deleteBacaan(${actualIndex})" title="Hapus">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>${formatDate(item.tanggal)}</td>
+                            <td><span class="surat-badge">${item.namaSurat}</span></td>
+                            <td>${item.ayatMulai}-${item.ayatSelesai}</td>
+                            <td><strong>${item.jumlahAyat}</strong> ayat</td>
+                            <td>${item.durasi} menit</td>
+                            <td><span class="status-badge ${statusClass}">${item.status}</span></td>
+                            <td>${item.khatam > 0 ? item.khatam : '-'}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            }
+        }
+
+        // Pagination functions
+        function goToFirstPage() {
+            currentPage = 1;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToNextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function goToLastPage() {
+            currentPage = totalPages;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function goToPage(page) {
+            const pageNum = parseInt(page);
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                currentPage = pageNum;
+                renderTable();
+                updatePaginationInfo();
+                updateNavigationButtons();
+            }
+        }
+
+        function changeRowsPerPage(value) {
+            rowsPerPage = parseInt(value);
+            totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+            currentPage = 1;
+            renderTable();
+            updatePaginationInfo();
+            updateNavigationButtons();
+        }
+
+        function refreshData() {
+            loadData();
+        }
+
+        function updatePaginationInfo() {
+            const start = totalItems > 0 ? (currentPage - 1) * rowsPerPage + 1 : 0;
+            const end = Math.min(currentPage * rowsPerPage, totalItems);
+            
+            document.getElementById('displayStart').textContent = start;
+            document.getElementById('displayEnd').textContent = end;
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('currentPage').value = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('currentPage').max = totalPages;
+        }
+
+        function updateNavigationButtons() {
+            const firstBtn = document.querySelector('button[onclick="goToFirstPage()"]');
+            const prevBtn = document.querySelector('button[onclick="goToPrevPage()"]');
+            const nextBtn = document.querySelector('button[onclick="goToNextPage()"]');
+            const lastBtn = document.querySelector('button[onclick="goToLastPage()"]');
+
+            if (currentPage === 1) {
+                firstBtn.disabled = true;
+                prevBtn.disabled = true;
+                firstBtn.style.opacity = '0.5';
+                prevBtn.style.opacity = '0.5';
+                firstBtn.style.cursor = 'not-allowed';
+                prevBtn.style.cursor = 'not-allowed';
+            } else {
+                firstBtn.disabled = false;
+                prevBtn.disabled = false;
+                firstBtn.style.opacity = '1';
+                prevBtn.style.opacity = '1';
+                firstBtn.style.cursor = 'pointer';
+                prevBtn.style.cursor = 'pointer';
+            }
+
+            if (currentPage === totalPages) {
+                nextBtn.disabled = true;
+                lastBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                lastBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+                lastBtn.style.cursor = 'not-allowed';
+            } else {
+                nextBtn.disabled = false;
+                lastBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                lastBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+                lastBtn.style.cursor = 'pointer';
+            }
+        }
+
+        // Export to CSV
+        function exportData() {
+            if (bacaan.length === 0) {
+                alert('Tidak ada data untuk diekspor');
+                return;
+            }
+
+            let csv = 'Tanggal,Surat,Ayat Mulai,Ayat Selesai,Jumlah Ayat,Durasi (menit),Status,Khatam Ke\n';
+            
+            bacaan.forEach((item) => {
+                csv += `${formatDate(item.tanggal)},${item.namaSurat},${item.ayatMulai},${item.ayatSelesai},${item.jumlahAyat},${item.durasi},${item.status},${item.khatam || '-'}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bacaan_quran_${new Date().getTime()}.csv`;
+            a.click();
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        }
+
+        // Sidebar functions
+        function handleLogout() {
+            if (confirm('Yakin ingin logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Set today's date as default
+        document.getElementById('tanggal').valueAsDate = new Date();
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            populateSurat();
+            loadData();
+        });
+
+        // Close sidebar when clicking menu items
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
