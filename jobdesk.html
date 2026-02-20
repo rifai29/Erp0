@@ -597,6 +597,34 @@
     </div>
 
 
+
+<div style="background:#FAFAFA; min-height:100vh; padding: 32px 24px;">
+    <div style="max-width:1400px; margin:0 auto;">
+        <!-- Header Bar -->
+        <div style="background:white; border-radius:16px; padding:20px 28px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.04); border:1px solid #F0F0F0;">
+            <div class="header-left">
+                <button class="hamburger-btn" onclick="openSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div style="font-size:22px; font-weight:600; color:#1A1A1A; letter-spacing:-0.3px;">Jobdesk</div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center;">
+                <div style="background:#F0F9FF; color:#0369A1; padding:8px 18px; border-radius:10px; font-weight:500; font-size:13px; border:1px solid #E0F2FE;">PT. A YANI</div>
+                <button onclick="if(confirm('Keluar?'))window.location.href='index.html'" style="width:38px; height:38px; border-radius:10px; background:#FEF2F2; border:1px solid #FEE2E2; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" style="width:18px;height:18px;">
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Original Jobdesk Container -->
+        <div class="container">
+
 <!-- Edit Modal -->
 <div class="modal-overlay" id="editModal">
     <div class="modal">
@@ -675,5 +703,10 @@
             document.getElementById('sidebarOverlay').classList.remove('show');
         }
     </script>
+
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

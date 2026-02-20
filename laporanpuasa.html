@@ -596,6 +596,12 @@
             .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
             .hamburger-btn svg { width: 22px; height: 22px; }
         }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 </style>
 </head>
 <body>
@@ -756,7 +762,7 @@
 <div class="container">
         <!-- Header -->
         <div class="header">
-            <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="header-left">
                 <button class="hamburger-btn" onclick="openSidebar()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="6" x2="21" y2="6"></line>

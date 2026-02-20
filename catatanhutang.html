@@ -761,6 +761,25 @@
             .sidebar-item { padding: 16px; margin-bottom: 6px; min-height: 52px; }
             .sidebar-item svg { width: 22px; height: 22px; }
         }
+
+        .hamburger-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #F8F8F8;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hamburger-btn:hover { background: #EFEFEF; }
+        .hamburger-btn svg { width: 20px; height: 20px; stroke: #1A1A1A; }
+        @media (max-width: 768px) {
+            .hamburger-btn { width: 44px; height: 44px; min-width: 44px; }
+            .hamburger-btn svg { width: 22px; height: 22px; }
+        }
 </style>
 </head>
 <body>
