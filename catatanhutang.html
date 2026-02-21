@@ -22,15 +22,15 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 0;
         }
 
         /* ── Header ── */
         .header {
             background: white;
-            border-radius: 16px;
-            padding: 20px 28px;
-            margin-bottom: 32px;
+            border-radius: 0;
+            padding: 10px 12px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -124,11 +124,11 @@
         /* ── Main Card ── */
         .card {
             background: white;
-            border-radius: 16px;
-            padding: 32px;
+            border-radius: 0;
+            padding: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             border: 1px solid #F0F0F0;
-            margin-bottom: 24px;
+            margin-bottom: 4px;
         }
 
         /* ── Toolbar ── */
@@ -278,8 +278,8 @@
         .table-scroll-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin: 0 -32px;
-            padding: 0 32px;
+            margin: 0 -12px;
+            padding: 0 12px;
         }
 
         .ios-table {
@@ -1192,18 +1192,8 @@
 
     <script>
         // ── STATE ──
-        const defaultData = [
-            { id: 1, namaPihak: 'PT. Sumber Makmur', jenis: 'Hutang', jumlah: 5000000, tanggalTransaksi: '2025-01-10', jatuhTempo: '2025-06-10', status: 'Belum Lunas', sudahDibayar: 0, keterangan: 'Pembelian bahan baku' },
-            { id: 2, namaPihak: 'Budi Santoso', jenis: 'Piutang', jumlah: 2500000, tanggalTransaksi: '2025-02-05', jatuhTempo: '2025-05-05', status: 'Lunas', sudahDibayar: 2500000, keterangan: 'Pinjaman pribadi' },
-            { id: 3, namaPihak: 'CV. Maju Jaya', jenis: 'Hutang', jumlah: 8000000, tanggalTransaksi: '2025-03-01', jatuhTempo: '2025-09-01', status: 'Belum Lunas', sudahDibayar: 3000000, keterangan: 'Pengadaan peralatan' },
-            { id: 4, namaPihak: 'Siti Rahayu', jenis: 'Piutang', jumlah: 1000000, tanggalTransaksi: '2025-03-15', jatuhTempo: '2025-04-15', status: 'Belum Lunas', sudahDibayar: 0, keterangan: 'Kasbon karyawan' },
-            { id: 5, namaPihak: 'Toko Berkah', jenis: 'Hutang', jumlah: 3200000, tanggalTransaksi: '2025-04-01', jatuhTempo: '2025-07-01', status: 'Lunas', sudahDibayar: 3200000, keterangan: 'Hutang operasional' },
-        ];
-        let data = JSON.parse(localStorage.getItem('hutangData'));
-        if (!data || data.length === 0) {
-            data = defaultData;
-            localStorage.setItem('hutangData', JSON.stringify(data));
-        }
+        localStorage.removeItem('hutangData');
+        let data = [];
         let filteredData = [...data];
         let currentPage = 1;
         let rowsPerPage = 10;
@@ -1219,13 +1209,7 @@
             if (pageData.length === 0) {
                 tbody.innerHTML = `
                     <tr><td colspan="11">
-                        <div class="empty-state">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/>
-                            </svg>
-                            <h3>Belum Ada Data</h3>
-                            <p>Klik tombol + di atas untuk menambahkan data hutang baru.</p>
-                        </div>
+                        <div class="empty-state"></div>
                     </td></tr>`;
             } else {
                 tbody.innerHTML = pageData.map((item, idx) => {
