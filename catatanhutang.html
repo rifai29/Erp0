@@ -1429,15 +1429,21 @@
             }
 
             const editId = document.getElementById('editId').value;
+            let jumlahNum = parseFloat(jumlah);
+            let sudahDibayarNum = parseFloat(document.getElementById('sudahDibayar').value) || 0;
+            let statusVal = document.getElementById('status').value;
+
+            // Tidak boleh negatif
+            if (sudahDibayarNum < 0) sudahDibayarNum = 0;
+
             const newItem = {
                 namaPihak: nama,
                 jenis,
-                jumlah: parseFloat(jumlah),
+                jumlah: jumlahNum,
                 tanggal,
                 jatuhTempo: document.getElementById('jatuhTempo').value,
-                status: document.getElementById('status').value,
-                sudahDibayar: parseFloat(document.getElementById('sudahDibayar').value) || 0,
-
+                status: statusVal,
+                sudahDibayar: sudahDibayarNum,
             };
 
             if (editId) {
