@@ -28,7 +28,7 @@
         /* ── Header ── */
         .header {
             background: white;
-            border-radius: 0;
+            border-radius: 16px;
             padding: 10px 12px;
             margin-bottom: 4px;
             display: flex;
@@ -124,7 +124,7 @@
         /* ── Main Card ── */
         .card {
             background: white;
-            border-radius: 0;
+            border-radius: 16px;
             padding: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             border: 1px solid #F0F0F0;
@@ -1192,8 +1192,7 @@
 
     <script>
         // ── STATE ──
-        localStorage.removeItem('hutangData');
-        let data = [];
+        let data = JSON.parse(localStorage.getItem('hutangData') || '[]');
         let filteredData = [...data];
         let currentPage = 1;
         let rowsPerPage = 10;
