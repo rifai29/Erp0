@@ -1092,10 +1092,11 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="payId">
-                <div style="background:#F8F8F8; border-radius:12px; padding:14px 16px; margin-bottom:20px;">
+                <!-- Info ringkas -->
+                <div style="background:#F8F8F8; border-radius:12px; padding:14px 16px; margin-bottom:16px;">
                     <div style="font-size:12px; color:#8E8E93; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">Nama</div>
                     <div style="font-size:15px; font-weight:600; color:#1A1A1A;" id="payNama">-</div>
-                    <div style="display:flex; gap:24px; margin-top:12px;">
+                    <div style="display:flex; gap:16px; margin-top:12px; flex-wrap:wrap;">
                         <div>
                             <div style="font-size:11px; color:#8E8E93; margin-bottom:2px;">Total Hutang</div>
                             <div style="font-size:14px; font-weight:700; color:#1A1A1A;" id="payTotal">-</div>
@@ -1111,17 +1112,34 @@
                     </div>
                 </div>
 
-                <!-- +/- toggle -->
-                <div style="display:flex; gap:8px; margin-bottom:14px;">
-                    <button id="payBtnPlus" onclick="setPayMode('+')" style="flex:1; padding:9px; border-radius:10px; border:2px solid #059669; background:#D1FAE5; color:#065F46; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;">+ Tambah</button>
-                    <button id="payBtnMinus" onclick="setPayMode('-')" style="flex:1; padding:9px; border-radius:10px; border:2px solid #E5E5E5; background:white; color:#737373; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;">− Kurang</button>
+                <!-- Input nominal + toggle dalam satu baris -->
+                <div style="margin-bottom:14px;">
+                    <div style="display:flex; align-items:stretch; gap:0; border:2px solid #E5E5E5; border-radius:12px; overflow:hidden; background:white;">
+                        <button id="payBtnPlus" onclick="setPayMode('+')" title="Bayar Hutang" style="width:52px; min-width:52px; border:none; background:#D1FAE5; color:#065F46; font-size:22px; font-weight:700; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center;">+</button>
+                        <input type="number" id="payJumlah" placeholder="0" min="1" style="flex:1; padding:12px 10px; border:none; font-size:16px; font-weight:600; color:#1A1A1A; outline:none; text-align:center; background:white; width:100%;" oninput="updatePayPreview()">
+                        <button id="payBtnMinus" onclick="setPayMode('-')" title="Hutang Lagi" style="width:52px; min-width:52px; border:none; background:#FEE2E2; color:#991B1B; font-size:22px; font-weight:700; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center;">−</button>
+                    </div>
+                    <div style="margin-top:6px; padding:0 4px;">
+                        <span id="payLabel" style="font-size:12px; color:#8E8E93;">Mode: Bayar Hutang</span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label id="payLabel">Jumlah Tambah (Rp)</label>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn btn-outline" onclick="setBayarLunas()" id="payLunasBtn" style="white-space:nowrap; font-size:13px; padding:8px 14px;">Lunas Semua</button>
-                        <input type="number" id="payJumlah" placeholder="Masukkan nominal..." min="1" style="flex:1; padding:10px 14px; border:1px solid #E5E5E5; border-radius:10px; font-size:14px; outline:none;" onfocus="this.style.borderColor='#3B82F6'" onblur="this.style.borderColor='#E5E5E5'">
+                <!-- Preview hasil -->
+                <div id="payPreviewBox" style="display:none; background:#F0F9FF; border:1px solid #BAE6FD; border-radius:10px; padding:12px 14px;">
+                    <div style="font-size:11px; color:#0369A1; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">Preview Setelah Disimpan</div>
+                    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                        <div>
+                            <div style="font-size:11px; color:#8E8E93; margin-bottom:2px;">Total Hutang</div>
+                            <div style="font-size:14px; font-weight:700; color:#1A1A1A;" id="previewTotal">-</div>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; color:#8E8E93; margin-bottom:2px;">Sudah Dibayar</div>
+                            <div style="font-size:14px; font-weight:700; color:#059669;" id="previewSudah">-</div>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; color:#8E8E93; margin-bottom:2px;">Sisa</div>
+                            <div style="font-size:14px; font-weight:700;" id="previewSisa">-</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1309,17 +1327,52 @@
             const btnPlus = document.getElementById('payBtnPlus');
             const btnMinus = document.getElementById('payBtnMinus');
             const label = document.getElementById('payLabel');
-            const lunasBtn = document.getElementById('payLunasBtn');
+            const wrapper = btnPlus.parentElement;
             if (mode === '+') {
-                btnPlus.style.cssText = 'flex:1; padding:9px; border-radius:10px; border:2px solid #059669; background:#D1FAE5; color:#065F46; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;';
-                btnMinus.style.cssText = 'flex:1; padding:9px; border-radius:10px; border:2px solid #E5E5E5; background:white; color:#737373; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;';
-                label.textContent = 'Jumlah Tambah (Rp)';
-                lunasBtn.style.display = '';
+                btnPlus.style.background = '#D1FAE5'; btnPlus.style.color = '#065F46';
+                btnMinus.style.background = '#FEE2E2'; btnMinus.style.color = '#991B1B'; btnMinus.style.opacity = '0.4';
+                btnPlus.style.opacity = '1';
+                wrapper.style.borderColor = '#059669';
+                label.textContent = 'Mode: Bayar Hutang';
             } else {
-                btnMinus.style.cssText = 'flex:1; padding:9px; border-radius:10px; border:2px solid #DC2626; background:#FEE2E2; color:#991B1B; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;';
-                btnPlus.style.cssText = 'flex:1; padding:9px; border-radius:10px; border:2px solid #E5E5E5; background:white; color:#737373; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;';
-                label.textContent = 'Jumlah Kurang (Rp)';
-                lunasBtn.style.display = 'none';
+                btnMinus.style.background = '#FEE2E2'; btnMinus.style.color = '#991B1B'; btnMinus.style.opacity = '1';
+                btnPlus.style.background = '#D1FAE5'; btnPlus.style.color = '#065F46'; btnPlus.style.opacity = '0.4';
+                wrapper.style.borderColor = '#DC2626';
+                label.textContent = 'Mode: Tambah Hutang Baru';
+            }
+            document.getElementById('payJumlah').value = '';
+            updatePayPreview();
+        }
+
+        function updatePayPreview() {
+            const id = parseInt(document.getElementById('payId').value);
+            const item = data.find(d => d.id === id);
+            if (!item) return;
+            const nominal = parseFloat(document.getElementById('payJumlah').value) || 0;
+            const previewBox = document.getElementById('payPreviewBox');
+
+            let totalBaru = parseFloat(item.jumlah) || 0;
+            let sudahBaru = parseFloat(item.sudahDibayar) || 0;
+
+            if (payMode === '+') {
+                // Bayar hutang: sudahDibayar naik
+                sudahBaru += nominal;
+                if (sudahBaru > totalBaru) sudahBaru = totalBaru;
+            } else {
+                // Hutang lagi: jumlah total naik
+                totalBaru += nominal;
+            }
+
+            const sisaBaru = totalBaru - sudahBaru;
+
+            if (nominal > 0) {
+                previewBox.style.display = 'block';
+                document.getElementById('previewTotal').textContent = 'Rp ' + formatNum(totalBaru);
+                document.getElementById('previewSudah').textContent = 'Rp ' + formatNum(sudahBaru);
+                document.getElementById('previewSisa').textContent = 'Rp ' + formatNum(sisaBaru);
+                document.getElementById('previewSisa').style.color = sisaBaru > 0 ? '#DC2626' : '#059669';
+            } else {
+                previewBox.style.display = 'none';
             }
         }
 
@@ -1351,6 +1404,7 @@
             if (!item) return;
             const sisa = (parseFloat(item.jumlah) || 0) - (parseFloat(item.sudahDibayar) || 0);
             document.getElementById('payJumlah').value = sisa;
+            updatePayPreview();
         }
 
         function savePembayaran() {
@@ -1362,19 +1416,22 @@
             }
             const idx = data.findIndex(d => d.id === id);
             if (idx === -1) return;
-            let sudahDibayar = parseFloat(data[idx].sudahDibayar) || 0;
+
             if (payMode === '+') {
+                // Bayar hutang: naikkan sudahDibayar
+                let sudahDibayar = parseFloat(data[idx].sudahDibayar) || 0;
                 sudahDibayar += nominal;
                 if (sudahDibayar >= parseFloat(data[idx].jumlah)) {
                     sudahDibayar = parseFloat(data[idx].jumlah);
                     data[idx].status = 'Lunas';
                 }
+                data[idx].sudahDibayar = sudahDibayar;
             } else {
-                sudahDibayar -= nominal;
-                if (sudahDibayar < 0) sudahDibayar = 0;
+                // Hutang lagi: naikkan total jumlah hutang, status otomatis Belum Lunas
+                data[idx].jumlah = (parseFloat(data[idx].jumlah) || 0) + nominal;
                 data[idx].status = 'Belum Lunas';
             }
-            data[idx].sudahDibayar = sudahDibayar;
+
             localStorage.setItem('hutangData', JSON.stringify(data));
             filteredData = [...data];
             applyFilter();
