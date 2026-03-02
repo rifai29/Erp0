@@ -691,13 +691,13 @@
         }
 
         .status-active {
-            background: #DCFCE7;
-            color: #15803D;
+            background: #F3F4F6;
+            color: #374151;
         }
 
         .status-inactive {
-            background: #FEE2E2;
-            color: #DC2626;
+            background: #F3F4F6;
+            color: #374151;
         }
 
         /* Barcode Modal */
@@ -737,41 +737,43 @@
         }
 
         .barcode-header {
-            padding: 24px 28px;
+            padding: 20px 24px;
             border-bottom: 1px solid #F0F0F0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            background: #F8F9FA;
         }
 
         .barcode-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A1A1A;
         }
 
         .barcode-close-btn {
             width: 32px;
             height: 32px;
             border: none;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            background: #EBEBEB;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            font-size: 18px;
+            color: #555;
         }
 
         .barcode-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: #DCDCDC;
         }
 
         .barcode-close-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: white;
+            width: 16px;
+            height: 16px;
+            stroke: #555;
         }
 
         .barcode-body {
@@ -784,25 +786,29 @@
         }
 
         .barcode-user-name {
-            font-size: 22px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: #1A1A1A;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .barcode-user-nik {
-            font-size: 16px;
-            color: #737373;
+            font-size: 13px;
+            color: #9CA3AF;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
+            background: #F3F4F6;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
         .barcode-container {
-            background: #FAFAFA;
+            background: #fff;
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
             margin-bottom: 20px;
-            border: 2px dashed #E5E5E5;
+            border: 1.5px solid #F0F0F0;
         }
 
         .barcode-canvas {
@@ -832,12 +838,12 @@
         }
 
         .barcode-btn-download {
-            background: #3B82F6;
+            background: #374151;
             color: white;
         }
 
         .barcode-btn-download:hover {
-            background: #2563EB;
+            background: #1F2937;
             transform: translateY(-1px);
         }
 
@@ -2735,7 +2741,7 @@
 
         .ios-table th:nth-child(6),
         .ios-table td:nth-child(6) {
-            width: auto; /* Portal - flexible */
+            width: auto; /* Etrans - flexible */
         }
 
         .ios-table th:nth-child(7),
@@ -2794,7 +2800,7 @@
 
             .ios-table th:nth-child(6),
             .ios-table td:nth-child(6) {
-                min-width: 80px; /* Portal */
+                min-width: 80px; /* Etrans */
             }
 
             .ios-table th:nth-child(7),
@@ -3071,56 +3077,94 @@
 
 <!-- Modal Form User -->
     <div class="modal-overlay" id="formModal" onclick="closeFormModal()">
-        <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 500px;">
-            <div class="modal-header">
-                <div class="modal-title">Form User</div>
-                <button class="modal-close" onclick="closeFormModal()">×</button>
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 520px; border-radius: 20px; padding: 0; overflow: hidden;">
+            <!-- Modal Header -->
+            <div style="background: #F8F9FA; padding: 20px 24px; border-bottom: 1px solid #F0F0F0; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 36px; height: 36px; background: #374151; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div id="modalFormTitle" style="font-size: 16px; font-weight: 700; color: #1A1A1A;">Tambah User</div>
+                        <div style="font-size: 12px; color: #9CA3AF; margin-top: 1px;">Isi data dengan benar</div>
+                    </div>
+                </div>
+                <button onclick="closeFormModal()" style="width:32px;height:32px;border-radius:50%;background:#EBEBEB;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#555;">×</button>
             </div>
-            <div class="modal-body">
-                <form id="userForm" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label class="form-label">Nama</label>
-                        <input type="text" class="form-input" id="itemUser" placeholder="Masukkan nama" required>
+
+            <!-- Modal Body -->
+            <div style="padding: 24px;">
+                <form id="userForm" autocomplete="off" onsubmit="handleSubmit(event)">
+
+                    <!-- Nama -->
+                    <div style="margin-bottom: 16px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Nama Lengkap</label>
+                        <div style="position:relative;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <input type="text" class="form-input" autocomplete="off" id="itemUser" placeholder="Masukkan nama lengkap" required style="padding-left:38px;">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">NIK</label>
-                        <input type="text" class="form-input" id="nik" placeholder="Masukkan NIK" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+                    <!-- NIK & Role dalam 2 kolom -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">NIK</label>
+                            <input type="text" class="form-input" autocomplete="off" id="nik" placeholder="Nomor NIK" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Role</label>
+                            <select class="form-input" id="role" required>
+                                <option value="">Pilih Role</option>
+                                <option value="Crew">Crew</option>
+                                <option value="Kasir">Kasir</option>
+                                <option value="HC">HC</option>
+                                <option value="ACOS">ACOS</option>
+                                <option value="COS">COS</option>
+                                <option value="MD">MD</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Role</label>
-                        <select class="form-input" id="role" required>
-                            <option value="">Pilih Role</option>
-                            <option value="Crew">Crew</option>
-                            <option value="Kasir">Kasir</option>
-                            <option value="HC">HC</option>
-                            <option value="ACOS">ACOS</option>
-                            <option value="COS">COS</option>
-                            <option value="MD">MD</option>
-                        </select>
+
+                    <!-- e-trans & Portal dalam 2 kolom -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">e-Trans</label>
+                            <input type="text" class="form-input" autocomplete="off" id="level" placeholder="Nomor e-Trans" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Portal</label>
+                            <input type="text" class="form-input" autocomplete="off" id="portal" placeholder="Nomor Portal" pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">e-trans</label>
-                        <input type="text" class="form-input" id="level" placeholder="Masukkan e-trans" required pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+                    <!-- Kasir & Status dalam 2 kolom -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Kasir</label>
+                            <input type="text" class="form-input" autocomplete="off" id="kasir" placeholder="ID Kasir">
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Status</label>
+                            <select class="form-input" id="userStatus" required>
+                                <option value="active">Aktif</option>
+                                <option value="inactive">Tidak Aktif</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Portal</label>
-                        <input type="text" class="form-input" id="portal" placeholder="Masukkan Portal" pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+                    <!-- Action Buttons -->
+                    <div style="display:flex;gap:10px;">
+                        <button type="button" onclick="closeFormModal()" style="flex:1;padding:13px;border-radius:12px;border:1.5px solid #E5E7EB;background:#fff;font-size:14px;font-weight:600;color:#6B7280;cursor:pointer;">Batal</button>
+                        <button type="submit" style="flex:2;padding:13px;border-radius:12px;border:none;background:#374151;color:#fff;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Simpan User
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Kasir</label>
-                        <input type="text" class="form-input" id="kasir" placeholder="Masukkan Kasir">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <select class="form-input" id="userStatus" required>
-                            <option value="active">Aktif</option>
-                            <option value="inactive">Tidak Aktif</option>
-                        </select>
-                    </div>
-                    <div class="modal-actions">
-                        <button type="button" class="btn btn-cancel" onclick="closeFormModal()">Batal</button>
-                        <button type="submit" class="btn btn-save">Simpan User</button>
-                    </div>
+
                 </form>
             </div>
         </div>
@@ -3164,7 +3208,28 @@
                             <input type="text" class="search-input" id="searchInput" placeholder="Cari nama, NIK, atau role..." oninput="searchUsers()">
                         </div>
                     </div>
-                    <div class="toolbar-right">
+                    <div class="toolbar-right" style="display:flex; gap:8px; align-items:center;">
+                        <div style="position:relative;">
+                            <button class="btn-icon-add" onclick="toggleExportMenu(event)" title="Export" style="background:#F3F4F6; color:#374151;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <div id="exportMenu" style="display:none; position:absolute; right:0; top:42px; background:#fff; border:1px solid #E5E7EB; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.1); z-index:999; min-width:140px; overflow:hidden;">
+                                <button onclick="exportData('excel')" style="width:100%; padding:12px 16px; border:none; background:#fff; text-align:left; font-size:13px; color:#374151; cursor:pointer; display:flex; align-items:center; gap:8px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='#fff'">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 0v10m0-10a2 2 0 012 2h2a2 2 0 012-2V7"/></svg>
+                                    Excel
+                                </button>
+                                <button onclick="exportData('csv')" style="width:100%; padding:12px 16px; border:none; background:#fff; text-align:left; font-size:13px; color:#374151; cursor:pointer; display:flex; align-items:center; gap:8px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='#fff'">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                    CSV
+                                </button>
+                                <button onclick="exportData('pdf')" style="width:100%; padding:12px 16px; border:none; background:#fff; text-align:left; font-size:13px; color:#374151; cursor:pointer; display:flex; align-items:center; gap:8px;" onmouseover="this.style.background='#F3F4F6'" onmouseout="this.style.background='#fff'">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                    PDF
+                                </button>
+                            </div>
+                        </div>
                         <button class="btn-icon-add" onclick="openFormModal()" title="Tambah User">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
                                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -3193,7 +3258,7 @@
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Portal</th>
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Kasir</th>
                                 <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Status</th>
-                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Aksi</th>
+                                <th style="padding: 8px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #8E8E93; text-transform: uppercase; letter-spacing: 0.5px; border: none;">Kelola</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody" class="ios-tbody">
@@ -3241,17 +3306,31 @@
     <div class="barcode-modal" id="barcodeModal">
         <div class="barcode-content">
             <div class="barcode-header">
-                <h2 class="barcode-title">Barcode NIK</h2>
-                <button class="barcode-close-btn" onclick="closeBarcodeModal()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div style="width:36px;height:36px;background:#374151;border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:18px;height:18px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="barcode-title">Barcode NIK</h2>
+                        <div style="font-size:12px;color:#9CA3AF;margin-top:1px;">Scan untuk identifikasi</div>
+                    </div>
+                </div>
+                <button class="barcode-close-btn" onclick="closeBarcodeModal()">×</button>
             </div>
             <div class="barcode-body">
                 <div class="barcode-user-info">
                     <div class="barcode-user-name" id="barcodeUserName">-</div>
-                    <div class="barcode-user-nik" id="barcodeUserNik">-</div>
+                    <div id="barcodeUserNik" style="display:none;">-</div>
+                </div>
+                <!-- Info grid -->
+                <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;font-size:15px;font-weight:700;color:#1A1A1A;font-family:'Courier New',monospace;">
+                    <span id="barcodeEtrans">-</span>
+                    <span style="color:#D1D5DB;">|</span>
+                    <span id="barcodePortal">-</span>
+                    <span style="color:#D1D5DB;">|</span>
+                    <span id="barcodeKasir">-</span>
                 </div>
                 <div class="barcode-container">
                     <svg id="barcodeCanvas"></svg>
@@ -3280,16 +3359,7 @@
 
         // Helper function to get badge color
         function getBadgeColor(role) {
-            const badgeColors = {
-                'Crew': 'background: #D1FAE5; color: #065F46;',
-                'Kasir': 'background: #DBEAFE; color: #1E40AF;',
-                'HC': 'background: #FEF3C7; color: #92400E;',
-                'ACOS': 'background: #E0E7FF; color: #3730A3;',
-                'COS': 'background: #FCE7F3; color: #9F1239;',
-                'MD': 'background: #FED7AA; color: #C2410C;'
-            };
-            // Return color if exists, otherwise return default gray
-            return badgeColors[role] || 'background: #E5E7EB; color: #374151;';
+            return 'background: #F3F4F6; color: #374151;';
         }
 
         // Filter by status
@@ -3415,12 +3485,12 @@
                     <td class="ios-cell">
                         <div style="display: flex; gap: 8px;">
                             <button onclick="editUser(this)" class="icon-btn" title="Edit">
-                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                 </svg>
                             </button>
                             <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
-                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </button>
@@ -3596,6 +3666,67 @@
             }
         }
 
+        function toggleExportMenu(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('exportMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+        document.addEventListener('click', function() {
+            const menu = document.getElementById('exportMenu');
+            if (menu) menu.style.display = 'none';
+        });
+
+        function exportData(type) {
+            document.getElementById('exportMenu').style.display = 'none';
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const headers = ['No', 'Nama', 'NIK', 'Role', 'e-trans', 'Portal', 'Kasir', 'Status'];
+            const data = [];
+            for (let row of rows) {
+                const cells = row.getElementsByTagName('td');
+                if (cells.length === 0) continue;
+                const roleSpan = cells[3].querySelector('span');
+                const statusSpan = cells[7].querySelector('span');
+                data.push([
+                    cells[0].textContent.trim(),
+                    cells[1].textContent.trim(),
+                    cells[2].textContent.trim(),
+                    roleSpan ? roleSpan.textContent.trim() : '',
+                    cells[4].textContent.trim(),
+                    cells[5].textContent.trim(),
+                    cells[6].textContent.trim(),
+                    statusSpan ? statusSpan.textContent.trim() : ''
+                ]);
+            }
+            if (type === 'csv') {
+                let csv = headers.join(',') + '\n';
+                data.forEach(r => { csv += r.map(v => `"${v}"`).join(',') + '\n'; });
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'user_management.csv';
+                a.click();
+            } else if (type === 'excel') {
+                let xls = '<table><tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+                data.forEach(r => { xls += '<tr>' + r.map(v => `<td>${v}</td>`).join('') + '</tr>'; });
+                xls += '</table>';
+                const blob = new Blob([xls], { type: 'application/vnd.ms-excel' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'user_management.xls';
+                a.click();
+            } else if (type === 'pdf') {
+                const win = window.open('', '_blank');
+                let html = `<html><head><title>User Management</title><style>body{font-family:sans-serif;padding:20px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px;font-size:12px}th{background:#F3F4F6;}</style></head><body>`;
+                html += '<h3>User Management</h3><table><tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+                data.forEach(r => { html += '<tr>' + r.map(v => `<td>${v}</td>`).join('') + '</tr>'; });
+                html += '</table></body></html>';
+                win.document.write(html);
+                win.document.close();
+                win.print();
+            }
+        }
+
         function openFormModal() {
             document.getElementById('formModal').classList.add('show');
         }
@@ -3627,13 +3758,59 @@
                 });
             }
             
-            localStorage.setItem('userManagementData', JSON.stringify(data));
+            localStorage.setItem('userManagementData_v11', JSON.stringify(data));
         }
 
         // Load data from localStorage
         function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('userManagementData');
-            if (!savedData) return;
+            const savedData = localStorage.getItem('userManagementData_v11');
+            if (!savedData) {
+                // Default sample data
+                const sampleData = [
+                    { nama: 'RIFAKHI RINDHOI SETIAWAN', nik: '0225106927', role: 'Crew', level: '290602', portal: '290601', kasir: '804rifaa', status: 'active' },
+                    { nama: 'YOSSY PRATAMA PUTRA', nik: '0224033515', role: 'Crew', level: '114414', portal: '262622', kasir: 'YE1234567', status: 'active' },
+                    { nama: 'APRILIA TRI HASTUTI', nik: '0223086086', role: 'Crew', level: '0', portal: '412113', kasir: 'kny12345', status: 'active' },
+                    { nama: 'TYAS EDI HUGRAHENI', nik: '0224096387', role: 'Crew', level: '000001', portal: '0', kasir: '0', status: 'active' },
+                    { nama: 'AKHSANUL HUDA', nik: '0219080008', role: 'Crew', level: '0', portal: '229911', kasir: '0', status: 'active' },
+                    { nama: 'DIMAS SURYA ARDI WARDANA', nik: '0225121851', role: 'Crew', level: '190344', portal: '0', kasir: 'a1234567', status: 'active' },
+                    { nama: 'MAULIDA KAROMAH', nik: '0225072144', role: 'Crew', level: '0', portal: '0', kasir: '0', status: 'active' },
+                    { nama: 'LIDYA ZAHRA APRILIA PRAMIDHITA', nik: '0225075563', role: 'Crew', level: '0', portal: '0', kasir: '0', status: 'active' },
+                ];
+                localStorage.setItem('userManagementData_v11', JSON.stringify(sampleData));
+                const tableBody = document.getElementById('tableBody');
+                tableBody.innerHTML = '';
+                sampleData.forEach((user, index) => {
+                    const newRow = tableBody.insertRow();
+                    const badgeStyle = getBadgeColor(user.role);
+                    const status = user.status || 'active';
+                    const statusClass = status === 'active' ? 'status-active' : 'status-inactive';
+                    const statusText = status === 'active' ? 'Aktif' : 'Tidak Aktif';
+                    newRow.className = 'ios-row';
+                    newRow.setAttribute('data-visible', 'true');
+                    newRow.innerHTML = `
+                        <td class="ios-cell">${index + 1}</td>
+                        <td class="ios-cell">${user.nama}</td>
+                        <td class="ios-cell">${user.nik}</td>
+                        <td class="ios-cell"><span style="${badgeStyle} padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">${user.role}</span></td>
+                        <td class="ios-cell">${user.level}</td>
+                        <td class="ios-cell">${user.portal}</td>
+                        <td class="ios-cell">${user.kasir}</td>
+                        <td class="ios-cell"><span class="status-badge ${statusClass}" data-status="${status}">${statusText}</span></td>
+                        <td class="ios-cell">
+                            <div style="display: flex; gap: 8px;">
+                                <button onclick="editUser(this)" class="icon-btn" title="Edit">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                </button>
+                                <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    makeRowClickable(newRow);
+                });
+                return;
+            }
             
             const data = JSON.parse(savedData);
             const tableBody = document.getElementById('tableBody');
@@ -3664,12 +3841,12 @@
                     <td class="ios-cell">
                         <div style="display: flex; gap: 8px;">
                             <button onclick="editUser(this)" class="icon-btn" title="Edit">
-                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#3B82F6" style="width: 16px; height: 16px;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                 </svg>
                             </button>
                             <button onclick="deleteUser(this)" class="icon-btn" title="Hapus">
-                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#DC2626" style="width: 16px; height: 16px;">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#374151" style="width: 16px; height: 16px;">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </button>
@@ -3685,9 +3862,12 @@
         }
 
         // Barcode Modal Functions
-        function showBarcodeModal(nama, nik) {
+        function showBarcodeModal(nama, nik, etrans, portal, kasir) {
             document.getElementById('barcodeUserName').textContent = nama;
             document.getElementById('barcodeUserNik').textContent = nik;
+            document.getElementById('barcodeEtrans').textContent = etrans || '-';
+            document.getElementById('barcodePortal').textContent = portal || '-';
+            document.getElementById('barcodeKasir').textContent = kasir || '-';
             
             // Generate barcode
             try {
@@ -3695,10 +3875,9 @@
                     format: "CODE128",
                     width: 2,
                     height: 100,
-                    displayValue: true,
-                    fontSize: 16,
+                    displayValue: false,
                     margin: 10,
-                    background: "#FAFAFA"
+                    background: "#ffffff"
                 });
             } catch (e) {
                 console.error('Error generating barcode:', e);
@@ -3751,8 +3930,11 @@
                 const cells = this.getElementsByTagName('td');
                 const nama = cells[1].textContent;
                 const nik = cells[2].textContent;
+                const etrans = cells[4].textContent;
+                const portal = cells[5].textContent;
+                const kasir = cells[6].textContent;
                 
-                showBarcodeModal(nama, nik);
+                showBarcodeModal(nama, nik, etrans, portal, kasir);
             });
         }
 
